@@ -51,5 +51,21 @@ public class HomeAllBean extends BaseBean{
         public String getTitle() {
             return title;
         }
+
+        @Override
+        public String toString() {
+            return "HomeTopicBean{" +
+                    "id=" + id +
+                    ", pic='" + pic + '\'' +
+                    ", title='" + title + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "HomeAllBean{" +
+                "homeTopic=" + homeTopic +
+                '}';
     }
 }
