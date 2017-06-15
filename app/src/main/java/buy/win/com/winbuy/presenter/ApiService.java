@@ -6,6 +6,7 @@ import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.model.net.HomeAllBean;
+import buy.win.com.winbuy.model.net.InvoiceAllBean;
 import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.SearchBean;
@@ -78,8 +79,11 @@ public interface ApiService {
     Call<LoginBean> regist(@Field("username") String username, @Field("password") String password);
 
 
-   // @GET("invoice")
-
+    /**发票
+     * @return
+     */
+    @GET("invoice")
+    Call<InvoiceAllBean> getInvoiceProduct();
 
 
 
