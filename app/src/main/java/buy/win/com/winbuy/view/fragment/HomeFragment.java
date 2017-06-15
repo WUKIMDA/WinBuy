@@ -2,11 +2,13 @@ package buy.win.com.winbuy.view.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buy.win.com.winbuy.R;
+import buy.win.com.winbuy.model.net.HomeAllBean;
+import buy.win.com.winbuy.presenter.HomePresenter;
+import buy.win.com.winbuy.view.activity.SearchActivity;
 
 /**
  * Created by Ziwen on 2017/6/15.
@@ -25,20 +30,37 @@ import buy.win.com.winbuy.R;
 
 public class HomeFragment extends Fragment {
     private MZBannerView mMZBanner;
+    private List<HomeAllBean.HomeTopicBean> mHomeTopicLists;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = View.inflate(getActivity(), R.layout.fragment_home, null);
         initBanner(rootView);
+        tempBtn(rootView);
         return rootView;
+
+    }
+
+    private void tempBtn(View rootView) {
+        Button tempBtn = (Button)rootView.findViewById(R.id.btn_search);
+        tempBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        HomePresenter homePresenter = new HomePresenter(HomeFragment.this);
+        homePresenter.loadHomeData();
     }
+
 
     private int[] RES = new int[]{R.mipmap.image1, R.mipmap.image2, R.mipmap.image3, R.mipmap.image4, R.mipmap.image5, R.mipmap.image6};
 
@@ -67,6 +89,18 @@ public class HomeFragment extends Fragment {
 
     }
 
+    public void onHomeSuccess(HomeAllBean bean) {
+        mHomeTopicLists = bean.getHomeTopic();
+    }
+
+    public void onHomeSercerBug(int code) {
+
+    }
+
+    public void onHomeConnectError(String message) {
+
+    }
+
     public static class BannerViewHolder implements MZViewHolder<Integer> {
         private ImageView mImageView;
 
@@ -84,7 +118,6 @@ public class HomeFragment extends Fragment {
             mImageView.setImageResource(data);
         }
     }
-
     @Override
     public void onPause() {
         super.onPause();
