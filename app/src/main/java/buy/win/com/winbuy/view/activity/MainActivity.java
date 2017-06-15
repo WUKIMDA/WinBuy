@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         mRbHome.setChecked(true);
         //监听底部Tab按钮
         mRgNavigationBar.setOnCheckedChangeListener(this);
-
+        // 测试github
     }
 
     @Override
