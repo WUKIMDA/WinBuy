@@ -1,13 +1,18 @@
 package buy.win.com.winbuy.presenter;
 
-import java.util.Map;
-
+import buy.win.com.winbuy.model.net.AddressAllListBean;
+import buy.win.com.winbuy.model.net.BrandBean;
+import buy.win.com.winbuy.model.net.FavoritesBean;
+import buy.win.com.winbuy.model.net.HelpBean;
+import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.model.net.LoginBean;
+import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.SearchBean;
+import buy.win.com.winbuy.model.net.TopicAllBean;
+import buy.win.com.winbuy.model.net.VersionAllBean;
 import retrofit2.Call;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -20,16 +25,47 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
+    /**
+     * 首页
+     *
+     * @return
+     */
     @GET("home")
-    Call<HomeAllBean> getHomeData();
+    Call<HomeAllBean> getHomeAllProduct();
 
+    /**
+     * 搜索
+     *
+     * @param page
+     * @param pageNum
+     * @param orderby
+     * @param keyword
+     * @return
+     */
     @GET("search")
-    Call<SearchBean> searchProduct(
+    Call<SearchBean> getSearchProduct(
             @Query("page") String page,
             @Query("pageNum") String pageNum,
             @Query("orderby") String orderby,
             @Query("keyword") String keyword
     );
+
+    /**
+     * 促销
+     *
+     * @param page
+     * @param pageNum
+     * @return
+     */
+    @GET("topic")
+    Call<TopicAllBean> getTopicAllProduct(
+            @Query("page") String page,
+            @Query("pageNum") String pageNum
+    );
+
+    //plist?page=1&pageNum=8&id=1210&orderby=saleDown
+    @GET("brand")
+    Call<BrandBean> getBrandProduct();
 
 
     @FormUrlEncoded //POST请求中
@@ -37,13 +73,87 @@ public interface ApiService {
     Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
 
 
-    @FormUrlEncoded
-    @POST("login")
-    Call<LoginBean> login2(@FieldMap Map<String, String> params);
+    @FormUrlEncoded //POST请求中
+    @POST("register")
+    Call<LoginBean> regist(@Field("username") String username, @Field("password") String password);
 
+
+   // @GET("invoice")
+
+
+
+
+    /**版本检测
+     * @return
+     */
+    @GET("version")
+    Call<VersionAllBean> getVersionProduct();
+
+
+
+    /**收藏夹
+     * @param userid
+     * @param page
+     * @param pageNum
+     * @return
+     */
+    @GET("favorites")
+    Call<FavoritesBean> getFavoriteProduct(
+            @Header("userid") String userid,
+            @Query("page") String page,
+            @Query("pageNum")String pageNum
+
+    );
+
+
+    /**订单详情
+     * @param userid
+     * @param orderId
+     * @return
+     */
+    @GET("orderdetail")
+    Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
+                                                @Query("orderId") String orderId);
+
+
+    /**
+     * 地址列表
+     *
+     * @param userid
+     * @return
+     */
+    @GET("addresslist")
+    Call<AddressAllListBean> getAddressProduct(@Query("userid") String userid);
 
     @GET("userinfo")
     Call<SearchBean> getUserInfo(@Header("userid") String userid);
 
+    /**
+     * 删除地址
+     *
+     * @param userid
+     * @param id
+     * @return
+     */
+    @FormUrlEncoded //POST请求中
+    @POST("addressdelete")
+    Call addressDelete(@Header("userid") String userid, @Field("id") String id);
+
+    /**
+     * 帮助列表
+     *
+     * @return
+     */
+    @GET("help")
+    Call<HelpBean> getHelpProduct();
+
+    /**
+     * 帮助内容获取
+     *
+     * @param id
+     * @return
+     */
+    @GET("helpDetail")
+    Call<HelpDetailBean> getHelpDetailProduct(@Query("id") String id);
 
 }
