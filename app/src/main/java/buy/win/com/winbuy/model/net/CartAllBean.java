@@ -6,7 +6,7 @@ import java.util.List;
  * Created by BUTTON on 2017-06-15.
  */
 
-public class CartAll extends BaseBean{
+public class CartAllBean extends BaseBean{
 
 
     /**

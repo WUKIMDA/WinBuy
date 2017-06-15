@@ -6,21 +6,11 @@ import java.util.List;
  * Created by BUTTON on 2017-06-15.
  */
 
-public class HomeAllBean {
-
-    private String response;
+public class HomeAllBean extends BaseBean{
     private List<HomeTopicBean> homeTopic;
-
-    public void setResponse(String response) {
-        this.response = response;
-    }
 
     public void setHomeTopic(List<HomeTopicBean> homeTopic) {
         this.homeTopic = homeTopic;
-    }
-
-    public String getResponse() {
-        return response;
     }
 
     public List<HomeTopicBean> getHomeTopic() {
