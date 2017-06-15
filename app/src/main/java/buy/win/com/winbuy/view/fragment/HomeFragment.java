@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,10 @@ import buy.win.com.winbuy.view.activity.SearchActivity;
  */
 
 public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
+
     private MZBannerView mMZBanner;
-    private List<HomeAllBean.HomeTopicBean> mHomeTopicLists;
+    private List<HomeAllBean.HomeTopicBean> mHomeTopicLists = new ArrayList<>();
 
 
     @Nullable
@@ -91,14 +94,19 @@ public class HomeFragment extends Fragment {
 
     public void onHomeSuccess(HomeAllBean bean) {
         mHomeTopicLists = bean.getHomeTopic();
+        Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
     }
 
-    public void onHomeSercerBug(int code) {
 
-    }
 
     public void onHomeConnectError(String message) {
+        Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
+    }
 
+
+    public void onHomeServerBug(int code) {
+        Log.d(TAG, "onHomeServerBug "+ code);
+        Toast.makeText(getActivity(), "服务器正在修复中", Toast.LENGTH_SHORT).show();
     }
 
     public static class BannerViewHolder implements MZViewHolder<Integer> {

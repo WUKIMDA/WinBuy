@@ -7,11 +7,8 @@ package buy.win.com.winbuy.model.net;
 
 public class BaseBean {
 
-
-
     private String error;
     private String error_code;
-    
 
     private String response;
 
