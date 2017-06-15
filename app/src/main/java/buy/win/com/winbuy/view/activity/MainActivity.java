@@ -21,6 +21,7 @@ import buy.win.com.winbuy.view.fragment.HomeFragment;
 import buy.win.com.winbuy.view.fragment.MoreFragment;
 import buy.win.com.winbuy.view.fragment.ShopCartFragment;
 import buy.win.com.winbuy.view.fragment.UserFragment;
+import buy.win.com.winbuy.view.fragment.HomeFragment;
 
 public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
 
