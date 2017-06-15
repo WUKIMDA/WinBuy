@@ -1,7 +1,9 @@
 package buy.win.com.winbuy.view.activity;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import buy.win.com.winbuy.R;
 
