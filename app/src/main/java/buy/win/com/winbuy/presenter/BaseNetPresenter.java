@@ -43,9 +43,14 @@ public abstract class BaseNetPresenter<T> {
 
 
     //测试
-    public String textTemp;
+    private String textTemp;
+
+    public void setTextTemp(String textTemp) {
+        this.textTemp = textTemp;
+    }
 
     public String getTextTemp() {
+        Log.d("DataText", textTemp);
         return textTemp;
     }
 

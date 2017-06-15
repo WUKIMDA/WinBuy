@@ -1,17 +1,16 @@
 package buy.win.com.winbuy.presenter;
 
-import buy.win.com.winbuy.model.net.HomeAllBean;
+import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.utils.RetrofitUtil;
 
 /**
  * Created by BUTTON on 2017-06-15.
  */
 
-public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
+public class CategoryPresenter extends BaseNetPresenter<CategoryAllBean> {
 
-
-    public void loadHomeData(){
-        RetrofitUtil.getApiService().getHomeAllProduct().enqueue(mCallBack);
+    public void loadCategoryData(){
+       RetrofitUtil.getApiService().getCategoryAllProduct().enqueue(mCallBack);
     }
 
     @Override
@@ -25,15 +24,13 @@ public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
     }
 
     @Override
-    public void onSuccess(HomeAllBean bean) {
+    public void onSuccess(CategoryAllBean bean) {
         //TODO
-        //HomeFragment.onHomeSuccess(数据List)
-
 //        setTextTemp(bean.toString());
 //        getTextTemp();
 
 
-
     }
+
 
 }

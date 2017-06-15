@@ -83,5 +83,24 @@ public class CategoryAllBean extends BaseBean{
         public String getTag() {
             return tag;
         }
+
+        @Override
+        public String toString() {
+            return "CategoryBean{" +
+                    "id=" + id +
+                    ", isLeafNode=" + isLeafNode +
+                    ", name='" + name + '\'' +
+                    ", parentId=" + parentId +
+                    ", pic='" + pic + '\'' +
+                    ", tag='" + tag + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryAllBean{" +
+                "category=" + category +
+                '}';
     }
 }

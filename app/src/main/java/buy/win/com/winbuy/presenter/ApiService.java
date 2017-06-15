@@ -2,6 +2,7 @@ package buy.win.com.winbuy.presenter;
 
 import buy.win.com.winbuy.model.net.AddressAllListBean;
 import buy.win.com.winbuy.model.net.BrandBean;
+import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
@@ -33,6 +34,10 @@ public interface ApiService {
      */
     @GET("home")
     Call<HomeAllBean> getHomeAllProduct();
+
+
+    @GET("category")
+    Call<CategoryAllBean> getCategoryAllProduct();
 
     /**
      * 搜索
