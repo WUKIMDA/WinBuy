@@ -4,11 +4,45 @@
                 android:layout_height="match_parent"
                 tools:context="buy.win.com.winbuy.view.activity.MainActivity">
 
+    <RadioGroup
+        android:layout_alignParentBottom="true"
+        android:id="@+id/rg_navigation_bar"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#50000000">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="我是MainActivity"
-        android:layout_height="wrap_content"/>
 
+        <RadioButton
+            android:id="@+id/rb01"
+            style="@style/RadioGroupMainActivity"
+            android:drawableTop="@drawable/temp_selector"
+            android:text="首页" />
+        <RadioButton
+            android:id="@+id/rb02"
+            style="@style/RadioGroupMainActivity"
+            android:drawableTop="@drawable/temp_selector"
+            android:text="分类" />
+
+        <RadioButton
+            android:id="@+id/rb03"
+            style="@style/RadioGroupMainActivity"
+            android:drawableTop="@drawable/temp_selector"
+            android:text="购物车" />
+
+        <RadioButton
+            android:id="@+id/rb04"
+            style="@style/RadioGroupMainActivity"
+            android:drawableTop="@drawable/temp_selector"
+            android:text="更多" />
+
+        <RadioButton
+            android:id="@+id/rb05"
+            style="@style/RadioGroupMainActivity"
+            android:drawableTop="@drawable/temp_selector"
+            android:text="第三方SDK" />
+
+
+    </RadioGroup>
 
 </RelativeLayout>
