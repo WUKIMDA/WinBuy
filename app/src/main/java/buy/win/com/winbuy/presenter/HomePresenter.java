@@ -27,7 +27,7 @@ public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
 
     @Override
     public void onServerBug(int code) {
-        mHomeFragment.onHomeSercerBug(code);
+        mHomeFragment.onHomeServerBug(code);
     }
 
     @Override

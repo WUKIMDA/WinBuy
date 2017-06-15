@@ -56,4 +56,11 @@
     <color name="mlcqingse">#00ffff</color><!--青色 -->
     <color name="mlclanse">#0000ff</color><!--蓝色 -->
     <color name="mlcfenhongse">#ff85c5</color><!--粉红色 -->
+
+    <!--launcherView need-->
+    <color name="load_red">#fa007a</color>
+    <color name="load_purple">#935fe7</color>
+    <color name="load_yellow">#f9b11f</color>
+    <color name="load_blue">#009cfa</color>
+    <color name="load_blues">#dc663e</color>
 </resources>
