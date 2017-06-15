@@ -3,14 +3,19 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
+              android:background="@mipmap/bc_homefrgm"
+              android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="搜索界面专用入口"/>
 
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
         android:orientation="horizontal"
         android:padding="8dp">
 
@@ -41,16 +46,12 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="10dp"
-        app:open_mz_mode="true"
         app:canLoop="true"
         app:indicatorAlign="center"
         app:indicatorPaddingLeft="10dp"
+        app:open_mz_mode="true"
         />
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="match_parent"
-        android:text="搜索界面专用入口"
-        android:layout_height="wrap_content"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

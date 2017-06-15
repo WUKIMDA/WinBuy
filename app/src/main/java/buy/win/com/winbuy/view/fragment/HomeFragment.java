@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -23,6 +24,7 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.presenter.HomePresenter;
+import buy.win.com.winbuy.utils.Constans;
 import buy.win.com.winbuy.view.activity.SearchActivity;
 
 /**
@@ -34,15 +36,19 @@ public class HomeFragment extends Fragment {
 
     private MZBannerView mMZBanner;
     private List<HomeAllBean.HomeTopicBean> mHomeTopicLists = new ArrayList<>();
+    private HomePresenter mHomePresenter;
+    private View mRootView;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = View.inflate(getActivity(), R.layout.fragment_home, null);
-        initBanner(rootView);
-        tempBtn(rootView);
-        return rootView;
+        mRootView = View.inflate(getActivity(), R.layout.fragment_home, null);
+        mHomePresenter = new HomePresenter(this);
+        mHomePresenter.loadHomeData();
+
+        tempBtn(mRootView);
+        return mRootView;
 
     }
 
@@ -81,8 +87,9 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < RES.length; i++) {
             list.add(RES[i]);
         }
+        Log.e(TAG, "mHomeTopicListsmHomeTopicListsmHomeTopicLists"+mHomeTopicLists.toString() );
         // 设置数据
-        mMZBanner.setPages(list, new MZHolderCreator<BannerViewHolder>() {
+        mMZBanner.setPages(mHomeTopicLists, new MZHolderCreator<BannerViewHolder>() {
             @Override
             public BannerViewHolder createViewHolder() {
                 return new BannerViewHolder();
@@ -94,6 +101,8 @@ public class HomeFragment extends Fragment {
 
     public void onHomeSuccess(HomeAllBean bean) {
         mHomeTopicLists = bean.getHomeTopic();
+        mHomeTopicLists.remove(mHomeTopicLists.size()-1);
+        initBanner(mRootView);
         Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
     }
 
@@ -109,7 +118,7 @@ public class HomeFragment extends Fragment {
         Toast.makeText(getActivity(), "服务器正在修复中", Toast.LENGTH_SHORT).show();
     }
 
-    public static class BannerViewHolder implements MZViewHolder<Integer> {
+    public class BannerViewHolder implements MZViewHolder<HomeAllBean.HomeTopicBean> {
         private ImageView mImageView;
 
         @Override
@@ -121,10 +130,17 @@ public class HomeFragment extends Fragment {
         }
 
         @Override
-        public void onBind(Context context, int position, Integer data) {
-            // 数据绑定
-            mImageView.setImageResource(data);
+        public void onBind(Context context, int i, HomeAllBean.HomeTopicBean homeTopicBean) {
+            Glide.with(context).load(Constans.URL_HOST+homeTopicBean.getPic()).into(mImageView);
         }
+
+//        @Override
+//        public void onBind(Context context, int position, Integer data) {
+//            // 数据绑定
+//           // mImageView.setImageResource();
+//            Log.e(TAG, "onBind: ******************************"+data );
+//            Glide.with(context).load(Constans.URL_HOST+mHomeTopicLists.get(data).getPic()).into(mImageView);
+//        }
     }
     @Override
     public void onPause() {
@@ -135,6 +151,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if (mMZBanner==null) {
+            return;
+        }
         mMZBanner.start();//开始轮播
     }
 }
