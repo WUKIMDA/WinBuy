@@ -33,7 +33,6 @@ public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
     @Override
     public void onSuccess(HomeAllBean bean) {
         mHomeFragment.onHomeSuccess(bean);
-
     }
 
 }
