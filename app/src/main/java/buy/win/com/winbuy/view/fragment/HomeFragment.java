@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import buy.win.com.winbuy.R;
+import buy.win.com.winbuy.model.net.HomeAllBean;
+import buy.win.com.winbuy.presenter.HomePresenter;
 
 /**
  * Created by Ziwen on 2017/6/15.
@@ -25,6 +27,8 @@ import buy.win.com.winbuy.R;
 
 public class HomeFragment extends Fragment {
     private MZBannerView mMZBanner;
+    private List<HomeAllBean.HomeTopicBean> mHomeTopicLists;
+
 
     @Nullable
     @Override
@@ -32,13 +36,16 @@ public class HomeFragment extends Fragment {
         View rootView = View.inflate(getActivity(), R.layout.fragment_home, null);
         initBanner(rootView);
         return rootView;
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        HomePresenter homePresenter = new HomePresenter(HomeFragment.this);
+        homePresenter.loadHomeData();
     }
+
 
     private int[] RES = new int[]{R.mipmap.image1, R.mipmap.image2, R.mipmap.image3, R.mipmap.image4, R.mipmap.image5, R.mipmap.image6};
 
@@ -67,6 +74,18 @@ public class HomeFragment extends Fragment {
 
     }
 
+    public void onHomeSuccess(HomeAllBean bean) {
+        mHomeTopicLists = bean.getHomeTopic();
+    }
+
+    public void onHomeSercerBug(int code) {
+
+    }
+
+    public void onHomeConnectError(String message) {
+
+    }
+
     public static class BannerViewHolder implements MZViewHolder<Integer> {
         private ImageView mImageView;
 
@@ -84,6 +103,11 @@ public class HomeFragment extends Fragment {
             mImageView.setImageResource(data);
         }
     }
+
+
+
+
+
 
     @Override
     public void onPause() {

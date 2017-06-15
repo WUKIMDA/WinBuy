@@ -11,17 +11,16 @@ import retrofit2.Response;
  */
 public abstract class BaseNetPresenter<T> {
 
-
-
     public Callback mCallBack = new Callback<T>() {
         @Override
         public void onResponse(Call<T> call, Response<T> response) {//服务器有响应
             if (response.isSuccessful()) {//拿到数据
                 T body = response.body();
-                textTemp = body.toString();
                 onSuccess(body);
-                Log.d("Text", "成功" + textTemp);
 
+                //Test
+                textTemp = body.toString();
+                Log.d("Text", "成功" + textTemp);
 
             } else {//服务器出现异常
                 Log.d("Text", "失败");

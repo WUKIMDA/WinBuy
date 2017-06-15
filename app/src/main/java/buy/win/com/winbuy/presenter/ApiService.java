@@ -11,6 +11,7 @@ import buy.win.com.winbuy.model.net.InvoiceAllBean;
 import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.SearchBean;
+import buy.win.com.winbuy.model.net.SelectCartBean;
 import buy.win.com.winbuy.model.net.TopicAllBean;
 import buy.win.com.winbuy.model.net.VersionAllBean;
 import retrofit2.Call;
@@ -38,6 +39,11 @@ public interface ApiService {
 
     @GET("category")
     Call<CategoryAllBean> getCategoryAllProduct();
+
+
+    @GET("selectCart")
+    Call<SelectCartBean> getSelectCartProduct(@Query("userId")String userId);
+
 
     /**
      * 搜索
