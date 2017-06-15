@@ -21,7 +21,6 @@ import buy.win.com.winbuy.view.fragment.HomeFragment;
 import buy.win.com.winbuy.view.fragment.MoreFragment;
 import buy.win.com.winbuy.view.fragment.ShopCartFragment;
 import buy.win.com.winbuy.view.fragment.UserFragment;
-import buy.win.com.winbuy.view.fragment.HomeFragment;
 
 public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
 
@@ -51,7 +50,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         selectPageIndex(0);
         //监听底部Tab按钮
         mRgNavigationBar.setOnCheckedChangeListener(this);
-
+        // 测试github
     }
 
     @Override
