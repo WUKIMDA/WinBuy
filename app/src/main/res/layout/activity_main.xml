@@ -4,43 +4,53 @@
                 android:layout_height="match_parent"
                 tools:context="buy.win.com.winbuy.view.activity.MainActivity">
 
+    <FrameLayout
+        android:id="@+id/main_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+
     <RadioGroup
-        android:layout_alignParentBottom="true"
         android:id="@+id/rg_navigation_bar"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#50000000">
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingTop="4dp">
 
 
         <RadioButton
-            android:id="@+id/rb01"
+            android:id="@+id/rb_home"
             style="@style/RadioGroupMainActivity"
-            android:drawableTop="@drawable/temp_selector"
-            android:text="首页" />
-        <RadioButton
-            android:id="@+id/rb02"
-            style="@style/RadioGroupMainActivity"
-            android:drawableTop="@drawable/temp_selector"
-            android:text="分类" />
+            android:drawableTop="@drawable/selector_tab_home"
+            />
 
         <RadioButton
-            android:id="@+id/rb03"
+            android:id="@+id/rb_category"
             style="@style/RadioGroupMainActivity"
-            android:drawableTop="@drawable/temp_selector"
-            android:text="购物车" />
+            android:drawableTop="@drawable/selector_tab_showcart"
+            />
 
         <RadioButton
-            android:id="@+id/rb04"
+            android:id="@+id/rb_shopcart"
             style="@style/RadioGroupMainActivity"
-            android:drawableTop="@drawable/temp_selector"
-            android:text="更多" />
+            android:drawableTop="@drawable/selector_tab_showcart"
+            />
 
         <RadioButton
-            android:id="@+id/rb05"
+            android:id="@+id/rb_user"
             style="@style/RadioGroupMainActivity"
-            android:drawableTop="@drawable/temp_selector"
-            android:text="第三方SDK" />
+            android:drawableTop="@drawable/selector_tab_my"
+            android:text="我的"
+            />
+
+        <RadioButton
+            android:id="@+id/rb_more"
+            style="@style/RadioGroupMainActivity"
+            android:drawableTop="@drawable/selector_tab_more"
+            />
 
 
     </RadioGroup>
