@@ -16,11 +16,11 @@ public abstract class BaseNetPresenter {
 
 
     public Retrofit mRetrofit;
-    public ApiService mTakeOutService;
+    public ApiService mApiService;
 
     public BaseNetPresenter() {
         mRetrofit = new Retrofit.Builder().baseUrl(Constans.URL_HOST).addConverterFactory(GsonConverterFactory.create()).build();
-        mTakeOutService = mRetrofit.create(ApiService.class);
+        mApiService = mRetrofit.create(ApiService.class);
     }
 
 
