@@ -17,34 +17,34 @@ import buy.win.com.winbuy.R;
  * Created by 林特烦 on 2017/6/15.
  */
 public class UserCenterAdapter extends BaseAdapter {
-    private final ArrayList<Picture> pictures;
-    private final LayoutInflater inflater;
+    private final ArrayList<UserCenterbean> mUserCentenList;
+    private final Context mContext;
     //图片下文字
-    private String[] desc = new String[]{"收藏夹", "关注店铺", "足迹"};
+    private String[] descList = new String[]{"收藏夹", "关注店铺", "足迹"};
     //图片ID数组
-    private int[] images = new int[]{R.mipmap.user_gridview1, R.mipmap.user_gridview2, R.mipmap.user_gridview3};
+    private int[] imgList = new int[]{R.mipmap.user_gridview1, R.mipmap.user_gridview2, R.mipmap.user_gridview3};
 
     public UserCenterAdapter(Context context) {
-        pictures = new ArrayList<Picture>();
-        inflater = LayoutInflater.from(context);
-        for (int i = 0; i < images.length; i++) {
-            Picture picture = new Picture(desc[i], images[i]);
-            pictures.add(picture);
+        mContext = context;
+        mUserCentenList = new ArrayList<UserCenterbean>();
+        for (int i = 0; i < imgList.length; i++) {
+            UserCenterbean userCenterbean = new UserCenterbean(descList[i], imgList[i]);
+            mUserCentenList.add(userCenterbean);
         }
     }
 
     @Override
     public int getCount() {
-        if (pictures != null) {
-            return pictures.size();
+        if (mUserCentenList != null) {
+            return mUserCentenList.size();
         }
         return 0;
     }
 
     @Override
     public Object getItem(int position) {
-        if(pictures != null){
-            return pictures.get(position);
+        if(mUserCentenList != null){
+            return mUserCentenList.get(position);
         }
         return null;
     }
@@ -56,37 +56,37 @@ public class UserCenterAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        UserCenterHolder userCentenHolder;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.item_gv_user, null);
-            viewHolder = new ViewHolder();
-            viewHolder.title = (TextView) convertView.findViewById(R.id.title);
-            viewHolder.image = (ImageView) convertView.findViewById(R.id.image);
-            convertView.setTag(viewHolder);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gv_user, null);
+            userCentenHolder = new UserCenterHolder();
+            userCentenHolder.title = (TextView) convertView.findViewById(R.id.title);
+            userCentenHolder.image = (ImageView) convertView.findViewById(R.id.image);
+            convertView.setTag(userCentenHolder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            userCentenHolder = (UserCenterHolder) convertView.getTag();
         }
-        viewHolder.title.setText(pictures.get(position).getTitle());
-        viewHolder.image.setImageResource(pictures.get(position).getImageId());
+        userCentenHolder.title.setText(mUserCentenList.get(position).getTitle());
+        userCentenHolder.image.setImageResource(mUserCentenList.get(position).getImageId());
         convertView.setBackgroundColor(Color.WHITE);
         return convertView;
     }
 }
 
-class ViewHolder {
+class UserCenterHolder {
     public TextView title;
     public ImageView image;
 }
 
-class Picture {
+class UserCenterbean {
     private String title;
     private int imageId;
 
-    public Picture() {
+    public UserCenterbean() {
         super();
     }
 
-    public Picture(String title, int imageId) {
+    public UserCenterbean(String title, int imageId) {
         super();
         this.title = title;
         this.imageId = imageId;

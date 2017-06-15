@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.view.adapter.UserCenterAdapter;
+import buy.win.com.winbuy.view.adapter.UserLVAdapter;
 
 /**
  * Created by 林特烦 on 2017/6/15.
@@ -41,6 +42,7 @@ public class UserFragment extends Fragment {
         View rootView = View.inflate(getActivity(), R.layout.fragment_user, null);
         ButterKnife.bind(this, rootView);
         mGridview.setAdapter(new UserCenterAdapter(getActivity()));
+        mListview.setAdapter(new UserLVAdapter(getActivity()));
         return rootView;
     }
 
