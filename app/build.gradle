@@ -32,4 +32,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.github.pinguo-zhouwei:MZBannerView:v1.1.0'
+
 }
