@@ -1,5 +1,7 @@
 package buy.win.com.winbuy.presenter;
 
+import com.zhouwei.mzbanner.holder.MZHolderCreator;
+
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.view.fragment.HomeFragment;
@@ -33,6 +35,15 @@ public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
     @Override
     public void onSuccess(HomeAllBean bean) {
         mHomeFragment.onHomeSuccess(bean);
+    }
+    // 设置数据
+    public void bannerSetData() {
+        mHomeFragment.mMZBanner.setPages(mHomeFragment.mHomeTopicLists, new MZHolderCreator<HomeFragment.BannerViewHolder>() {
+            @Override
+            public HomeFragment.BannerViewHolder createViewHolder() {
+                return new HomeFragment.BannerViewHolder();
+            }
+        });
     }
 
 }
