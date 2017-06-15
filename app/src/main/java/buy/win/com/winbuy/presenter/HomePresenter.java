@@ -1,5 +1,7 @@
 package buy.win.com.winbuy.presenter;
 
+import org.greenrobot.eventbus.EventBus;
+
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.utils.RetrofitUtil;
 
@@ -8,7 +10,6 @@ import buy.win.com.winbuy.utils.RetrofitUtil;
  */
 
 public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
-
 
     public void loadHomeData(){
         RetrofitUtil.getApiService().getHomeAllProduct().enqueue(mCallBack);
@@ -26,14 +27,8 @@ public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
 
     @Override
     public void onSuccess(HomeAllBean bean) {
-        //TODO
-        //HomeFragment.onHomeSuccess(数据List)
-
-//        setTextTemp(bean.toString());
-//        getTextTemp();
-
-
-
+        //post到Event的订阅者
+        EventBus.getDefault().post(bean);
     }
 
 }

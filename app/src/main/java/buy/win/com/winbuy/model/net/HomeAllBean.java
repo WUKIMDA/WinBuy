@@ -7,7 +7,14 @@ import java.util.List;
  */
 
 public class HomeAllBean extends BaseBean{
+
+
     private List<HomeTopicBean> homeTopic;
+
+    public HomeAllBean(List<HomeTopicBean> homeTopic) {
+        this.homeTopic = homeTopic;
+    }
+
 
     public void setHomeTopic(List<HomeTopicBean> homeTopic) {
         this.homeTopic = homeTopic;
