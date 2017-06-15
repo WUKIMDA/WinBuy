@@ -1,26 +1,25 @@
 package buy.win.com.winbuy.view.fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.zhouwei.mzbanner.MZBannerView;
+import com.zhouwei.mzbanner.holder.MZHolderCreator;
+import com.zhouwei.mzbanner.holder.MZViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.presenter.HomePresenter;
-import buy.win.com.winbuy.utils.UiUtils;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Ziwen on 2017/6/15.
@@ -28,15 +27,12 @@ import static android.content.ContentValues.TAG;
 
 public class HomeFragment extends Fragment {
     private MZBannerView mMZBanner;
+    private List<HomeAllBean.HomeTopicBean> mHomeTopicLists;
 
-public class HomeFragment  extends Fragment {
-
-    private List<HomeAllBean.HomeTopicBean> mHomeTopic;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
         View rootView = View.inflate(getActivity(), R.layout.fragment_home, null);
         initBanner(rootView);
         return rootView;
@@ -46,28 +42,10 @@ public class HomeFragment  extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        HomePresenter homePresenter = new HomePresenter();
+        HomePresenter homePresenter = new HomePresenter(HomeFragment.this);
         homePresenter.loadHomeData();
-
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread (HomeAllBean event) {
-        mHomeTopic = event.getHomeTopic();
-        Log.d(TAG, "onEventMainThread "+"  "+mHomeTopic.toString());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
 
     private int[] RES = new int[]{R.mipmap.image1, R.mipmap.image2, R.mipmap.image3, R.mipmap.image4, R.mipmap.image5, R.mipmap.image6};
 
@@ -96,6 +74,18 @@ public class HomeFragment  extends Fragment {
 
     }
 
+    public void onHomeSuccess(HomeAllBean bean) {
+        mHomeTopicLists = bean.getHomeTopic();
+    }
+
+    public void onHomeSercerBug(int code) {
+
+    }
+
+    public void onHomeConnectError(String message) {
+
+    }
+
     public static class BannerViewHolder implements MZViewHolder<Integer> {
         private ImageView mImageView;
 
@@ -113,6 +103,11 @@ public class HomeFragment  extends Fragment {
             mImageView.setImageResource(data);
         }
     }
+
+
+
+
+
 
     @Override
     public void onPause() {

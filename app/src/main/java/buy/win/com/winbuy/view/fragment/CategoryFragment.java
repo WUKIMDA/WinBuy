@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import buy.win.com.winbuy.R;
+import buy.win.com.winbuy.model.net.CategoryAllBean;
 
 /**
  * Created by Ziwen on 2017/6/15.
@@ -21,5 +21,17 @@ public class CategoryFragment extends Fragment {
         TextView textView = new TextView(getActivity());
         textView.setText("分类");
         return textView;
+    }
+
+    public void onConnectError(String message) {
+
+    }
+
+    public void onServerBug(int code) {
+
+    }
+
+    public void onSuccess(CategoryAllBean bean) {
+
     }
 }

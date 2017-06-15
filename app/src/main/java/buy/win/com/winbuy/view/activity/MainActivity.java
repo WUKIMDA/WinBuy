@@ -21,7 +21,6 @@ import buy.win.com.winbuy.view.fragment.HomeFragment;
 import buy.win.com.winbuy.view.fragment.MoreFragment;
 import buy.win.com.winbuy.view.fragment.ShopCartFragment;
 import buy.win.com.winbuy.view.fragment.UserFragment;
-import buy.win.com.winbuy.view.fragment.HomeFragment;
 
 public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
 
@@ -49,6 +48,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         initFragment();
         //默认打开选首页
         selectPageIndex(0);
+        mRbHome.setChecked(true);
         //监听底部Tab按钮
         mRgNavigationBar.setOnCheckedChangeListener(this);
 

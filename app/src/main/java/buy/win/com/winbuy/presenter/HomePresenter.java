@@ -1,9 +1,8 @@
 package buy.win.com.winbuy.presenter;
 
-import org.greenrobot.eventbus.EventBus;
-
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.utils.RetrofitUtil;
+import buy.win.com.winbuy.view.fragment.HomeFragment;
 
 /**
  * Created by BUTTON on 2017-06-15.
@@ -11,24 +10,30 @@ import buy.win.com.winbuy.utils.RetrofitUtil;
 
 public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
 
+    HomeFragment mHomeFragment;
+
+    public HomePresenter(HomeFragment homeFragment) {
+        mHomeFragment = homeFragment;
+    }
+
     public void loadHomeData(){
         RetrofitUtil.getApiService().getHomeAllProduct().enqueue(mCallBack);
     }
 
     @Override
     public void onConnectError(String message) {
-
+        mHomeFragment.onHomeConnectError(message);
     }
 
     @Override
     public void onServerBug(int code) {
-
+        mHomeFragment.onHomeSercerBug(code);
     }
 
     @Override
     public void onSuccess(HomeAllBean bean) {
-        //post到Event的订阅者
-        EventBus.getDefault().post(bean);
+        mHomeFragment.onHomeSuccess(bean);
+
     }
 
 }
