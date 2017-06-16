@@ -1,58 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
-
-    <LinearLayout
-        android:id="@+id/ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:orientation="horizontal"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/textView"
-            style="@style/HomeFrgmTV"
-            android:text="主页"/>
-
-        <TextView
-            style="@style/HomeFrgmTV"
-            android:text="热门单品"/>
-
-        <TextView
-            style="@style/HomeFrgmTV"
-            android:text="促销快报"/>
-
-        <TextView
-            style="@style/HomeFrgmTV"
-            android:text="限时抢购"/>
-
-        <TextView
-            style="@style/HomeFrgmTV"
-            android:text="新品上架"/>
-    </LinearLayout>
-
-    <com.zhouwei.mzbanner.MZBannerView
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="10dp"
-        app:open_mz_mode="true"
-        app:canLoop="true"
-        app:indicatorAlign="center"
-        app:indicatorPaddingLeft="10dp"
-        />
+              android:background="@mipmap/bc_homefrgm"
+              android:orientation="vertical">
     <Button
         android:id="@+id/btn_search"
         android:layout_width="match_parent"
-        android:text="搜索界面专用入口"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="主页"/>
+        android:text="搜索界面专用入口"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_home_fragment"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

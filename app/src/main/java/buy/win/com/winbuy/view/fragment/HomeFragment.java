@@ -1,50 +1,81 @@
 package buy.win.com.winbuy.view.fragment;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.zhouwei.mzbanner.MZBannerView;
-import com.zhouwei.mzbanner.holder.MZHolderCreator;
-import com.zhouwei.mzbanner.holder.MZViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.presenter.HomePresenter;
 import buy.win.com.winbuy.view.activity.SearchActivity;
+import buy.win.com.winbuy.view.adapter.HomeFrgmRecyViewAdapter;
 
 /**
  * Created by Ziwen on 2017/6/15.
  */
 
 public class HomeFragment extends Fragment {
-    private MZBannerView mMZBanner;
-    private List<HomeAllBean.HomeTopicBean> mHomeTopicLists;
+    private static final String TAG = "HomeFragment";
+
+    public MZBannerView mMZBanner;
+    private View mRootView;
+    private HomePresenter mHomePresenter;
+    private RecyclerView mRv_homeFrgm;
+    private HomeFrgmRecyViewAdapter mHomeFrgmRecyViewAdapter;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = View.inflate(getActivity(), R.layout.fragment_home, null);
-        initBanner(rootView);
-        tempBtn(rootView);
-        return rootView;
+        mRootView = View.inflate(getActivity(), R.layout.fragment_home, null);
+        mHomePresenter = new HomePresenter(HomeFragment.this);
+        tempBtn(mRootView);
+        initRecyclerView(mRootView);
+        return mRootView;
+    }
 
+    private void initRecyclerView(View rootView) {
+        mRv_homeFrgm = (RecyclerView) rootView.findViewById(R.id.rv_home_fragment);
+        mRv_homeFrgm.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        //默认分两列,但是头View需要占两格
+        //http://blog.csdn.net/kyleceshen/article/details/50296273
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == 0 ? 2 : 1;
+            }
+        });
+        mRv_homeFrgm.setLayoutManager(gridLayoutManager);
+
+        mHomeFrgmRecyViewAdapter = new HomeFrgmRecyViewAdapter(getActivity());
+        mHomeFrgmRecyViewAdapter.setAppBeanList(mHomePresenter.getApps());
+        mRv_homeFrgm.setAdapter(mHomeFrgmRecyViewAdapter);
+    }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mHomePresenter.loadHomeData();
     }
 
     private void tempBtn(View rootView) {
-        Button tempBtn = (Button)rootView.findViewById(R.id.btn_search);
+        Button tempBtn = (Button) rootView.findViewById(R.id.btn_search);
         tempBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,80 +84,48 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+//    private void initBanner(View view) {
+//        mMZBanner = (MZBannerView) view.findViewById(R.id.banner);
+//        // 设置页面点击事件
+//        mMZBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
+//            @Override
+//            public void onPageClick(View view, int position) {
+//                Toast.makeText(getActivity(), "click page:" + position, Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        Log.e(TAG, "mHomeTopicListsmHomeTopicListsmHomeTopicLists" + mHomeTopicLists.toString());
+//    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        HomePresenter homePresenter = new HomePresenter(HomeFragment.this);
-        homePresenter.loadHomeData();
-    }
-
-
-    private int[] RES = new int[]{R.mipmap.image1, R.mipmap.image2, R.mipmap.image3, R.mipmap.image4, R.mipmap.image5, R.mipmap.image6};
-
-    private void initBanner(View view) {
-        mMZBanner = (MZBannerView) view.findViewById(R.id.banner);
-        // 设置页面点击事件
-        mMZBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
-            @Override
-            public void onPageClick(View view, int position) {
-                Toast.makeText(getActivity(), "click page:" + position, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < RES.length; i++) {
-            list.add(RES[i]);
-        }
-        // 设置数据
-        mMZBanner.setPages(list, new MZHolderCreator<BannerViewHolder>() {
-            @Override
-            public BannerViewHolder createViewHolder() {
-                return new BannerViewHolder();
-            }
-        });
-
-
-    }
 
     public void onHomeSuccess(HomeAllBean bean) {
-        mHomeTopicLists = bean.getHomeTopic();
+        List<HomeAllBean.HomeTopicBean> mHomeTopicLists = bean.getHomeTopic();
+        mHomeTopicLists.remove(mHomeTopicLists.size() - 1);
+        mHomeFrgmRecyViewAdapter.setHomeAllBeenList(mHomeTopicLists);
+        Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
     }
-
-    public void onHomeSercerBug(int code) {
-
-    }
-
     public void onHomeConnectError(String message) {
-
+        Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
+    }
+    public void onHomeServerBug(int code) {
+        Log.d(TAG, "onHomeServerBug " + code);
+        Toast.makeText(getActivity(), "服务器正在修复中", Toast.LENGTH_SHORT).show();
     }
 
-    public static class BannerViewHolder implements MZViewHolder<Integer> {
-        private ImageView mImageView;
-
-        @Override
-        public View createView(Context context) {
-            // 返回页面布局文件
-            View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
-            mImageView = (ImageView) view.findViewById(R.id.banner_image);
-            return view;
-        }
-
-        @Override
-        public void onBind(Context context, int position, Integer data) {
-            // 数据绑定
-            mImageView.setImageResource(data);
-        }
-    }
     @Override
     public void onPause() {
         super.onPause();
+        if (mMZBanner == null) {
+            return;
+        }
         mMZBanner.pause();//暂停轮播
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if (mMZBanner == null) {
+            return;
+        }
         mMZBanner.start();//开始轮播
     }
 }
