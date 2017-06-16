@@ -19,7 +19,7 @@ import java.util.List;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
-import buy.win.com.winbuy.other.xzwtempfile.AppBean;
+import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.utils.Constans;
 
 /**
@@ -80,10 +80,10 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        if (mAppBeanList == null) {
+        if (mHomeBottomBeenList == null) {
             return 0;
         }
-        return mAppBeanList.size();
+        return mHomeBottomBeenList.size()+1;    //总长度+1是因为存在titleView
     }
 
     private List<HomeAllBean.HomeTopicBean> mHomeAllBeenList = new ArrayList<>();
@@ -116,6 +116,28 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         }
     }
 
+    private List<LimitbuyBean.ProductListBean> mHomeBottomBeenList = new ArrayList<>();
+    public void setHomeBottomBeenList(List<LimitbuyBean.ProductListBean> productList) {
+        mHomeBottomBeenList = productList;
+        notifyDataSetChanged();
+    }
+    private class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView mNameTextView;
+        private final ImageView mIconImageView;
+
+        public ViewHolder(View rootView) {
+            super(rootView);
+            mNameTextView = (TextView) rootView.findViewById(R.id.nameTextView);
+            mIconImageView = (ImageView) rootView.findViewById(R.id.imageView);
+        }
+
+        public void setData(int position) {
+            //-1是为了防止索引越界异常,因为前面存在头View
+            LimitbuyBean.ProductListBean bean = mHomeBottomBeenList.get(position-1);
+            mNameTextView.setText(bean.name);
+            Glide.with(mContext).load(Constans.URL_HOST +bean.pic).into(mIconImageView);
+        }
+    }
     public static class BannerViewHolder implements MZViewHolder<HomeAllBean.HomeTopicBean> {
         private ImageView mImageView;
 
@@ -133,25 +155,38 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private List<AppBean> mAppBeanList = new ArrayList<>();
 
-    public void setAppBeanList(List<AppBean> appBeen) {
-        mAppBeanList = appBeen;
-    }
 
-    private class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView mNameTextView;
-        private final ImageView mIconImageView;
+    private static final int DELAY = 138;
+    private int mLastPosition = -1;
+    /*public void showItemAnim(final View view, final int position) {
+        mContext = view.getContext();
+        if (position > mLastPosition) {
+            view.setAlpha(0);
+            view.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Animation animation = AnimationUtils.loadAnimation(mContext,
+                            R.anim.item_right);
+                    animation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            view.setAlpha(1);
+                        }
 
-        public ViewHolder(View rootView) {
-            super(rootView);
-            mNameTextView = (TextView) rootView.findViewById(R.id.nameTextView);
-            mIconImageView = (ImageView) rootView.findViewById(R.id.imageView);
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {}
+
+
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {}
+                    });
+                    view.startAnimation(animation);
+                }
+            }, DELAY * position);
+            mLastPosition = position;
         }
-
-        public void setData(int position) {
-            mNameTextView.setText(mAppBeanList.get(position).getName());
-            mIconImageView.setImageResource(mAppBeanList.get(position).getDrawable());
-        }
-    }
+    }*/
 }
