@@ -3,10 +3,12 @@ package buy.win.com.winbuy.presenter;
 import buy.win.com.winbuy.model.net.AddressAllListBean;
 import buy.win.com.winbuy.model.net.BrandBean;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
+import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.model.net.HomeAllBean;
+import buy.win.com.winbuy.model.net.HotSearchBean;
 import buy.win.com.winbuy.model.net.InvoiceAllBean;
 import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
@@ -42,7 +44,7 @@ public interface ApiService {
 
 
     @GET("selectCart")
-    Call<SelectCartBean> getSelectCartProduct(@Query("userId")String userId);
+    Call<SelectCartBean> getSelectCartProduct(@Query("userId") String userId);
 
 
     /**
@@ -56,11 +58,18 @@ public interface ApiService {
      */
     @GET("search")
     Call<SearchBean> getSearchProduct(
+            @Query("keyword") String keyword,
             @Query("page") String page,
             @Query("pageNum") String pageNum,
-            @Query("orderby") String orderby,
-            @Query("keyword") String keyword
+            @Query("orderby") String orderby
     );
+
+    /**
+     * 热门搜索字段
+     * @return
+     */
+    @GET("search/recommend")
+    Call<HotSearchBean> getHotBrand();
 
     /**
      * 促销
@@ -80,6 +89,11 @@ public interface ApiService {
     Call<BrandBean> getBrandProduct();
 
 
+    //http://product?pId=1
+    @GET
+    Call<CommodityProductBean> getCommodityProdectData(@Query("pId") String pId);
+
+
     @FormUrlEncoded //POST请求中
     @POST("login")
     Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
@@ -90,23 +104,27 @@ public interface ApiService {
     Call<LoginBean> regist(@Field("username") String username, @Field("password") String password);
 
 
-    /**发票
+    /**
+     * 发票
+     *
      * @return
      */
     @GET("invoice")
     Call<InvoiceAllBean> getInvoiceProduct();
 
 
-
-    /**版本检测
+    /**
+     * 版本检测
+     *
      * @return
      */
     @GET("version")
     Call<VersionAllBean> getVersionProduct();
 
 
-
-    /**收藏夹
+    /**
+     * 收藏夹
+     *
      * @param userid
      * @param page
      * @param pageNum
@@ -116,12 +134,14 @@ public interface ApiService {
     Call<FavoritesBean> getFavoriteProduct(
             @Header("userid") String userid,
             @Query("page") String page,
-            @Query("pageNum")String pageNum
+            @Query("pageNum") String pageNum
 
     );
 
 
-    /**订单详情
+    /**
+     * 订单详情
+     *
      * @param userid
      * @param orderId
      * @return

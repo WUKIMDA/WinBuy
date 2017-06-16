@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Random;
 
 import buy.win.com.winbuy.R;
+import buy.win.com.winbuy.utils.UiUtils;
 
 /**
  * 搜索页面view
@@ -162,7 +163,7 @@ public class mSearchLayout extends LinearLayout{
 //                    mIv_Fold.setImageResource(R.mipmap.less);
 //                }
 //                Toast.makeText(context, "点击了Category ,isUnfold = " + isUnfold, Toast.LENGTH_SHORT).show();
-                Toast.makeText(context, "点击了Category", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "搜索左边点击功能待实现", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -254,41 +255,39 @@ public class mSearchLayout extends LinearLayout{
 
     }
 
-
     /**
-     *
-     * @param olddatalist  历史搜索数据集合
-     * @param hotdata  热门搜索数据集合
-     * @param sCb  事件处理监听
+     * 初始化历史记录
+     * @param olddatalist
      */
-    public void initData(List<String> olddatalist,List<String> hotdata,setSearchCallBackListener sCb){
-
-        SetCallBackListener(sCb);
-
-        hotflowLayout.removeAllViews();
+    public void initOldRecord(List<String> olddatalist) {
         OldDataList.clear();
-        if(olddatalist!=null)
-        OldDataList.addAll(olddatalist);
-
-
+        if(olddatalist!=null){
+            OldDataList.addAll(olddatalist);
+           // UiUtils.logD(mSearchLayout.class,olddatalist.toString());
+        }
 //        countOldDataSize = OldDataList.size();
 
         OldDataAdapter = new SearchOldDataAdapter(context,OldDataList);
         gridviewolddata.setAdapter(OldDataAdapter);
-
-
-
-        LayoutInflater mInflater = LayoutInflater.from(context);
-        for (int i = 0; i < hotdata.size(); i++)
-        {
-            TextView tv = (TextView) mInflater.inflate(R.layout.suosou_item,hotflowLayout, false);
-            tv.setText(hotdata.get(i));
-            tv.setOnClickListener(TextViewItemListener);
-            tv.getBackground().setLevel(MyRandom(1,5));
-            hotflowLayout.addView(tv);
-        }
     }
 
+    public void initHotSearch(List<String> hotdata) {
+        UiUtils.logD(mSearchLayout.class,hotdata.toString());
+
+        hotflowLayout.removeAllViews();
+
+        if(hotdata.size() > 0) {
+            LayoutInflater mInflater = LayoutInflater.from(context);
+
+            for (int i = 0; i < hotdata.size(); i++) {
+                TextView tv = (TextView) mInflater.inflate(R.layout.suosou_item, hotflowLayout, false);
+                tv.setText(hotdata.get(i));
+                tv.setOnClickListener(TextViewItemListener);
+                tv.getBackground().setLevel(MyRandom(1, 5));
+                hotflowLayout.addView(tv);
+            }
+        }
+    }
 
 
     private void executeSearch_and_NotifyDataSetChanged(String str){
@@ -359,7 +358,7 @@ public class mSearchLayout extends LinearLayout{
      * 设置接口回调
      * @param sCb   setCallBackListener接口
      */
-    private void SetCallBackListener(setSearchCallBackListener sCb){
+    public void SetCallBackListener(setSearchCallBackListener sCb){
         sCBlistener=sCb;
     }
 

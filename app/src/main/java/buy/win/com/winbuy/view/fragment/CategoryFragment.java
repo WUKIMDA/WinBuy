@@ -29,6 +29,7 @@ public class CategoryFragment extends Fragment {
         TextView textView = new TextView(getActivity());
         textView.setText("分类");
 
+        //罗林海测试
         loadData();
         //mCategoryList
         System.out.println("分类数据" + mCategoryList.toString());

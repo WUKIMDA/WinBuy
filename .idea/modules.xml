@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/WinBuy.iml" filepath="$PROJECT_DIR$/.idea/WinBuy.iml" />
       <module fileurl="file://$PROJECT_DIR$/WinBuy.iml" filepath="$PROJECT_DIR$/WinBuy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

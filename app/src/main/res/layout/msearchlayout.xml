@@ -14,39 +14,40 @@
 
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView"
         android:scrollbars="none"
+        android:visibility="visible"
         >
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_marginTop="10dp"
+            android:orientation="vertical"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/huise"
                 android:text="@string/search_all"
+                android:textColor="@color/huise"
+                android:textSize="12sp"
                 />
 
 
             <include
                 android:id="@+id/shadowview"
-                layout="@layout/shadow_set_layout" />
+                layout="@layout/shadow_set_layout"/>
 
             <buy.win.com.winbuy.view.searchview.FlowLayout
-                android:padding="10dp"
                 android:id="@+id/id_flowlayouthot"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="10dp">
             </buy.win.com.winbuy.view.searchview.FlowLayout>
 
 
@@ -58,45 +59,43 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
                     android:layout_marginLeft="10dp"
-                    android:textColor="@color/huise"
-                    android:text="@string/search_lately"
-                    android:paddingTop="2dp"
                     android:paddingBottom="2dp"
+                    android:paddingTop="2dp"
+                    android:text="@string/search_lately"
+                    android:textColor="@color/huise"
+                    android:textSize="12sp"
 
 
                     />
 
 
                 <TextView
+                    android:id="@+id/tvclearolddata"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:textColor="@color/heise"
-                    android:id="@+id/tvclearolddata"
-                    android:text="@string/search_clear"
-                    android:background="@drawable/sousuo_clearolddata_shap"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginRight="10dp" />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/sousuo_clearolddata_shap"
+                    android:text="@string/search_clear"
+                    android:textColor="@color/heise"
+                    android:textSize="12sp"/>
 
             </RelativeLayout>
 
 
-
-
             <include
                 android:id="@+id/shadowview"
-                layout="@layout/shadow_set_layout" />
+                layout="@layout/shadow_set_layout"/>
 
             <buy.win.com.winbuy.view.searchview.selfSearchGridView
+                android:id="@+id/gridviewolddata"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/gridviewolddata"
-                android:numColumns="3"
                 android:gravity="center"
+                android:numColumns="3"
                 android:padding="10dp"
                 >
 
