@@ -1,5 +1,7 @@
 package buy.win.com.winbuy.view.adapter;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -10,21 +12,37 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
+import buy.win.com.winbuy.view.fragment.AboutFragment;
+import buy.win.com.winbuy.view.fragment.FeedbackFragment;
+import buy.win.com.winbuy.view.fragment.HelpCenterFragment;
 
 /**
  * Created by 林特烦 on 2017/6/15.
  */
 
 public class UserLVAdapter extends BaseAdapter {
+    private FragmentManager mFragmentManager;
     private Context mContext;
     private String[] descList = new String[]{"用户反馈", "帮助中心", "关于"};
     private int[] imgList = new int[]{R.mipmap.user_listview1, R.mipmap.user_listview2, R.mipmap.user_listview3};
     private ArrayList<UserLVbean> mUserLVBeanList;
+    List<Fragment> mFragmentList = new ArrayList<Fragment>();
 
-    public UserLVAdapter(Context context) {
+    private void initFragment() {
+        mFragmentList.add(new FeedbackFragment());
+        mFragmentList.add(new HelpCenterFragment());
+        mFragmentList.add(new AboutFragment());
+    }
+
+    public UserLVAdapter(Context context, FragmentManager fragmentManager) {
         this.mContext = context;
+        this.mFragmentManager = fragmentManager;
+        initFragment();
         mUserLVBeanList = new ArrayList<UserLVbean>();
         for (int i = 0; i < imgList.length; i++) {
             UserLVbean userLVbean = new UserLVbean(descList[i], imgList[i]);
@@ -34,7 +52,7 @@ public class UserLVAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if(mUserLVBeanList != null){
+        if (mUserLVBeanList != null) {
             return mUserLVBeanList.size();
         }
         return 0;
@@ -42,7 +60,7 @@ public class UserLVAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        if(mUserLVBeanList != null){
+        if (mUserLVBeanList != null) {
             return mUserLVBeanList.get(position);
         }
         return null;
@@ -55,27 +73,48 @@ public class UserLVAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        UserLVHolder userLVHolder;
+        ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_lv_user, null);
-            userLVHolder = new UserLVHolder();
-            userLVHolder.title = (TextView) convertView.findViewById(R.id.title);
-            userLVHolder.image = (ImageView) convertView.findViewById(R.id.image);
-            convertView.setTag(userLVHolder);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
         } else {
-            userLVHolder = (UserLVHolder) convertView.getTag();
+            viewHolder = (ViewHolder) convertView.getTag();
         }
-        userLVHolder.title.setText(mUserLVBeanList.get(position).getTitle());
-        userLVHolder.image.setImageResource(mUserLVBeanList.get(position).getImageId());
+        viewHolder.setData(position);
         convertView.setBackgroundColor(Color.WHITE);
         return convertView;
     }
+
+    class ViewHolder {
+        @Bind(R.id.image)
+        ImageView mImage;
+        @Bind(R.id.title)
+        TextView mTitle;
+        private int mPosition;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    OpenFragmentByPosition(mPosition);
+                }
+            });
+        }
+
+        public void setData(int position) {
+            mPosition = position;
+            mTitle.setText(mUserLVBeanList.get(position).getTitle());
+            mImage.setImageResource(mUserLVBeanList.get(position).getImageId());
+        }
+    }
+
+    private void OpenFragmentByPosition(int position) {
+        mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, mFragmentList.get(position)).commit();
+    }
 }
 
-class UserLVHolder {
-    public TextView title;
-    public ImageView image;
-}
 
 class UserLVbean {
     private String title;
