@@ -13,6 +13,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_home_fragment"
         android:layout_width="match_parent"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>

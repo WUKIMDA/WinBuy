@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
         mRv_homeFrgm.setLayoutManager(gridLayoutManager);
 
         mHomeFrgmRecyViewAdapter = new HomeFrgmRecyViewAdapter(getActivity());
-       // mHomeFrgmRecyViewAdapter.setAppBeanList(mHomePresenter.getApps());
+        // mHomeFrgmRecyViewAdapter.setAppBeanList(mHomePresenter.getApps());
         mRv_homeFrgm.setAdapter(mHomeFrgmRecyViewAdapter);
     }
 

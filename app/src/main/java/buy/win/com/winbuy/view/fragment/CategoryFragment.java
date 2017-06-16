@@ -119,6 +119,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     }
 
     public void onServerBug(int code) {
+
     }
 
     public void onSuccess(CategoryAllBean bean) {
