@@ -17,7 +17,6 @@ public abstract class BaseNetPresenter<T> {
             if (response.isSuccessful()) {//拿到数据
                 T body = response.body();
                 onSuccess(body);
-
                 //Test
                 textTemp = body.toString();
                 Log.d("Text", "成功" + textTemp);

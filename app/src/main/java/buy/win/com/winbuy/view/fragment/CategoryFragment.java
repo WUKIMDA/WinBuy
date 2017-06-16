@@ -21,7 +21,7 @@ import buy.win.com.winbuy.presenter.CategoryPresenter;
 
 public class CategoryFragment extends Fragment {
 
-    private List<CategoryAllBean.CategoryBean> mCategoryList=new ArrayList<>();
+    private List<CategoryAllBean.CategoryBean> mCategoryList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -31,13 +31,13 @@ public class CategoryFragment extends Fragment {
 
         loadData();
         //mCategoryList
-        System.out.println("分类数据"+mCategoryList.toString());
-
+        System.out.println("分类数据" + mCategoryList.toString());
 
         return textView;
     }
 
     private void loadData() {
+
         CategoryPresenter categoryPresenter = new CategoryPresenter(this);
         categoryPresenter.loadCategoryData();
     }
@@ -52,7 +52,7 @@ public class CategoryFragment extends Fragment {
 
     public void onSuccess(CategoryAllBean bean) {
         mCategoryList = bean.getCategory();
-        System.out.println("分类数据"+mCategoryList.toString());
+        System.out.println("分类数据" + mCategoryList.toString());
         Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
     }
 
