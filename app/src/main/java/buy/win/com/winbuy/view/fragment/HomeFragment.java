@@ -114,6 +114,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        if (mMZBanner == null) {
+            return;
+        }
         mMZBanner.pause();//暂停轮播
     }
 

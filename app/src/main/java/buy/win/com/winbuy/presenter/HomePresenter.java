@@ -43,6 +43,7 @@ public class HomePresenter extends BaseNetPresenter<HomeAllBean>{
     public List<AppBean> getApps() {
         List<AppBean> appBeen = new ArrayList<>();
         appBeen.add(new AppBean("Google+", R.mipmap.ic_google_48dp, 4.6f));
+        appBeen.add(new AppBean("Google+", R.mipmap.ic_google_48dp, 4.6f));
         appBeen.add(new AppBean("Gmail", R.mipmap.ic_gmail_48dp, 4.8f));
         appBeen.add(new AppBean("Inbox", R.mipmap.ic_inbox_48dp, 4.5f));
         appBeen.add(new AppBean("Google Keep", R.mipmap.ic_keep_48dp, 4.2f));
