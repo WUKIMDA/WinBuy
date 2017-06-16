@@ -92,7 +92,7 @@ public interface ApiService {
 
 
     //http://product?pId=1
-    @GET
+    @GET("product")
     Call<CommodityProductBean> getCommodityProdectData(@Query("pId") String pId);
 
 
