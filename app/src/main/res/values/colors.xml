@@ -8,4 +8,5 @@
     <color name="item_color_selected">#96A6A6</color>
     <color name="text_color">#203240</color>
     <color name="textcolor_selected">#F32613</color>
+    <color name="white">#ffffffff</color>
 </resources>

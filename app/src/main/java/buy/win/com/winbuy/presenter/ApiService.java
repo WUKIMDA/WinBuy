@@ -10,6 +10,7 @@ import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.model.net.HotSearchBean;
 import buy.win.com.winbuy.model.net.InvoiceAllBean;
+import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.SearchBean;
@@ -191,4 +192,9 @@ public interface ApiService {
     @GET("helpDetail")
     Call<HelpDetailBean> getHelpDetailProduct(@Query("id") String id);
 
+    /**
+     * 首页限时抢购
+     */
+    @GET("limitbuy")
+    Call<LimitbuyBean> getLimitBuy(@Query("page") String page, @Query("pageNum") String pageNum);
 }

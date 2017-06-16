@@ -20,7 +20,9 @@ import java.util.List;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
+import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.presenter.HomePresenter;
+import buy.win.com.winbuy.presenter.HomePresenterLimit;
 import buy.win.com.winbuy.view.activity.SearchActivity;
 import buy.win.com.winbuy.view.adapter.HomeFrgmRecyViewAdapter;
 
@@ -34,6 +36,7 @@ public class HomeFragment extends Fragment {
     public MZBannerView mMZBanner;
     private View mRootView;
     private HomePresenter mHomePresenter;
+    private HomePresenterLimit mHomePresenterLimit;
     private RecyclerView mRv_homeFrgm;
     private HomeFrgmRecyViewAdapter mHomeFrgmRecyViewAdapter;
 
@@ -43,6 +46,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mRootView = View.inflate(getActivity(), R.layout.fragment_home, null);
         mHomePresenter = new HomePresenter(HomeFragment.this);
+        mHomePresenterLimit = new HomePresenterLimit(HomeFragment.this);
         tempBtn(mRootView);
         initRecyclerView(mRootView);
         return mRootView;
@@ -63,7 +67,7 @@ public class HomeFragment extends Fragment {
         mRv_homeFrgm.setLayoutManager(gridLayoutManager);
 
         mHomeFrgmRecyViewAdapter = new HomeFrgmRecyViewAdapter(getActivity());
-        mHomeFrgmRecyViewAdapter.setAppBeanList(mHomePresenter.getApps());
+       // mHomeFrgmRecyViewAdapter.setAppBeanList(mHomePresenter.getApps());
         mRv_homeFrgm.setAdapter(mHomeFrgmRecyViewAdapter);
     }
 
@@ -72,6 +76,7 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mHomePresenter.loadHomeData();
+        mHomePresenterLimit.loadHomeBottomData();
     }
 
     private void tempBtn(View rootView) {
@@ -103,9 +108,17 @@ public class HomeFragment extends Fragment {
         mHomeFrgmRecyViewAdapter.setHomeAllBeenList(mHomeTopicLists);
         Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
     }
+
+    public void onHomeSuccessLimit(LimitbuyBean bean) {
+        List<LimitbuyBean.ProductListBean> productList = bean.productList;
+        mHomeFrgmRecyViewAdapter.setHomeBottomBeenList(productList);
+        Log.e(TAG, "onHomeSuccessLimit: " + productList.toString());
+    }
+
     public void onHomeConnectError(String message) {
         Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
     }
+
     public void onHomeServerBug(int code) {
         Log.d(TAG, "onHomeServerBug " + code);
         Toast.makeText(getActivity(), "服务器正在修复中", Toast.LENGTH_SHORT).show();
