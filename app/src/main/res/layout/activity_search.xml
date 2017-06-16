@@ -13,4 +13,5 @@
         app:search_hint="@string/search_hint">>
 
     </buy.win.com.winbuy.view.searchview.mSearchLayout>
+
 </LinearLayout>

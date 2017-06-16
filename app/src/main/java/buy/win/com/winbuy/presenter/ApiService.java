@@ -7,6 +7,7 @@ import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.model.net.HomeAllBean;
+import buy.win.com.winbuy.model.net.HotSearchBean;
 import buy.win.com.winbuy.model.net.InvoiceAllBean;
 import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
@@ -56,11 +57,18 @@ public interface ApiService {
      */
     @GET("search")
     Call<SearchBean> getSearchProduct(
+            @Query("keyword") String keyword,
             @Query("page") String page,
             @Query("pageNum") String pageNum,
-            @Query("orderby") String orderby,
-            @Query("keyword") String keyword
+            @Query("orderby") String orderby
     );
+
+    /**
+     * 热门搜索字段
+     * @return
+     */
+    @GET("search/recommend")
+    Call<HotSearchBean> getHotBrand();
 
     /**
      * 促销
