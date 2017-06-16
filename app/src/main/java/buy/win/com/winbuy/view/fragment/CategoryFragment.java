@@ -114,4 +114,13 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         mListAdapter.notifyDataSetChanged();
         recDataSet();
     }
+
+    public void onConnectError(String message) {
+    }
+
+    public void onServerBug(int code) {
+    }
+
+    public void onSuccess(CategoryAllBean bean) {
+    }
 }
