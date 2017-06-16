@@ -1,7 +1,6 @@
 package buy.win.com.winbuy.view.adapter;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -20,12 +19,12 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.view.fragment.AttentionFragment;
 import buy.win.com.winbuy.view.fragment.CollectFragment;
 import buy.win.com.winbuy.view.fragment.HistoryFragment;
+import buy.win.com.winbuy.view.fragment.UserFragment;
 
 /**
  * Created by 林特烦 on 2017/6/15.
  */
 public class UserCenterAdapter extends BaseAdapter {
-    private FragmentManager mFragmentManager;
     private final ArrayList<UserCenterbean> mUserCentenList;
     private final Context mContext;
     private String[] descList = new String[]{"收藏夹", "关注店铺", "足迹"};
@@ -37,9 +36,8 @@ public class UserCenterAdapter extends BaseAdapter {
         mFragmentList.add(new AttentionFragment());
         mFragmentList.add(new HistoryFragment());
     }
-    public UserCenterAdapter(Context context, FragmentManager fragmentManager) {
+    public UserCenterAdapter(Context context) {
         mContext = context;
-        this.mFragmentManager = fragmentManager;
         initFragment();
         mUserCentenList = new ArrayList<UserCenterbean>();
         for (int i = 0; i < imgList.length; i++) {
@@ -108,7 +106,7 @@ public class UserCenterAdapter extends BaseAdapter {
     }
 
     private void OpenFragmentByPosition(int position) {
-        mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, mFragmentList.get(position)).commit();
+        UserFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, mFragmentList.get(position)).commit();
     }
 }
 

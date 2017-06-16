@@ -37,14 +37,23 @@ public class UserFragment extends Fragment {
     @Bind(R.id.listview)
     ListView mListview;
 
+    public static FragmentManager mFragmentManager;
+    private UserFragment() {}
+
+    private static final UserFragment instance = new UserFragment();
+    //防止直接生成一个实例
+    public synchronized static UserFragment getInstance() {
+        return instance;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = View.inflate(getActivity(), R.layout.fragment_user, null);
         ButterKnife.bind(this, rootView);
-        FragmentManager fragmentManager = getActivity().getFragmentManager();
-        mGridview.setAdapter(new UserCenterAdapter(getActivity(),fragmentManager));
-        mListview.setAdapter(new UserLVAdapter(getActivity(),fragmentManager));
+        mFragmentManager = getActivity().getFragmentManager();
+        mGridview.setAdapter(new UserCenterAdapter(getActivity()));
+        mListview.setAdapter(new UserLVAdapter(getActivity()));
         return rootView;
     }
 
