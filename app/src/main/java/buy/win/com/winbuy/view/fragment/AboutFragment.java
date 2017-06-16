@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 
 /**
@@ -21,5 +22,16 @@ public class AboutFragment extends Fragment {
         View rootView = View.inflate(getActivity(), R.layout.fragment_user_about, null);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+
+    @OnClick(R.id.ib_back)
+    public void onClick() {
+        UserFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, UserFragment.getInstance()).commit();
     }
 }
