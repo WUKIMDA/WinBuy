@@ -22,7 +22,7 @@ import buy.win.com.winbuy.view.fragment.MoreFragment;
 import buy.win.com.winbuy.view.fragment.ShopCartFragment;
 import buy.win.com.winbuy.view.fragment.UserFragment;
 
-public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener{
 
     @Bind(R.id.main_fragment_container)
     FrameLayout mFrameLayoutContainer;
@@ -38,7 +38,6 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     RadioButton mRbMore;
     @Bind(R.id.rg_navigation_bar)
     RadioGroup mRgNavigationBar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +128,4 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
             //View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY 触摸就显示
         }
     }
-
-
 }
