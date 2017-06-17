@@ -1,5 +1,6 @@
 package buy.win.com.winbuy.model.net;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class TopPicBean {
     public String response;
     public List<TopicBean> topic;
 
-    public static class TopicBean {
+    public static class TopicBean  implements Serializable{
         /**
          * id : 2
          * name : 儿童玩具聚划算

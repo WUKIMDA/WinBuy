@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
-              tools:context="buy.win.com.winbuy.view.activity.MainActivity">
+              tools:topPicActivity="buy.win.com.winbuy.view.activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/main_fragment_container"

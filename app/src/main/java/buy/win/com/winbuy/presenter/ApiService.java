@@ -17,6 +17,8 @@ import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.model.net.SelectCartBean;
 import buy.win.com.winbuy.model.net.TopPicBean;
+import buy.win.com.winbuy.model.net.TopicPlistBean;
+import buy.win.com.winbuy.model.net.UserVersionBean;
 import buy.win.com.winbuy.model.net.VersionAllBean;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -207,4 +209,15 @@ public interface ApiService {
      */
     @GET("limitbuy")
     Call<LimitbuyBean> getLimitBuy(@Query("page") String page, @Query("pageNum") String pageNum);
+
+    /**
+     * 获取版本号
+     */
+    @GET("version")
+    Call<UserVersionBean> getVersion();
+    /**
+     * 专题商品列表
+     */
+    @GET("topic/plist")
+    Call<TopicPlistBean> getTopicPlist(@Query("page") String page, @Query("pageNum") String pageNum, @Query("id") String id, @Query("orderby") String orderby);
 }

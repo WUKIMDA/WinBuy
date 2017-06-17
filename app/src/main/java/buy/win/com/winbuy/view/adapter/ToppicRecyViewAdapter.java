@@ -1,7 +1,8 @@
 package buy.win.com.winbuy.view.adapter;
 
-import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,62 +15,41 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.TopPicBean;
 import buy.win.com.winbuy.view.activity.TopPicActivity;
+import buy.win.com.winbuy.view.activity.TopicPlistActivity;
 
 /**
  * Created by Ziwen on 2017/6/17.
  */
 
 public class ToppicRecyViewAdapter extends RecyclerView.Adapter {
-    private Context mContext;
+    private TopPicActivity mTopPicActivity;
 
-    public ToppicRecyViewAdapter(Context context) {
-        mContext = context;
+    public ToppicRecyViewAdapter(TopPicActivity topPicActivity) {
+        mTopPicActivity = topPicActivity;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_normal, parent, false);
+        View rootView = LayoutInflater.from(mTopPicActivity).inflate(R.layout.item_topic_recycler, parent, false);
         ViewHolder viewHolder = new ViewHolder(rootView);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        final ViewGroup.LayoutParams layoutParams = ((ViewHolder) holder).mIconImageView.getLayoutParams();
-        layoutParams.height = ((TopPicActivity)mContext).heighsArr[position];
+        if (mTopicList.size() == 0) {   // TODO: 2017/6/17 注释掉试一下
+            return;
+        }
+        ViewGroup.LayoutParams layoutParams = ((ViewHolder) holder).mIconImageView.getLayoutParams();
+        layoutParams.height = (int) ((layoutParams.width *  mTopPicActivity.mTopPicActivityPresenter.mHeighsArr[position] + 0.5f));
         ((ViewHolder) holder).mIconImageView.setLayoutParams(layoutParams);
-//            LayoutParams lp = holder.mPriceTextView.getLayoutParams();
-//            lp.height = mHeights.get(position);
-//
-//            holder.mPriceTextView.setLayoutParams(lp);
-//            holder.mPriceTextView.setText(mDatas.get(position));
-//
-//            // 如果设置了回调，则设置点击事件
-//            if (mOnItemClickLitener != null) {
-//                holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        int pos = holder.getLayoutPosition();
-//                        mOnItemClickLitener.onItemClick(holder.itemView, pos);
-//                    }
-//                });
-//
-//                holder.itemView.setOnLongClickListener(new OnLongClickListener() {
-//                    @Override
-//                    public boolean onLongClick(View v) {
-//                        int pos = holder.getLayoutPosition();
-//                        mOnItemClickLitener.onItemLongClick(holder.itemView, pos);
-//                        removeData(pos);
-//                        return false;
-//                    }
-//                });
-//            }
+        ((ViewHolder) holder).setData(position);
     }
 
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mTopicList.size();
     }
 
     private List<TopPicBean.TopicBean> mTopicList = new ArrayList<>();
@@ -80,29 +60,27 @@ public class ToppicRecyViewAdapter extends RecyclerView.Adapter {
 
     private class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView mIconImageView;
-        private final TextView mNameTextView;
-        private TextView mLimitPriceTextView;
-        private TextView mPriceTextView;
-        private TextView mLeftTimeTextView;
+        private TextView mNameTextView;
 
         public ViewHolder(View rootView) {
             super(rootView);
-            mIconImageView = (ImageView) rootView.findViewById(R.id.imageView);
-            mNameTextView = (TextView) rootView.findViewById(R.id.nameTextView);
-            mLimitPriceTextView = (TextView) rootView.findViewById(R.id.tv_home_limitPrice);
-            mPriceTextView = (TextView) rootView.findViewById(R.id.tv_home_price);
-            mLeftTimeTextView = (TextView) rootView.findViewById(R.id.tv_home_leftTime);
+            mIconImageView = (ImageView) rootView.findViewById(R.id.iv_topic_img);
+            mNameTextView = (TextView) rootView.findViewById(R.id.tv_topic_name);
+            rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mTopPicActivity, TopicPlistActivity.class);
+                    intent.putExtra("bean",  mTopicList.get(getPosition()));
+                    mTopPicActivity.startActivity(intent);
+                    Log.e("ToppicRecyViewAdapter", "onClick: " + getPosition());
+                }
+            });
         }
 
         public void setData(int position) {
-            //-1是为了防止索引越界异常,因为前面存在头View
-//            mLeftTimeTextView.setText(NumToTime.secToTime(timeArr[position - 1]));
-//            LimitbuyBean.ProductListBean bean = mHomeBottomBeenList.get(position - 1);
-//            Glide.with(mContext).load(Constant.URL_HOST + bean.pic).crossFade().into(mIconImageView);
-//            mNameTextView.setText(bean.name);
-//            mLimitPriceTextView.setText("¥" + bean.limitPrice);
-//            mPriceTextView.setText("¥" + bean.price);
-//            mPriceTextView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            TopPicBean.TopicBean topicBean = mTopicList.get(position);
+            mIconImageView.setImageBitmap(mTopPicActivity.mTopPicActivityPresenter.mBitmapsArr[position]);
+            mNameTextView.setText(topicBean.name);
         }
     }
 }

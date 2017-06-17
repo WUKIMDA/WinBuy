@@ -50,6 +50,7 @@
         <activity android:name=".view.activity.CommodityActivity">
         </activity>
         <activity android:name=".view.activity.TopPicActivity"/>
+        <activity android:name=".view.activity.TopicPlistActivity"/>
 
     </application>
 
