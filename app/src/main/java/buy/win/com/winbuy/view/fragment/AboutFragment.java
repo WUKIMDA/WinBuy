@@ -15,13 +15,13 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.UserVersionBean;
 import buy.win.com.winbuy.presenter.UserAboutPresenter;
+import buy.win.com.winbuy.utils.SPUtils;
 
 /**
  * Created by 林特烦 on 2017/6/16.
  */
 
 public class AboutFragment extends Fragment {
-    private float version = 1.0f;
     @Bind(R.id.textView)
     TextView mTextView;
     private UserAboutPresenter mAboutPresenter;
@@ -32,6 +32,8 @@ public class AboutFragment extends Fragment {
         View rootView = View.inflate(getActivity(), R.layout.fragment_user_about, null);
         ButterKnife.bind(this, rootView);
         mAboutPresenter = new UserAboutPresenter(AboutFragment.this);
+        float version = SPUtils.getVersion(getActivity());
+        mTextView.setText("版本号: v" + version);
         return rootView;
     }
 
@@ -49,7 +51,7 @@ public class AboutFragment extends Fragment {
 
     @OnClick(R.id.ib_back)
     public void onClick() {
-        UserFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, UserFragment.getInstance()).commit();
+        MoreFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, MoreFragment.getInstance()).commit();
     }
 
     @Override
@@ -61,7 +63,7 @@ public class AboutFragment extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    UserFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, UserFragment.getInstance()).commit();
+                    MoreFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, MoreFragment.getInstance()).commit();
                     return true;
                 }
                 return false;
@@ -70,16 +72,18 @@ public class AboutFragment extends Fragment {
     }
 
     public void onSuccess(UserVersionBean bean) {
-        UserVersionBean.VersionBean versionBean = bean.version;
-        version = versionBean.version;
-        mTextView.setText("版本号: v" + version);
+        float mVersion = bean.version.version;
+        mTextView.setText("版本号: v" + mVersion);
+        SPUtils.saveVersion(getActivity(),mVersion);
     }
 
     public void onError() {
+        float version = SPUtils.getVersion(getActivity());
         mTextView.setText("版本号: v" + version);
     }
 
     public void onServerBug() {
+        float version = SPUtils.getVersion(getActivity());
         mTextView.setText("版本号: v" + version);
     }
 }

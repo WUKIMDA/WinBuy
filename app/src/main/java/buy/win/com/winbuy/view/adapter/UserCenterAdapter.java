@@ -19,7 +19,7 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.view.fragment.AttentionFragment;
 import buy.win.com.winbuy.view.fragment.CollectFragment;
 import buy.win.com.winbuy.view.fragment.HistoryFragment;
-import buy.win.com.winbuy.view.fragment.UserFragment;
+import buy.win.com.winbuy.view.fragment.MoreFragment;
 
 /**
  * Created by 林特烦 on 2017/6/15.
@@ -106,7 +106,7 @@ public class UserCenterAdapter extends BaseAdapter {
     }
 
     private void OpenFragmentByPosition(int position) {
-        UserFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, mFragmentList.get(position)).commit();
+        MoreFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, mFragmentList.get(position)).commit();
     }
 }
 

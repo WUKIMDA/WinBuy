@@ -18,9 +18,9 @@ import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.view.fragment.CategoryFragment;
 import buy.win.com.winbuy.view.fragment.HomeFragment;
-import buy.win.com.winbuy.view.fragment.MoreFragment;
-import buy.win.com.winbuy.view.fragment.ShopCartFragment;
 import buy.win.com.winbuy.view.fragment.UserFragment;
+import buy.win.com.winbuy.view.fragment.ShopCartFragment;
+import buy.win.com.winbuy.view.fragment.MoreFragment;
 
 public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener{
 
@@ -95,8 +95,8 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         mFragmentList.add(new HomeFragment());
         mFragmentList.add(new CategoryFragment());
         mFragmentList.add(new ShopCartFragment());
-        mFragmentList.add(UserFragment.getInstance());
-        mFragmentList.add(new MoreFragment());
+        mFragmentList.add(new UserFragment());
+        mFragmentList.add(MoreFragment.getInstance());
 
     }
 
