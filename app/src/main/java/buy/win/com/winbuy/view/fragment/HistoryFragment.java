@@ -18,7 +18,7 @@ public class HistoryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = View.inflate(getActivity(), R.layout.fragment_user_history, null);
+        View rootView = View.inflate(getActivity(), R.layout.fragment_more_history, null);
         ButterKnife.bind(this, rootView);
         return rootView;
     }

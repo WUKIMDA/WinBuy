@@ -48,9 +48,9 @@
         <activity android:name=".view.activity.TutorialActivity"/>
 
         <activity android:name=".view.activity.CommodityActivity">
-
-
         </activity>
+        <activity android:name=".view.activity.TopPicActivity"/>
+
     </application>
 
 </manifest>

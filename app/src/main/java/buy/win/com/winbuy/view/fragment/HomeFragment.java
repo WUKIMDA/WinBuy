@@ -122,7 +122,7 @@ public class HomeFragment extends Fragment {
         List<HomeAllBean.HomeTopicBean> mHomeTopicLists = bean.getHomeTopic();
         mHomeTopicLists.remove(mHomeTopicLists.size() - 1);
         mHomeFrgmRecyViewAdapter.setHomeAllBeenList(mHomeTopicLists);
-//        Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
     }
 
     public void onHomeSuccessLimit(LimitbuyBean bean) {

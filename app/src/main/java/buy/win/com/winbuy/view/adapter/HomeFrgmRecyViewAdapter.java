@@ -23,7 +23,7 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.model.net.LimitbuyBean;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.NumToTime;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.activity.TopPicActivity;
@@ -199,7 +199,7 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
             //-1是为了防止索引越界异常,因为前面存在头View
             mLeftTimeTextView.setText(NumToTime.secToTime(timeArr[position - 1]));
             LimitbuyBean.ProductListBean bean = mHomeBottomBeenList.get(position - 1);
-            Glide.with(mContext).load(Constans.URL_HOST + bean.pic).crossFade().into(mIconImageView);
+            Glide.with(mContext).load(Constant.URL_HOST + bean.pic).crossFade().into(mIconImageView);
             mNameTextView.setText(bean.name);
             mLimitPriceTextView.setText("¥" + bean.limitPrice);
             mPriceTextView.setText("¥" + bean.price);
@@ -268,7 +268,7 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onBind(Context context, int i, HomeAllBean.HomeTopicBean homeTopicBean) {
-            Glide.with(context).load(Constans.URL_HOST + homeTopicBean.getPic()).into(mImageView);
+            Glide.with(context).load(Constant.URL_HOST + homeTopicBean.getPic()).into(mImageView);
         }
     }
 

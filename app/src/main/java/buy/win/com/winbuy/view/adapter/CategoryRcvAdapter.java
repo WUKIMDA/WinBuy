@@ -19,7 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 
 /**
  * Created by Administrator on 2017/6/15 0015.
@@ -107,7 +107,7 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         public void setData(List<CategoryAllBean.CategoryBean> data, int id) {
             for (int i = 0; i < data.size(); i++) {
                 if (data.get(i).getId() == id) {
-                    Glide.with(mContenx).load(Constans.URL_HOST + data.get(i).getPic()).into(mHeadview);
+                    Glide.with(mContenx).load(Constant.URL_HOST + data.get(i).getPic()).into(mHeadview);
                 }
             }
         }

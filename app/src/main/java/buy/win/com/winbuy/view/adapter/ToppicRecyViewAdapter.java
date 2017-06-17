@@ -98,7 +98,7 @@ public class ToppicRecyViewAdapter extends RecyclerView.Adapter {
             //-1是为了防止索引越界异常,因为前面存在头View
 //            mLeftTimeTextView.setText(NumToTime.secToTime(timeArr[position - 1]));
 //            LimitbuyBean.ProductListBean bean = mHomeBottomBeenList.get(position - 1);
-//            Glide.with(mContext).load(Constans.URL_HOST + bean.pic).crossFade().into(mIconImageView);
+//            Glide.with(mContext).load(Constant.URL_HOST + bean.pic).crossFade().into(mIconImageView);
 //            mNameTextView.setText(bean.name);
 //            mLimitPriceTextView.setText("¥" + bean.limitPrice);
 //            mPriceTextView.setText("¥" + bean.price);

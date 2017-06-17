@@ -12,7 +12,7 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.TopPicBean;
 import buy.win.com.winbuy.presenter.TopPicActivityPresenter;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.UrlToBitmap;
 import buy.win.com.winbuy.view.adapter.ToppicRecyViewAdapter;
 
@@ -55,7 +55,7 @@ public class TopPicActivity extends Activity {
             @Override
             public void run() {
                 for (int i = 0; i < mTopicList.size(); i++) {
-                    Bitmap bitmap = UrlToBitmap.getImageFromNet(Constans.URL_HOST + mTopicList.get(i).pic);
+                    Bitmap bitmap = UrlToBitmap.getImageFromNet(Constant.URL_HOST + mTopicList.get(i).pic);
                     heighsArr[i] = 170 * bitmap.getHeight() / bitmap.getWidth();
                 }
             }

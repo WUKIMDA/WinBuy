@@ -16,8 +16,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import buy.win.com.winbuy.R;
-import buy.win.com.winbuy.view.adapter.UserCenterAdapter;
-import buy.win.com.winbuy.view.adapter.UserLVAdapter;
+import buy.win.com.winbuy.view.adapter.MoreCenterAdapter;
+import buy.win.com.winbuy.view.adapter.MoreLVAdapter;
 
 /**
  * Created by 林特烦 on 2017/6/15.
@@ -49,11 +49,11 @@ public class MoreFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = View.inflate(getActivity(), R.layout.fragment_user, null);
+        View rootView = View.inflate(getActivity(), R.layout.fragment_more, null);
         ButterKnife.bind(this, rootView);
         mFragmentManager = getActivity().getFragmentManager();
-        mGridview.setAdapter(new UserCenterAdapter(getActivity()));
-        mListview.setAdapter(new UserLVAdapter(getActivity()));
+        mGridview.setAdapter(new MoreCenterAdapter(getActivity()));
+        mListview.setAdapter(new MoreLVAdapter(getActivity()));
         return rootView;
     }
 

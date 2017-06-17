@@ -13,7 +13,7 @@ import java.util.List;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 
 /**
  * Created by Administrator on 2017/6/15 0015.
@@ -53,7 +53,7 @@ public class GridViewAdapter extends BaseAdapter {
         convertView = View.inflate(mContext,R.layout.category_gridview_item,null);
         ImageView img = (ImageView) convertView.findViewById(R.id.gridview_iv);
         TextView txv = (TextView) convertView.findViewById(R.id.gridview_tv);
-        Glide.with(mContext).load(Constans.URL_HOST + mDatas.get(position).getPic()).into(img);
+        Glide.with(mContext).load(Constant.URL_HOST + mDatas.get(position).getPic()).into(img);
         txv.setText(mDatas.get(position).getName());
         return convertView;
     }
