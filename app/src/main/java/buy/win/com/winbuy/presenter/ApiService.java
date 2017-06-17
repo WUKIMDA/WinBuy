@@ -52,10 +52,10 @@ public interface ApiService {
     /**
      * 搜索
      *
+     * @param keyword
      * @param page
      * @param pageNum
      * @param orderby
-     * @param keyword
      * @return
      */
     @GET("search")
@@ -65,7 +65,6 @@ public interface ApiService {
             @Query("pageNum") String pageNum,
             @Query("orderby") String orderby
     );
-
     /**
      * 热门搜索字段
      * @return

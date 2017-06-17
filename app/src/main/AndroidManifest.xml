@@ -33,7 +33,11 @@
 
         </activity>
         <activity android:name=".view.activity.SearchActivity"/>
-        <activity android:name=".view.activity.SearchResultActivity"/>
+        <activity
+            android:name=".view.activity.SearchResultActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+
+        </activity>
 
         <activity
             android:name=".view.activity.SplashActivity"
