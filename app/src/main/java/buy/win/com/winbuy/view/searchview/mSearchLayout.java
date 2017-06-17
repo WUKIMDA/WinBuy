@@ -51,7 +51,7 @@ public class mSearchLayout extends LinearLayout{
     private String backtitle="取消",searchtitle="搜索";
     private OnClickListener TextViewItemListener;
     private int countOldDataSize=15;//默认搜索记录的条数， 正确的是传入进来的条数
-    private TextView mTv_Category;
+    //private TextView mTv_Category;
     private LinearLayout mLl_category;
     private ImageView mIv_Fold;
 
@@ -95,7 +95,7 @@ public class mSearchLayout extends LinearLayout{
         //把按钮从布局文件中找到
         ib_searchtext_delete = (ImageView) searchview.findViewById(R.id.ib_searchtext_delete);
         et_searchtext_search = (EditText) searchview.findViewById(R.id.et_searchtext_search);
-        mTv_Category = (TextView) searchview.findViewById(R.id.category);
+        //mTv_Category = (TextView) searchview.findViewById(R.id.category);
         mLl_category = (LinearLayout) searchview.findViewById(R.id.ll_category);
         mIv_Fold = (ImageView) findViewById(R.id.iv_fold);
         et_searchtext_search.setBackgroundResource(msearch_baground);

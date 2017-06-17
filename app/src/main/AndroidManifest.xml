@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.SearchActivity"/>
-
+        <activity android:name=".view.activity.SearchResultActivity"/>
         <activity
             android:name=".view.activity.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
@@ -43,6 +43,7 @@
         </activity>
 
         <activity android:name=".view.activity.TutorialActivity"/>
+
     </application>
 
 </manifest>

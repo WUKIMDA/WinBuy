@@ -2,9 +2,9 @@ package buy.win.com.winbuy.view.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +34,7 @@ public class SearchActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
         setContentView(R.layout.activity_search);
         mSearch = (mSearchLayout) findViewById(R.id.search_layout);
         mSearchPresenter = new SearchPresenter(this);
@@ -60,8 +61,10 @@ public class SearchActivity extends Activity {
             @Override
             public void Search(String str) {
                 //进行联网搜索
-                Toast.makeText(SearchActivity.this, str, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SearchActivity.this, str, Toast.LENGTH_SHORT).show();
                 mSearchPresenter.loadSearchData(str,page,pageNum,orderby);
+                Intent intent = new Intent(mContext,SearchResultActivity.class);
+                startActivity(intent);
             }
 
             @Override

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include
         layout="@layout/msearch_top"
@@ -33,9 +33,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:drawableLeft="@mipmap/hot_red"
                 android:text="@string/search_all"
                 android:textColor="@color/huise"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 />
 
 
@@ -50,41 +51,17 @@
                 android:padding="10dp">
             </buy.win.com.winbuy.view.searchview.FlowLayout>
 
-
-            <RelativeLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:paddingBottom="2dp"
-                    android:paddingTop="2dp"
-                    android:text="@string/search_lately"
-                    android:textColor="@color/huise"
-                    android:textSize="12sp"
-
-
-                    />
-
-
-                <TextView
-                    android:id="@+id/tvclearolddata"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/sousuo_clearolddata_shap"
-                    android:text="@string/search_clear"
-                    android:textColor="@color/heise"
-                    android:textSize="12sp"/>
-
-            </RelativeLayout>
-
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:drawableLeft="@mipmap/history"
+                android:text="@string/search_lately"
+                android:textColor="@color/huise"
+                android:textSize="16sp"
+                />
 
             <include
                 android:id="@+id/shadowview"
@@ -100,6 +77,17 @@
                 >
 
             </buy.win.com.winbuy.view.searchview.selfSearchGridView>
+
+            <TextView
+                android:id="@+id/tvclearolddata"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/sousuo_clearolddata_shap"
+                android:text="@string/search_clear"
+                android:textColor="@color/heise"
+                android:drawableLeft="@mipmap/delete"
+                android:textSize="16sp"/>
 
         </LinearLayout>
 
