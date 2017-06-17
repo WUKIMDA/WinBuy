@@ -3,6 +3,7 @@ package buy.win.com.winbuy.presenter;
 import buy.win.com.winbuy.model.net.AddressAllListBean;
 import buy.win.com.winbuy.model.net.BrandBean;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
+import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
@@ -68,6 +69,7 @@ public interface ApiService {
 
     /**
      * 热门搜索字段
+     *
      * @return
      */
     @GET("search/recommend")
@@ -105,10 +107,18 @@ public interface ApiService {
     @POST("register")
     Call<LoginBean> regist(@Field("username") String username, @Field("password") String password);
 
+    @GET("addCart")
+    Call<LoginBean> addCart(@Query("userId") String userId, @Query("productId") String productId, @Query("productCount") String productCount, @Query("propertyId") String propertyId);
+
+    @GET("description")
+    Call<String> descriptionData(@Query("pId") String pId);
+
+    @GET("product/comment")
+    Call<CommentDataBean> commentLoad(@Query("pId")String pId, @Query("page")String page, @Query("pageNum")String pageNum);
+
 
     /**
      * 发票
-     *
      * @return
      */
     @GET("invoice")
@@ -198,6 +208,7 @@ public interface ApiService {
      */
     @GET("limitbuy")
     Call<LimitbuyBean> getLimitBuy(@Query("page") String page, @Query("pageNum") String pageNum);
+
     /**
      * 获取版本号
      */

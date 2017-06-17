@@ -22,4 +22,5 @@ public class RetrofitUtil {
     public static ApiService getApiService() {
         return getRetrofit().create(ApiService.class);
     }
+
 }
