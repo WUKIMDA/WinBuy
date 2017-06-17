@@ -5,9 +5,10 @@ package buy.win.com.winbuy.utils;
  */
 public class Constans {
 
-//    public static final String URL_HOST = "http://192.168.21.100:8080/market/";
+    public static final String URL_HOST = "http://192.168.21.100:8080/market/";
+//    public static final String URL_HOST = "http://10.0.2.2:8080/market/";
 
-    public static final String URL_HOST = "http://www.wukimda.win:8080/market/";
+//    public static final String URL_HOST = "http://www.wukimda.win:8080/market/";
 
     public static final int ERROR01= 1530;// 用户名不存在或密码错误
     public static final int ERROR02= 1531;//  userid请求头为空
