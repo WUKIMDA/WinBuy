@@ -3,10 +3,11 @@ package buy.win.com.winbuy.view.fragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import buy.win.com.winbuy.view.adapter.HelpCenterLVAdapter;
 
 public class HelpCenterFragment extends Fragment {
     @Bind(R.id.listview)
-    ListView mListview;
+    ExpandableListView mListview;
     public HelpCenterPresenter mHelpCenterPresenter;
     private HelpCenterLVAdapter mHelpCenterLVAdapter;
 
@@ -56,7 +57,25 @@ public class HelpCenterFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                    MoreFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, MoreFragment.getInstance()).commit();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
     public void onSuccess(List<HelpDetailBean.HelpDetailListBean> helpDetailList) {
         mHelpCenterLVAdapter.setTitles(helpDetailList);
+        mHelpCenterLVAdapter.setContent(helpDetailList);
     }
 }

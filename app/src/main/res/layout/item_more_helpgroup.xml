@@ -17,9 +17,10 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/line"/>
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/android_list_idex"
+        android:src="@drawable/ssdk_recomm_plats_more"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:layout_centerVertical="true"/>
