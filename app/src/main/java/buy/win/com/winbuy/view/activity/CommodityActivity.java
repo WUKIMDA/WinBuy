@@ -160,6 +160,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         setContentView(R.layout.activity_commodity);
         look_all_comment = (LinearLayout) findViewById(R.id.look_all_comment);
         listview_comment = (ListView) findViewById(R.id.listview_comment);
+        ButterKnife.bind(this);
 
         EventBus.getDefault().register(this);
 
@@ -171,7 +172,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 //        loadService(pId);
         loadService();
 
-        ButterKnife.bind(this);
+
         //透明状态栏
         StatusBarUtil.setTranslucentForImageView(this, llOffset);
         LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) llOffset.getLayoutParams();
@@ -197,6 +198,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     protected void onStart() {
         super.onStart();
         //如果收藏,回显
+
+
     }
 
 
@@ -426,9 +429,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                 dialogNum.setText("" + mCommodityCount);
             }
         });
-
-
-
 
         mBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

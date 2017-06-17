@@ -8,8 +8,6 @@ import java.util.List;
 
 public class CommodityProductBean extends BaseBean {
 
-
-
     private ProductBean product;
 
     public void setProduct(ProductBean product) {

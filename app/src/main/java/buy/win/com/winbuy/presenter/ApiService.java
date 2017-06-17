@@ -228,7 +228,7 @@ public interface ApiService {
 //    @FormUrlEncoded //POST请求中
 //    @POST("login")//定义
 //    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
-奶粉
+
 
     @FormUrlEncoded //POST请求中
     @POST("register")//定义
