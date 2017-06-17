@@ -1,10 +1,13 @@
 package buy.win.com.winbuy.presenter;
 
 import buy.win.com.winbuy.model.net.AddressAllListBean;
+import buy.win.com.winbuy.model.net.AddressBean;
+import buy.win.com.winbuy.model.net.AreaBean;
 import buy.win.com.winbuy.model.net.BrandBean;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
+import buy.win.com.winbuy.model.net.DelectBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
@@ -14,11 +17,12 @@ import buy.win.com.winbuy.model.net.InvoiceAllBean;
 import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
+import buy.win.com.winbuy.model.net.RegisterBean;
+import buy.win.com.winbuy.model.net.SaveAddressBean;
 import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.model.net.SelectCartBean;
 import buy.win.com.winbuy.model.net.TopPicBean;
 import buy.win.com.winbuy.model.net.TopicPlistBean;
-import buy.win.com.winbuy.model.net.UserVersionBean;
 import buy.win.com.winbuy.model.net.VersionAllBean;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -99,9 +103,9 @@ public interface ApiService {
     Call<CommodityProductBean> getCommodityProdectData(@Query("pId") String pId);
 
 
-    @FormUrlEncoded //POST请求中
+    /*@FormUrlEncoded //POST请求中
     @POST("login")
-    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
+    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);*/
 
 
     @FormUrlEncoded //POST请求中
@@ -213,8 +217,46 @@ public interface ApiService {
     /**
      * 获取版本号
      */
-    @GET("version")
-    Call<UserVersionBean> getVersion();
+    /*@GET("version")
+    Call<UserVersionBean> getVersion();*/
+
+
+    /**
+     * 底部导航我的部分(包括 用户登录 地址管理 )  eason
+     */
+    @FormUrlEncoded //POST请求中
+    @POST("login")//定义
+    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
+
+
+    @FormUrlEncoded //POST请求中
+    @POST("register")//定义
+    Call<RegisterBean> register(@Field("username") String username, @Field("password") String password);
+
+
+    @GET("addresslist")
+    Call<AddressBean> getAddressList(@Header("userid") String userid);
+
+    @GET("addressarea")
+    Call<AreaBean> getaddressarea(@Query("id") String id);
+
+    @GET("addressdelete")
+    Call<DelectBean> deleteAddress(@Query("id") int id);
+
+    @FormUrlEncoded
+    @POST("addresssave")//定义
+    Call<SaveAddressBean> saveAddress(
+            @Header("userid") String userid,
+            @Field("name") String name,
+            @Field("phoneNumber") String phoneNumber,
+            @Field("province") String province,
+            @Field("city") String city,
+            @Field("addressArea") String addressArea,
+            @Field("addressDetail") String addressDetail,
+            @Field("zipCode") String zipCode,
+            @Field("isDefault") String isDefault
+    );
+
     /**
      * 专题商品列表
      */

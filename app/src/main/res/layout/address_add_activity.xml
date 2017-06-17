@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back_btn"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="新增地址"
+            android:textColor="#4E4E4E"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:textSize="16sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="保存"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/rl_title"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/mine"
+            android:hint="收货人:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/phone"
+            android:hint="手机号:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+
+        <TextView
+            android:layout_margin="4dp"
+            android:textSize="18sp"
+            android:id="@+id/address"
+            android:hint="省市区:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <View
+        android:background="@color/colorLine"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+
+        <EditText
+            android:textSize="18sp"
+            android:id="@+id/detailsAddress"
+            android:hint="详细地址:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <!--<Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/btn_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_oral"
+            android:text="设置为默认地址"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>-->
+
+       <!-- <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/btn_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_oral"
+            android:text="删除"
+            android:textColor="#ffffff"
+            android:textSize="20sp"/>-->
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
