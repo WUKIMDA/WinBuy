@@ -225,10 +225,10 @@ public interface ApiService {
     /**
      * 底部导航我的部分(包括 用户登录 地址管理 )  eason
      */
-    @FormUrlEncoded //POST请求中
-    @POST("login")//定义
-    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
-
+//    @FormUrlEncoded //POST请求中
+//    @POST("login")//定义
+//    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
+奶粉
 
     @FormUrlEncoded //POST请求中
     @POST("register")//定义

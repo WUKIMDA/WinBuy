@@ -41,10 +41,10 @@ public class ErrorBean {
     public void setResponse(String response) {
         this.response = response;
     }
-=======
- * Created by BUTTON on 2017-06-17.
- */
-
-public class ErrorBean extends BaseBean {
->>>>>>> Stashed changes
+//=======
+// * Created by BUTTON on 2017-06-17.
+// */
+//
+//public class ErrorBean extends BaseBean {
+//>>>>>>> Stashed changes
 }
