@@ -17,12 +17,13 @@ public abstract class BaseNetPresenter<T> {
             if (response.isSuccessful()) {//拿到数据
                 T body = response.body();
                 onSuccess(body);
+
                 //Test
                 textTemp = body.toString();
-                Log.d("Text", "成功" + textTemp);
+                Log.d("Text", BaseNetPresenter.this.getClass().getSimpleName()+"成功" + textTemp);
 
             } else {//服务器出现异常
-                Log.d("Text", "失败");
+                Log.d("Text", BaseNetPresenter.this.getClass().getSimpleName()+"失败");
                 onServerBug(response.code());
             }
         }

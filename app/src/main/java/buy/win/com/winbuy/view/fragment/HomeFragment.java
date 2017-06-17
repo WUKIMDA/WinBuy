@@ -88,6 +88,22 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        Button tempBtnEwm = (Button) rootView.findViewById(R.id.temp_ewm);
+        tempBtnEwm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button tempBtnYy = (Button) rootView.findViewById(R.id.temp_yy);
+        tempBtnYy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 //    private void initBanner(View view) {
 //        mMZBanner = (MZBannerView) view.findViewById(R.id.banner);
@@ -106,7 +122,7 @@ public class HomeFragment extends Fragment {
         List<HomeAllBean.HomeTopicBean> mHomeTopicLists = bean.getHomeTopic();
         mHomeTopicLists.remove(mHomeTopicLists.size() - 1);
         mHomeFrgmRecyViewAdapter.setHomeAllBeenList(mHomeTopicLists);
-        Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
     }
 
     public void onHomeSuccessLimit(LimitbuyBean bean) {

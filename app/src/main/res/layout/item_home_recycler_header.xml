@@ -4,6 +4,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
+
     <LinearLayout
         android:id="@+id/ll_home_top"
         android:layout_width="match_parent"
@@ -12,25 +13,30 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/toppic"
             style="@style/HomeFrgmTV"
             android:text="促销快报"/>
 
         <TextView
+            android:id="@+id/tjpp"
             style="@style/HomeFrgmTV"
             android:text="推荐品牌"/>
 
-        <TextView
-            style="@style/HomeFrgmTV"
-            android:text="限时抢购"/>
 
         <TextView
+            android:id="@+id/xpsj"
             style="@style/HomeFrgmTV"
             android:text="新品上架"/>
 
         <TextView
+            android:id="@+id/rmdp"
             style="@style/HomeFrgmTV"
             android:text="热门单品"/>
+
+        <TextView
+            style="@style/HomeFrgmTV"
+            android:text="猜你喜欢"/>
+
     </LinearLayout>
 
     <com.zhouwei.mzbanner.MZBannerView

@@ -44,11 +44,11 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/layout_line"></include>
+    <include layout="@layout/activity_commdity_line"></include>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -69,44 +69,10 @@
                     android:textColor="#000"
                     android:textSize="16sp"/>
 
-                <RadioGroup
-                    android:id="@+id/rg_color"
+                <buy.win.com.winbuy.view.commodityView.PropertyViewGroup
+                    android:id="@+id/property_color"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp">
-
-                    <RadioButton
-                        style="@style/RadioGroupMainActivity"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_color_red"
-                        />
-
-                    <RadioButton
-                        style="@style/RadioGroupMainActivity"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_color_yellow"
-                        />
-
-                    <RadioButton
-                        style="@style/RadioGroupMainActivity"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_color_bule"
-                        />
-
-                    <RadioButton
-                        style="@style/RadioGroupMainActivity"
-                        android:layout_weight="1"
-                        android:background="@drawable/shape_color_green"
-                        />
-
-
-                </RadioGroup>
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <ImageView
@@ -127,46 +93,66 @@
                     android:textColor="#000"
                     android:textSize="16sp"/>
 
-                <RadioGroup
-                    android:id="@+id/rg_size"
+                <buy.win.com.winbuy.view.commodityView.PropertyViewGroup
+                    android:id="@+id/property_size"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"/>
 
-                    <RadioButton
-                        style="@style/rg_size_select"
-                        android:text="M"
-                        android:background="@drawable/selector_size_select"
-                        />
 
-                    <RadioButton
-                        style="@style/rg_size_select"
-                        android:background="@drawable/selector_size_select"
-                        />
-
-                    <RadioButton
-                        style="@style/rg_size_select"
-                        android:background="@drawable/selector_size_select"
-                        />
-
-                    <RadioButton
-                        style="@style/rg_size_select"
-                        android:background="@drawable/selector_size_select"
-                        />
-
-                </RadioGroup>
             </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e0e0e0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数量"
+                android:textColor="#000"
+                android:textSize="16sp"/>
+
+            <RelativeLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:id="@+id/ll_change_num"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <TextView
+                    android:id="@+id/dialog_reduceNum"
+                    android:background="@drawable/cart_min"
+                    android:layout_width="36dp"
+                    android:layout_height="40dp" />
+                <EditText
+                    android:id="@+id/dialog_num"
+                    android:background="@drawable/icon_cart_count"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#ea8010"
+                    android:text="1"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:layout_toRightOf="@+id/dialog_reduceNum"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp" />
+                <TextView
+                    android:layout_toRightOf="@+id/dialog_num"
+                    android:background="@drawable/cart_max"
+                    android:id="@+id/dialog_increaseNum"
+                    android:layout_width="36dp"
+                    android:layout_height="40dp" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/textView2"
+        android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_btn"
+        android:textColor="@color/white"
         android:padding="10dp"
         android:text="确定"/>
 </LinearLayout>

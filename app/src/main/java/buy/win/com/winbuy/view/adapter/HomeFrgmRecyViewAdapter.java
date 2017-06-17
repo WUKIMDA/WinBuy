@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.zhouwei.mzbanner.MZBannerView;
@@ -22,9 +23,10 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.model.net.LimitbuyBean;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.NumToTime;
 import buy.win.com.winbuy.utils.UiUtils;
+import buy.win.com.winbuy.view.activity.TopPicActivity;
 
 /**
  * Created by Ziwen on 2017/6/15.
@@ -50,11 +52,13 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         }
     }
 
-    /** 6.item的局部赋值
+    /**
+     * 6.item的局部赋值
      * notifyItemChanged(int position, Object payload)
-     * @param holder    根据之前传入的position,获取每一个的holder.意思就是这个方法调用的次数为mHomeBottomBeenList.size()
-     * @param position  前一个方法notifyItemChanged的参数position来到了此处
-     * @param payloads  前一个方法notifyItemChanged的参数payload来到了此处
+     *
+     * @param holder   根据之前传入的position,获取每一个的holder.意思就是这个方法调用的次数为mHomeBottomBeenList.size()
+     * @param position 前一个方法notifyItemChanged的参数position来到了此处
+     * @param payloads 前一个方法notifyItemChanged的参数payload来到了此处
      */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List payloads) {
@@ -67,7 +71,7 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
              *  因为传入的position的范围是[1~mHomeBottomBeenList.size()]
              *  当你看到此处说明我已全部讲解完成.
              */
-            ((ViewHolder) holder).mLeftTimeTextView.setText(NumToTime.secToTime(timeArr[position-1]));
+            ((ViewHolder) holder).mLeftTimeTextView.setText(NumToTime.secToTime(timeArr[position - 1]));
         }
     }
 
@@ -117,13 +121,22 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    private class TitleHolder extends RecyclerView.ViewHolder {
+    private class TitleHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final LinearLayout mLlHomeTop;
         private final MZBannerView mBannerHomeTop;
+        private final TextView mCxkk;
+        private final TextView mTjpp;
+        private final TextView mXpsj;
+        private final TextView mRmdp;
+
 
         public TitleHolder(View view) {
             super(view);
             mLlHomeTop = (LinearLayout) view.findViewById(R.id.ll_home_top);
+            (mCxkk = (TextView) view.findViewById(R.id.toppic)).setOnClickListener(this);
+            (mTjpp = (TextView) view.findViewById(R.id.tjpp)).setOnClickListener(this);
+            (mXpsj = (TextView) view.findViewById(R.id.xpsj)).setOnClickListener(this);
+            (mRmdp = (TextView) view.findViewById(R.id.rmdp)).setOnClickListener(this);
             mBannerHomeTop = (MZBannerView) view.findViewById(R.id.banner_home_top);
         }
 
@@ -138,6 +151,24 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
                 }
             });
         }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.toppic:
+                    UiUtils.startActivity(mContext, TopPicActivity.class);
+                    break;
+                case R.id.tjpp:
+                    Toast.makeText(mContext, "tjpp", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.xpsj:
+                    Toast.makeText(mContext, "xpsj", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.rmdp:
+                    Toast.makeText(mContext, "rmdp", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
     }
 
     private List<LimitbuyBean.ProductListBean> mHomeBottomBeenList = new ArrayList<>();
@@ -145,56 +176,7 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
     public void setHomeBottomBeenList(List<LimitbuyBean.ProductListBean> productList) {
         mHomeBottomBeenList = productList;
         notifyDataSetChanged();
-        createTimeArr();
-    }
-
-    private int[] timeArr;
-
-    /**
-     * notifyItemChanged(int position, Object payload)
-     * 意思是指定position条目的holder进行数据刷新,此方法执行后会执行{@link #onBindViewHolder(RecyclerView.ViewHolder holder, int position, List payloads)}
-     * 只需要在onBindViewHolder内进行item的局部赋值即可.
-     */
-    private void createTimeArr() {
-        // 1.获取List内所有Bean.leftTime
-        timeArr = new int[mHomeBottomBeenList.size()];
-        for (int i = 0; i < mHomeBottomBeenList.size(); i++) {
-            timeArr[i] = mHomeBottomBeenList.get(i).leftTime;
-        }
-        // 2.在子线程进行记时操作
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    SystemClock.sleep(1000);
-                    // 3.数组内所有的时间值自减1
-                    for (int i = 0; i < timeArr.length; i++) {
-                        timeArr[i] -= 1;
-                    }
-                    // 4.在UI线程进行刷新数据
-                    UiUtils.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            /** 5.需求:所有的holder都要求刷新时间
-                             * notifyItemChanged(int position, Object payload)
-                             * @param position holder的索引
-                             * @param payload 需要传递的数据(类似于handler内的msg)但是我并没有利用此参数传递数据
-                             * 后续将执行
-                             * {@link #onBindViewHolder(RecyclerView.ViewHolder holder, int position, List payloads)}
-                             */
-                            for (int j = 0; j < timeArr.length; j++) {
-                                /** 看完注释8再回来看这里
-                                 *  难点1:假如传入j而不是j+1,那么holder将会遍历头View同时忽略最后一个holder,所以+1
-                                 *  请继续看难点2
-                                 */
-                                notifyItemChanged(j + 1,timeArr);
-                            }
-                        }
-                    });
-                }
-            }
-
-        }).start();
+        countTime();
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder {
@@ -217,12 +199,60 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
             //-1是为了防止索引越界异常,因为前面存在头View
             mLeftTimeTextView.setText(NumToTime.secToTime(timeArr[position - 1]));
             LimitbuyBean.ProductListBean bean = mHomeBottomBeenList.get(position - 1);
-            Glide.with(mContext).load(Constans.URL_HOST + bean.pic).into(mIconImageView);
+            Glide.with(mContext).load(Constant.URL_HOST + bean.pic).crossFade().into(mIconImageView);
             mNameTextView.setText(bean.name);
             mLimitPriceTextView.setText("¥" + bean.limitPrice);
             mPriceTextView.setText("¥" + bean.price);
             mPriceTextView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         }
+    }
+
+    private int[] timeArr;
+
+    /**
+     * notifyItemChanged(int position, Object payload)
+     * 意思是指定position条目的holder进行数据刷新,此方法执行后会执行{@link #onBindViewHolder(RecyclerView.ViewHolder holder, int position, List payloads)}
+     * 只需要在onBindViewHolder内进行item的局部赋值即可.
+     */
+    private void countTime() {
+        // 1.获取List内所有Bean.leftTime
+        timeArr = new int[mHomeBottomBeenList.size()];
+        for (int i = 0; i < mHomeBottomBeenList.size(); i++) {
+            timeArr[i] = mHomeBottomBeenList.get(i).leftTime;
+        }
+        // 2.在子线程进行记时操作
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    SystemClock.sleep(1000);
+                    // 3.数组内所有的时间值自减1
+                    for (int i = 0; i < timeArr.length; i++) {
+                        timeArr[i] -= 1;
+                        // 4.在UI线程进行刷新数据
+                        final int finalI = i;
+                        UiUtils.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                /** 5.需求:所有的holder都要求刷新时间
+                                 * notifyItemChanged(int position, Object payload)
+                                 * @param position holder的索引
+                                 * @param payload 需要传递的数据(类似于handler内的msg)但是我并没有利用此参数传递数据
+                                 * 后续将执行
+                                 * {@link #onBindViewHolder(RecyclerView.ViewHolder holder, int position, List payloads)}
+                                 */
+                                /** 看完注释8再回来看这里
+                                 *  难点1:假如传入j而不是j+1,那么holder将会遍历头View同时忽略最后一个holder,所以+1
+                                 *  请继续看难点2
+                                 */
+                                notifyItemChanged(finalI + 1, timeArr);
+                            }
+                        });
+                    }
+                }
+            }
+
+        }).start();
     }
 
     public static class BannerViewHolder implements MZViewHolder<HomeAllBean.HomeTopicBean> {
@@ -238,41 +268,8 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
 
         @Override
         public void onBind(Context context, int i, HomeAllBean.HomeTopicBean homeTopicBean) {
-            Glide.with(context).load(Constans.URL_HOST + homeTopicBean.getPic()).into(mImageView);
+            Glide.with(context).load(Constant.URL_HOST + homeTopicBean.getPic()).into(mImageView);
         }
     }
 
-
-    private static final int DELAY = 138;
-    private int mLastPosition = -1;
-    /*public void showItemAnim(final View view, final int position) {
-        mContext = view.getContext();
-        if (position > mLastPosition) {
-            view.setAlpha(0);
-            view.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Animation animation = AnimationUtils.loadAnimation(mContext,
-                            R.anim.item_right);
-                    animation.setAnimationListener(new Animation.AnimationListener() {
-                        @Override
-                        public void onAnimationStart(Animation animation) {
-                            view.setAlpha(1);
-                        }
-
-
-                        @Override
-                        public void onAnimationEnd(Animation animation) {}
-
-
-
-                        @Override
-                        public void onAnimationRepeat(Animation animation) {}
-                    });
-                    view.startAnimation(animation);
-                }
-            }, DELAY * position);
-            mLastPosition = position;
-        }
-    }*/
 }

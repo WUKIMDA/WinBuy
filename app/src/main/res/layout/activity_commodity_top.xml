@@ -192,7 +192,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/layout_line"/>
+        <include layout="@layout/activity_commdity_line"/>
 
 
         <View
@@ -215,6 +215,7 @@
             android:background="@color/grey_line_bg"/>
 
         <LinearLayout
+            android:id="@+id/look_all_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -224,94 +225,13 @@
                 android:id="@+id/tv_commdoty_commentCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="商品评价(1)"/>
+                android:text="商品评价(0)"/>
 
-            <LinearLayout
+            <ListView
+                android:id="@+id/listview_comment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_smaller"
-                android:orientation="horizontal">
-
-                <buy.win.com.winbuy.view.commodityView.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_launcher"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_smallest"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="巴拉巴拉"/>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/da_ren_list_star"/>
-
-                            <ImageView
-                                android:id="@+id/imageView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:src="@drawable/da_ren_list_star"/>
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_tinyest"
-                                android:src="@drawable/da_ren_list_star"/>
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_tinyest"
-                                android:src="@drawable/da_ren_list_star"/>
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/spacing_tinyest"
-                                android:src="@drawable/da_ren_list_star"/>
-                        </LinearLayout>
-                    </RelativeLayout>
-
-                    <TextView
-                        style="@style/greyTextStyleSmaller"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_tinyest"
-                        android:text="2016年04月"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_tinyest"
-                        android:text="第二次来找这个零食了，第一次吃就开始爱上了，还是跟原来一样的味道"/>
-
-                    <TextView
-                        style="@style/greyTextStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_tinyest"
-                        android:text="颜色分类：原味"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
+                android:layout_height="wrap_content">
+            </ListView>
 
             <TextView
                 android:id="@+id/tv_talent_detail_open"

@@ -4,17 +4,38 @@
               android:layout_height="match_parent"
               android:background="@mipmap/bc_homefrgm"
               android:orientation="vertical">
-    <Button
-        android:id="@+id/btn_search"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="搜索界面专用入口"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/temp_ewm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="二维码"/>
+
+        <Button
+            android:id="@+id/temp_yy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="语音"/>
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="搜索"/>
+
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_home_fragment"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:layout_height="match_parent">
+        android:paddingRight="4dp">
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>

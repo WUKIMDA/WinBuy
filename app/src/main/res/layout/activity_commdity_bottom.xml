@@ -24,7 +24,7 @@
             android:padding="@dimen/spacing_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <include layout="@layout/layout_line"/>
+        <include layout="@layout/activity_commdity_line"/>
         <TextView
             android:background="@drawable/list_gray_item"
             android:drawableRight="@drawable/rightarrow"
@@ -32,7 +32,7 @@
             android:padding="@dimen/spacing_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <include layout="@layout/layout_line"/>
+        <include layout="@layout/activity_commdity_line"/>
         <TextView
             android:background="@drawable/list_gray_item"
             android:drawableRight="@drawable/rightarrow"
@@ -40,7 +40,7 @@
             android:padding="@dimen/spacing_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <include layout="@layout/layout_line"/>
+        <include layout="@layout/activity_commdity_line"/>
         <TextView
             android:background="@drawable/list_gray_item"
             android:drawableRight="@drawable/rightarrow"
@@ -48,7 +48,7 @@
             android:padding="@dimen/spacing_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <include layout="@layout/layout_line"/>
+        <include layout="@layout/activity_commdity_line"/>
 
 
         <RelativeLayout

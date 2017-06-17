@@ -14,7 +14,7 @@ public class RetrofitUtil {
     public static Retrofit getRetrofit() {
         return new Retrofit
                 .Builder()
-                .baseUrl(Constans.URL_HOST)
+                .baseUrl(Constant.URL_HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -22,4 +22,5 @@ public class RetrofitUtil {
     public static ApiService getApiService() {
         return getRetrofit().create(ApiService.class);
     }
+
 }

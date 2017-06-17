@@ -1,11 +1,14 @@
 package buy.win.com.winbuy.model.net;
 
+/**
+ * Created by demo on 2017/6/15.
+ */
 
+public class LoginBean extends ErrorBean{
 
-public class LoginBean extends BaseBean {
 
     /**
-     * userInfo : {"userid":"20428"}
+     * userInfo : {"userid":"82652"}
      */
 
     private UserInfoBean userInfo;
@@ -20,7 +23,7 @@ public class LoginBean extends BaseBean {
 
     public static class UserInfoBean {
         /**
-         * userid : 20428
+         * userid : 82652
          */
 
         private String userid;
@@ -32,19 +35,5 @@ public class LoginBean extends BaseBean {
         public void setUserid(String userid) {
             this.userid = userid;
         }
-
-        @Override
-        public String toString() {
-            return "UserInfoBean{" +
-                    "userid='" + userid + '\'' +
-                    '}';
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "LoginBean{" +
-                "userInfo=" + userInfo +
-                '}';
     }
 }

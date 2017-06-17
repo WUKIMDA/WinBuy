@@ -45,4 +45,6 @@ dependencies {
 
     compile 'com.github.dongjunkun:DropDownMenu:1.0.4'
     compile 'com.github.razerdp:BasePopup:v1.7.1'
+
+    compile 'com.github.open-android:citypicker:0.1.0'
 }

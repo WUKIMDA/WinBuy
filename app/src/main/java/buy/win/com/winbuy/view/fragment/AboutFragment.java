@@ -13,8 +13,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import buy.win.com.winbuy.R;
-import buy.win.com.winbuy.model.net.UserVersionBean;
-import buy.win.com.winbuy.presenter.UserAboutPresenter;
+import buy.win.com.winbuy.model.net.VersionAllBean;
+import buy.win.com.winbuy.presenter.MoreAboutPresenter;
 import buy.win.com.winbuy.utils.SPUtils;
 
 /**
@@ -24,14 +24,14 @@ import buy.win.com.winbuy.utils.SPUtils;
 public class AboutFragment extends Fragment {
     @Bind(R.id.textView)
     TextView mTextView;
-    private UserAboutPresenter mAboutPresenter;
+    private MoreAboutPresenter mAboutPresenter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = View.inflate(getActivity(), R.layout.fragment_user_about, null);
+        View rootView = View.inflate(getActivity(), R.layout.fragment_more_about, null);
         ButterKnife.bind(this, rootView);
-        mAboutPresenter = new UserAboutPresenter(AboutFragment.this);
+        mAboutPresenter = new MoreAboutPresenter(AboutFragment.this);
         float version = SPUtils.getVersion(getActivity());
         mTextView.setText("版本号: v" + version);
         return rootView;
@@ -71,19 +71,9 @@ public class AboutFragment extends Fragment {
         });
     }
 
-    public void onSuccess(UserVersionBean bean) {
-        float mVersion = bean.version.version;
+    public void onSuccess(VersionAllBean bean) {
+        float mVersion = bean.getVersion().getVersion();
         mTextView.setText("版本号: v" + mVersion);
         SPUtils.saveVersion(getActivity(),mVersion);
-    }
-
-    public void onError() {
-        float version = SPUtils.getVersion(getActivity());
-        mTextView.setText("版本号: v" + version);
-    }
-
-    public void onServerBug() {
-        float version = SPUtils.getVersion(getActivity());
-        mTextView.setText("版本号: v" + version);
     }
 }

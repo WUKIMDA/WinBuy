@@ -16,6 +16,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
+import buy.win.com.winbuy.model.dao.MoreCenterBean;
 import buy.win.com.winbuy.view.fragment.AttentionFragment;
 import buy.win.com.winbuy.view.fragment.CollectFragment;
 import buy.win.com.winbuy.view.fragment.HistoryFragment;
@@ -24,8 +25,8 @@ import buy.win.com.winbuy.view.fragment.MoreFragment;
 /**
  * Created by 林特烦 on 2017/6/15.
  */
-public class UserCenterAdapter extends BaseAdapter {
-    private final ArrayList<UserCenterbean> mUserCentenList;
+public class MoreCenterAdapter extends BaseAdapter {
+    private final ArrayList<MoreCenterBean> mUserCentenList;
     private final Context mContext;
     private String[] descList = new String[]{"收藏夹", "关注店铺", "足迹"};
     private int[] imgList = new int[]{R.mipmap.user_gridview1, R.mipmap.user_gridview2, R.mipmap.user_gridview3};
@@ -36,13 +37,14 @@ public class UserCenterAdapter extends BaseAdapter {
         mFragmentList.add(new AttentionFragment());
         mFragmentList.add(new HistoryFragment());
     }
-    public UserCenterAdapter(Context context) {
+
+    public MoreCenterAdapter(Context context) {
         mContext = context;
         initFragment();
-        mUserCentenList = new ArrayList<UserCenterbean>();
+        mUserCentenList = new ArrayList<MoreCenterBean>();
         for (int i = 0; i < imgList.length; i++) {
-            UserCenterbean userCenterbean = new UserCenterbean(descList[i], imgList[i]);
-            mUserCentenList.add(userCenterbean);
+            MoreCenterBean moreCenterBean = new MoreCenterBean(descList[i], imgList[i]);
+            mUserCentenList.add(moreCenterBean);
         }
     }
 
@@ -69,15 +71,9 @@ public class UserCenterAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder userCentenHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_gv_user, null);
-            userCentenHolder = new ViewHolder(convertView);
-            convertView.setTag(userCentenHolder);
-        } else {
-            userCentenHolder = (ViewHolder) convertView.getTag();
-        }
-        userCentenHolder.setData(position);
+        convertView = LayoutInflater.from(mContext).inflate(R.layout.item_more_gv, null);
+        ViewHolder viewHolder = new ViewHolder(convertView);
+        viewHolder.setData(position);
         convertView.setBackgroundColor(Color.WHITE);
         return convertView;
     }
@@ -98,6 +94,7 @@ public class UserCenterAdapter extends BaseAdapter {
                 }
             });
         }
+
         public void setData(int position) {
             mPosition = position;
             mTitle.setText(mUserCentenList.get(position).getTitle());
@@ -110,35 +107,6 @@ public class UserCenterAdapter extends BaseAdapter {
     }
 }
 
-class UserCenterbean {
-    private String title;
-    private int imageId;
 
-    public UserCenterbean() {
-        super();
-    }
-
-    public UserCenterbean(String title, int imageId) {
-        super();
-        this.title = title;
-        this.imageId = imageId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
-    }
-}
 
 

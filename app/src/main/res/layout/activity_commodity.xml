@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:background="@color/white"
     >
 
-    <!--需要的滑动数据的页面 -->
+
+    <buy.win.com.winbuy.view.loadingview.LoadingView
+        android:id="@+id/lv_circularJump"
+        android:layout_width="50dp"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        android:layout_height="50dp"
+        />
+
     <buy.win.com.winbuy.presenter.ScrollViewContainer
         android:id="@+id/sv_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="58dp">
 
-        <include layout="@layout/layout_top"/>
+        <include layout="@layout/activity_commodity_top"/>
 
-        <include layout="@layout/layout_bottom"/>
+        <include layout="@layout/activity_commdity_bottom"/>
 
     </buy.win.com.winbuy.presenter.ScrollViewContainer>
+
+
+
 
     <!--头-->
     <RelativeLayout
