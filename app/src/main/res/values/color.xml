@@ -2,7 +2,6 @@
 <resources>
     <color name="top_search_bg_nt">#ff145f8f</color>
     <color name="huise">#c2979797</color>
-    <color name="transparent">#00000000</color>
     <color name="content_text_readed">#ff828282</color>
     <color name="heise">#353232</color><!--黑色 -->
     <color name="colorWhite">#FFF</color>

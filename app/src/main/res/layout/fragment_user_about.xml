@@ -27,6 +27,7 @@
     </android.support.v7.widget.Toolbar>
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_gravity="center"
