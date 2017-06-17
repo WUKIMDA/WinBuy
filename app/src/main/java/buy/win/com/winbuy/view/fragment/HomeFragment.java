@@ -88,6 +88,22 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        Button tempBtnEwm = (Button) rootView.findViewById(R.id.temp_ewm);
+        tempBtnEwm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button tempBtnYy = (Button) rootView.findViewById(R.id.temp_yy);
+        tempBtnYy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 //    private void initBanner(View view) {
 //        mMZBanner = (MZBannerView) view.findViewById(R.id.banner);

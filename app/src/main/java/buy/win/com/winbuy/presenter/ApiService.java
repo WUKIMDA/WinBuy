@@ -16,7 +16,7 @@ import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.model.net.SelectCartBean;
-import buy.win.com.winbuy.model.net.TopicAllBean;
+import buy.win.com.winbuy.model.net.TopPicBean;
 import buy.win.com.winbuy.model.net.UserVersionBean;
 import buy.win.com.winbuy.model.net.VersionAllBean;
 import retrofit2.Call;
@@ -83,7 +83,7 @@ public interface ApiService {
      * @return
      */
     @GET("topic")
-    Call<TopicAllBean> getTopicAllProduct(
+    Call<TopPicBean> getTopicAllProduct(
             @Query("page") String page,
             @Query("pageNum") String pageNum
     );

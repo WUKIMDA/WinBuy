@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_margin="2dp"
+    android:layout_margin="4dp"
     >
 
     <LinearLayout
@@ -19,7 +19,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="170dp"
-            android:layout_height="275dp"
+            android:layout_height="210dp"
             android:scaleType="centerCrop"
             tools:background="@mipmap/q1"/>
 
@@ -88,7 +88,7 @@
                 android:layout_height="32dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="10dp"
                 android:src="@mipmap/home_frgm_shopcar"
                 />
         </RelativeLayout>
