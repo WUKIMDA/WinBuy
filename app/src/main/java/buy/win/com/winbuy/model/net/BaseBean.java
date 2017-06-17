@@ -32,7 +32,17 @@ public class BaseBean {
         return response;
     }
 
+    @Override
+    public String toString() {
+        return "BaseBean{" +
+                "error='" + error + '\'' +
+                ", error_code='" + error_code + '\'' +
+                ", response='" + response + '\'' +
+                '}';
+    }
+
     public void setResponse(String response) {
+
         this.response = response;
     }
 }

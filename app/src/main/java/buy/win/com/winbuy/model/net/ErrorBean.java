@@ -1,6 +1,7 @@
 package buy.win.com.winbuy.model.net;
 
 /**
+<<<<<<< Updated upstream
  * Created by demo on 2017/6/15.
  */
 
@@ -40,4 +41,10 @@ public class ErrorBean {
     public void setResponse(String response) {
         this.response = response;
     }
+=======
+ * Created by BUTTON on 2017-06-17.
+ */
+
+public class ErrorBean extends BaseBean {
+>>>>>>> Stashed changes
 }
