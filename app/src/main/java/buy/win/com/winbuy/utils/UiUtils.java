@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
@@ -148,4 +149,7 @@ public class UiUtils {
         sHandler.removeCallbacks(task);
     }
 
+    public static void notifyAdapter(RecyclerView.Adapter a) {
+
+    }
 }

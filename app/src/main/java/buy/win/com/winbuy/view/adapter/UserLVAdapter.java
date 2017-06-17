@@ -1,7 +1,6 @@
 package buy.win.com.winbuy.view.adapter;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -20,13 +19,13 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.view.fragment.AboutFragment;
 import buy.win.com.winbuy.view.fragment.FeedbackFragment;
 import buy.win.com.winbuy.view.fragment.HelpCenterFragment;
+import buy.win.com.winbuy.view.fragment.MoreFragment;
 
 /**
  * Created by 林特烦 on 2017/6/15.
  */
 
 public class UserLVAdapter extends BaseAdapter {
-    private FragmentManager mFragmentManager;
     private Context mContext;
     private String[] descList = new String[]{"用户反馈", "帮助中心", "关于"};
     private int[] imgList = new int[]{R.mipmap.user_listview1, R.mipmap.user_listview2, R.mipmap.user_listview3};
@@ -39,9 +38,8 @@ public class UserLVAdapter extends BaseAdapter {
         mFragmentList.add(new AboutFragment());
     }
 
-    public UserLVAdapter(Context context, FragmentManager fragmentManager) {
+    public UserLVAdapter(Context context) {
         this.mContext = context;
-        this.mFragmentManager = fragmentManager;
         initFragment();
         mUserLVBeanList = new ArrayList<UserLVbean>();
         for (int i = 0; i < imgList.length; i++) {
@@ -111,7 +109,7 @@ public class UserLVAdapter extends BaseAdapter {
     }
 
     private void OpenFragmentByPosition(int position) {
-        mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, mFragmentList.get(position)).commit();
+        MoreFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, mFragmentList.get(position)).commit();
     }
 }
 

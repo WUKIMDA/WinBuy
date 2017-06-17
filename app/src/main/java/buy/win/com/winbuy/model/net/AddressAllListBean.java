@@ -20,17 +20,6 @@ public class AddressAllListBean extends BaseBean {
     }
 
     public static class AddressListBean {
-        /**
-         * addressArea : abc
-         * addressDetail : abc
-         * city : abc
-         * id : 133
-         * isDefault : 0
-         * name : abc
-         * phoneNumber : 123
-         * province : abc
-         * zipCode : 12345
-         */
 
         private String addressArea;
         private String addressDetail;

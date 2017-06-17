@@ -1,52 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--<android.support.v7.widget.CardView-->
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_margin="2dp"
+    >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:padding="6dp">
+        android:layout_margin="4dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:scaleType="fitXY"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:src="@mipmap/ic_docs_48dp"/>
+            android:layout_width="170dp"
+            android:layout_height="275dp"
+            android:scaleType="centerCrop"
+            tools:background="@mipmap/q1"/>
 
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:maxLines="2"
-            android:text="Item"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="28dp">
 
-        <!--<TextView-->
-            <!--android:id="@+id/ratingTextView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="4dp"-->
-            <!--android:layout_marginStart="4dp"-->
-            <!--android:drawableEnd="@drawable/ic_rate"-->
-            <!--android:drawablePadding="2dp"-->
-            <!--android:drawableRight="@drawable/ic_rate"-->
-            <!--android:gravity="center"-->
-            <!--android:text="4,5"-->
-            <!--android:textAppearance="@style/TextAppearance.AppCompat.Body1"-->
-            <!--android:textSize="12sp"/>-->
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:padding="6dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="粉色毛衣"/>
 
+            <TextView
+                android:id="@+id/tv_home_leftTime"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="2dp"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                tools:text="00:12:23"
+                android:textColor="@color/mlcred"
+                />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@drawable/home_line"
+            android:layerType="software"
+            android:layout_height="2dp"/>
+        <RelativeLayout
+            android:layout_width="170dp"
+            android:layout_height="36dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_home_limitPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/heise"
+                android:textSize="24sp"
+                tools:text="¥66.6"/>
+
+            <TextView
+                android:id="@+id/tv_home_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+
+                android:layout_toRightOf="@id/tv_home_limitPrice"
+                android:textSize="16sp"
+                tools:text="¥99"/>
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="6dp"
+                android:src="@mipmap/home_frgm_shopcar"
+                />
+        </RelativeLayout>
     </LinearLayout>
+
 
 </android.support.v7.widget.CardView>

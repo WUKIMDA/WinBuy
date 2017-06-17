@@ -10,11 +10,13 @@ import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.model.net.HotSearchBean;
 import buy.win.com.winbuy.model.net.InvoiceAllBean;
+import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.model.net.SelectCartBean;
 import buy.win.com.winbuy.model.net.TopicAllBean;
+import buy.win.com.winbuy.model.net.UserVersionBean;
 import buy.win.com.winbuy.model.net.VersionAllBean;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -90,7 +92,7 @@ public interface ApiService {
 
 
     //http://product?pId=1
-    @GET
+    @GET("product")
     Call<CommodityProductBean> getCommodityProdectData(@Query("pId") String pId);
 
 
@@ -191,4 +193,14 @@ public interface ApiService {
     @GET("helpDetail")
     Call<HelpDetailBean> getHelpDetailProduct(@Query("id") String id);
 
+    /**
+     * 首页限时抢购
+     */
+    @GET("limitbuy")
+    Call<LimitbuyBean> getLimitBuy(@Query("page") String page, @Query("pageNum") String pageNum);
+    /**
+     * 获取版本号
+     */
+    @GET("version")
+    Call<UserVersionBean> getVersion();
 }

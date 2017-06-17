@@ -22,4 +22,9 @@ public class FeedbackFragment extends Fragment {
         ButterKnife.bind(this, rootView);
         return rootView;
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
 }

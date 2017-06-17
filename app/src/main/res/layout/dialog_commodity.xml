@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="#ffffff"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:paddingBottom="43dp"
+              android:paddingLeft="22.5dp"
+              android:paddingRight="22.5dp"
+              android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_commodity"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="10dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tv_commdity_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_commdity_price"
+            android:layout_marginBottom="15dp"
+            android:layout_toEndOf="@+id/iv_commodity"
+            android:layout_toRightOf="@+id/iv_commodity"
+            android:text="name"/>
+
+        <TextView
+            android:id="@+id/tv_commdity_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_commodity"
+            android:layout_marginBottom="14dp"
+            android:layout_toRightOf="@+id/iv_commodity"
+            android:text="price"/>
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/layout_line"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="颜色分类"
+                    android:textColor="#000"
+                    android:textSize="16sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <RadioButton
+                        style="@style/RadioGroupMainActivity"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_color_red"
+                        />
+
+                    <RadioButton
+                        style="@style/RadioGroupMainActivity"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_color_yellow"
+                        />
+
+                    <RadioButton
+                        style="@style/RadioGroupMainActivity"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_color_bule"
+                        />
+
+                    <RadioButton
+                        style="@style/RadioGroupMainActivity"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_color_green"
+                        />
+
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e0e0e0"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="尺码"
+                    android:textColor="#000"
+                    android:textSize="16sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        style="@style/rg_size_select"
+                        android:text="M"
+                        android:background="@drawable/selector_size_select"
+                        />
+
+                    <RadioButton
+                        style="@style/rg_size_select"
+                        android:background="@drawable/selector_size_select"
+                        />
+
+                    <RadioButton
+                        style="@style/rg_size_select"
+                        android:background="@drawable/selector_size_select"
+                        />
+
+                    <RadioButton
+                        style="@style/rg_size_select"
+                        android:background="@drawable/selector_size_select"
+                        />
+
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_btn"
+        android:padding="10dp"
+        android:text="确定"/>
+</LinearLayout>
