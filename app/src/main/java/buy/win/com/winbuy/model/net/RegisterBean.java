@@ -4,11 +4,11 @@ package buy.win.com.winbuy.model.net;
  * Created by demo on 2017/6/15.
  */
 
-public class LoginBean extends ErrorBean{
+public class RegisterBean extends ErrorBean{
 
 
     /**
-     * userInfo : {"userid":"82652"}
+     * userInfo : {"userid":"113356"}
      */
 
     private UserInfoBean userInfo;
@@ -23,7 +23,7 @@ public class LoginBean extends ErrorBean{
 
     public static class UserInfoBean {
         /**
-         * userid : 82652
+         * userid : 113356
          */
 
         private String userid;

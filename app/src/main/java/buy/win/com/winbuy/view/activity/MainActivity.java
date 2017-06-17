@@ -95,7 +95,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
         mFragmentList.add(new HomeFragment());
         mFragmentList.add(new CategoryFragment());
         mFragmentList.add(new ShopCartFragment());
-        mFragmentList.add(new UserFragment());
+        mFragmentList.add(new UserFragment(this));
         mFragmentList.add(MoreFragment.getInstance());
 
     }

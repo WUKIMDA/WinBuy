@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back_btn"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="地址列表"
+            android:textColor="#4E4E4E"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/add_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="新增地址"
+            android:textColor="#4E4E4E"
+            android:textSize="18sp"/>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tv_none"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/address_noaddr"
+        android:text="请添加您的收货地址"
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"/>
+
+    <ListView
+        android:id="@+id/lv_address_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl"
+        android:visibility="gone">
+
+    </ListView>
+
+</RelativeLayout>

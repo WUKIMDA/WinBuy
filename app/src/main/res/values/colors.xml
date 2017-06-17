@@ -21,4 +21,10 @@
     <color name="original_border_color">#F18459</color>
     <color name="grey_normal_bg">#EEEEEE</color>
 
+
+    <!--eason-->
+    <color name="colorLine">#E5E5E5</color>
+    <color name="colorWhile">#ffffff</color>
+    <color name="colorBlack">#85827D</color>
+
 </resources>
