@@ -18,27 +18,14 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:text="帮助中心"
+            android:text="设置"
             android:textColor="@color/colorWhite"
             android:textSize="24sp"/>
     </android.support.v7.widget.Toolbar>
-
-    <TextView
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="常见问题"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_margin="16dp"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/line"
+        android:layout_marginTop="8dp"
         />
-    <ExpandableListView
-        android:id="@+id/eplistview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ExpandableListView>
-
-
 </LinearLayout>

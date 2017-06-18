@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SearchBean;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 
 /**
  * Created by lenovo on 2017/6/17.
@@ -78,7 +78,7 @@ public class SearchRvGridAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(SearchBean.ProductListBean bean) {
-            Picasso.with(mContext).load(Constans.URL_HOST + bean.getPic()).into(mImageView);
+            Picasso.with(mContext).load(Constant.URL_HOST + bean.getPic()).into(mImageView);
             mTvNameH.setText(bean.getName());
             mTvNewpriceH.setText("￥" + bean.getPrice() + "");
             mTvOldpriceH.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);

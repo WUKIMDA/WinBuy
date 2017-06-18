@@ -18,7 +18,9 @@ import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.dao.MoreLVBean;
 import buy.win.com.winbuy.view.fragment.AboutFragment;
+import buy.win.com.winbuy.view.fragment.AfterServiceFragment;
 import buy.win.com.winbuy.view.fragment.FeedbackFragment;
+import buy.win.com.winbuy.view.fragment.GuideFragment;
 import buy.win.com.winbuy.view.fragment.HelpCenterFragment;
 import buy.win.com.winbuy.view.fragment.MoreFragment;
 
@@ -28,13 +30,15 @@ import buy.win.com.winbuy.view.fragment.MoreFragment;
 
 public class MoreLVAdapter extends BaseAdapter {
     private Context mContext;
-    private String[] descList = new String[]{"用户反馈", "帮助中心", "关于"};
-    private int[] imgList = new int[]{R.mipmap.user_listview1, R.mipmap.user_listview2, R.mipmap.user_listview3};
+    private String[] descList = new String[]{"用户反馈","售后服务","新手指南", "帮助中心", "关于"};
+    private int[] imgList = new int[]{R.mipmap.user_listview1, R.mipmap.user_listview2, R.mipmap.user_listview3, R.mipmap.user_listview4, R.mipmap.user_listview5};
     private ArrayList<MoreLVBean> mUserLVBeanList;
     List<Fragment> mFragmentList = new ArrayList<Fragment>();
 
     private void initFragment() {
         mFragmentList.add(new FeedbackFragment());
+        mFragmentList.add(new AfterServiceFragment());
+        mFragmentList.add(new GuideFragment());
         mFragmentList.add(new HelpCenterFragment());
         mFragmentList.add(new AboutFragment());
     }

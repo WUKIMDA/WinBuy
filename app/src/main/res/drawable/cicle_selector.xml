@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 按下效果 ,drawable指向背景图-->
+    <item android:state_pressed="true" android:drawable="@drawable/shape_circle_pressed"/>
+    <!-- 其他效果 -->
+    <item android:drawable="@drawable/shape_circle_normal"/>
+</selector>

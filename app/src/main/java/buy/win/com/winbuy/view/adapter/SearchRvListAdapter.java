@@ -18,8 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SearchBean;
-import buy.win.com.winbuy.utils.Constans;
-import buy.win.com.winbuy.utils.UiUtils;
+import buy.win.com.winbuy.utils.Constant;
 
 /**
  * Created by lenovo on 2017/6/17.
@@ -64,6 +63,8 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
         return 0;
     }
 
+
+
     class ListViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.iv_icon)
         ImageView mIvIcon;
@@ -80,17 +81,17 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(SearchBean.ProductListBean bean) {
-            UiUtils.logD(SearchRvListAdapter.class, bean.toString());
+          //  UiUtils.logD(SearchRvListAdapter.class, bean.toString());
             String pic = bean.getPic();
             String name = bean.getName();
             int price = bean.getPrice();
             int marketPrice = bean.getMarketPrice();
 
-            Picasso.with(mContext).load(Constans.URL_HOST + pic).into(mIvIcon);
+            Picasso.with(mContext).load(Constant.URL_HOST + pic).into(mIvIcon);
             mTvNameV.setText(name);
-            mTvNewpriceV.setText("￥" + price + "");
+            mTvNewpriceV.setText("￥" + String.valueOf(price));
             mTvOldpriceV.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            mTvOldpriceV.setText("￥" + marketPrice + "");
+            mTvOldpriceV.setText("￥" + String.valueOf(marketPrice));
         }
     }
 }

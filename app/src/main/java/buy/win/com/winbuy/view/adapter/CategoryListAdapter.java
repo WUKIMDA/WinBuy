@@ -79,9 +79,7 @@ public class CategoryListAdapter extends BaseAdapter {
         }
 
         public void setData(CategoryAllBean.CategoryBean bean,boolean selected) {
-//
             mCategoryListItemTv.setEnabled(!selected);
-
             mCategoryListItemTv.setText(bean.getName());
         }
     }

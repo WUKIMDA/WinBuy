@@ -19,18 +19,18 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import buy.win.com.winbuy.R;
-import buy.win.com.winbuy.model.net.SearchBean;
-import buy.win.com.winbuy.presenter.SearchPresenter;
+import buy.win.com.winbuy.model.net.GoodsBean;
+import buy.win.com.winbuy.presenter.GoodsShowPresenter;
 import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.UiUtils;
-import buy.win.com.winbuy.view.adapter.SearchRvGridAdapter;
-import buy.win.com.winbuy.view.adapter.SearchRvListAdapter;
+import buy.win.com.winbuy.view.adapter.GoodsRvGridAdapter;
+import buy.win.com.winbuy.view.adapter.GoodsRvListAdapter;
 
 /**
  * Created by lenovo on 2017/6/16.
  */
 
-public class SearchResultActivity extends Activity {
+public class GoodsShowActivity extends Activity {
     @Bind(R.id.iv_back)
     ImageView mIvBack;
     @Bind(R.id.et_searchtext_search)
@@ -65,13 +65,13 @@ public class SearchResultActivity extends Activity {
     LinearLayout mSearchEmpty;
     //    @Bind(R.id.loadmore_list)
 //    SwipeRefreshLayout mLoadmoreList;
-    private SearchRvListAdapter mRvListAdapter;
+    private GoodsRvListAdapter mRvListAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private SearchRvGridAdapter mRvGridAdapter;
+    private GoodsRvGridAdapter mRvGridAdapter;
     private GridLayoutManager mGridLayoutManager;
     private Context mContext;
-    private String mKeyword;
-    private SearchPresenter mSearchPresenter;
+    private String sId;
+    private GoodsShowPresenter mGoodsShowPresenter;
     private String mOrderby = "";
     private int mPage = 1;
 
@@ -86,7 +86,7 @@ public class SearchResultActivity extends Activity {
         setContentView(R.layout.activity_search_result);
         ButterKnife.bind(this);
         mContext = this;
-        mSearchPresenter = new SearchPresenter(this);
+        mGoodsShowPresenter = new GoodsShowPresenter(this);
         initData();
         initEvent();
         init();
@@ -94,43 +94,41 @@ public class SearchResultActivity extends Activity {
 
     private void initData() {
         if (getIntent() != null) {
-            mKeyword = getIntent().getStringExtra("keyword");
-           // UiUtils.logD(SearchResultActivity.class, "getExtra: " + mKeyword);
+            sId = getIntent().getStringExtra("sId");
+            // UiUtils.logD(SearchResultActivity.class, "getExtra: " + mKeyword);
         }
         mOrderby = Constant.SHELVESDOWN;
-        loadSearchResult(String.valueOf(mPage), mOrderby);
+        loadSearchesult(String.valueOf(mPage), mOrderby);
     }
 
-    public void onSearchSuccess(SearchBean bean) {
+    public void onGoodsShowSuccess(GoodsBean bean) {
 //        mSearchBean.addAll(bean.getProductList());
-        UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean.getProductList() + "size: " + bean.getProductList().size());
+        UiUtils.logD(GoodsShowActivity.class, "onSearchSuccessResult: " + bean.getProductList() + "size: " + bean.getProductList().size());
         if (bean.getProductList().size() <= 0) {
             Toast.makeText(mContext, "没有该商品", Toast.LENGTH_SHORT).show();
             mSearchEmpty.setVisibility(View.VISIBLE);
         } else {
             mRvListAdapter.setBean(bean.getProductList());
-            mRvGridAdapter.setSearchBean(bean.getProductList());
+            mRvGridAdapter.setBean(bean.getProductList());
         }
     }
 
     private void init() {
 //        mRvList.setVisibility(View.VISIBLE);
 //        mRvGrid.setVisibility(View.GONE);
-        mEtSearch.setText(mKeyword);
-        mEtSearch.setCursorVisible(false);
+//        mEtSearch.setText(mKeyword);
+//        mEtSearch.setCursorVisible(false);
         mComplex.setSelected(true);
 
         mLinearLayoutManager = new LinearLayoutManager(mContext);
         mRvList.setLayoutManager(mLinearLayoutManager);
-        mRvListAdapter = new SearchRvListAdapter(mContext);
+        mRvListAdapter = new GoodsRvListAdapter(mContext);
         mRvList.setAdapter(mRvListAdapter);
-
 
         mGridLayoutManager = new GridLayoutManager(mContext, 2, GridLayoutManager.VERTICAL, false);
         mRvGrid.setLayoutManager(mGridLayoutManager);
-        mRvGridAdapter = new SearchRvGridAdapter(mContext);
+        mRvGridAdapter = new GoodsRvGridAdapter(mContext);
         mRvGrid.setAdapter(mRvGridAdapter);
-
     }
 
 
@@ -173,7 +171,7 @@ public class SearchResultActivity extends Activity {
                 if (!loading
                         && (totalItemCount - visibleItemCount) <= firstVisibleItem) {
                     mPage++;
-                    UiUtils.logD(SearchResultActivity.class, mPage + "");
+                    UiUtils.logD(GoodsShowActivity.class, mPage + "");
                     onLoadMore(mPage);
                     loading = true;
                 }
@@ -182,7 +180,7 @@ public class SearchResultActivity extends Activity {
     }
 
     private void onLoadMore(int page) {
-        loadSearchResult(String.valueOf(page), mOrderby);
+        loadSearchesult(String.valueOf(page), mOrderby);
 //        runOnUiThread(new Runnable() {
 //            @Override
 //            public void run() {
@@ -230,7 +228,7 @@ public class SearchResultActivity extends Activity {
             case R.id.search_tv_sale:
                 // 销量排序
                 mOrderby = Constant.SALEDOWN;
-                loadSearchResult(String.valueOf(mPage), mOrderby);
+                loadSearchesult(String.valueOf(mPage), mOrderby);
                 mTvSale.setSelected(true);
                 mComplex.setSelected(false);
                 mPrice.setSelected(false);
@@ -245,13 +243,13 @@ public class SearchResultActivity extends Activity {
                 mOther.setSelected(false);
                 if (isPriceUp) {
                     mOrderby = Constant.PRICEUP;
-                    loadSearchResult(String.valueOf(mPage), mOrderby);
+                    loadSearchesult(String.valueOf(mPage), mOrderby);
                     mPriceDown.setSelected(true);
                     mPriceUp.setSelected(false);
                     isPriceUp = false;
                 } else {
                     mOrderby = Constant.PRICEDOWN;
-                    loadSearchResult(String.valueOf(mPage), mOrderby);
+                    loadSearchesult(String.valueOf(mPage), mOrderby);
                     mPriceUp.setSelected(true);
                     mPriceDown.setSelected(false);
                     isPriceUp = true;
@@ -268,13 +266,9 @@ public class SearchResultActivity extends Activity {
         }
     }
 
-    private void loadSearchResult(String page, String orderby) {
-        mSearchPresenter.loadSearchData(mKeyword, page, Constant.PAGE_NUM, orderby);
-        UiUtils.logD(SearchResultActivity.class, mKeyword + page + Constant.PAGE_NUM + orderby);
-    }
-
-    public void onSearchError(String message) {
-
+    private void loadSearchesult(String page, String orderby) {
+        mGoodsShowPresenter.loadGoodsShowData(page, Constant.PAGE_NUM, sId, orderby);
+        UiUtils.logD(GoodsShowActivity.class, sId + page + Constant.PAGE_NUM + orderby);
     }
 
 }

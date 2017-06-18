@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.view.adapter.MoreCenterAdapter;
 import buy.win.com.winbuy.view.adapter.MoreLVAdapter;
@@ -21,14 +23,15 @@ import buy.win.com.winbuy.view.adapter.MoreLVAdapter;
  */
 
 public class MoreFragment extends Fragment {
-
-
     @Bind(R.id.gridview)
     GridView mGridview;
     @Bind(R.id.listview)
     ListView mListview;
 
     public static FragmentManager mFragmentManager;
+    @Bind(R.id.ib_setting)
+    ImageButton mIbSetting;
+
 
     private MoreFragment() {
     }
@@ -58,4 +61,8 @@ public class MoreFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
+    @OnClick(R.id.ib_setting)
+    public void onViewClicked() {
+        mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, new SettingFragment()).commit();
+    }
 }

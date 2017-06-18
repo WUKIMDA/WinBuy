@@ -7,54 +7,37 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListView;
-
-import java.util.List;
+import android.widget.ImageButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import buy.win.com.winbuy.R;
-import buy.win.com.winbuy.model.net.HelpDetailBean;
-import buy.win.com.winbuy.presenter.HelpCenterPresenter;
-import buy.win.com.winbuy.view.adapter.HelpCenterEPLVAdapter;
 
 /**
  * Created by 林特烦 on 2017/6/16.
  */
 
-public class HelpCenterFragment extends Fragment {
-    @Bind(R.id.eplistview)
-    ExpandableListView mExpandableEPListView;
-    public HelpCenterPresenter mHelpCenterPresenter;
-    private HelpCenterEPLVAdapter mHelpCenterLVAdapter;
-
-    @OnClick(R.id.ib_back)
-    public void onClick() {
-        MoreFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, MoreFragment.getInstance()).commit();
-    }
-
+public class AfterServiceFragment extends Fragment {
+    @Bind(R.id.ib_back)
+    ImageButton mIbBack;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = View.inflate(getActivity(), R.layout.fragment_more_help, null);
+        View rootView = View.inflate(getActivity(), R.layout.fragment_afterservice, null);
         ButterKnife.bind(this, rootView);
-        mHelpCenterPresenter = new HelpCenterPresenter(this);
-        mHelpCenterLVAdapter = new HelpCenterEPLVAdapter(getActivity());
-        mExpandableEPListView.setAdapter(mHelpCenterLVAdapter);
         return rootView;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mHelpCenterPresenter.loadHelpDetail();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @OnClick(R.id.ib_back)
+    public void onViewClicked(View view) {
+        MoreFragment.mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, MoreFragment.getInstance()).commit();
     }
 
     @Override
@@ -72,10 +55,5 @@ public class HelpCenterFragment extends Fragment {
                 return false;
             }
         });
-    }
-
-    public void onSuccess(List<HelpDetailBean.HelpDetailListBean> helpDetailList) {
-        mHelpCenterLVAdapter.setTitles(helpDetailList);
-        mHelpCenterLVAdapter.setContent(helpDetailList);
     }
 }
