@@ -139,6 +139,20 @@ public class PropertyViewGroup<X extends TextView> extends ViewGroup {
         }
     }
 
+
+    public void viewSelect(int index){
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            if (index == i){
+                View childAt = getChildAt(i);
+//                childAt.setSelected(true);
+                childAt.callOnClick();
+            }
+
+        }
+    }
+
+
     //获取控件的自适应高度  
     private int getViewHeight() {
         int viewwidth = HorInterval;

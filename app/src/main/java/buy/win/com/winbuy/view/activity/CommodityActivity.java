@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -54,6 +55,7 @@ import buy.win.com.winbuy.presenter.ScrollViewContainer;
 import buy.win.com.winbuy.utils.Constans;
 import buy.win.com.winbuy.utils.MyImageLoader;
 import buy.win.com.winbuy.utils.RetrofitUtil;
+import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.utils.StatusBarUtil;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.adapter.CommentAdapter;
@@ -155,6 +157,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     private List<CommodityProductBean.ProductBean.ProductPropertyBean> mProductPropertyLists;
 
     private Map<String, String> skuMap = new HashMap<>();
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,13 +169,18 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 
         EventBus.getDefault().register(this);
 
+        //KIMDA KIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDA
+        //加载用户id
+        userId = ShareUtils.getUserId(this, "20428");
+
 
         Intent intent = getIntent();
         if (intent != null) {
-            String pId = intent.getStringExtra("pId");
+            pId = intent.getStringExtra("pId");
         }
-//        loadService(pId);
-        loadService();
+        //KIMDA KIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDA
+        loadService("1");
+//        loadService();
 
 
         //透明状态栏
@@ -201,21 +209,25 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         super.onStart();
         //如果收藏,回显
 
-
     }
 
 
-    //private void loadService(String pId) {
-    public void loadService() {
+    private void loadService(String pId) {
+        if (TextUtils.isEmpty(pId)) {
+            Toast.makeText(getApplicationContext(), "请求商品id失败,请传商品id", Toast.LENGTH_SHORT).show();
+            return;
+        }
+//    public void loadService() {
         CommodityProductPresenter commodityProductPresenter = new CommodityProductPresenter(this);
         //TODO:模拟加载第pId是"1"的商品
-//        commodityProductPresenter.loadCommdityProductData(pId);
-        commodityProductPresenter.loadCommdityProductData("1");
+
+        commodityProductPresenter.loadCommdityProductData(pId);
+//        commodityProductPresenter.loadCommdityProductData("1");
 
         CommentPresenter commentPresenter = new CommentPresenter();
-        //TODO：模拟
+        //TODO：模拟   评论
 //        commentPresenter.loadCommentData(pId,page,pageNum);
-        commentPresenter.loadCommentData("1", "1", "10");
+        commentPresenter.loadCommentData(pId, "1", "10");
         //后续EventBus自动获取数据后onEventMainThread()
 
     }
@@ -259,13 +271,16 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                 //addCart?userId=20428&productId=2&productCount=2&propertyId=1
                 AddCartPresenter addCartPresenter = new AddCartPresenter();
                 //用户id,商品id,商品数量,商品属性默认颜色1 TODO
-                //addCartPresenter.addCard("用户ID", pId, "1", "1");
+                if (TextUtils.isEmpty(userId) && TextUtils.isEmpty(pId)) {
+                    return;
+                }
+                addCartPresenter.addCard(userId, pId, "1", "1");
 
                 break;
             case R.id.tv_good_detail_buy:
+                //立即购买
                 //checkCommit
                 checkCommit();
-
                 break;
             case R.id.tv_good_detail_cate:
                 //产品分类选择,popw
@@ -278,7 +293,20 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     private void checkCommit() {
         CheckoutPresent checkoutPresent = new CheckoutPresent();
         //TODO:用户ID
-//         checkoutPresent.upCheckout(userId,sku);
+        if (TextUtils.isEmpty(userId)) {
+            return;
+        }
+        //如果用户没有选择过属性,默认
+        if (TextUtils.isEmpty(sku)) {
+            //pid , 默认: 商品数量,颜色,尺寸
+            sku = pId + ":" + "1" + ":" + "1" + "," + "3";
+        }
+        //单个商品立即购买Intent传输
+//        Intent intent = new Intent(this,CheckoutActivity.class);
+//        intent.putExtra("userId",userId);
+//        intent.putExtra("sku",sku);
+//        startActivity(intent);
+        Log.d("立即购买", sku + "跳转结算中心");
     }
 
     /**
@@ -286,7 +314,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
      */
     private void pidFavorites() {
         //TODO  userId
-        RetrofitUtil.getApiService().upPidFavorites("用户ID", pId).enqueue(new Callback<ErrorBean>() {
+        RetrofitUtil.getApiService().upPidFavorites(userId, pId).enqueue(new Callback<ErrorBean>() {
             @Override
             public void onResponse(Call<ErrorBean> call, Response<ErrorBean> response) {
                 if (response.isSuccessful()) {
@@ -314,7 +342,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 
                 }
             }
-
             @Override
             public void onFailure(Call<ErrorBean> call, Throwable t) {
 
@@ -377,21 +404,25 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         mTvCommdityPrice.setText("￥" + mLimitPrice);
 
         //回显或初始化数量
-        dialogNum.setText(""+mCommodityCount);
+        dialogNum.setText("" + mCommodityCount);
 
-        //TODO
-//        if (TextUtils.isEmpty(mSelectColor)){
-//            for (int i = 0; i < mColorLists.size(); i++) {
-//                //颜色按钮选中
-//
-//            }
-//        }
-//        if (TextUtils.isEmpty(mSelectSize)){
-//            for (int i = 0; i < mSizeLists.size(); i++) {
-//
-//            }
-//        }
+        //TODO    回显失败
+        if (!TextUtils.isEmpty(mSelectColor) && mColorLists != null) {
+            for (int i = 0; i < mColorLists.size(); i++) {
+                //颜色按钮选中
+                if (mSelectColor.equals(mColorLists.get(i))) {
+                    mPropertyColor.viewSelect(i);
+                }
+            }
 
+        }
+        if (!TextUtils.isEmpty(mSelectSize) && mSizeLists != null) {
+            for (int i = 0; i < mSizeLists.size(); i++) {
+                if (mSelectSize.equals(mSizeLists.get(i))) {
+                    mPropertySize.viewSelect(i);
+                }
+            }
+        }
 
     }
 
@@ -450,8 +481,11 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         mBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (TextUtils.isEmpty(mSelectColor)||TextUtils.isEmpty(mSelectSize)){
+                    return;
+                }
                 mCommodityDialog.dismiss();
-                sku = pId +":"+ mCommodityCount +":"+ mSelectColor + "," + mSelectSize;
+                sku = pId + ":" + mCommodityCount + ":" + mSelectColor + "," + mSelectSize;
                 Log.d("SKU===", sku);
             }
         });
@@ -575,7 +609,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         mTvCommdotyInventoryArea.setText(product.getInventoryArea());
         mLimitPrice = product.getLimitPrice();
         mTvLimitPrice.setText("抢购价:￥" + mLimitPrice);
-        mTvVipPrice.setText("会员价:" + product.getPrice());
+        mTvVipPrice.setText("会员价:￥" + product.getPrice());
         mTvGoodDetailDiscount.setText("市场价:" + product.getMarketPrice());
 
         //商品属性
