@@ -20,11 +20,11 @@ import buy.win.com.winbuy.model.net.HelpDetailBean;
  * Created by 林特烦 on 2017/6/17.
  */
 
-public class HelpCenterLVAdapter extends BaseExpandableListAdapter {
+public class HelpCenterEPLVAdapter extends BaseExpandableListAdapter {
 
     private Context mContext;
 
-    public HelpCenterLVAdapter(Context context) {
+    public HelpCenterEPLVAdapter(Context context) {
         mContext = context;
     }
 
