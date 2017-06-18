@@ -12,9 +12,7 @@ import java.util.List;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HotSearchBean;
-import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.presenter.HotSearchPresenter;
-import buy.win.com.winbuy.presenter.SearchPresenter;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.searchview.mSearchLayout;
 
@@ -26,8 +24,6 @@ import buy.win.com.winbuy.view.searchview.mSearchLayout;
 public class SearchActivity extends Activity {
     public mSearchLayout mSearch;
     private Context mContext;
-    private SearchPresenter mSearchPresenter;
-    private List<SearchBean.ProductListBean> mProductList = new ArrayList<>();
     private HotSearchPresenter mHotSearchPresenter;
     private List<String> mSearchKeywords = new ArrayList<>();
 
@@ -37,10 +33,8 @@ public class SearchActivity extends Activity {
         mContext = this;
         setContentView(R.layout.activity_search);
         mSearch = (mSearchLayout) findViewById(R.id.search_layout);
-        mSearchPresenter = new SearchPresenter(this);
         mHotSearchPresenter = new HotSearchPresenter(this);
         initData();
-
     }
 
     protected void initData() {
@@ -53,17 +47,13 @@ public class SearchActivity extends Activity {
 
         mSearch.initOldRecord(record);
 
-        final String page = "0";
-        final String pageNum = "10";
-        final String orderby = "saleDown";
-
         mSearch.SetCallBackListener(new mSearchLayout.setSearchCallBackListener() {
             @Override
             public void Search(String str) {
                 //进行联网搜索
                 //Toast.makeText(SearchActivity.this, str, Toast.LENGTH_SHORT).show();
-                mSearchPresenter.loadSearchData(str,page,pageNum,orderby);
-                Intent intent = new Intent(mContext,SearchResultActivity.class);
+                Intent intent = new Intent(mContext, SearchResultActivity.class);
+                intent.putExtra("keyword", str);
                 startActivity(intent);
             }
 
@@ -90,16 +80,10 @@ public class SearchActivity extends Activity {
 //            Toast.makeText(mContext, "网络连接异常", Toast.LENGTH_SHORT).show();
 //        }
         mSearch.initHotSearch(mSearchKeywords);
-        UiUtils.logD(SearchActivity.class, "初始化热门搜索: " +mSearchKeywords.toString());
+        UiUtils.logD(SearchActivity.class, "初始化热门搜索: " + mSearchKeywords.toString());
     }
 
     public void onSearchError(String message) {
-        //Toast.makeText(mContext, "网络连接异常" + message, Toast.LENGTH_SHORT).show();
-    }
 
-    public void onSearchSuccess(SearchBean bean) {
-        mProductList.addAll(bean.getProductList());
-        UiUtils.logD(SearchActivity.class,mProductList.toString());
     }
-
 }

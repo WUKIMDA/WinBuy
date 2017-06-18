@@ -46,9 +46,10 @@ public class TopicPlistRecyViewAdapter extends RecyclerView.Adapter {
         PlistViewHolder plistViewHolder = (PlistViewHolder) holder;
         plistViewHolder.setData(position);
     }
+
     @Override
     public int getItemCount() {
-        if (mList==null||mList.size()==0) {
+        if (mList == null || mList.size() == 0) {
             return 0;
         }
         return mList.size();
@@ -58,16 +59,23 @@ public class TopicPlistRecyViewAdapter extends RecyclerView.Adapter {
 
         private ImageView mIoconImageView;
         private TextView mNameTextView;
+        private TextView price;
+        private TextView marketPrice;
 
         public PlistViewHolder(View view) {
             super(view);
             mIoconImageView = (ImageView) view.findViewById(R.id.iv_topiclist_img);
             mNameTextView = (TextView) view.findViewById(R.id.tv_topiclist_name);
+            price = (TextView) view.findViewById(R.id.tv_topiclist_price);
+            marketPrice = (TextView) view.findViewById(R.id.tv_topiclist_marketPrice);
         }
+
         public void setData(int position) {
             TopicPlistBean.ProductListBean bean = mList.get(position);
             Glide.with(mTopicPlistActivity).load(Constans.URL_HOST + bean.pic).crossFade().into(mIoconImageView);
             mNameTextView.setText(bean.name);
+            price.setText(String.valueOf(bean.price));
+            marketPrice.setText(String.valueOf(bean.marketPrice));
         }
     }
 }

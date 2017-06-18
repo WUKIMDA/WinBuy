@@ -48,7 +48,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -100,6 +100,50 @@
 
 
             </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e0e0e0"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数量"
+                android:textColor="#000"
+                android:textSize="16sp"/>
+
+            <RelativeLayout
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:id="@+id/ll_change_num"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <TextView
+                    android:id="@+id/dialog_reduceNum"
+                    android:background="@drawable/cart_min"
+                    android:layout_width="36dp"
+                    android:layout_height="40dp" />
+                <EditText
+                    android:id="@+id/dialog_num"
+                    android:background="@drawable/icon_cart_count"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#ea8010"
+                    android:text="1"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:layout_toRightOf="@+id/dialog_reduceNum"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp" />
+                <TextView
+                    android:layout_toRightOf="@+id/dialog_num"
+                    android:background="@drawable/cart_max"
+                    android:id="@+id/dialog_increaseNum"
+                    android:layout_width="36dp"
+                    android:layout_height="40dp" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

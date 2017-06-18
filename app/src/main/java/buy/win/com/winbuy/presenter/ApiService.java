@@ -4,9 +4,12 @@ import buy.win.com.winbuy.model.net.AddressAllListBean;
 import buy.win.com.winbuy.model.net.AddressBean;
 import buy.win.com.winbuy.model.net.AreaBean;
 import buy.win.com.winbuy.model.net.BrandBean;
+import buy.win.com.winbuy.model.net.CartAllBean;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
+import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
+import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.DelectBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
@@ -58,10 +61,10 @@ public interface ApiService {
     /**
      * 搜索
      *
+     * @param keyword
      * @param page
      * @param pageNum
      * @param orderby
-     * @param keyword
      * @return
      */
     @GET("search")
@@ -71,7 +74,6 @@ public interface ApiService {
             @Query("pageNum") String pageNum,
             @Query("orderby") String orderby
     );
-
     /**
      * 热门搜索字段
      *
@@ -103,17 +105,17 @@ public interface ApiService {
     Call<CommodityProductBean> getCommodityProdectData(@Query("pId") String pId);
 
 
-    /*@FormUrlEncoded //POST请求中
+    @FormUrlEncoded //POST请求中
     @POST("login")
-    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);*/
+    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
 
 
     @FormUrlEncoded //POST请求中
     @POST("register")
     Call<LoginBean> regist(@Field("username") String username, @Field("password") String password);
 
-    @GET("addCart")
-    Call<LoginBean> addCart(@Query("userId") String userId, @Query("productId") String productId, @Query("productCount") String productCount, @Query("propertyId") String propertyId);
+    @GET("addCart")//http://localhost:8080/market/addCart?userId=20428&productId=2&productCount=2&propertyId=1
+    Call<CartAllBean> addCart(@Query("userId") String userId, @Query("productId") String productId, @Query("productCount") String productCount, @Query("propertyId") String propertyId);
 
     @GET("description")
     Call<String> descriptionData(@Query("pId") String pId);
@@ -224,9 +226,9 @@ public interface ApiService {
     /**
      * 底部导航我的部分(包括 用户登录 地址管理 )  eason
      */
-    @FormUrlEncoded //POST请求中
-    @POST("login")//定义
-    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
+//    @FormUrlEncoded //POST请求中
+//    @POST("login")//定义
+//    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
 
 
     @FormUrlEncoded //POST请求中
@@ -262,4 +264,13 @@ public interface ApiService {
      */
     @GET("topic/plist")
     Call<TopicPlistBean> getTopicPlist(@Query("page") String page, @Query("pageNum") String pageNum, @Query("id") String id, @Query("orderby") String orderby);
+
+    //商品收藏
+    @GET("product/favorites")
+    Call<ErrorBean> upPidFavorites(String userid, String pId);
+
+
+    @FormUrlEncoded
+    @POST("userid")
+    Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
 }

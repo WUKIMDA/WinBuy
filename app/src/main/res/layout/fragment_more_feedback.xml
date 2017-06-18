@@ -3,9 +3,69 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="反馈"/>
+        android:background="#D7D7D7">
+        <ImageButton
+            android:id="@+id/ib_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="用户反馈"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"/>
+    </android.support.v7.widget.Toolbar>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="10dp"
+        android:textSize="16dp"
+        android:text="反馈内容(你可以输入商品以及对客户端的意见)"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/assess"
+        android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_help_border"
+        android:textSize="16dp"
+        android:gravity="top|left"
+        android:hint="用户评价输入框"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="16dp"
+        android:text="联系方式"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/contact"
+        android:padding="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/shape_help_border"
+        android:textSize="16dp"
+        android:gravity="top|left"
+        android:hint="您的姓名、手机号、邮箱"/>
+    <Button
+        android:id="@+id/bt_commit"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:textSize="18dp"
+        android:layout_height="60dp"
+        android:text="提交"
+        android:textColor="@color/white"
+        />
 </LinearLayout>

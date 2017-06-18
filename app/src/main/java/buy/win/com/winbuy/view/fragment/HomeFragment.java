@@ -2,6 +2,7 @@ package buy.win.com.winbuy.view.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,9 +12,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechUtility;
+import com.iflytek.cloud.ui.RecognizerDialog;
+import com.iflytek.cloud.ui.RecognizerDialogListener;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.zhouwei.mzbanner.MZBannerView;
 
 import java.util.List;
@@ -21,6 +33,7 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.model.net.LimitbuyBean;
+import buy.win.com.winbuy.model.net.ResultBean;
 import buy.win.com.winbuy.presenter.HomePresenter;
 import buy.win.com.winbuy.presenter.HomePresenterLimit;
 import buy.win.com.winbuy.view.activity.SearchActivity;
@@ -32,6 +45,7 @@ import buy.win.com.winbuy.view.adapter.HomeFrgmRecyViewAdapter;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
+    private static final int REQUEST_CODE = 111;
 
     public MZBannerView mMZBanner;
     private View mRootView;
@@ -39,14 +53,18 @@ public class HomeFragment extends Fragment {
     private HomePresenterLimit mHomePresenterLimit;
     private RecyclerView mRv_homeFrgm;
     private HomeFrgmRecyViewAdapter mHomeFrgmRecyViewAdapter;
-
+    private Gson mGson = new Gson();
+    private EditText mEditText;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        SpeechUtility.createUtility(getActivity(), SpeechConstant.APPID + "=56f22e12");
+
         mRootView = View.inflate(getActivity(), R.layout.fragment_home, null);
         mHomePresenter = new HomePresenter(HomeFragment.this);
         mHomePresenterLimit = new HomePresenterLimit(HomeFragment.this);
+
         tempBtn(mRootView);
         initRecyclerView(mRootView);
         return mRootView;
@@ -80,31 +98,86 @@ public class HomeFragment extends Fragment {
     }
 
     private void tempBtn(View rootView) {
-        Button tempBtn = (Button) rootView.findViewById(R.id.btn_search);
-        tempBtn.setOnClickListener(new View.OnClickListener() {
+
+
+        mEditText = (EditText) rootView.findViewById(R.id.btn_search);
+        mEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
         });
-        Button tempBtnEwm = (Button) rootView.findViewById(R.id.temp_ewm);
-        tempBtnEwm.setOnClickListener(new View.OnClickListener() {
+
+        ImageView qrcodeView = (ImageView) rootView.findViewById(R.id.iv_qrcode_topbar);
+        qrcodeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(getActivity(), CaptureActivity.class);
+                startActivityForResult(intent,REQUEST_CODE);
+
             }
         });
-        Button tempBtnYy = (Button) rootView.findViewById(R.id.temp_yy);
-        tempBtnYy.setOnClickListener(new View.OnClickListener() {
+
+        TextView speakView = (TextView) rootView.findViewById(R.id.tv_message_topbar);
+        speakView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
+                //1.创建RecognizerDialog对象
+                RecognizerDialog mDialog = new RecognizerDialog(getActivity(), null);
+                //2.设置accent、language等参数
+                mDialog.setParameter(SpeechConstant.LANGUAGE, "zh_cn");
+                mDialog.setParameter(SpeechConstant.ACCENT, "mandarin");
+                //若要将UI控件用于语义理解，必须添加以下参数设置，设置之后onResult回调返回将是语义理解//结果
+                // mDialog.setParameter("asr_sch", "1");
+                // mDialog.setParameter("nlp_version", "2.0");
+                //3.设置回调接口
+                mDialog.setListener(mRecognizerDialogListener);//识别的结果
+                //4.显示dialog，接收语音输入
+                mDialog.show();
+
             }
         });
+
     }
+
+
+    RecognizerDialogListener mRecognizerDialogListener = new RecognizerDialogListener() {
+
+        /**
+         *
+         * @param recognizerResult
+         * @param b 是否是结束 通常标点符号
+         */
+        @Override
+        public void onResult(RecognizerResult recognizerResult, boolean b) {
+            //            Toast.makeText(MainActivity.this, recognizerResult.getResultString(), Toast.LENGTH_SHORT).show();
+            if (b) {//过滤掉句号
+                return;
+            }
+
+            ResultBean resultBean = mGson.fromJson(recognizerResult.getResultString(), ResultBean.class);
+            List<ResultBean.WsBean> ws = resultBean.getWs();
+            String w = "";
+            for (int i = 0; i < ws.size(); i++) {
+                ResultBean.WsBean wsBean = ws.get(i);
+                List<ResultBean.WsBean.CwBean> cw = wsBean.getCw();
+                for (int j = 0; j < cw.size(); j++) {
+                    ResultBean.WsBean.CwBean cwBean = cw.get(j);
+                    w += cwBean.getW();
+                }
+            }
+
+
+            Toast.makeText(getActivity(), w, Toast.LENGTH_SHORT).show();
+            mEditText.setText(w);
+        }
+
+        @Override
+        public void onError(SpeechError speechError) {
+
+        }
+    };
 //    private void initBanner(View view) {
 //        mMZBanner = (MZBannerView) view.findViewById(R.id.banner);
 //        // 设置页面点击事件
@@ -116,6 +189,46 @@ public class HomeFragment extends Fragment {
 //        });
 //        Log.e(TAG, "mHomeTopicListsmHomeTopicListsmHomeTopicLists" + mHomeTopicLists.toString());
 //    }
+
+
+    /**
+     * 二维码回调
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    //用默认浏览器打开扫描得到的地址
+                    Intent intent = new Intent();
+                    intent.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(result.toString());
+                    Log.d(TAG, "onActivityResult: "+result);
+                    intent.setData(content_url);
+                    getActivity().startActivity(intent);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(getActivity(), "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
+
+
 
 
     public void onHomeSuccess(HomeAllBean bean) {

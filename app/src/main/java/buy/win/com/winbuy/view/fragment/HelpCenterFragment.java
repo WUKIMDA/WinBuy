@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import java.util.List;
 
@@ -17,17 +18,19 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.presenter.HelpCenterPresenter;
-import buy.win.com.winbuy.view.adapter.HelpCenterLVAdapter;
+import buy.win.com.winbuy.view.adapter.HelpCenterEPLVAdapter;
 
 /**
  * Created by 林特烦 on 2017/6/16.
  */
 
 public class HelpCenterFragment extends Fragment {
+    @Bind(R.id.eplistview)
+    ExpandableListView mExpandableEPListView;
     @Bind(R.id.listview)
-    ExpandableListView mListview;
+    ListView mListview;
     public HelpCenterPresenter mHelpCenterPresenter;
-    private HelpCenterLVAdapter mHelpCenterLVAdapter;
+    private HelpCenterEPLVAdapter mHelpCenterLVAdapter;
 
     @OnClick(R.id.ib_back)
     public void onClick() {
@@ -40,8 +43,9 @@ public class HelpCenterFragment extends Fragment {
         View rootView = View.inflate(getActivity(), R.layout.fragment_more_help, null);
         ButterKnife.bind(this, rootView);
         mHelpCenterPresenter = new HelpCenterPresenter(this);
-        mHelpCenterLVAdapter = new HelpCenterLVAdapter(getActivity());
-        mListview.setAdapter(mHelpCenterLVAdapter);
+        mHelpCenterLVAdapter = new HelpCenterEPLVAdapter(getActivity());
+        mExpandableEPListView.setAdapter(mHelpCenterLVAdapter);
+//        mListview.setAdapter(new HelpCenterLVAdapter(getActivity()));
         return rootView;
     }
 

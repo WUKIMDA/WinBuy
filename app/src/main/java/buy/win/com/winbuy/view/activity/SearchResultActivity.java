@@ -1,8 +1,12 @@
 package buy.win.com.winbuy.view.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -10,10 +14,18 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import buy.win.com.winbuy.R;
+import buy.win.com.winbuy.model.net.SearchBean;
+import buy.win.com.winbuy.presenter.SearchPresenter;
+import buy.win.com.winbuy.utils.UiUtils;
+import buy.win.com.winbuy.view.adapter.SearchRvGridAdapter;
+import buy.win.com.winbuy.view.adapter.SearchRvListAdapter;
 
 /**
  * Created by lenovo on 2017/6/16.
@@ -46,30 +58,72 @@ public class SearchResultActivity extends Activity {
     TextView mTvOther;
     @Bind(R.id.search_ll_other)
     LinearLayout mOther;
+    @Bind(R.id.search_recycler_listview)
+    RecyclerView mRvList;
+    @Bind(R.id.search_recycler_gridview)
+    RecyclerView mRvGrid;
+    private SearchRvListAdapter mRvListAdapter;
+    private LinearLayoutManager mLinearLayoutManager;
+    private SearchRvGridAdapter mRvGridAdapter;
+    private GridLayoutManager mGridLayoutManager;
+    private List<SearchBean.ProductListBean> mSearchBean = new ArrayList<>();
+    private Context mContext;
+    private String mKeyword;
+    private SearchPresenter mSearchPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
         ButterKnife.bind(this);
-        init();
+        mContext = this;
+        mSearchPresenter = new SearchPresenter(this);
         initData();
+        init();
+    }
+
+    private void initData() {
+        if (getIntent() != null) {
+            mKeyword = getIntent().getStringExtra("keyword");
+            UiUtils.logD(SearchResultActivity.class, "getExtra: " + mKeyword);
+        }
+
+        String page = "1";
+        String pageNum = "10";
+        String orderby = "saleDown";
+        mSearchPresenter.loadSearchData(mKeyword,page,pageNum,orderby);
+    }
+
+    public void onSearchSuccess(SearchBean bean) {
+//        mSearchBean.addAll(bean.getProductList());
+        mRvListAdapter.setBean(bean.getProductList());
+        mRvGridAdapter.setSearchBean(bean.getProductList());
+        UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean);
     }
 
     private void init() {
 
+        mEtSearch.setText(mKeyword);
         mEtSearch.setCursorVisible(false);
+        mComplex.setSelected(true);
 
+        mLinearLayoutManager = new LinearLayoutManager(mContext);
+        mRvList.setLayoutManager(mLinearLayoutManager);
+        mRvListAdapter = new SearchRvListAdapter(mContext);
+//        UiUtils.logD(SearchResultActivity.class,"getRvListAdapter: " + mSearchBean.toString());
+        mRvList.setAdapter(mRvListAdapter);
 
-    }
+        mGridLayoutManager = new GridLayoutManager(mContext, 2, GridLayoutManager.VERTICAL, false);
+        mRvGrid.setLayoutManager(mGridLayoutManager);
+        mRvGridAdapter = new SearchRvGridAdapter(mContext);
+        mRvGrid.setAdapter(mRvGridAdapter);
 
-    private void initData() {
-
-        mEtSearch.setText("测试文字");
     }
 
     private boolean isPriceUp = true;
-    @OnClick({R.id.iv_back, R.id.et_searchtext_search, R.id.iv_pic_type,R.id.search_ll_complex, R.id.search_tv_sale, R.id.search_rl_price, R.id.search_ll_other})
+    private boolean isRvList = true;
+
+    @OnClick({R.id.iv_back, R.id.et_searchtext_search, R.id.iv_pic_type, R.id.search_ll_complex, R.id.search_tv_sale, R.id.search_rl_price, R.id.search_ll_other})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -80,6 +134,17 @@ public class SearchResultActivity extends Activity {
                 break;
             case R.id.iv_pic_type:
                 // 搜索结果显示切换
+                if (isRvList) {
+                    mIvType.setImageResource(R.mipmap.viewgallery);
+                    mRvGrid.setVisibility(View.VISIBLE);
+                    mRvList.setVisibility(View.GONE);
+                    isRvList = false;
+                } else {
+                    mIvType.setImageResource(R.mipmap.viewlist);
+                    mRvList.setVisibility(View.VISIBLE);
+                    mRvGrid.setVisibility(View.GONE);
+                    isRvList = true;
+                }
                 break;
             case R.id.search_ll_complex:
                 // 综合排序
@@ -101,11 +166,11 @@ public class SearchResultActivity extends Activity {
                 mComplex.setSelected(false);
                 mTvSale.setSelected(false);
                 mOther.setSelected(false);
-                if(isPriceUp) {
+                if (isPriceUp) {
                     mPriceDown.setSelected(true);
                     mPriceUp.setSelected(false);
                     isPriceUp = false;
-                }else {
+                } else {
                     mPriceUp.setSelected(true);
                     mPriceDown.setSelected(false);
                     isPriceUp = true;
@@ -120,4 +185,9 @@ public class SearchResultActivity extends Activity {
                 break;
         }
     }
+
+    public void onSearchError(String message) {
+
+    }
+
 }
