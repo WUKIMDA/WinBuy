@@ -111,18 +111,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                //差值
-                //                Log.e("home", dy + "");
                 sumY += dy;
                 int bgColor;
                 if (sumY < 0) {
-                    //初始最浅的蓝色0x553190E8
                     bgColor = startColor;
                 } else if (sumY > distance) {
-                    //最蓝的颜色0xff3190E8
                     bgColor = endColor;
                 } else {
-                    //在0-distance范围内计算alpha的值  255
                     bgColor = (int) mEvaluator.evaluate(sumY / distance, startColor, endColor);
                 }
                 mRlTitle.setBackgroundColor(bgColor);

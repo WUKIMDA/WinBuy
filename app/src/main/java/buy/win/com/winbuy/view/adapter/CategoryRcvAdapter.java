@@ -1,6 +1,7 @@
 package buy.win.com.winbuy.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.utils.Constant;
+import buy.win.com.winbuy.view.activity.GoodsShowActivity;
 
 /**
  * Created by Administrator on 2017/6/15 0015.
@@ -29,13 +31,13 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
 
     private static final int TYPE_HEADVIEW = 0;
     private static final int TYPE_COMMON = 1;
-    private Context mContenx;
+    private Context mContext;
     private List<CategoryAllBean.CategoryBean> mDatas = new ArrayList<>();
     private int mSelectedId;
     private List<CategoryAllBean.CategoryBean> mRcvDatas = new ArrayList<>();
 
-    public CategoryRcvAdapter(Context contenx) {
-        mContenx = contenx;
+    public CategoryRcvAdapter(Context context) {
+        mContext = context;
     }
 
     @Override
@@ -53,11 +55,11 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         RecyclerView.ViewHolder viewholder = null;
         switch (viewType) {
             case TYPE_HEADVIEW:
-                View headView = LayoutInflater.from(mContenx).inflate(R.layout.category_rcv_headview, parent, false);
+                View headView = LayoutInflater.from(mContext).inflate(R.layout.category_rcv_headview, parent, false);
                 viewholder = new HeadViewHolder(headView);
                 break;
             case TYPE_COMMON:
-                View commonView = LayoutInflater.from(mContenx).inflate(R.layout.category_rcv_itemview, parent, false);
+                View commonView = LayoutInflater.from(mContext).inflate(R.layout.category_rcv_itemview, parent, false);
                 viewholder = new CommonViewHolder(commonView);
                 break;
         }
@@ -73,7 +75,7 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         } else {
             CommonViewHolder headView = (CommonViewHolder) holder;
             headView.setData(mDatas, mRcvDatas.get(position));
-//            Toast.makeText(mContenx,mRcvDatas.toString(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(mContext,mRcvDatas.toString(),Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -107,7 +109,7 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         public void setData(List<CategoryAllBean.CategoryBean> data, int id) {
             for (int i = 0; i < data.size(); i++) {
                 if (data.get(i).getId() == id) {
-                    Glide.with(mContenx).load(Constant.URL_HOST + data.get(i).getPic()).into(mHeadview);
+                    Glide.with(mContext).load(Constant.URL_HOST + data.get(i).getPic()).into(mHeadview);
                 }
             }
         }
@@ -135,14 +137,16 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
                 }
             }
 
-            GridViewAdapter gridViewAdapter = new GridViewAdapter(mContenx, mGridDatas);
+            GridViewAdapter gridViewAdapter = new GridViewAdapter(mContext, mGridDatas);
             mCategoryRcvItemGv.setAdapter(gridViewAdapter);
             mCategoryRcvItemGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     //// TODO: 2017/6/15 0015
-
+                    Intent intent = new Intent(mContext,GoodsShowActivity.class);
+                    intent.putExtra("sId","125");
+                    mContext.startActivity(intent);
                 }
             });
         }
