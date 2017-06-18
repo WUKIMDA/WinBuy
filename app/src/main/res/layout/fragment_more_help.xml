@@ -36,7 +36,7 @@
         android:src="@drawable/line"
         />
     <ExpandableListView
-        android:id="@+id/listview"
+        android:id="@+id/eplistview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ExpandableListView>
 

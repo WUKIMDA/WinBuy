@@ -19,7 +19,7 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.RegisterBean;
 import buy.win.com.winbuy.presenter.ApiService;
-import buy.win.com.winbuy.utils.RetrofitUtils;
+import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.ShareUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -132,7 +132,7 @@ public class LonginAndRegisterActivity extends AppCompatActivity {
 
     private void checkRegisterData() {
 
-            ApiService service = RetrofitUtils.getService();
+            ApiService service = RetrofitUtil.getApiservice2();
 
             service.register(mUsername2,mPassword2).enqueue(new Callback<RegisterBean>() {
                 @Override
@@ -142,7 +142,7 @@ public class LonginAndRegisterActivity extends AppCompatActivity {
                         RegisterBean registerBean = response.body();
                         if(!TextUtils.isEmpty(registerBean.getError())) {
 
-                            Toast.makeText(LonginAndRegisterActivity.this, "您申请的用户名已经错在,请从新申请", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LonginAndRegisterActivity.this, registerBean.getError(), Toast.LENGTH_SHORT).show();
 
                         }else {
                             //注册成功 保存数据userid  然后跳到主页
@@ -195,7 +195,7 @@ public class LonginAndRegisterActivity extends AppCompatActivity {
                 .build()
                 .create(ApiService.class);*/
 
-        ApiService apkservice = RetrofitUtils.getService();
+        ApiService apkservice = RetrofitUtil.getApiservice2();
 
 
         apkservice.login(mUsername1, mPassword1).enqueue(new Callback<LoginBean>() {

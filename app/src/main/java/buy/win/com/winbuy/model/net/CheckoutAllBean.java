@@ -64,6 +64,22 @@ public class CheckoutAllBean extends  BaseBean{
     }
 
     public static class AddressInfoBean {
+        @Override
+        public String toString() {
+            return name+"/r/n"+phoneNumber+"/r/n"+province+","+city+","+addressArea+","+addressDetail+","+zipCode;
+//            return "AddressInfoBean{" +
+//                    "地区'" + addressArea + '\'' +
+//                    ", 地址详情'" + addressDetail + '\'' +
+//                    ", 城市:'" + city + '\'' +
+//                    ", id=" + id +
+//                    ", isDefault=" + isDefault +
+//                    ", name='" + name + '\'' +
+//                    ", phoneNumber='" + phoneNumber + '\'' +
+//                    ", province='" + province + '\'' +
+//                    ", zipCode='" + zipCode + '\'' +
+//                    '}';
+        }
+
         /**
          * addressArea : 不要告诉你
          * addressDetail : 84639806@qq.com
@@ -160,6 +176,17 @@ public class CheckoutAllBean extends  BaseBean{
     }
 
     public static class CheckoutAddupBean {
+        @Override
+        public String toString() {
+            return "邮费"+freight+"总数"+totalCount+"总价"+totalPrice+"总Point"+totalPoint;
+//            return "CheckoutAddupBean{" +
+//                    "freight=" + freight +
+//                    ", totalCount=" + totalCount +
+//                    ", totalPoint=" + totalPoint +
+//                    ", totalPrice=" + totalPrice +
+//                    '}';
+        }
+
         /**
          * freight : 10
          * totalCount : 5

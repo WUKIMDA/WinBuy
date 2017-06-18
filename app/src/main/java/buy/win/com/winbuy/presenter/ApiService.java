@@ -4,6 +4,7 @@ import buy.win.com.winbuy.model.net.AddressAllListBean;
 import buy.win.com.winbuy.model.net.AddressBean;
 import buy.win.com.winbuy.model.net.AreaBean;
 import buy.win.com.winbuy.model.net.BrandBean;
+import buy.win.com.winbuy.model.net.CartAllBean;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.model.net.CommentDataBean;
@@ -130,8 +131,8 @@ public interface ApiService {
     @POST("register")
     Call<LoginBean> regist(@Field("username") String username, @Field("password") String password);
 
-    @GET("addCart")
-    Call<LoginBean> addCart(@Query("userId") String userId, @Query("productId") String productId, @Query("productCount") String productCount, @Query("propertyId") String propertyId);
+    @GET("addCart")//http://localhost:8080/market/addCart?userId=20428&productId=2&productCount=2&propertyId=1
+    Call<CartAllBean> addCart(@Query("userId") String userId, @Query("productId") String productId, @Query("productCount") String productCount, @Query("propertyId") String propertyId);
 
     @GET("description")
     Call<String> descriptionData(@Query("pId") String pId);
@@ -246,6 +247,7 @@ public interface ApiService {
 //    @POST("login")//定义
 //    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
 
+
     @FormUrlEncoded //POST请求中
     @POST("register")//定义
     Call<RegisterBean> register(@Field("username") String username, @Field("password") String password);
@@ -288,4 +290,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("userid")
     Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
+
+    //新品上架
+    @GET("newproduct")
+    Call<TopicPlistBean> getNewProduct(@Query("page") String page, @Query("pageNum") String pageNum,@Query("orderby") String orderby);
+
+    //热门单品
+    @GET("hotproduct")
+    Call<TopicPlistBean> getHotProduct(@Query("page") String page, @Query("pageNum") String pageNum,@Query("orderby") String orderby);
+
+    //新品上架
+    @GET("brand")
+    Call<TopicPlistBean> getBrand();
+
 }

@@ -1,6 +1,7 @@
 package buy.win.com.winbuy.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.SystemClock;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.NumToTime;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.activity.TopPicActivity;
+import buy.win.com.winbuy.view.activity.TopicPlistActivity;
 
 /**
  * Created by Ziwen on 2017/6/15.
@@ -128,6 +130,7 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         private final TextView mTjpp;
         private final TextView mXpsj;
         private final TextView mRmdp;
+        private final TextView mCnxh;
 
 
         public TitleHolder(View view) {
@@ -137,6 +140,7 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
             (mTjpp = (TextView) view.findViewById(R.id.tjpp)).setOnClickListener(this);
             (mXpsj = (TextView) view.findViewById(R.id.xpsj)).setOnClickListener(this);
             (mRmdp = (TextView) view.findViewById(R.id.rmdp)).setOnClickListener(this);
+            (mCnxh = (TextView) view.findViewById(R.id.cnxh)).setOnClickListener(this);
             mBannerHomeTop = (MZBannerView) view.findViewById(R.id.banner_home_top);
         }
 
@@ -162,10 +166,19 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
                     Toast.makeText(mContext, "tjpp", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.xpsj:
-                    Toast.makeText(mContext, "xpsj", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "xpsj", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, TopicPlistActivity.class);
+                    intent.putExtra("intentKey", "newproductValue");
+                    mContext.startActivity(intent);
                     break;
                 case R.id.rmdp:
-                    Toast.makeText(mContext, "rmdp", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "rmdp", Toast.LENGTH_SHORT).show();
+                    Intent intent2 = new Intent(mContext, TopicPlistActivity.class);
+                    intent2.putExtra("intentKey", "hotproductValue");
+                    mContext.startActivity(intent2);
+                    break;
+                case R.id.cnxh:
+                    Toast.makeText(mContext, "你猜我猜不猜", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -229,8 +242,8 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
                     // 3.数组内所有的时间值自减1
                     for (int i = 0; i < timeArr.length; i++) {
                         timeArr[i] -= 1;
-                        // 4.在UI线程进行刷新数据
                         final int finalI = i;
+                        // 4.在UI线程进行刷新数据
                         UiUtils.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -269,6 +282,8 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         @Override
         public void onBind(Context context, int i, HomeAllBean.HomeTopicBean homeTopicBean) {
             Glide.with(context).load(Constant.URL_HOST + homeTopicBean.getPic()).into(mImageView);
+            //Bitmap bitmap = UrlToBitmap.getImageFromNet(Constant.URL_HOST + homeTopicBean.getPic());
+//            mImageView.setBackground(bitmap);
         }
     }
 
