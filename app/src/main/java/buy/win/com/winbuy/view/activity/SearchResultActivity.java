@@ -70,10 +70,7 @@ public class SearchResultActivity extends Activity {
     private Context mContext;
     private String mKeyword;
     private SearchPresenter mSearchPresenter;
-    private String mOrderby;
-    private String mPage;
-    private String mPageNum;
-
+    private int mPage = 1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,10 +88,12 @@ public class SearchResultActivity extends Activity {
             UiUtils.logD(SearchResultActivity.class, "getExtra: " + mKeyword);
         }
 
-        mPage = "1";
-        mPageNum = "6";
-        mOrderby = Constant.SALEDOWN;
-        mSearchPresenter.loadSearchData(mKeyword, mPage, mPageNum, Constant.SHELVESDOWN);
+
+        loadSearchResult(String.valueOf(mPage),Constant.SHELVESDOWN);
+    }
+
+    private void loadSearchResult(String page, String orderby) {
+        mSearchPresenter.loadSearchData(mKeyword, page, Constant.PAGE_NUM, orderby);
     }
 
     public void onSearchSuccess(SearchBean bean) {
@@ -161,14 +160,16 @@ public class SearchResultActivity extends Activity {
                 mTvSale.setSelected(false);
                 mPrice.setSelected(false);
                 mOther.setSelected(false);
+                isPriceUp = true;
                 break;
             case R.id.search_tv_sale:
                 // 销量排序
-                mSearchPresenter.loadSearchData(mKeyword, mPage, mPageNum, Constant.SALEDOWN);
+                loadSearchResult(String.valueOf(mPage),Constant.SALEDOWN);
                 mTvSale.setSelected(true);
                 mComplex.setSelected(false);
                 mPrice.setSelected(false);
                 mOther.setSelected(false);
+                isPriceUp = true;
                 break;
             case R.id.search_rl_price:
                 // 价格排序
@@ -177,12 +178,12 @@ public class SearchResultActivity extends Activity {
                 mTvSale.setSelected(false);
                 mOther.setSelected(false);
                 if (isPriceUp) {
-                    mSearchPresenter.loadSearchData(mKeyword, mPage, mPageNum, Constant.PRICEUP);
+                    loadSearchResult(String.valueOf(mPage),Constant.PRICEUP);
                     mPriceDown.setSelected(true);
                     mPriceUp.setSelected(false);
                     isPriceUp = false;
                 } else {
-                    mSearchPresenter.loadSearchData(mKeyword, mPage, mPageNum, Constant.PRICEDOWN);
+                    loadSearchResult(String.valueOf(mPage),Constant.PRICEDOWN);
                     mPriceUp.setSelected(true);
                     mPriceDown.setSelected(false);
                     isPriceUp = true;
@@ -194,6 +195,7 @@ public class SearchResultActivity extends Activity {
                 mComplex.setSelected(false);
                 mTvSale.setSelected(false);
                 mPrice.setSelected(false);
+                isPriceUp = true;
                 break;
         }
     }
