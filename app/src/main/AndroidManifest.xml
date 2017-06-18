@@ -54,22 +54,23 @@
         <activity android:name=".view.activity.TopicPlistActivity"/>
 
 
-
         <!--eason-->
 
         <activity android:name=".view.activity.AddressListActivity"/>
 
         <activity android:name=".view.activity.AddAddressActivity">
-           <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <!-- <intent-filter>
+                 <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+                 <category android:name="android.intent.category.LAUNCHER"/>
+             </intent-filter>-->
 
         </activity>
 
         <activity android:name=".view.activity.LonginAndRegisterActivity"/>
-
+        <activity
+            android:name=".view.activity.GoodsShowActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
 
 
     </application>

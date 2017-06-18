@@ -48,4 +48,5 @@ dependencies {
     compile 'com.android.support:support-v4:23.0.1'
     compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support:support-v4:26.0.0-alpha1'
 }

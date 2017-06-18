@@ -11,6 +11,7 @@ import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.DelectBean;
 import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
+import buy.win.com.winbuy.model.net.GoodsBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.model.net.HomeAllBean;
@@ -80,6 +81,22 @@ public interface ApiService {
      */
     @GET("search/recommend")
     Call<HotSearchBean> getHotBrand();
+
+    /**
+     * 商品列表
+     * @param page
+     * @param pageNum
+     * @param cId
+     * @param orderby
+     * @return
+     */
+    @GET("productlist")
+    Call<GoodsBean> getGoodsProduct(
+            @Query("page") String page,
+            @Query("pageNum") String pageNum,
+            @Query("cId") String cId,
+            @Query("orderby") String orderby
+            );
 
     /**
      * 促销

@@ -1,6 +1,7 @@
 package buy.win.com.winbuy.view.searchview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,6 +26,7 @@ import java.util.Random;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.utils.UiUtils;
+import buy.win.com.winbuy.view.activity.GoodsShowActivity;
 
 /**
  * 搜索页面view
@@ -164,6 +166,11 @@ public class mSearchLayout extends LinearLayout{
 //                }
 //                Toast.makeText(context, "点击了Category ,isUnfold = " + isUnfold, Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "搜索左边点击功能待实现", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(context,GoodsShowActivity.class);
+                intent.putExtra("sId","125");
+                context.startActivity(intent);
+
             }
         });
 
