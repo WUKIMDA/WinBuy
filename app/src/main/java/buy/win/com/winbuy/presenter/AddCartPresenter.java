@@ -34,7 +34,7 @@ public class AddCartPresenter extends BaseNetPresenter<CartAllBean> {
             UiUtils.postTask(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(UiUtils.getContext(), "添加失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UiUtils.getContext(), "添加失败,请登录", Toast.LENGTH_SHORT).show();
                 }
             });
         }

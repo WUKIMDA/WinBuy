@@ -91,7 +91,7 @@ public class MoreLVAdapter extends BaseAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    OpenFragmentByPosition(mPosition);
+                OpenFragmentByPosition(mPosition);
                 }
             });
         }

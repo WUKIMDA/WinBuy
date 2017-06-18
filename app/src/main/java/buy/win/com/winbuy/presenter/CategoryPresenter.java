@@ -21,17 +21,17 @@ public class CategoryPresenter extends BaseNetPresenter<CategoryAllBean> {
 
     @Override
     public void onConnectError(String message) {
-//        mCategoryFragment.onConnectError(message);
+        mCategoryFragment.onConnectError(message);
     }
 
     @Override
     public void onServerBug(int code) {
-       // mCategoryFragment.onServerBug(code);
+        mCategoryFragment.onServerBug(code);
     }
 
     @Override
     public void onSuccess(CategoryAllBean bean) {
-       // mCategoryFragment.onSuccess(bean);
+        mCategoryFragment.onSuccess(bean);
 
     }
 

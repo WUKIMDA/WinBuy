@@ -14,5 +14,9 @@ public class WinBuyApplication extends Application {
         super.onCreate();
         //工具类的初始化
         UiUtils.init(this);
+
+
+
+        //测试commit
     }
 }
