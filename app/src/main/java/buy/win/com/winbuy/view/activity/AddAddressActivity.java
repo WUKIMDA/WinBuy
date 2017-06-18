@@ -23,7 +23,7 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SaveAddressBean;
 import buy.win.com.winbuy.presenter.ApiService;
-import buy.win.com.winbuy.utils.RetrofitUtils;
+import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.ShareUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,6 +60,7 @@ public class AddAddressActivity extends AppCompatActivity {
 
         setContentView(R.layout.address_add_activity);
         ButterKnife.bind(this);
+
 
 
 
@@ -162,8 +163,8 @@ public class AddAddressActivity extends AppCompatActivity {
 
 
 
-            //RetrofitUtils.getService()
-            ApiService apkservice = RetrofitUtils.getService();
+            //RetrofitUtils.getApiservice2()
+            ApiService apkservice = RetrofitUtil.getApiservice2();
 
             Log.e("body", "clickSave "+ShareUtils.getUserId(this,null));
 
@@ -175,13 +176,19 @@ public class AddAddressActivity extends AppCompatActivity {
                 public void onResponse(Call<SaveAddressBean> call, Response<SaveAddressBean> response) {
                     if(response.isSuccessful()) {
 
-                        List<SaveAddressBean.AddressListBean> addressList = response.body().getAddressList();
-                        //Log.e("body", "onResponse "+addressList.toString());
+                        SaveAddressBean body = response.body();
 
+                        if(!TextUtils.isEmpty(body.getError())) {
 
-                        finish();
+                            Toast.makeText(AddAddressActivity.this, body.getError(), Toast.LENGTH_SHORT).show();
+                        }else {
 
+                            List<SaveAddressBean.AddressListBean> addressList = response.body().getAddressList();
+                            //Log.e("body", "onResponse "+addressList.toString());
 
+                            finish();
+
+                        }
 
                     }else {
                         //返回数据失败 404 500 505 话费
