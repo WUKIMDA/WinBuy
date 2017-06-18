@@ -15,11 +15,13 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
@@ -42,16 +44,24 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
+import buy.win.com.winbuy.model.net.ErrorBean;
+import buy.win.com.winbuy.presenter.AddCartPresenter;
+import buy.win.com.winbuy.presenter.CheckoutPresent;
 import buy.win.com.winbuy.presenter.CommentPresenter;
 import buy.win.com.winbuy.presenter.CommodityProductPresenter;
 import buy.win.com.winbuy.presenter.ScrollViewContainer;
-import buy.win.com.winbuy.utils.Constant;
+import buy.win.com.winbuy.utils.Constans;
 import buy.win.com.winbuy.utils.MyImageLoader;
+import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.StatusBarUtil;
+import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.adapter.CommentAdapter;
 import buy.win.com.winbuy.view.commodityView.GradationScrollView;
 import buy.win.com.winbuy.view.commodityView.NoScrollListView;
 import buy.win.com.winbuy.view.commodityView.PropertyViewGroup;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by BUTTON on 2017-06-16.
@@ -138,6 +148,10 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     private LinearLayout look_all_comment;
     private ListView listview_comment;
     private CommentAdapter mCommentAdapter;
+    private String pId;
+    private int mBuyLimit;
+    private Dialog mCommodityDialog;
+    private List<CommodityProductBean.ProductBean.ProductPropertyBean> mProductPropertyLists;
 
 
     @Override
@@ -146,6 +160,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         setContentView(R.layout.activity_commodity);
         look_all_comment = (LinearLayout) findViewById(R.id.look_all_comment);
         listview_comment = (ListView) findViewById(R.id.listview_comment);
+        ButterKnife.bind(this);
 
         EventBus.getDefault().register(this);
 
@@ -157,7 +172,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 //        loadService(pId);
         loadService();
 
-        ButterKnife.bind(this);
+
         //透明状态栏
         StatusBarUtil.setTranslucentForImageView(this, llOffset);
         LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) llOffset.getLayoutParams();
@@ -183,6 +198,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     protected void onStart() {
         super.onStart();
         //如果收藏,回显
+
+
     }
 
 
@@ -205,8 +222,12 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     public void onEventMainThread(CommentDataBean commentDataLists) {
 //        List<CommentDataBean.CommentBean> comment = commentDataLists.getComment();
 //        System.out.println("测试" + comment.toString());
+        if (commentDataLists == null) {
+            return;
+        }
         int size = commentDataLists.getComment().size();
-        mTvCommdotyCommentCount.setText("商品评论(" + size + ")");
+//        mTvCommdotyCommentCount.setText("商品评论(" + size + ")");
+        mTvCommdotyCommentCount.setText("商品评论(" + 1 + ")");
         mCommentAdapter.setData(commentDataLists);
 
 
@@ -228,16 +249,23 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                 break;
             case R.id.ll_good_detail_collect:
                 //收藏:取反,GONE
-                //favorites?userid=85915&pId=1
+                //favorites?userid=85915&pId=1  //TODO:用户ID
+                pidFavorites();
+
 
                 break;
             case R.id.tv_good_detail_shop_cart:
                 //加入购物车
                 //addCart?userId=20428&productId=2&productCount=2&propertyId=1
+                AddCartPresenter addCartPresenter = new AddCartPresenter();
+                //用户id,商品id,商品数量,商品属性默认颜色1 TODO
+                //addCartPresenter.addCard("用户ID", pId, "1", "1");
 
                 break;
             case R.id.tv_good_detail_buy:
-                //立即购买
+                //checkCommit
+                checkCommit();
+
                 break;
             case R.id.tv_good_detail_cate:
                 //产品分类选择,popw
@@ -246,17 +274,64 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 
         }
     }
+
+    private void checkCommit() {
+        CheckoutPresent checkoutPresent = new CheckoutPresent();
+        //TODO:用户ID
+//         checkoutPresent.upCheckout(userId,sku);
+    }
+
+    /**
+     * 商品收藏
+     */
+    private void pidFavorites() {
+        //TODO  userId
+        RetrofitUtil.getApiService().upPidFavorites("用户ID", pId).enqueue(new Callback<ErrorBean>() {
+            @Override
+            public void onResponse(Call<ErrorBean> call, Response<ErrorBean> response) {
+                if (response.isSuccessful()) {
+                    final ErrorBean body = response.body();
+                    UiUtils.postTask(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(CommodityActivity.this, body.getError(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    String bodyResponse = body.getResponse();
+                    String error = body.getError();
+                    if (("当前商品已经添加过收藏".equals(error)) || ("addfavorites".equals(bodyResponse))) {
+                        ivCollectSelect.setVisibility(View.VISIBLE);
+                        ivCollectUnSelect.setVisibility(View.GONE);
+                    }
+                    if ("还未登陆".equals(error)) {
+                        UiUtils.postTask(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(CommodityActivity.this, "请登陆", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ErrorBean> call, Throwable t) {
+
+            }
+        });
+    }
     //KIMDA:详细描述：product/description?pId=2
 
 
     private void dialogShow() {
 
-        Dialog commodityDialog = new Dialog(this, R.style.my_dialog);
+        mCommodityDialog = new Dialog(this, R.style.my_dialog);
         LinearLayout root = (LinearLayout) LayoutInflater.from(this).inflate(
                 R.layout.dialog_commodity, null);
-        commodityDialog.setContentView(root);
+        mCommodityDialog.setContentView(root);
 
-        Window dialogWindow = commodityDialog.getWindow();
+        Window dialogWindow = mCommodityDialog.getWindow();
         dialogWindow.setGravity(Gravity.BOTTOM);
         dialogWindow.setWindowAnimations(R.style.dialogstyle); // 添加动画
         WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
@@ -269,8 +344,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         lp.height = root.getMeasuredHeight();
         lp.alpha = 9f; // 透明度
         dialogWindow.setAttributes(lp);
-        commodityDialog.setCanceledOnTouchOutside(true);
-        commodityDialog.show();
+        mCommodityDialog.setCanceledOnTouchOutside(true);
+        mCommodityDialog.show();
 
         initDialog(root);
         initDialogEvent();
@@ -283,6 +358,9 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     public PropertyViewGroup mPropertyColor;
     public PropertyViewGroup mPropertySize;
     public Button mBtnSubmit;
+    public TextView reduceNum;
+    EditText dialogNum;
+    TextView addNumber;
 
     private void initDialog(LinearLayout root) {
         this.mIvCommodity = (ImageView) root.findViewById(R.id.iv_commodity);
@@ -291,35 +369,90 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         this.mPropertyColor = (PropertyViewGroup) root.findViewById(R.id.property_color);
         this.mPropertySize = (PropertyViewGroup) root.findViewById(R.id.property_size);
         this.mBtnSubmit = (Button) root.findViewById(R.id.btn_submit);
+        addNumber = (TextView) root.findViewById(R.id.dialog_increaseNum);
+        dialogNum = (EditText) root.findViewById(R.id.dialog_num);
+        reduceNum = (TextView) root.findViewById(R.id.dialog_reduceNum);
 
         mTvCommdityName.setText(mName);
         mTvCommdityPrice.setText("￥" + mLimitPrice);
+
     }
 
+
+    private String mSelectSize;
+    private String mSelectColor;
     /**
      * 对话框操作事件
      */
     private void initDialogEvent() {
-        Glide.with(this).load(Constant.URL_HOST + imageIndex0).into(mIvCommodity);
+        Glide.with(this).load(Constans.URL_HOST + imageIndex0).into(mIvCommodity);
         mPropertySize.addItemViews(mSizeLists, PropertyViewGroup.BTN_MODE);
         mPropertyColor.addItemViews(mColorLists, PropertyViewGroup.TEV_MODE);
 
         mPropertySize.setGroupClickListener(new PropertyViewGroup.OnGroupItemClickListener() {
             @Override
             public void onGroupItemClick(int item) {
-                System.out.println("选择了" + mSizeLists.get(item));
+                mSelectSize = mSizeLists.get(item);
             }
         });
 
         mPropertyColor.setGroupClickListener(new PropertyViewGroup.OnGroupItemClickListener() {
+
             @Override
             public void onGroupItemClick(int item) {
-                System.out.println("选择了" + item + mColorLists.get(item));
+                //TODO保存数据
+                mSelectColor = mColorLists.get(item);
             }
 
         });
 
+        reduceNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mCommodityCount == 1) {
+                    return;
+                }
+                mCommodityCount--;
+                dialogNum.setText("" + mCommodityCount);
+            }
+        });
+
+        addNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mCommodityCount >=mBuyLimit) {
+                    return;
+                }
+                mCommodityCount++;
+                dialogNum.setText("" + mCommodityCount);
+            }
+        });
+
+        mBtnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCommodityDialog.dismiss();
+                System.out.println("我选择了"+mSelectColor + mSelectSize +mCommodityCount);
+            }
+        });
     }
+
+    /**整合sku商品属性的方法*/
+    public void productPropertySelect(String key){
+        if (mProductPropertyLists.contains(key)){
+            //TODO
+        }
+
+
+
+    }
+
+    /**
+     * 属性操作商品的数量
+     */
+    int mCommodityCount = 1;
 
 
     public int getScreenHeight(Context context) {
@@ -388,13 +521,20 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     }
 
     public void onSuccess(CommodityProductBean bean) {
+
         CommodityProductBean.ProductBean product = bean.getProduct();
+        System.out.println("bean"+ bean.toString());
+        if (product == null) {
+            Toast.makeText(this, "数据为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        pId = String.valueOf(product.getId());
 
         //大图bigPics
         List<String> bigPicsLists = product.getBigPic();
         imgsUrl = new ArrayList<>();
         for (int i = 0; i < bigPicsLists.size(); i++) {
-            imgsUrl.add(Constant.URL_HOST + bigPicsLists.get(i));
+            imgsUrl.add(Constans.URL_HOST + bigPicsLists.get(i));
         }
         imgAdapter.addAll(imgsUrl);
         nlvImgs.setAdapter(imgAdapter);
@@ -405,7 +545,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         imageIndex0 = picsLists.get(0);
         HashMap<String, String> url_maps = new HashMap<String, String>();
         for (int i = 0; i < picsLists.size(); i++) {
-            url_maps.put("" + i, Constant.URL_HOST + picsLists.get(i));
+            url_maps.put("" + i, Constans.URL_HOST + picsLists.get(i));
         }
 
         for (String desc : url_maps.keySet()) {
@@ -419,7 +559,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         //基本数据填充
         mName = product.getName();
         mTvCommdotyName.setText(mName);
-        mTvCommdotyBuyLimit.setText("限购:" + product.getBuyLimit());
+        mBuyLimit = product.getBuyLimit();
+        mTvCommdotyBuyLimit.setText("限购:" + mBuyLimit);
 
         mTvCommdotyInventoryArea.setText(product.getInventoryArea());
         mLimitPrice = product.getLimitPrice();
@@ -428,14 +569,14 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         mTvGoodDetailDiscount.setText("市场价:" + product.getMarketPrice());
 
         //商品属性
-        List<CommodityProductBean.ProductBean.ProductPropertyBean> productPropertyLists = product.getProductProperty();
-        int pSize = productPropertyLists.size();
+        mProductPropertyLists = product.getProductProperty();
+        int pSize = mProductPropertyLists.size();
 
         mColorLists = new ArrayList<>();
         mSizeLists = new ArrayList<>();
 
         for (int i = 0; i < pSize; i++) {
-            CommodityProductBean.ProductBean.ProductPropertyBean productPropertyBean = productPropertyLists.get(i);
+            CommodityProductBean.ProductBean.ProductPropertyBean productPropertyBean = mProductPropertyLists.get(i);
             if ("颜色".equals(productPropertyBean.getK())) {
                 mColorLists.add(productPropertyBean.getV());
             } else {//尺码
@@ -443,9 +584,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             }
         }
         Log.d("商品属性", mColorLists.toString() + mSizeLists.toString());
-
-
     }
+
 
 
     @Override

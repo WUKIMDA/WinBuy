@@ -7,7 +7,7 @@ import java.util.List;
  */
 
 
-public class SearchBean extends BaseBean{
+public class SearchBean extends BaseBean {
     private List<ProductListBean> productList;
 
     public List<ProductListBean> getProductList() {

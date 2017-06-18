@@ -2,7 +2,7 @@ package buy.win.com.winbuy.presenter;
 
 import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.utils.RetrofitUtil;
-import buy.win.com.winbuy.view.activity.SearchActivity;
+import buy.win.com.winbuy.view.activity.SearchResultActivity;
 
 /**
  * Created by lenovo on 2017/6/15.
@@ -10,10 +10,10 @@ import buy.win.com.winbuy.view.activity.SearchActivity;
 
 public class SearchPresenter extends BaseNetPresenter<SearchBean> {
 
-    private SearchActivity mSearchActivity;
+    private SearchResultActivity mSearchResultActivity;
 
-    public SearchPresenter(SearchActivity searchActivity) {
-        mSearchActivity = searchActivity;
+    public SearchPresenter(SearchResultActivity searchResultActivity) {
+        mSearchResultActivity = searchResultActivity;
     }
 
     /**
@@ -34,7 +34,7 @@ public class SearchPresenter extends BaseNetPresenter<SearchBean> {
 
     @Override
     public void onConnectError(String message) {
-        mSearchActivity.onSearchError(message);
+        mSearchResultActivity.onSearchError(message);
     }
 
     @Override
@@ -44,6 +44,8 @@ public class SearchPresenter extends BaseNetPresenter<SearchBean> {
 
     @Override
     public void onSuccess(SearchBean bean) {
-        mSearchActivity.onSearchSuccess(bean);
+        mSearchResultActivity.onSearchSuccess(bean);
     }
+
+
 }
