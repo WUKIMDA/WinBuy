@@ -306,9 +306,6 @@ public class mSearchLayout extends LinearLayout{
         }
     }
 
-
-
-
     /**
      * 生成随机数
      * @param max  最大值

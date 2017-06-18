@@ -13,9 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,14 +61,18 @@ public class SearchResultActivity extends Activity {
     RecyclerView mRvList;
     @Bind(R.id.search_recycler_gridview)
     RecyclerView mRvGrid;
+    @Bind(R.id.search_empty)
+    LinearLayout mSearchEmpty;
     private SearchRvListAdapter mRvListAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private SearchRvGridAdapter mRvGridAdapter;
     private GridLayoutManager mGridLayoutManager;
-    private List<SearchBean.ProductListBean> mSearchBean = new ArrayList<>();
     private Context mContext;
     private String mKeyword;
     private SearchPresenter mSearchPresenter;
+    private String mOrderby;
+    private String mPage;
+    private String mPageNum;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,18 +91,22 @@ public class SearchResultActivity extends Activity {
             UiUtils.logD(SearchResultActivity.class, "getExtra: " + mKeyword);
         }
 
-        String page = "1";
-        String pageNum = "10";
-        String orderby = "saleDown";
-        mSearchPresenter.loadSearchData(mKeyword,page,pageNum, Constant.SALEDOWN);
+        mPage = "1";
+        mPageNum = "6";
+        mOrderby = Constant.SALEDOWN;
+        mSearchPresenter.loadSearchData(mKeyword, mPage, mPageNum, Constant.SHELVESDOWN);
     }
 
     public void onSearchSuccess(SearchBean bean) {
 //        mSearchBean.addAll(bean.getProductList());
-        mRvListAdapter.setBean(bean.getProductList());
-        mRvGridAdapter.setSearchBean(bean.getProductList());
-        UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean);
-
+        UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean.getProductList() + "size: " + bean.getProductList().size());
+        if (bean.getProductList().size() <= 0) {
+            Toast.makeText(mContext, "没有该商品", Toast.LENGTH_SHORT).show();
+            mSearchEmpty.setVisibility(View.VISIBLE);
+        } else {
+            mRvListAdapter.setBean(bean.getProductList());
+            mRvGridAdapter.setSearchBean(bean.getProductList());
+        }
     }
 
     private void init() {
@@ -149,7 +155,8 @@ public class SearchResultActivity extends Activity {
                 }
                 break;
             case R.id.search_ll_complex:
-                // 综合排序
+                // 综合排序 弹出popwindow
+                // mSearchPresenter.loadSearchData(mKeyword,mPage,mPageNum, Constant.SALEDOWN);
                 mComplex.setSelected(true);
                 mTvSale.setSelected(false);
                 mPrice.setSelected(false);
@@ -157,6 +164,7 @@ public class SearchResultActivity extends Activity {
                 break;
             case R.id.search_tv_sale:
                 // 销量排序
+                mSearchPresenter.loadSearchData(mKeyword, mPage, mPageNum, Constant.SALEDOWN);
                 mTvSale.setSelected(true);
                 mComplex.setSelected(false);
                 mPrice.setSelected(false);
@@ -169,10 +177,12 @@ public class SearchResultActivity extends Activity {
                 mTvSale.setSelected(false);
                 mOther.setSelected(false);
                 if (isPriceUp) {
+                    mSearchPresenter.loadSearchData(mKeyword, mPage, mPageNum, Constant.PRICEUP);
                     mPriceDown.setSelected(true);
                     mPriceUp.setSelected(false);
                     isPriceUp = false;
                 } else {
+                    mSearchPresenter.loadSearchData(mKeyword, mPage, mPageNum, Constant.PRICEDOWN);
                     mPriceUp.setSelected(true);
                     mPriceDown.setSelected(false);
                     isPriceUp = true;
