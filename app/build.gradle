@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -37,15 +37,12 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     compile 'com.android.support:cardview-v7:26.0.0-alpha1'
-
     compile 'com.joanzapata.android:base-adapter-helper:1.1.11'
-
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.daimajia.slider:library:1.1.5@aar'
-
     compile 'com.github.dongjunkun:DropDownMenu:1.0.4'
     compile 'com.github.razerdp:BasePopup:v1.7.1'
-
     compile 'com.github.open-android:citypicker:0.1.0'
     compile 'cn.yipianfengye.android:zxing-library:1.5'
+    compile files('libs/Msc.jar')
 }
