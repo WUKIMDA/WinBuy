@@ -272,4 +272,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("userid")
     Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
+
+    //新品上架
+    @GET("newproduct")
+    Call<TopicPlistBean> getNewProduct(@Query("page") String page, @Query("pageNum") String pageNum,@Query("orderby") String orderby);
+
+    //热门单品
+    @GET("hotproduct")
+    Call<TopicPlistBean> getHotProduct(@Query("page") String page, @Query("pageNum") String pageNum,@Query("orderby") String orderby);
+
+    //新品上架
+    @GET("brand")
+    Call<TopicPlistBean> getBrand();
+
 }

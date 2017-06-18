@@ -47,7 +47,6 @@ import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.presenter.AddCartPresenter;
-import buy.win.com.winbuy.presenter.CheckoutPresent;
 import buy.win.com.winbuy.presenter.CommentPresenter;
 import buy.win.com.winbuy.presenter.CommodityProductPresenter;
 import buy.win.com.winbuy.presenter.ScrollViewContainer;
@@ -276,7 +275,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     }
 
     private void checkCommit() {
-        CheckoutPresent checkoutPresent = new CheckoutPresent();
+//        CheckoutPresent checkoutPresent = new CheckoutPresent();
         //TODO:用户ID
 //         checkoutPresent.upCheckout(userId,sku);
     }

@@ -1,5 +1,6 @@
 package buy.win.com.winbuy.view.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.TopicPlistBean;
 import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.view.activity.CommodityActivity;
 import buy.win.com.winbuy.view.activity.TopicPlistActivity;
 
 /**
@@ -68,6 +70,16 @@ public class TopicPlistRecyViewAdapter extends RecyclerView.Adapter {
             mNameTextView = (TextView) view.findViewById(R.id.tv_topiclist_name);
             price = (TextView) view.findViewById(R.id.tv_topiclist_price);
             marketPrice = (TextView) view.findViewById(R.id.tv_topiclist_marketPrice);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TopicPlistBean.ProductListBean bean = mList.get(getPosition());
+                    int id = bean.id;
+                    Intent intent = new Intent(mTopicPlistActivity, CommodityActivity.class);
+                    intent.putExtra("pId", String.valueOf(id));
+                    mTopicPlistActivity.startActivity(intent);
+                }
+            });
         }
 
         public void setData(int position) {

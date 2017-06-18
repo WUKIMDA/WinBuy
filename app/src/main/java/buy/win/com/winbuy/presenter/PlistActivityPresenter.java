@@ -18,6 +18,12 @@ public class PlistActivityPresenter extends BaseNetPresenter<TopicPlistBean>  {
     public void loadTopicPlistData(String id,String sort) {
         RetrofitUtil.getApiService().getTopicPlist("1", "10",id,sort).enqueue(mCallBack);
     }
+    public void loadNewProductData(String sort) {
+        RetrofitUtil.getApiService().getNewProduct("1", "10",sort).enqueue(mCallBack);
+    }
+    public void loadHotProductData(String sort) {
+        RetrofitUtil.getApiService().getHotProduct("1", "10",sort).enqueue(mCallBack);
+    }
 
     @Override
     public void onConnectError(String message) {

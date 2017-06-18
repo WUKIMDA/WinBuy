@@ -27,5 +27,15 @@ public class TopPicBean {
         public int id;
         public String name;
         public String pic;
+
+        @Override
+        public String toString() {
+            return "TopicBean{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", pic='" + pic + '\'' +
+                    '}';
+        }
     }
+
 }
