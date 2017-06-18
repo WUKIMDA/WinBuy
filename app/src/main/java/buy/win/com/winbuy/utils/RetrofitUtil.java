@@ -32,7 +32,7 @@ public class RetrofitUtil {
         ApiService apkservice = new Retrofit
                 .Builder()
                 //.client(client)
-                .baseUrl(Constant.URL_HOST)
+                .baseUrl(Constans.URL_HOST)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ApiService.class);

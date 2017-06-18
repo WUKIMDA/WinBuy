@@ -49,6 +49,8 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         View root = inflater.inflate(R.layout.fragment_category, null);
         ButterKnife.bind(this, root);
         new CategoryPresenter(this).loadCategoryData();
+
+
         mListAdapter = new CategoryListAdapter(mContext);
         mCategoryList.setAdapter(mListAdapter);
         mCategoryRcv.setLayoutManager(new LinearLayoutManager(mContext));
@@ -62,6 +64,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         Log.d(TAG, "onActivityCreated: " + mDatas.toString());
 
     }

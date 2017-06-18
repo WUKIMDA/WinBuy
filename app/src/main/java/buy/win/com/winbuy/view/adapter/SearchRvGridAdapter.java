@@ -1,7 +1,6 @@
 package buy.win.com.winbuy.view.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,8 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SearchBean;
-import buy.win.com.winbuy.utils.Constant;
-import buy.win.com.winbuy.view.activity.CommodityActivity;
+import buy.win.com.winbuy.utils.Constans;
 
 /**
  * Created by lenovo on 2017/6/17.
@@ -77,20 +75,10 @@ public class SearchRvGridAdapter extends RecyclerView.Adapter {
         GridViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    SearchBean.ProductListBean bean = mSearchBean.get(getPosition());
-                    int id = bean.getId();
-                    Intent intent = new Intent(mContext,CommodityActivity.class);
-                    intent.putExtra("pId", String.valueOf(id));
-                    mContext.startActivity(intent);
-                }
-            });
         }
 
         public void setData(SearchBean.ProductListBean bean) {
-            Picasso.with(mContext).load(Constant.URL_HOST + bean.getPic()).into(mImageView);
+            Picasso.with(mContext).load(Constans.URL_HOST + bean.getPic()).into(mImageView);
             mTvNameH.setText(bean.getName());
             mTvNewpriceH.setText("￥" + bean.getPrice() + "");
             mTvOldpriceH.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);

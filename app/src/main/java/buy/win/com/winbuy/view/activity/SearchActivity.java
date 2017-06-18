@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HotSearchBean;
 import buy.win.com.winbuy.presenter.HotSearchPresenter;
@@ -25,8 +23,6 @@ import buy.win.com.winbuy.view.searchview.mSearchLayout;
 
 public class SearchActivity extends Activity {
     public mSearchLayout mSearch;
-    @Bind(R.id.search_layout)
-    buy.win.com.winbuy.view.searchview.mSearchLayout mSearchLayout;
     private Context mContext;
     private HotSearchPresenter mHotSearchPresenter;
     private List<String> mSearchKeywords = new ArrayList<>();
@@ -36,7 +32,6 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.activity_search);
-        ButterKnife.bind(this);
         mSearch = (mSearchLayout) findViewById(R.id.search_layout);
         mHotSearchPresenter = new HotSearchPresenter(this);
         initData();
@@ -45,7 +40,8 @@ public class SearchActivity extends Activity {
     protected void initData() {
         // 获取热门搜索字段
         mHotSearchPresenter.loadHotSearch();
-        String shareData = "奶粉,奇妮孕妇装,莫施,Bio-oil,快乐宝贝,爱家,Nutrilon";
+
+        String shareData = "澳洲美食,长沙美食,韩国料理,日本料理,舌尖上的中国,意大利餐,山西菜";
         List<String> record = Arrays.asList(shareData.split(","));
         //UiUtils.logD(SearchActivity.class,record.toString());
 
@@ -55,8 +51,6 @@ public class SearchActivity extends Activity {
             @Override
             public void Search(String str) {
                 //进行联网搜索
-                mSearch.et_searchtext_search.setText(str);
-                mSearch.et_searchtext_search.setSelection(str.length());
                 //Toast.makeText(SearchActivity.this, str, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, SearchResultActivity.class);
                 intent.putExtra("keyword", str);

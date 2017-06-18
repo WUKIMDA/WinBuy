@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -47,8 +46,9 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/line1"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="#9f9f9f"/>
 
     <LinearLayout
@@ -78,22 +78,22 @@
                 android:src="@drawable/search_complex_selector"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/search_tv_sale"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="销量"
-            android:textColor="@color/search_text_selector"/>
+            <TextView
+                android:id="@+id/search_tv_sale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="销量"
+                android:textColor="@color/search_text_selector"/>
 
 
         <RelativeLayout
             android:id="@+id/search_rl_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/search_tv_price"
@@ -101,22 +101,20 @@
                 android:layout_height="wrap_content"
                 android:text="价格"
                 android:textColor="@color/search_text_selector"/>
-
             <ImageView
                 android:id="@+id/search_result_price_up"
+                android:layout_toRightOf="@id/search_tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@id/search_tv_price"
                 android:src="@drawable/search_price_up_selector"/>
-
             <ImageView
+                android:layout_below="@id/search_result_price_up"
                 android:id="@+id/search_result_price_down"
+                android:layout_toRightOf="@id/search_tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/search_result_price_up"
                 android:layout_marginLeft="4dp"
-                android:layout_toRightOf="@id/search_tv_price"
                 android:src="@drawable/search_price_down_selector"/>
         </RelativeLayout>
 
@@ -144,50 +142,29 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/line2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="#9f9f9f"/>
 
-    <LinearLayout
-        android:gravity="center"
-        android:id="@+id/search_empty"
-        android:visibility="gone"
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="8dp"
+        android:id="@+id/search_recycler_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_empty_page"/>
-    </LinearLayout>
+    </android.support.v7.widget.RecyclerView>
 
-    <!--<android.support.v4.widget.SwipeRefreshLayout-->
-        <!--android:id="@+id/loadmore_list"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="8dp"
+        android:id="@+id/search_recycler_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/search_recycler_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:visibility="visible">
-        </android.support.v7.widget.RecyclerView>
+    </android.support.v7.widget.RecyclerView>
 
-    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
-    <!--<android.support.v4.widget.SwipeRefreshLayout-->
-        <!--android:id="@+id/loadmore_grid"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/search_recycler_gridview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:visibility="gone">
-
-        </android.support.v7.widget.RecyclerView>
-    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 </LinearLayout>
 
