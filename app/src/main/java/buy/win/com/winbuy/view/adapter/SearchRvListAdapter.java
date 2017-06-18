@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SearchBean;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.UiUtils;
 
 /**
@@ -86,11 +86,11 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
             int price = bean.getPrice();
             int marketPrice = bean.getMarketPrice();
 
-            Picasso.with(mContext).load(Constans.URL_HOST + pic).into(mIvIcon);
+            Picasso.with(mContext).load(Constant.URL_HOST + pic).into(mIvIcon);
             mTvNameV.setText(name);
-            mTvNewpriceV.setText("￥" + price + "");
+            mTvNewpriceV.setText("￥" + String.valueOf(price));
             mTvOldpriceV.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            mTvOldpriceV.setText("￥" + marketPrice + "");
+            mTvOldpriceV.setText("￥" + String.valueOf(marketPrice));
         }
     }
 }

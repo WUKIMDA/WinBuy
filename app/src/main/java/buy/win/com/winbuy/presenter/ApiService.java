@@ -8,8 +8,8 @@ import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
-import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.DelectBean;
+import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
@@ -228,7 +228,6 @@ public interface ApiService {
 //    @FormUrlEncoded //POST请求中
 //    @POST("login")//定义
 //    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
-奶粉
 
     @FormUrlEncoded //POST请求中
     @POST("register")//定义

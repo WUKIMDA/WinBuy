@@ -35,7 +35,7 @@ public class mSearchLayout extends LinearLayout{
     private  int msearch_baground;
     Context context;
     private ImageView ib_searchtext_delete;
-    private EditText et_searchtext_search;
+    public EditText et_searchtext_search;
     private LinearLayout searchview;
     private Button bt_text_search_back;
     private TextView tvclearolddata;

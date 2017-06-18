@@ -23,6 +23,7 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.presenter.SearchPresenter;
+import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.adapter.SearchRvGridAdapter;
 import buy.win.com.winbuy.view.adapter.SearchRvListAdapter;
@@ -91,7 +92,7 @@ public class SearchResultActivity extends Activity {
         String page = "1";
         String pageNum = "10";
         String orderby = "saleDown";
-        mSearchPresenter.loadSearchData(mKeyword,page,pageNum,orderby);
+        mSearchPresenter.loadSearchData(mKeyword,page,pageNum, Constant.SALEDOWN);
     }
 
     public void onSearchSuccess(SearchBean bean) {
@@ -99,6 +100,7 @@ public class SearchResultActivity extends Activity {
         mRvListAdapter.setBean(bean.getProductList());
         mRvGridAdapter.setSearchBean(bean.getProductList());
         UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean);
+
     }
 
     private void init() {
