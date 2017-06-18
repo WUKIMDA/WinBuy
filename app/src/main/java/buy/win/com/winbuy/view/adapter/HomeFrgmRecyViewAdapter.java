@@ -3,6 +3,7 @@ package buy.win.com.winbuy.view.adapter;
 import android.content.Context;
 import android.graphics.Paint;
 import android.os.SystemClock;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -229,8 +230,8 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
                     // 3.数组内所有的时间值自减1
                     for (int i = 0; i < timeArr.length; i++) {
                         timeArr[i] -= 1;
-                        // 4.在UI线程进行刷新数据
                         final int finalI = i;
+                        // 4.在UI线程进行刷新数据
                         UiUtils.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -256,19 +257,21 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
     }
 
     public static class BannerViewHolder implements MZViewHolder<HomeAllBean.HomeTopicBean> {
-        private ImageView mImageView;
+        private CardView mImageView;
 
         @Override
         public View createView(Context context) {
             // 返回页面布局文件
             View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
-            mImageView = (ImageView) view.findViewById(R.id.banner_image);
+            mImageView = (CardView) view.findViewById(R.id.banner_image);
             return view;
         }
 
         @Override
         public void onBind(Context context, int i, HomeAllBean.HomeTopicBean homeTopicBean) {
-            Glide.with(context).load(Constant.URL_HOST + homeTopicBean.getPic()).into(mImageView);
+            //Glide.with(context).load(Constant.URL_HOST + homeTopicBean.getPic()).into(mImageView);
+            //Bitmap bitmap = UrlToBitmap.getImageFromNet(Constant.URL_HOST + homeTopicBean.getPic());
+//            mImageView.setBackground(bitmap);
         }
     }
 

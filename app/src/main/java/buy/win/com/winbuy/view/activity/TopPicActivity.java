@@ -39,6 +39,14 @@ public class TopPicActivity extends Activity {
         mTopPicActivityPresenter.loadTopicData();
 
         mRvToppic.setAdapter(mToppicRecyViewAdapter);
+
+        mRvToppic.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+        });
     }
 
     public void onTopicSuccess(TopPicBean bean) {
