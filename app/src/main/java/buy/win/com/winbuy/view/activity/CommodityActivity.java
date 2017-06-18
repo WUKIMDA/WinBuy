@@ -37,6 +37,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -153,6 +154,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     private Dialog mCommodityDialog;
     private List<CommodityProductBean.ProductBean.ProductPropertyBean> mProductPropertyLists;
 
+    private Map<String, String> skuMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,8 +253,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                 //收藏:取反,GONE
                 //favorites?userid=85915&pId=1  //TODO:用户ID
                 pidFavorites();
-
-
                 break;
             case R.id.tv_good_detail_shop_cart:
                 //加入购物车
@@ -376,11 +376,29 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         mTvCommdityName.setText(mName);
         mTvCommdityPrice.setText("￥" + mLimitPrice);
 
+        //回显或初始化数量
+        dialogNum.setText(""+mCommodityCount);
+
+        //TODO
+//        if (TextUtils.isEmpty(mSelectColor)){
+//            for (int i = 0; i < mColorLists.size(); i++) {
+//                //颜色按钮选中
+//
+//            }
+//        }
+//        if (TextUtils.isEmpty(mSelectSize)){
+//            for (int i = 0; i < mSizeLists.size(); i++) {
+//
+//            }
+//        }
+
+
     }
 
 
     private String mSelectSize;
     private String mSelectColor;
+
     /**
      * 对话框操作事件
      */
@@ -392,7 +410,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         mPropertySize.setGroupClickListener(new PropertyViewGroup.OnGroupItemClickListener() {
             @Override
             public void onGroupItemClick(int item) {
-                mSelectSize = mSizeLists.get(item);
+                mSelectSize = skuMap.get(mSizeLists.get(item));
             }
         });
 
@@ -400,8 +418,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 
             @Override
             public void onGroupItemClick(int item) {
-                //TODO保存数据
-                mSelectColor = mColorLists.get(item);
+                mSelectColor = skuMap.get(mColorLists.get(item));
             }
 
         });
@@ -422,7 +439,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             @Override
             public void onClick(View v) {
 
-                if (mCommodityCount >=mBuyLimit) {
+                if (mCommodityCount >= mBuyLimit) {
                     return;
                 }
                 mCommodityCount++;
@@ -434,20 +451,13 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             @Override
             public void onClick(View v) {
                 mCommodityDialog.dismiss();
-                System.out.println("我选择了"+mSelectColor + mSelectSize +mCommodityCount);
+                sku = pId +":"+ mCommodityCount +":"+ mSelectColor + "," + mSelectSize;
+                Log.d("SKU===", sku);
             }
         });
     }
 
-    /**整合sku商品属性的方法*/
-    public void productPropertySelect(String key){
-        if (mProductPropertyLists.contains(key)){
-            //TODO
-        }
-
-
-
-    }
+    String sku;
 
     /**
      * 属性操作商品的数量
@@ -523,7 +533,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     public void onSuccess(CommodityProductBean bean) {
 
         CommodityProductBean.ProductBean product = bean.getProduct();
-        System.out.println("bean"+ bean.toString());
+        System.out.println("bean" + bean.toString());
         if (product == null) {
             Toast.makeText(this, "数据为空", Toast.LENGTH_SHORT).show();
             return;
@@ -578,14 +588,14 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         for (int i = 0; i < pSize; i++) {
             CommodityProductBean.ProductBean.ProductPropertyBean productPropertyBean = mProductPropertyLists.get(i);
             if ("颜色".equals(productPropertyBean.getK())) {
-                mColorLists.add(productPropertyBean.getV());
+                mColorLists.add("" + productPropertyBean.getV());
             } else {//尺码
-                mSizeLists.add(productPropertyBean.getV());
+                mSizeLists.add("" + productPropertyBean.getV());
             }
+            skuMap.put(productPropertyBean.getV(), "" + productPropertyBean.getId());
         }
-        Log.d("商品属性", mColorLists.toString() + mSizeLists.toString());
+        Log.d("商品属性", "=====" + mColorLists.toString() + mSizeLists.toString());
     }
-
 
 
     @Override
