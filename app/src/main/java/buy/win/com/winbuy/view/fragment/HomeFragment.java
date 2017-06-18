@@ -2,6 +2,7 @@ package buy.win.com.winbuy.view.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,9 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.zhouwei.mzbanner.MZBannerView;
 
 import java.util.List;
@@ -32,6 +36,7 @@ import buy.win.com.winbuy.view.adapter.HomeFrgmRecyViewAdapter;
 
 public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
+    private static final int REQUEST_CODE = 111;
 
     public MZBannerView mMZBanner;
     private View mRootView;
@@ -80,30 +85,26 @@ public class HomeFragment extends Fragment {
     }
 
     private void tempBtn(View rootView) {
-        Button tempBtn = (Button) rootView.findViewById(R.id.btn_search);
-        tempBtn.setOnClickListener(new View.OnClickListener() {
+        EditText editText = (EditText) rootView.findViewById(R.id.btn_search);
+        editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 startActivity(intent);
             }
         });
-        Button tempBtnEwm = (Button) rootView.findViewById(R.id.temp_ewm);
-        tempBtnEwm.setOnClickListener(new View.OnClickListener() {
+
+        ImageView qrcodeView = (ImageView) rootView.findViewById(R.id.iv_qrcode_topbar);
+        qrcodeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(getActivity(), CaptureActivity.class);
+                startActivityForResult(intent,REQUEST_CODE);
+
             }
         });
-        Button tempBtnYy = (Button) rootView.findViewById(R.id.temp_yy);
-        tempBtnYy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivity(intent);
-            }
-        });
+
+
     }
 //    private void initBanner(View view) {
 //        mMZBanner = (MZBannerView) view.findViewById(R.id.banner);
@@ -116,6 +117,46 @@ public class HomeFragment extends Fragment {
 //        });
 //        Log.e(TAG, "mHomeTopicListsmHomeTopicListsmHomeTopicLists" + mHomeTopicLists.toString());
 //    }
+
+
+    /**
+     * 二维码回调
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == REQUEST_CODE) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    //用默认浏览器打开扫描得到的地址
+                    Intent intent = new Intent();
+                    intent.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(result.toString());
+                    Log.d(TAG, "onActivityResult: "+result);
+                    intent.setData(content_url);
+                    getActivity().startActivity(intent);
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(getActivity(), "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
+
+
 
 
     public void onHomeSuccess(HomeAllBean bean) {
