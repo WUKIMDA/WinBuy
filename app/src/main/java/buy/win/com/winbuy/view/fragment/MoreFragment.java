@@ -8,13 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.view.adapter.MoreCenterAdapter;
 import buy.win.com.winbuy.view.adapter.MoreLVAdapter;
@@ -24,23 +21,20 @@ import buy.win.com.winbuy.view.adapter.MoreLVAdapter;
  */
 
 public class MoreFragment extends Fragment {
-    @Bind(R.id.ll_login)
-    LinearLayout mLlLogin;
-    @Bind(R.id.username)
-    TextView mUsername;
-    @Bind(R.id.phone)
-    TextView mPhone;
-    @Bind(R.id.ll_userinfo)
-    LinearLayout mLlUserinfo;
+
+
     @Bind(R.id.gridview)
     GridView mGridview;
     @Bind(R.id.listview)
     ListView mListview;
 
     public static FragmentManager mFragmentManager;
-    private MoreFragment() {}
+
+    private MoreFragment() {
+    }
 
     private static final MoreFragment instance = new MoreFragment();
+
     //防止直接生成一个实例
     public synchronized static MoreFragment getInstance() {
         return instance;
@@ -64,7 +58,4 @@ public class MoreFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.ll_login)
-    public void onClick() {
-    }
 }

@@ -5,16 +5,24 @@
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/image"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_margin="10dp"
         />
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="32dp"
         android:layout_toRightOf="@id/image"
         android:layout_margin="10dp"
         android:gravity="center_vertical"
-        android:textSize="20sp"/>
+        android:textSize="18sp"/>
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/android_list_idex"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_centerVertical="true"/>
 </RelativeLayout>
