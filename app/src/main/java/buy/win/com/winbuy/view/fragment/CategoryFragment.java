@@ -76,7 +76,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
                 mRcvDatas.add(mDatas.get(i));
             }
         }
-
         mRcvAdapter.setDatas(mDatas, mSelectedId, mRcvDatas);
     }
 
@@ -123,5 +122,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     }
 
     public void onSuccess(CategoryAllBean bean) {
+        setDatas(bean.getCategory());
     }
 }
