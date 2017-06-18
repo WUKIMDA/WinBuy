@@ -271,7 +271,7 @@ public interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("userid")
+    @POST("checkout")
     Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
 
     //新品上架

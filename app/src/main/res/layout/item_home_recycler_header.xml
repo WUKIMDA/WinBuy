@@ -36,7 +36,7 @@
         <TextView
             android:id="@+id/cnxh"
             style="@style/HomeFrgmTV"
-            android:text="猜你喜欢"/>
+            android:text="结算中心"/>
 
     </LinearLayout>
 

@@ -3,12 +3,53 @@
               android:layout_width="match_parent"
               android:orientation="vertical"
               android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="←结算中心"
+            android:layout_height="wrap_content"/>
+    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:id="@+id/addressInfo"
+        android:layout_width="match_parent"
+        android:text="显示收货地址,联系电话"
+        android:layout_height="wrap_content"/>
     <TextView
         android:layout_width="match_parent"
-        android:text="结算中心"
+        android:text="这里以后会是一个recyclerView,item是每个商品的信息"
         android:layout_height="wrap_content"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc_checkout"
+    <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:orientation="vertical"
+        android:id="@+id/checkoutProm"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:text="促销信息1"
+            android:id="@+id/checkoutProm1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:text="促销信息1"
+            android:id="@+id/checkoutProm2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/paymentList"
+        android:text="点击后显示弹出window,选择付款方式,再回显"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/deliveryList"
+        android:text="点击后显示弹出window,选择送货方式,再回显"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/checkoutAddup"
+        android:text="共2件,总金额¥ 11976.00"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

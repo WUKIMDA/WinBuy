@@ -23,12 +23,22 @@ private CheckoutActivity mCheckoutActivity;
     }
     @Override
     public void onConnectError(String message) {
-
+        UiUtils.postTask(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(UiUtils.getContext(), "onConnectError", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     public void onServerBug(int code) {
-
+        UiUtils.postTask(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(UiUtils.getContext(), "onServerBug", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
