@@ -1,6 +1,7 @@
 package buy.win.com.winbuy.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,9 @@ import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.utils.Constant;
+import buy.win.com.winbuy.utils.UiUtils;
+import buy.win.com.winbuy.view.activity.CommodityActivity;
+import buy.win.com.winbuy.view.activity.SearchResultActivity;
 
 /**
  * Created by lenovo on 2017/6/17.
@@ -78,6 +82,17 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
         ListViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SearchBean.ProductListBean bean = mSearchBean.get(getPosition());
+                    int id = bean.getId();
+                    UiUtils.logD(SearchResultActivity.class,id + "");
+                    Intent intent = new Intent(mContext,CommodityActivity.class);
+                    intent.putExtra("pId", String.valueOf(id));
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         public void setData(SearchBean.ProductListBean bean) {

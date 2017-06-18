@@ -178,7 +178,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             pId = intent.getStringExtra("pId");
         }
         //KIMDA KIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDA
-        loadService("1");
+        loadService(pId);
 //        loadService();
 
 
@@ -629,7 +629,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         }
         Log.d("商品属性", "=====" + mColorLists.toString() + mSizeLists.toString());
     }
-
 
     @Override
     protected void onDestroy() {
