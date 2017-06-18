@@ -88,6 +88,8 @@
         </activity>
 
         <activity android:name=".view.activity.LonginAndRegisterActivity"/>
+        <activity android:name=".view.activity.CheckoutActivity"/>
+
         <activity
             android:name=".view.activity.GoodsShowActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>

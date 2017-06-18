@@ -170,7 +170,6 @@ public class mSearchLayout extends LinearLayout{
                 Intent intent = new Intent(context,GoodsShowActivity.class);
                 intent.putExtra("sId","125");
                 context.startActivity(intent);
-
             }
         });
 
