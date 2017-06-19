@@ -19,6 +19,7 @@ import buy.win.com.winbuy.model.net.HotSearchBean;
 import buy.win.com.winbuy.model.net.InvoiceAllBean;
 import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.model.net.LoginBean;
+import buy.win.com.winbuy.model.net.OrderCancleBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.OrderListAllBean;
 import buy.win.com.winbuy.model.net.RegisterBean;
@@ -294,5 +295,13 @@ public interface ApiService {
     //新品上架
     @GET("brand")
     Call<TopicPlistBean> getBrand();
+
+    //取消订单http://localhost:8080/market/ordercancel?orderId=873768
+    @GET("ordercancel")
+    Call<OrderCancleBean> orderCancelService(@Header("userid")String userid, @Query("orderId")String orderId);
+
+    //订单列表http://localhost:8080/market/orderlist?type=1&page=0&pageNum=10
+    @GET("orderlist")
+    Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
 
 }

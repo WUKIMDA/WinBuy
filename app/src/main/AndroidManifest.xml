@@ -16,14 +16,12 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
 
     <!--获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
@@ -70,6 +68,7 @@
         <activity android:name=".view.activity.CommodityActivity">
 
 
+
         </activity>
         <activity android:name=".view.activity.TopPicActivity"/>
         <activity android:name=".view.activity.TopicPlistActivity"/>
@@ -82,6 +81,7 @@
         <activity android:name=".view.activity.AddAddressActivity">
             <!-- <intent-filter>
                  <action android:name="android.intent.action.MAIN"/>
+
                  <category android:name="android.intent.category.LAUNCHER"/>
              </intent-filter>-->
 
@@ -89,13 +89,19 @@
 
         <activity android:name=".view.activity.LonginAndRegisterActivity"/>
         <activity android:name=".view.activity.CheckoutActivity"/>
-        <activity android:name=".view.activity.OrderListActiivty">
 
-        </activity>
+        <activity
+            android:name=".view.activity.GoodsShowActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+
+
+        <activity android:name=".view.activity.OrderListActiivty"/>
+
 
         <activity android:name=".view.activity.OrderDetailActivity">
 
         </activity>
+
 
 
     </application>

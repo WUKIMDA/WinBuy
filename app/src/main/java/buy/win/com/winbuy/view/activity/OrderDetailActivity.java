@@ -1,8 +1,15 @@
 package buy.win.com.winbuy.view.activity;
 
+<<<<<<< Updated upstream
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+=======
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+>>>>>>> Stashed changes
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +21,10 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,7 +34,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import buy.win.com.winbuy.R;
+import buy.win.com.winbuy.model.net.OrderCancleBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
+import buy.win.com.winbuy.presenter.OrderCanclePresenter;
 import buy.win.com.winbuy.presenter.OrderDetailPresent;
 
 /**
@@ -48,15 +61,17 @@ public class OrderDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orderlist);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         mListviewOrder.setVisibility(View.GONE);
         mScrollView.setVisibility(View.VISIBLE);
 
         mUserId = "20428";//TODO
+        mOrderId = "098593";//TODO
         //mUserId = ShareUtils.getUserId(this, "");
-        Intent intent = getIntent();
-        if (intent != null) {
-            mOrderId = intent.getStringExtra("orderId");
-        }
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//            mOrderId = intent.getStringExtra("orderId");
+//        }
 
         if (TextUtils.isEmpty(mUserId)) {
             Toast.makeText(this, "请登录", Toast.LENGTH_SHORT).show();
@@ -65,13 +80,24 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         //TODO 填充FramLayout布局显示数据
 
-        loadService();
+
     }
 
     private void loadService() {
         OrderDetailPresent orderDetailPresent = new OrderDetailPresent(this);
         orderDetailPresent.orderDetail(mUserId, mOrderId);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadService();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @OnClick(R.id.ib_back)
@@ -81,9 +107,11 @@ public class OrderDetailActivity extends AppCompatActivity {
 
     public void onSuccess(OrderDetailBean bean) {
         String response = bean.getResponse();
-        if (!"orderDetail".equals(response)) {
-            Toast.makeText(getApplicationContext(), "没有数据", Toast.LENGTH_SHORT).show();
+        if ("error".equals(response)) {
+            Toast.makeText(getApplicationContext(), "没有该订单详情", Toast.LENGTH_SHORT).show();
+            return;
         }
+
 
         //订单信息
         OrderDetailBean.OrderInfoBean orderInfo = bean.getOrderInfo();
@@ -139,17 +167,52 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         //TODO 2017年6月18日20:44:05
 
+
+        Toast.makeText(getApplicationContext(), "执行完毕", Toast.LENGTH_SHORT).show();
+
+
     }
 
 
-    class OrderDetailAdapter extends BaseAdapter{
+    //点击取消订单按钮
+    public void orderCancleClicl() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog alertDialog = builder.setMessage("您要取消该订单吗?")
+
+                .setPositiveButton("取消订单", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        new OrderCanclePresenter().orderCancle(mUserId, mOrderId);
+
+                    }
+                })
+                .setNegativeButton("我不取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        alertDialog.setCanceledOnTouchOutside(true);
+        alertDialog.show();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(OrderCancleBean event) {
+        //操作控件,隐藏按钮,状态修改
+
+
+    }
+
+
+    class OrderDetailAdapter extends BaseAdapter {
 
         private List<OrderDetailBean.ProductListBean> mDataLists = new ArrayList<>();
 
         @Override
         public int getCount() {
-            if (mDataLists !=null){
-                return  mDataLists.size();
+            if (mDataLists != null) {
+                return mDataLists.size();
             }
             return 0;
         }
@@ -186,7 +249,6 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
 
-
     // deliveryInfo/ //送货时间/1 => 周一至周五送货 2=> 双休日及公众假期送货 3=> 时间不限，工作日双休日及公众假期均可送货
 
     public String deliveryInfoType(String type) {
@@ -203,7 +265,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     //paymentInfo //支付方式  //支付类型，1=>货到付款 2=>货到POS机   3=>支付宝(待定)
-    public String paymentInfoType(int type){
+    public String paymentInfoType(int type) {
         switch (type) {
             case 1:
                 return "货到付款";
@@ -234,7 +296,6 @@ public class OrderDetailActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 }
