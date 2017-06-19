@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 
 import buy.win.com.winbuy.model.net.TopPicBean;
-import buy.win.com.winbuy.utils.Constant;
+import buy.win.com.winbuy.utils.Constans;
 import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.utils.UrlToBitmap;
@@ -50,7 +50,7 @@ public class TopPicActivityPresenter extends BaseNetPresenter<TopPicBean> {
                 mHeighsArr = new float[mTopPicActivity.mTopicList.size()];
                 mBitmapsArr = new Bitmap[mTopPicActivity.mTopicList.size()];
                 for (int i = 0; i < mTopPicActivity.mTopicList.size(); i++) {
-                    Bitmap bitmap = UrlToBitmap.getImageFromNet(Constant.URL_HOST + mTopPicActivity.mTopicList.get(i).pic);
+                    Bitmap bitmap = UrlToBitmap.getImageFromNet(Constans.URL_HOST + mTopPicActivity.mTopicList.get(i).pic);
                     mBitmapsArr[i] = bitmap;
                     mHeighsArr[i] = (float) bitmap.getHeight() / (float) bitmap.getWidth();
                     Log.e("TopPicActivityPresenter", "run: "+ mHeighsArr[i] );
