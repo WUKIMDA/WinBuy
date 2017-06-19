@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/addressInfoname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            tools:text="收货人:大傻逼"/>
+
+        <TextView
+            android:id="@+id/addressInfophoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:maxLines="1"
+            tools:text="12345678900"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/addressInfoMerge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        tools:text="收货地址:经拉瑟扥喊啦赛风好戳;asdfioheqwfip[jqwer偶还差塞防戳啊塞防戳青蛙俄方看啦赛风放弃而糖茶奈法奈森遛弯儿破案疯掉哦豁陈亲爱额"/>
+</LinearLayout>

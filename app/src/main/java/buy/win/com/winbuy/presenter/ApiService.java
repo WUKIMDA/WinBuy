@@ -280,13 +280,10 @@ public interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("userid")
-    Call<CheckoutAllBean> checkout(@Header("userid") String userid, @Field("sku") String sku);
     @POST("checkout")
     Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
 
     //新品上架
-
     @GET("newproduct")
     Call<TopicPlistBean> getNewProduct(@Query("page") String page, @Query("pageNum") String pageNum, @Query("orderby") String orderby);
 
@@ -303,7 +300,7 @@ public interface ApiService {
     Call<OrderCancleBean> orderCancelService(@Header("userid")String userid, @Query("orderId")String orderId);
 
     //订单列表http://localhost:8080/market/orderlist?type=1&page=0&pageNum=10
-    @GET("orderlist")
-    Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
+//    @GET("orderlist")   //这里拿下来后就报错,于是我注释掉了xzw
+//    Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
 
 }

@@ -1,15 +1,9 @@
 package buy.win.com.winbuy.view.activity;
 
-<<<<<<< Updated upstream
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-=======
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
->>>>>>> Stashed changes
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
