@@ -286,6 +286,7 @@ public interface ApiService {
     Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
 
     //新品上架
+
     @GET("newproduct")
     Call<TopicPlistBean> getNewProduct(@Query("page") String page, @Query("pageNum") String pageNum, @Query("orderby") String orderby);
 

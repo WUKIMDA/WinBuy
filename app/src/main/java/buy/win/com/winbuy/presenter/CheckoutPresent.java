@@ -1,5 +1,6 @@
 package buy.win.com.winbuy.presenter;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import buy.win.com.winbuy.model.net.CheckoutAllBean;
@@ -43,6 +44,7 @@ private CheckoutActivity mCheckoutActivity;
 
     @Override
     public void onSuccess(CheckoutAllBean bean) {
+        Log.e("CheckoutPresent", "onSuccess: "+bean.getResponse() );
         if ("checkOut".equals(bean.getResponse())){
             //提交成功
             UiUtils.postTask(new Runnable() {
@@ -52,7 +54,7 @@ private CheckoutActivity mCheckoutActivity;
                 }
             });
             mCheckoutActivity.checkOutSuccess(bean);
-        }else{
+        }else if ( "1533".equals(bean.getError_code())){
             //提交失败
             UiUtils.postTask(new Runnable() {
                 @Override
@@ -61,6 +63,7 @@ private CheckoutActivity mCheckoutActivity;
                 }
             });
         }
+        UiUtils.logD(CheckoutPresent.class,bean.getError_code() +"----"+bean.getError());
     }
 
 }
