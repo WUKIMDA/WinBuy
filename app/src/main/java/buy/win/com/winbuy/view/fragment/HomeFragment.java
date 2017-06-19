@@ -1,6 +1,5 @@
 package buy.win.com.winbuy.view.fragment;
 
-import android.animation.ArgbEvaluator;
 import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +30,6 @@ import com.zhouwei.mzbanner.MZBannerView;
 
 import java.util.List;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.HomeAllBean;
 import buy.win.com.winbuy.model.net.LimitbuyBean;
@@ -52,8 +48,6 @@ public class HomeFragment extends Fragment {
     private static final int REQUEST_CODE = 111;
 
     public MZBannerView mMZBanner;
-    @Bind(R.id.rl_title)
-    RelativeLayout mRlTitle;
     private View mRootView;
     private HomePresenter mHomePresenter;
     private HomePresenterLimit mHomePresenterLimit;
@@ -73,7 +67,6 @@ public class HomeFragment extends Fragment {
 
         tempBtn(mRootView);
         initRecyclerView(mRootView);
-        ButterKnife.bind(this, mRootView);
         return mRootView;
     }
 
@@ -96,33 +89,12 @@ public class HomeFragment extends Fragment {
         mRv_homeFrgm.setAdapter(mHomeFrgmRecyViewAdapter);
     }
 
-    int sumY = 0;
-    float distance = 150;  //最远滚动距离，超过这个距离还是最蓝色
-    int startColor = 0x00FFFFFF;
-    int endColor = 0xffDF7D6A;
-    ArgbEvaluator mEvaluator = new ArgbEvaluator();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mHomePresenter.loadHomeData();
         mHomePresenterLimit.loadHomeBottomData();
-        mRv_homeFrgm.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                sumY += dy;
-                int bgColor;
-                if (sumY < 0) {
-                    bgColor = startColor;
-                } else if (sumY > distance) {
-                    bgColor = endColor;
-                } else {
-                    bgColor = (int) mEvaluator.evaluate(sumY / distance, startColor, endColor);
-                }
-                mRlTitle.setBackgroundColor(bgColor);
-            }
-        });
     }
 
     private void tempBtn(View rootView) {
@@ -142,7 +114,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CaptureActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
+                startActivityForResult(intent,REQUEST_CODE);
 
             }
         });
@@ -206,17 +178,17 @@ public class HomeFragment extends Fragment {
 
         }
     };
-    //    private void initBanner(View view) {
-    //        mMZBanner = (MZBannerView) view.findViewById(R.id.banner);
-    //        // 设置页面点击事件
-    //        mMZBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
-    //            @Override
-    //            public void onPageClick(View view, int position) {
-    //                Toast.makeText(getActivity(), "click page:" + position, Toast.LENGTH_LONG).show();
-    //            }
-    //        });
-    //        Log.e(TAG, "mHomeTopicListsmHomeTopicListsmHomeTopicLists" + mHomeTopicLists.toString());
-    //    }
+//    private void initBanner(View view) {
+//        mMZBanner = (MZBannerView) view.findViewById(R.id.banner);
+//        // 设置页面点击事件
+//        mMZBanner.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
+//            @Override
+//            public void onPageClick(View view, int position) {
+//                Toast.makeText(getActivity(), "click page:" + position, Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        Log.e(TAG, "mHomeTopicListsmHomeTopicListsmHomeTopicLists" + mHomeTopicLists.toString());
+//    }
 
 
     /**
@@ -245,7 +217,7 @@ public class HomeFragment extends Fragment {
                     Intent intent = new Intent();
                     intent.setAction("android.intent.action.VIEW");
                     Uri content_url = Uri.parse(result.toString());
-                    Log.d(TAG, "onActivityResult: " + result);
+                    Log.d(TAG, "onActivityResult: "+result);
                     intent.setData(content_url);
                     getActivity().startActivity(intent);
                 } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
@@ -257,11 +229,13 @@ public class HomeFragment extends Fragment {
     }
 
 
+
+
     public void onHomeSuccess(HomeAllBean bean) {
         List<HomeAllBean.HomeTopicBean> mHomeTopicLists = bean.getHomeTopic();
         mHomeTopicLists.remove(mHomeTopicLists.size() - 1);
         mHomeFrgmRecyViewAdapter.setHomeAllBeenList(mHomeTopicLists);
-        //        Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "数据获取成功", Toast.LENGTH_SHORT).show();
     }
 
     public void onHomeSuccessLimit(LimitbuyBean bean) {
@@ -295,11 +269,5 @@ public class HomeFragment extends Fragment {
             return;
         }
         mMZBanner.start();//开始轮播
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 }

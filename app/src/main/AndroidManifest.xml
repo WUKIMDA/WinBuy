@@ -93,7 +93,14 @@
         <activity
             android:name=".view.activity.GoodsShowActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".view.activity.CheckoutActivity"/>
+
+
+        <activity android:name=".view.activity.OrderListActiivty"/>
+
+
+        <activity android:name=".view.activity.OrderDetailActivity">
+
+        </activity>
 
 
 

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#D7D7D7">
+
+        <ImageButton
+            android:id="@+id/ib_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:text="订单详情"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"/>
+    </android.support.v7.widget.Toolbar>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@mipmap/order_titile"
+        android:padding="10dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_order_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="订单状态"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/tv_order_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_order_status"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:text="订单时间"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <!--<ListView-->
+        <!--android:id="@+id/lv_goods_info"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></ListView>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@mipmap/order_area"
+        android:padding="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/order_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/order_position"/>
+
+        <TextView
+            android:id="@+id/tv_order_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/order_position"
+            android:text="联系人:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/tv_order_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_order_name"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/order_position"
+            android:text="地址:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_goods_totalCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="共几件商品:"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_goods_deliverfee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="运费:"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="总金额:￥"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/more_line"/>
+    <TextView
+        android:id="@+id/tv_invoice_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发票抬头:"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+    <TextView
+        android:id="@+id/tv_invoice_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发票信息:"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+    <TextView
+        android:id="@+id/tv_paymentinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="支付方式:"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:padding="10dp"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/more_line"/>
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <Button
+            android:id="@+id/bt_cancel_order"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@color/red"
+            android:text="取消订单"/>
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>

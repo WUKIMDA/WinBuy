@@ -1,7 +1,6 @@
 package buy.win.com.winbuy.application;
 
 import android.app.Application;
-import android.support.v7.app.AppCompatDelegate;
 
 import buy.win.com.winbuy.utils.UiUtils;
 
@@ -15,6 +14,7 @@ public class WinBuyApplication extends Application {
         super.onCreate();
         //工具类的初始化
         UiUtils.init(this);
+
 
 
         //测试commit
