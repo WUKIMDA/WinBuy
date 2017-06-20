@@ -181,16 +181,6 @@ public interface ApiService {
     );
 
 
-    /**
-     * 订单详情
-     *
-     * @param userid
-     * @param orderId
-     * @return
-     */
-    @GET("orderdetail")
-    Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
-                                                @Query("orderId") String orderId);
 
     /**
      * 地址列表
@@ -308,18 +298,37 @@ public interface ApiService {
     @GET("brand")
     Call<TopicPlistBean> getBrand();
 
-    //取消订单http://localhost:8080/market/ordercancel?orderId=873768
+    //取消订单
     @GET("ordercancel")
     Call<OrderCancleBean> orderCancelService(@Header("userid") String userid, @Query("orderId") String orderId);
 
-    //订单列表http://localhost:8080/market/orderlist?type=1&page=0&pageNum=10
-//    @GET("orderlist")   //这里拿下来后就报错,于是我注释掉了xzw
-//    Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
+    //订单列表
+    @GET("orderlist")
+    Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
+
+    /**
+     * 订单详情
+     *
+     * @param userid
+     * @param orderId
+     * @return
+     */
+    @GET("orderdetail")
+    Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
+                                                @Query("orderId") String orderId);
 
     // userid  //
+//    @FormUrlEncoded
 //    @POST("ordersumbit")
-//    Call<>
-
+//    Call<> ordersumbitService(@Header("userid")String userid,
+//                              @Field("sku") String sku,
+//                              @Field("addressId")String addressId,
+//                              @Field("paymentType")String paymentType,
+//                              @Field("deliveryType")String deliveryType,
+//                              @Field("invoiceType")String invoiceType,
+//                              @Field("invoiceTitle")String invoiceTitle,
+//                              @Field("invoiceContent")String invoiceContent
+//                              );
 
 
 }
