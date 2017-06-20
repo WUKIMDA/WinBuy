@@ -3,7 +3,6 @@ package buy.win.com.winbuy.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +40,16 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         mContext = context;
     }
 
+    public void setDatas(List<CategoryAllBean.CategoryBean> datas, int selectedId, List<CategoryAllBean.CategoryBean> rcvDatas) {
+        mDatas = datas;
+        mSelectedId = selectedId;
+        mRcvDatas.clear();
+        rcvDatas.add(0, null);
+        mRcvDatas.addAll(rcvDatas);
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
@@ -66,10 +75,23 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         return viewholder;
     }
 
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position == 0) {
+//        switch (position) {
+//            case TYPE_HEADVIEW:
+//                if(mDatas.size() > 0&& mRcvDatas.size() > 0) {
+//                    HeadViewHolder headView = (HeadViewHolder) holder;
+//                    headView.setData(mDatas, mSelectedId);
+//                }
+//                break;
+//            case TYPE_COMMON:
+//                if(mDatas.size() > 0 && mRcvDatas.size() > 0) {
+//                    CommonViewHolder headView1 = (CommonViewHolder) holder;
+//                    headView1.setData(mDatas, mRcvDatas.get(position));
+//                }
+//                break;
+//        }
+        if (position == 0 ) {
             HeadViewHolder headView = (HeadViewHolder) holder;
             headView.setData(mDatas, mSelectedId);
         } else {
@@ -81,19 +103,10 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        if (mRcvDatas != null) {
+        if (mRcvDatas != null && mRcvDatas.size() > 0) {
             return mRcvDatas.size();
         }
         return 0;
-    }
-
-    public void setDatas(List<CategoryAllBean.CategoryBean> datas, int selectedId, List<CategoryAllBean.CategoryBean> rcvDatas) {
-        mDatas = datas;
-        mSelectedId = selectedId;
-        mRcvDatas.clear();
-        rcvDatas.add(0, null);
-        mRcvDatas.addAll(rcvDatas);
-        notifyDataSetChanged();
     }
 
     class HeadViewHolder extends RecyclerView.ViewHolder {
@@ -126,7 +139,7 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         }
 
 
-        public void setData(List<CategoryAllBean.CategoryBean> datas, CategoryAllBean.CategoryBean categoryBean) {
+        public void setData(final List<CategoryAllBean.CategoryBean> datas, CategoryAllBean.CategoryBean categoryBean) {
             mCategoryRcvItemTv.setText(categoryBean.getName());
 
             final List<CategoryAllBean.CategoryBean> mGridDatas = new ArrayList<>();
@@ -144,6 +157,7 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
                     //// TODO: 2017/6/15 0015
                     Intent intent = new Intent(mContext, GoodsShowActivity.class);
                     intent.putExtra("sId", mGridDatas.get(position).getId() + "");
+//                    intent.putExtra("sId", datas.get(position).getId() + "");
                     mContext.startActivity(intent);
                 }
             });

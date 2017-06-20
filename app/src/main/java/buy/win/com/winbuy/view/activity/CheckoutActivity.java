@@ -43,14 +43,6 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     private CheckoutAllBean.AddressInfoBean mAddressInfo;
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (mSku!=null) {
-            loadView(mSku);
-        }
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
@@ -168,6 +160,15 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     public void ordersumbitSuccess(OrdersumbitBean bean) {
         Intent intent = new Intent(this, OrdersumbitActivity.class);
         intent.putExtra("orderInfo", bean.orderInfo);
-        startActivity(intent);
+        startActivityForResult(intent,3838438);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (3838438==requestCode) {
+            mCheckoutSubmit.setText("购买成功");
+            mCheckoutSubmit.setEnabled(false);
+        }
     }
 }

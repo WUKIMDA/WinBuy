@@ -160,7 +160,6 @@ public class AddressListActivity extends Activity {
                 finish();
                 break;
             case R.id.add_address:
-                Toast.makeText(this, "点击了新增地址", Toast.LENGTH_SHORT).show();
                 clickAddress();
                 break;
         }

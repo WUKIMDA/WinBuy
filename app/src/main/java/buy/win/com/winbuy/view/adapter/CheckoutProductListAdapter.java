@@ -222,7 +222,7 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
             this.mCheckoutProm = (TextView) rootView.findViewById(R.id.checkoutProm);
         }
 
-        public void setData() {
+        public synchronized void setData() {
             for (int i = 0; i < mDeliveryBeanList.size(); i++) {
                 RadioButton radioButton = new RadioButton(mCheckoutActivity);
                 radioButton.setText(mDeliveryBeanList.get(i).getDes());
@@ -246,7 +246,6 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
             }
             mCheckoutProm.setText(sb.toString());
         }
-
     }
 
     private static final String TAG = "CheckoutProductListAdap";

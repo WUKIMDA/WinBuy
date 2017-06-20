@@ -47,6 +47,7 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.ErrorBean;
+import buy.win.com.winbuy.model.net.FavoriteBean;
 import buy.win.com.winbuy.presenter.AddCartPresenter;
 import buy.win.com.winbuy.presenter.CommentPresenter;
 import buy.win.com.winbuy.presenter.CommodityProductPresenter;
@@ -627,10 +628,42 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         }
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
-        pidFavorites();
+        startFavorityService();
+    }
+
+    List<String> favoritesPidLists = new ArrayList<>();
+    private void startFavorityService() {
+        RetrofitUtil.getApiService().getFavorite(userId,"1","10").enqueue(new Callback<FavoriteBean>() {
+            @Override
+            public void onResponse(Call<FavoriteBean> call, Response<FavoriteBean> response) {
+                if (response.isSuccessful()){
+                    FavoriteBean body = response.body();
+                    List<FavoriteBean.ProductListBean> productList = body.getProductList();
+                    for (int i = 0; i < productList.size(); i++) {
+                        FavoriteBean.ProductListBean productListBean = productList.get(i);
+                        String id = productListBean.getId();
+                        favoritesPidLists.add(id);
+                    }
+                    if (favoritesPidLists.contains(pId)){
+                        ivCollectSelect.setVisibility(View.VISIBLE);
+                        ivCollectUnSelect.setVisibility(View.GONE);
+                    }else{
+                        ivCollectSelect.setVisibility(View.GONE);
+                        ivCollectUnSelect.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FavoriteBean> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
