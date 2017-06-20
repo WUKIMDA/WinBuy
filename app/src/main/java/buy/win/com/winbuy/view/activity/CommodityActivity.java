@@ -51,7 +51,7 @@ import buy.win.com.winbuy.presenter.CheckoutPresent;
 import buy.win.com.winbuy.presenter.CommentPresenter;
 import buy.win.com.winbuy.presenter.CommodityProductPresenter;
 import buy.win.com.winbuy.presenter.ScrollViewContainer;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.MyImageLoader;
 import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.StatusBarUtil;
@@ -403,7 +403,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
      * 对话框操作事件
      */
     private void initDialogEvent() {
-        Glide.with(this).load(Constans.URL_HOST + imageIndex0).into(mIvCommodity);
+        Glide.with(this).load(Constant.URL_HOST + imageIndex0).into(mIvCommodity);
         mPropertySize.addItemViews(mSizeLists, PropertyViewGroup.BTN_MODE);
         mPropertyColor.addItemViews(mColorLists, PropertyViewGroup.TEV_MODE);
 
@@ -544,7 +544,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         List<String> bigPicsLists = product.getBigPic();
         imgsUrl = new ArrayList<>();
         for (int i = 0; i < bigPicsLists.size(); i++) {
-            imgsUrl.add(Constans.URL_HOST + bigPicsLists.get(i));
+            imgsUrl.add(Constant.URL_HOST + bigPicsLists.get(i));
         }
         imgAdapter.addAll(imgsUrl);
         nlvImgs.setAdapter(imgAdapter);
@@ -555,7 +555,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         imageIndex0 = picsLists.get(0);
         HashMap<String, String> url_maps = new HashMap<String, String>();
         for (int i = 0; i < picsLists.size(); i++) {
-            url_maps.put("" + i, Constans.URL_HOST + picsLists.get(i));
+            url_maps.put("" + i, Constant.URL_HOST + picsLists.get(i));
         }
 
         for (String desc : url_maps.keySet()) {

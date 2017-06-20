@@ -23,7 +23,7 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SaveAddressBean;
 import buy.win.com.winbuy.presenter.ApiService;
-import buy.win.com.winbuy.utils.RetrofitUtils;
+import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.ShareUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -163,7 +163,7 @@ public class AddAddressActivity extends AppCompatActivity {
 
 
             //RetrofitUtils.getService()
-            ApiService apkservice = RetrofitUtils.getService();
+            ApiService apkservice = RetrofitUtil.getApiService();
 
             Log.e("body", "clickSave "+ShareUtils.getUserId(this,null));
 

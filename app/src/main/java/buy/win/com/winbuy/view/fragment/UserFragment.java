@@ -17,7 +17,7 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.AddressBean;
 import buy.win.com.winbuy.presenter.ApiService;
-import buy.win.com.winbuy.utils.RetrofitUtils;
+import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.view.activity.AddressListActivity;
 import buy.win.com.winbuy.view.activity.LonginAndRegisterActivity;
@@ -115,7 +115,7 @@ public class UserFragment extends Fragment {
         //请求网络数据
         String userId = ShareUtils.getUserId(mContext, null);
 
-        ApiService addressListService = RetrofitUtils.getService();
+        ApiService addressListService = RetrofitUtil.getApiService();
 
         addressListService.getAddressList(userId).enqueue(new Callback<AddressBean>() {
             @Override

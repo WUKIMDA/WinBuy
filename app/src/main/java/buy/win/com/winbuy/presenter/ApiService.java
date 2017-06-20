@@ -8,8 +8,8 @@ import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
-import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.DelectBean;
+import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
@@ -57,6 +57,14 @@ public interface ApiService {
     Call<SelectCartBean> getSelectCartProduct(@Query("userId") String userId);
 
 
+    @GET("deleteCart")
+    Call<SelectCartBean> deleteSelectCartProduct(@Query("userId") String userId,@Query("productId") String productId);
+
+    @GET("updateCart")
+    Call<SelectCartBean> updataSelectCartProduct(@Query("userId") String userId, @Query("productId") String productId,
+                                                 @Query("productCount") String productCount,
+                                                 @Query("propertyId") String propertyId
+                                                 );
     /**
      * 搜索
      *

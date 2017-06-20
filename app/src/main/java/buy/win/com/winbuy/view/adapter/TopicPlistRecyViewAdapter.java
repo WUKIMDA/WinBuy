@@ -13,7 +13,7 @@ import java.util.List;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.TopicPlistBean;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.view.activity.TopicPlistActivity;
 
 /**
@@ -66,7 +66,7 @@ public class TopicPlistRecyViewAdapter extends RecyclerView.Adapter {
         }
         public void setData(int position) {
             TopicPlistBean.ProductListBean bean = mList.get(position);
-            Glide.with(mTopicPlistActivity).load(Constans.URL_HOST + bean.pic).crossFade().into(mIoconImageView);
+            Glide.with(mTopicPlistActivity).load(Constant.URL_HOST + bean.pic).crossFade().into(mIoconImageView);
             mNameTextView.setText(bean.name);
         }
     }

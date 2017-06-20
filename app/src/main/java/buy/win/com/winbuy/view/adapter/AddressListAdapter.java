@@ -18,7 +18,7 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.AddressBean;
 import buy.win.com.winbuy.model.net.DelectBean;
 import buy.win.com.winbuy.presenter.ApiService;
-import buy.win.com.winbuy.utils.RetrofitUtils;
+import buy.win.com.winbuy.utils.RetrofitUtil;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -118,7 +118,7 @@ public class AddressListAdapter extends BaseAdapter {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                     //删除条目  请求网络
-                                    ApiService deleteService = RetrofitUtils.getService();
+                                    ApiService deleteService = RetrofitUtil.getApiService();
 
                                     deleteService.deleteAddress(mId).enqueue(new Callback<DelectBean>() {
                                         @Override

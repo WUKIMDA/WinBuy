@@ -20,7 +20,7 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.AddressBean;
 import buy.win.com.winbuy.presenter.ApiService;
-import buy.win.com.winbuy.utils.RetrofitUtils;
+import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.adapter.AddressListAdapter;
@@ -90,7 +90,7 @@ public class AddressListActivity extends AppCompatActivity {
 
         //Log.d(TAG, "precessIntent 意图为null");
         //首先请求网络获取数据 然后打开
-        ApiService apkservice = RetrofitUtils.getService();
+        ApiService apkservice = RetrofitUtil.getApiService();
 
         String userId = ShareUtils.getUserId(this, null);
         //TODO
