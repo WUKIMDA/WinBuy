@@ -16,6 +16,7 @@ import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.OrderListAllBean;
 import buy.win.com.winbuy.presenter.OrderListsPresenter;
+import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.view.adapter.OrderListAdapter;
 
 //type	1/2/3	1=>近一个月订单(改为10分钟)  2=>一个月前订单(改为10分钟)  0=>已取消订单
@@ -36,14 +37,13 @@ public class OrderListActiivty extends AppCompatActivity {
         ButterKnife.bind(this);
         OrderListsPresenter orderListsPresenter = new OrderListsPresenter(this);
 
-        userId = "20428";//TODO
-//        userId = ShareUtils.getUserId(this, "");
+//        userId = "20428";
+        userId = ShareUtils.getUserId(this, "");
         if (TextUtils.isEmpty(userId)) {
             Toast.makeText(this, "请重新登录", Toast.LENGTH_SHORT).show();
         }
         //访问网络
         orderListsPresenter.loadOrderLists(userId, "1", "0", "10");
-
 
         mOrderListAdapter = new OrderListAdapter();
         mListviewOrder.setAdapter(mOrderListAdapter);
@@ -52,10 +52,7 @@ public class OrderListActiivty extends AppCompatActivity {
 
     public void onSuccess(OrderListAllBean bean) {
         List<OrderListAllBean.OrderListBean> orderList = bean.getOrderList();
-
         refreshUI(orderList);
-
-
     }
 
     private void refreshUI(List<OrderListAllBean.OrderListBean> orderList) {

@@ -51,7 +51,7 @@ import buy.win.com.winbuy.presenter.AddCartPresenter;
 import buy.win.com.winbuy.presenter.CommentPresenter;
 import buy.win.com.winbuy.presenter.CommodityProductPresenter;
 import buy.win.com.winbuy.presenter.ScrollViewContainer;
-import buy.win.com.winbuy.utils.Constans;
+import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.MyImageLoader;
 import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.ShareUtils;
@@ -168,7 +168,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 
         EventBus.getDefault().register(this);
 
-        //KIMDA KIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDA
         //加载用户id
         userId = ShareUtils.getUserId(this, "20428");
 
@@ -177,10 +176,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         if (intent != null) {
             pId = intent.getStringExtra("pId");
         }
-        //KIMDA KIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDA
-        loadService("1");
+        loadService(pId);
 //        loadService();
-
 
         //透明状态栏
         StatusBarUtil.setTranslucentForImageView(this, llOffset);
@@ -218,13 +215,11 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         }
 //    public void loadService() {
         CommodityProductPresenter commodityProductPresenter = new CommodityProductPresenter(this);
-        //TODO:模拟加载第pId是"1"的商品
 
         commodityProductPresenter.loadCommdityProductData(pId);
 //        commodityProductPresenter.loadCommdityProductData("1");
 
         CommentPresenter commentPresenter = new CommentPresenter();
-        //TODO：模拟   评论
 //        commentPresenter.loadCommentData(pId,page,pageNum);
         commentPresenter.loadCommentData(pId, "1", "10");
         //后续EventBus自动获取数据后onEventMainThread()
@@ -433,7 +428,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
      * 对话框操作事件
      */
     private void initDialogEvent() {
-        Glide.with(this).load(Constans.URL_HOST + imageIndex0).into(mIvCommodity);
+        Glide.with(this).load(Constant.URL_HOST + imageIndex0).into(mIvCommodity);
         mPropertySize.addItemViews(mSizeLists, PropertyViewGroup.BTN_MODE);
         mPropertyColor.addItemViews(mColorLists, PropertyViewGroup.TEV_MODE);
 
@@ -577,7 +572,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         List<String> bigPicsLists = product.getBigPic();
         imgsUrl = new ArrayList<>();
         for (int i = 0; i < bigPicsLists.size(); i++) {
-            imgsUrl.add(Constans.URL_HOST + bigPicsLists.get(i));
+            imgsUrl.add(Constant.URL_HOST + bigPicsLists.get(i));
         }
         imgAdapter.addAll(imgsUrl);
         nlvImgs.setAdapter(imgAdapter);
@@ -588,7 +583,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         imageIndex0 = picsLists.get(0);
         HashMap<String, String> url_maps = new HashMap<String, String>();
         for (int i = 0; i < picsLists.size(); i++) {
-            url_maps.put("" + i, Constans.URL_HOST + picsLists.get(i));
+            url_maps.put("" + i, Constant.URL_HOST + picsLists.get(i));
         }
 
         for (String desc : url_maps.keySet()) {
@@ -629,7 +624,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         }
         Log.d("商品属性", "=====" + mColorLists.toString() + mSizeLists.toString());
     }
-
 
     @Override
     protected void onDestroy() {

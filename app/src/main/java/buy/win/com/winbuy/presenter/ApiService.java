@@ -9,9 +9,10 @@ import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
-import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.DelectBean;
+import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
+import buy.win.com.winbuy.model.net.GoodsBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
 import buy.win.com.winbuy.model.net.HomeAllBean;
@@ -86,6 +87,23 @@ public interface ApiService {
     Call<HotSearchBean> getHotBrand();
 
     /**
+     * 商品列表
+     *
+     * @param page
+     * @param pageNum
+     * @param cId
+     * @param orderby
+     * @return
+     */
+    @GET("productlist")
+    Call<GoodsBean> getGoodsProduct(
+            @Query("page") String page,
+            @Query("pageNum") String pageNum,
+            @Query("cId") String cId,
+            @Query("orderby") String orderby
+    );
+
+    /**
      * 促销
      *
      * @param page
@@ -130,6 +148,7 @@ public interface ApiService {
 
     /**
      * 发票
+     *
      * @return
      */
     @GET("invoice")
@@ -172,12 +191,6 @@ public interface ApiService {
     @GET("orderdetail")
     Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
                                                 @Query("orderId") String orderId);
-
-
-    //http://localhost:8080/market/orderlist?type=1&page=0&pageNum=10
-    @GET("orderlist")
-    Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
-
 
     /**
      * 地址列表
@@ -281,7 +294,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("checkout")
-    Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
+    Call<CheckoutAllBean> checkout(@Header("userid") String userid, @Field("sku") String sku);
 
     //新品上架
     @GET("newproduct")
@@ -297,10 +310,16 @@ public interface ApiService {
 
     //取消订单http://localhost:8080/market/ordercancel?orderId=873768
     @GET("ordercancel")
-    Call<OrderCancleBean> orderCancelService(@Header("userid")String userid, @Query("orderId")String orderId);
+    Call<OrderCancleBean> orderCancelService(@Header("userid") String userid, @Query("orderId") String orderId);
 
     //订单列表http://localhost:8080/market/orderlist?type=1&page=0&pageNum=10
 //    @GET("orderlist")   //这里拿下来后就报错,于是我注释掉了xzw
 //    Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
+
+    // userid  //
+//    @POST("ordersumbit")
+//    Call<>
+
+
 
 }

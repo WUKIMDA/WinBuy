@@ -145,7 +145,4 @@ public class OrderListAdapter extends BaseAdapter {
 
     }
 
-
-
-
 }

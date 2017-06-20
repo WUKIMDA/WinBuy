@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="20dp"
+            android:id="@+id/tv_title"
             android:text="订单管理"
             android:textColor="#fff"
             android:textSize="20sp"/>
@@ -31,7 +32,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <ListView

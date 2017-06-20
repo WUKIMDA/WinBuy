@@ -45,4 +45,12 @@ dependencies {
     compile 'com.github.open-android:citypicker:0.1.0'
     compile 'cn.yipianfengye.android:zxing-library:1.5'
     compile files('libs/Msc.jar')
+    compile 'com.huxq17.xrefreshview:xrefreshview:3.6.9'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:support-v4:23.0.1'
+    compile 'cn.bingoogolapple:bga-refreshlayout:1.1.7@aar'
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support:support-v4:26.0.0-alpha1'
+    compile 'cn.yipianfengye.android:zxing-library:1.5'
+    compile files('libs/Msc.jar')
 }

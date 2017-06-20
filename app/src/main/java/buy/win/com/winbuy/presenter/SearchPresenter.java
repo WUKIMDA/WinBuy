@@ -32,6 +32,10 @@ public class SearchPresenter extends BaseNetPresenter<SearchBean> {
         RetrofitUtil.getApiService().getSearchProduct(keyword, page, pageNum, orderby).enqueue(mCallBack);
     }
 
+//    public void loadSearchData(String page, String pageNum, String cId, String orderby) {
+//        RetrofitUtil.getApiService().getGoodsProduct(page,pageNum,cId,orderby).enqueue(mCallBack);
+//    }
+
     @Override
     public void onConnectError(String message) {
         mSearchResultActivity.onSearchError(message);
