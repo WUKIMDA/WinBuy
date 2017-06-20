@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/goos_icon_list"
+        android:layout_width="75dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:background="@mipmap/q1"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/goods_name_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:text="商品名称"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+        <RelativeLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/goods_newprice_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/red"
+                android:textSize="24sp"
+                android:text="66.6"/>
+
+            <TextView
+                android:id="@+id/goods_oldprice_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@id/goods_newprice_list"
+                android:textSize="16sp"
+                android:text="¥99"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/goods_comment_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:text="9999条评论"/>
+        <View
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#9f9f9f"/>
+    </LinearLayout>
+
+</LinearLayout>

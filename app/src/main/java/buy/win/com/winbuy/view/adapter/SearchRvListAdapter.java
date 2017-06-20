@@ -1,6 +1,7 @@
 package buy.win.com.winbuy.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,8 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.UiUtils;
+import buy.win.com.winbuy.view.activity.CommodityActivity;
+import buy.win.com.winbuy.view.activity.SearchResultActivity;
 
 /**
  * Created by lenovo on 2017/6/17.
@@ -36,6 +39,11 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
 
     public void setBean(List<SearchBean.ProductListBean> bean) {
         mSearchBean = bean;
+        notifyDataSetChanged();
+    }
+
+    public void setMore(List<SearchBean.ProductListBean> bean) {
+        mSearchBean.addAll(bean);
         notifyDataSetChanged();
     }
 
@@ -64,6 +72,8 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
         return 0;
     }
 
+
+
     class ListViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.iv_icon)
         ImageView mIvIcon;
@@ -77,10 +87,21 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
         ListViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SearchBean.ProductListBean bean = mSearchBean.get(getPosition());
+                    int id = bean.getId();
+                    UiUtils.logD(SearchResultActivity.class,id + "");
+                    Intent intent = new Intent(mContext,CommodityActivity.class);
+                    intent.putExtra("pId", String.valueOf(id));
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         public void setData(SearchBean.ProductListBean bean) {
-            UiUtils.logD(SearchRvListAdapter.class, bean.toString());
+          //  UiUtils.logD(SearchRvListAdapter.class, bean.toString());
             String pic = bean.getPic();
             String name = bean.getName();
             int price = bean.getPrice();
@@ -88,9 +109,9 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
 
             Picasso.with(mContext).load(Constant.URL_HOST + pic).into(mIvIcon);
             mTvNameV.setText(name);
-            mTvNewpriceV.setText("￥" + price + "");
+            mTvNewpriceV.setText("￥" + String.valueOf(price));
             mTvOldpriceV.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            mTvOldpriceV.setText("￥" + marketPrice + "");
+            mTvOldpriceV.setText("￥" + String.valueOf(marketPrice));
         }
     }
 }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WinBuy</string>
-    <string name="search_hint">雀巢咖啡 - 丝滑拿铁</string>
+    <string name="search_hint">购物就用WinBuy</string>
     <string name="search_cancel">取消</string>
     <string name="search_verify">搜索</string>
 

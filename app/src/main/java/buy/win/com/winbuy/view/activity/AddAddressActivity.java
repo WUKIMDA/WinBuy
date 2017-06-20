@@ -162,8 +162,8 @@ public class AddAddressActivity extends AppCompatActivity {
 
 
 
-            //RetrofitUtils.getService()
-            ApiService apkservice = RetrofitUtil.getApiService();
+            //RetrofitUtils.getApiservice2()
+            ApiService apkservice = RetrofitUtil.getApiservice2();
 
             Log.e("body", "clickSave "+ShareUtils.getUserId(this,null));
 
@@ -175,13 +175,19 @@ public class AddAddressActivity extends AppCompatActivity {
                 public void onResponse(Call<SaveAddressBean> call, Response<SaveAddressBean> response) {
                     if(response.isSuccessful()) {
 
-                        List<SaveAddressBean.AddressListBean> addressList = response.body().getAddressList();
-                        //Log.e("body", "onResponse "+addressList.toString());
+                        SaveAddressBean body = response.body();
 
+                        if(!TextUtils.isEmpty(body.getError())) {
 
-                        finish();
+                            Toast.makeText(AddAddressActivity.this, body.getError(), Toast.LENGTH_SHORT).show();
+                        }else {
 
+                            List<SaveAddressBean.AddressListBean> addressList = response.body().getAddressList();
+                            //Log.e("body", "onResponse "+addressList.toString());
 
+                            finish();
+
+                        }
 
                     }else {
                         //返回数据失败 404 500 505 话费

@@ -15,22 +15,25 @@ public class CategoryPresenter extends BaseNetPresenter<CategoryAllBean> {
         mCategoryFragment = categoryFragment;
     }
 
-    public void loadCategoryData() {
-        RetrofitUtil.getApiService().getCategoryAllProduct().enqueue(mCallBack);
+    public void loadCategoryData(){
+       RetrofitUtil.getApiService().getCategoryAllProduct().enqueue(mCallBack);
     }
 
     @Override
     public void onConnectError(String message) {
-//        mCategoryFragment.onConnectError(message);
+        mCategoryFragment.onConnectError(message);
     }
 
     @Override
     public void onServerBug(int code) {
-        // mCategoryFragment.onServerBug(code);
+        mCategoryFragment.onServerBug(code);
     }
 
     @Override
     public void onSuccess(CategoryAllBean bean) {
-        mCategoryFragment.setDatas(bean.getCategory());
+        mCategoryFragment.onSuccess(bean);
+
     }
+
+
 }

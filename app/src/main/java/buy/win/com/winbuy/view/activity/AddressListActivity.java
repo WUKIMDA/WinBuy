@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -90,7 +91,7 @@ public class AddressListActivity extends AppCompatActivity {
 
         //Log.d(TAG, "precessIntent 意图为null");
         //首先请求网络获取数据 然后打开
-        ApiService apkservice = RetrofitUtil.getApiService();
+        ApiService apkservice = RetrofitUtil.getApiservice2();
 
         String userId = ShareUtils.getUserId(this, null);
         //TODO
@@ -98,15 +99,16 @@ public class AddressListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<AddressBean> call, Response<AddressBean> response) {
                 if (response.isSuccessful()) {
-
                     AddressBean body = response.body();
                     Log.e("body", "onResponse "+body.getAddressList());
-                   /* if (!TextUtils.isEmpty(body.getError())) {
-                        Toast.makeText(AddressListActivity.this, "保存没成功", Toast.LENGTH_SHORT).show();
+                  if (!TextUtils.isEmpty(body.getError())) {
+                        Toast.makeText(AddressListActivity.this, body.getError(), Toast.LENGTH_SHORT).show();
 
-                        mTvNone.setVisibility(View.VISIBLE);
-                        mLvAddressList.setVisibility(View.GONE);
-                    } else {*/
+                      //login
+                      Intent intent = new Intent(AddressListActivity.this,LonginAndRegisterActivity.class);
+                      startActivity(intent);
+
+                    } else {
                         //成功
                        mAddressList = body.getAddressList();
                     UiUtils.runOnUiThread(new Runnable() {
@@ -116,22 +118,8 @@ public class AddressListActivity extends AppCompatActivity {
                         }
                     });
 
-                    /*if(mAddressList != null) {
-                        mAdapter.setList(mAddressList);
-                    }*/
 
-                        /*if(mAddressList ==null && mAddressList.size() == 0) {
-
-                            mTvNone.setVisibility(View.VISIBLE);
-                            mLvAddressList.setVisibility(View.GONE);
-                        }else {
-                            mTvNone.setVisibility(View.GONE);
-                            mLvAddressList.setVisibility(View.VISIBLE);
-*/
-                       // }
-
-
-                    //}
+                    }
                 } else {
                     Toast.makeText(AddressListActivity.this, "服务区繁忙", Toast.LENGTH_SHORT).show();
 

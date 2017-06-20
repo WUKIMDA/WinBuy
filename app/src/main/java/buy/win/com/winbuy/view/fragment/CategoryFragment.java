@@ -52,8 +52,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         View root = inflater.inflate(R.layout.fragment_category, null);
         ButterKnife.bind(this, root);
         new CategoryPresenter(this).loadCategoryData();
-
-
         mListAdapter = new CategoryListAdapter(mContext);
         mCategoryList.setAdapter(mListAdapter);
         mCategoryRcv.setLayoutManager(new LinearLayoutManager(mContext));
@@ -67,9 +65,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         Log.d(TAG, "onActivityCreated: " + mDatas.toString());
-
     }
 
     private void recDataSet() {
@@ -79,7 +75,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
                 mRcvDatas.add(mDatas.get(i));
             }
         }
-
         mRcvAdapter.setDatas(mDatas, mSelectedId, mRcvDatas);
     }
 
@@ -87,7 +82,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         mLvDatas = new ArrayList<>();
         for (int i = 0; i < mDatas.size(); i++) {
             if (mDatas.get(i).getParentId() == 0) {
-
                 mLvDatas.add(mDatas.get(i));
             }
         }
@@ -133,5 +127,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     }
 
     public void onSuccess(CategoryAllBean bean) {
+        setDatas(bean.getCategory());
     }
 }

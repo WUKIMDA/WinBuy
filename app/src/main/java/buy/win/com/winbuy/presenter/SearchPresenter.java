@@ -28,9 +28,13 @@ public class SearchPresenter extends BaseNetPresenter<SearchBean> {
      *                commentDown(评价降序)，shelvesDown(上架降序)。
      *                目前只有价格有双向排序，其他都只有降序，其中默认为saleDown
      */
-    public void loadSearchData(String keyword, String page, String pageNum, String orderby) {
-        RetrofitUtil.getApiService().getSearchProduct(keyword, page, pageNum, orderby).enqueue(mCallBack);
+    public void loadSearchData(String page, String pageNum, String orderby,String keyword) {
+        RetrofitUtil.getApiService().getSearchProduct(page, pageNum, orderby,keyword).enqueue(mCallBack);
     }
+
+//    public void loadSearchData(String page, String pageNum, String cId, String orderby) {
+//        RetrofitUtil.getApiService().getGoodsProduct(page,pageNum,cId,orderby).enqueue(mCallBack);
+//    }
 
     @Override
     public void onConnectError(String message) {
