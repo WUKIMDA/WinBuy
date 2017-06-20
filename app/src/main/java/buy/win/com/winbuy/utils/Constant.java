@@ -9,8 +9,8 @@ public class Constant {
     //    public static final String URL_HOST = "http://www.wukimda.win:8080/market/";
 
     /************************搜索排序常量**************************/
-    public static final String URL_HOST = "http://192.168.21.25:8080/market/";
-//    public static final String URL_HOST = "http://192.168.191.1:8080/market/";
+//    public static final String URL_HOST = "http://192.168.21.25:8080/market/";
+    public static final String URL_HOST = "http://192.168.191.1:8080/market/";
 
     public static final String SALEDOWN = "saleDown";   // 销量降序
     public static final String PRICEUP = "priceUp";     // 价格升序

@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +20,7 @@ import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.model.net.OrdersumbitBean;
 import buy.win.com.winbuy.presenter.CheckoutOrdersumbitPresenter;
 import buy.win.com.winbuy.presenter.CheckoutPresent;
+import buy.win.com.winbuy.presenter.SkuPresenter;
 import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.view.adapter.CheckoutProductListAdapter;
 
@@ -31,7 +31,7 @@ import buy.win.com.winbuy.view.adapter.CheckoutProductListAdapter;
 public class CheckoutActivity extends AppCompatActivity implements View.OnClickListener {
 
     private CheckoutPresent mCheckoutPresenter;
-    private Toolbar mToolbarCheckout;
+    private SkuPresenter mSkuPresenter;
     private RecyclerView mRvCheckout;
     private TextView mCheckoutAddupFreight;
     private TextView mCheckoutAddupTotalPrice;
@@ -39,17 +39,39 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     private CheckoutProductListAdapter mCheckoutProductListAdapter;
     private CheckoutOrdersumbitPresenter mCheckoutOrdersumbitPresenter;
     private String mUserId;
+    private TextView mTvCheckout;
+    private String mSku = "";
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mSku!=null) {
+            loadView(mSku);
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        mUserId = ShareUtils.getUserId(this, "20428");
+        selectSku();
         mCheckoutPresenter = new CheckoutPresent(this);
         mCheckoutOrdersumbitPresenter = new CheckoutOrdersumbitPresenter(this);
-
         initView();
-        loadView();
+    }
+
+    private void selectSku() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            mSku = intent.getStringExtra("sku");
+            if (mSku==null||mSku.equals("")) {
+                mSkuPresenter = new SkuPresenter(this);
+                mSkuPresenter.loadShopCartFragment(mUserId);
+            }else {
+                loadView(mSku);
+            }
+        }
     }
 
     private void initView() {
@@ -60,18 +82,11 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         mCheckoutAddupTotalPrice = (TextView) findViewById(R.id.checkoutAddup_totalPrice);
         mCheckoutSubmit = (Button) findViewById(R.id.checkout_submit);
         mCheckoutSubmit.setOnClickListener(this);
-
-
+        mTvCheckout = (TextView) findViewById(R.id.textview_checkout);
     }
 
-    private void loadView() {
-        String sku = "";
-        Intent intent = getIntent();
-        if (intent!=null) {
-            sku = intent.getStringExtra("sku");
-        }
-        mUserId = ShareUtils.getUserId(this, "20428");
-//        mUserId = "20428";// TODO: 2017/6/20 到时候删除这行
+    public void loadView(String sku) {
+        mSku = sku;
         mCheckoutPresenter.upCheckout(mUserId, sku);
         mCheckoutProductListAdapter = new CheckoutProductListAdapter(this);
         mRvCheckout.setAdapter(mCheckoutProductListAdapter);
