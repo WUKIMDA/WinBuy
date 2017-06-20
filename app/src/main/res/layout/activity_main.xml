@@ -32,6 +32,7 @@
             android:id="@+id/rb_category"
             style="@style/RadioGroupMainActivity"
             android:drawableTop="@drawable/selector_tab_category"
+
             />
 
         <RadioButton

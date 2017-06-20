@@ -47,6 +47,7 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.ErrorBean;
+import buy.win.com.winbuy.model.net.FavoriteBean;
 import buy.win.com.winbuy.presenter.AddCartPresenter;
 import buy.win.com.winbuy.presenter.CommentPresenter;
 import buy.win.com.winbuy.presenter.CommodityProductPresenter;
@@ -235,7 +236,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     }
 
 
-    @OnClick({R.id.iv_good_detai_back, R.id.iv_good_detai_share, R.id.tv_good_detail_shop_cart,
+    @OnClick({R.id.iv_good_detai_back, R.id.iv_good_detai_share,R.id.ll_good_detail_collect, R.id.tv_good_detail_shop_cart,
             R.id.tv_good_detail_buy, R.id.tv_good_detail_cate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -296,29 +297,16 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
      * 商品收藏
      */
     private void pidFavorites() {
-        //TODO  userId
         RetrofitUtil.getApiService().upPidFavorites(userId, pId).enqueue(new Callback<ErrorBean>() {
             @Override
             public void onResponse(Call<ErrorBean> call, Response<ErrorBean> response) {
                 if (response.isSuccessful()) {
                     final ErrorBean body = response.body();
-                    UiUtils.postTask(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(CommodityActivity.this, body.getError(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
                     String bodyResponse = body.getResponse();
                     String error = body.getError();
                     if (("当前商品已经添加过收藏".equals(error)) || ("addfavorites".equals(bodyResponse))) {
                         ivCollectSelect.setVisibility(View.VISIBLE);
                         ivCollectUnSelect.setVisibility(View.GONE);
-                        UiUtils.postTask(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(CommodityActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
-                            }
-                        });
                     }
                     if ("还未登陆".equals(error)) {
                         UiUtils.postTask(new Runnable() {
@@ -412,6 +400,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         }
 
     }
+
 
 
     private String mSelectSize;
@@ -637,6 +626,44 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             imgsUrl.add(Constant.URL_HOST + "/images/product/detail/bigcar3.jpg");
             imgsUrl.add(Constant.URL_HOST + "/images/product/detail/bigcar4.jpg");
         }
+    }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startFavorityService();
+    }
+
+    List<String> favoritesPidLists = new ArrayList<>();
+    private void startFavorityService() {
+        RetrofitUtil.getApiService().getFavorite(userId,"1","10").enqueue(new Callback<FavoriteBean>() {
+            @Override
+            public void onResponse(Call<FavoriteBean> call, Response<FavoriteBean> response) {
+                if (response.isSuccessful()){
+                    FavoriteBean body = response.body();
+                    List<FavoriteBean.ProductListBean> productList = body.getProductList();
+                    for (int i = 0; i < productList.size(); i++) {
+                        FavoriteBean.ProductListBean productListBean = productList.get(i);
+                        String id = productListBean.getId();
+                        favoritesPidLists.add(id);
+                    }
+                    if (favoritesPidLists.contains(pId)){
+                        ivCollectSelect.setVisibility(View.VISIBLE);
+                        ivCollectUnSelect.setVisibility(View.GONE);
+                    }else{
+                        ivCollectSelect.setVisibility(View.GONE);
+                        ivCollectUnSelect.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FavoriteBean> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

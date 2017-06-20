@@ -55,18 +55,26 @@ public class FavoriteActivity extends Activity {
 
     private void precessIntent() {
         if (getIntent() != null) {
-            boolean booleanExtra = getIntent().getBooleanExtra("null.class", false);
+
+            boolean booleanExtra = getIntent().getBooleanExtra("null.class", true);
+
             if (booleanExtra == false) {
+                //TODO:返回空图片
                 mFull.setVisibility(View.GONE);
                 mEmpty.setVisibility(View.VISIBLE);
+            }else {
+
+                mFavoriteBean = (FavoriteBean) getIntent().getSerializableExtra("FavoriteBean.class");
+                //list.add(mFavoriteBean);
+                mProductList = mFavoriteBean.getProductList();
+                mFull.setVisibility(View.VISIBLE);
+                mEmpty.setVisibility(View.GONE);
+
             }
-        } else if (getIntent() != null) {
-            mFull.setVisibility(View.VISIBLE);
-            mEmpty.setVisibility(View.GONE);
-            mFavoriteBean = (FavoriteBean) getIntent().getSerializableExtra("FavoriteBean.class");
-            //list.add(mFavoriteBean);
-            mProductList = mFavoriteBean.getProductList();
+
         }
+
+
     }
 
     @OnClick({R.id.iv_back, R.id.delete})

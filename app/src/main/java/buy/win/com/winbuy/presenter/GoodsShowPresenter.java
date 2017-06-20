@@ -1,7 +1,6 @@
 package buy.win.com.winbuy.presenter;
 
 import buy.win.com.winbuy.model.net.GoodsBean;
-import buy.win.com.winbuy.model.net.SearchBean;
 import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.view.activity.GoodsShowActivity;
 
@@ -23,6 +22,7 @@ public class GoodsShowPresenter extends BaseNetPresenter<GoodsBean> {
 
     @Override
     public void onConnectError(String message) {
+        mGoodsShowActivity.onGoodsShowError(message);
     }
 
     @Override

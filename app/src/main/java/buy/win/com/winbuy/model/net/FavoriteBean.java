@@ -34,7 +34,7 @@ public class FavoriteBean extends ErrorBean implements Serializable{
         this.productList = productList;
     }
 
-    public static class ProductListBean {
+    public static class ProductListBean implements Serializable{
         /**
          * id : 1
          * name : 韩版时尚蕾丝裙
