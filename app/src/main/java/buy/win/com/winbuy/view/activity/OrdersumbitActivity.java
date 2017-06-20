@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import buy.win.com.winbuy.R;
@@ -13,8 +15,9 @@ import buy.win.com.winbuy.model.net.OrdersumbitBean;
  * Created by Ziwen on 2017/6/20.
  */
 
-public class OrdersumbitActivity extends Activity {
+public class OrdersumbitActivity extends Activity implements View.OnClickListener {
     private TextView mOrderInfo;
+    private Button mFukuan;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,6 +29,8 @@ public class OrdersumbitActivity extends Activity {
 
     private void initView() {
         mOrderInfo = (TextView) findViewById(R.id.orderInfo);
+        mFukuan = (Button) findViewById(R.id.fukuan);
+        mFukuan.setOnClickListener(this);
     }
 
 
@@ -53,5 +58,14 @@ public class OrdersumbitActivity extends Activity {
         text += "订单金额:" + infoBean.price;
         text += "支付方式:" + payType;
         mOrderInfo.setText(text);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fukuan:
+
+                break;
+        }
     }
 }
