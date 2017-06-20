@@ -132,7 +132,7 @@ public class LonginAndRegisterActivity extends Activity {
 
     private void checkRegisterData() {
 
-            ApiService service = RetrofitUtil.getApiservice2();
+            ApiService service = RetrofitUtil.getApiService();
 
             service.register(mUsername2,mPassword2).enqueue(new Callback<RegisterBean>() {
                 @Override
@@ -195,7 +195,7 @@ public class LonginAndRegisterActivity extends Activity {
                 .build()
                 .create(ApiService.class);*/
 
-        ApiService apkservice = RetrofitUtil.getApiservice2();
+        ApiService apkservice = RetrofitUtil.getApiService();
 
 
         apkservice.login(mUsername1, mPassword1).enqueue(new Callback<LoginBean>() {

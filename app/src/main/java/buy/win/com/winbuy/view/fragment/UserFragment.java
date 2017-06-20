@@ -126,10 +126,10 @@ public class UserFragment extends Fragment {
     private void clickLikeBady() {
         //请求网络数据
         String userId = ShareUtils.getUserId(mContext, null);
-        ApiService addressListService = RetrofitUtil.getApiservice2();
+        ApiService addressListService = RetrofitUtil.getApiService();
 
 
-        addressListService.getFavorite(userId, "0", "1").enqueue(new Callback<FavoriteBean>() {
+        addressListService.getFavorite(userId, "1", "10").enqueue(new Callback<FavoriteBean>() {
             @Override
             public void onResponse(Call<FavoriteBean> call, Response<FavoriteBean> response) {
                 if (response.isSuccessful()) {
@@ -144,12 +144,14 @@ public class UserFragment extends Fragment {
                             Intent intent = new Intent(mContext, FavoriteActivity.class);
                             boolean isEmpty = false;
                             intent.putExtra("null.class",isEmpty);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
 
                         } else {
                             //传递数据
                             Intent intent = new Intent(mContext, FavoriteActivity.class);
                             intent.putExtra("FavoriteBean.class",body);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         }
 
@@ -173,7 +175,7 @@ public class UserFragment extends Fragment {
         //请求网络数据
         String userId = ShareUtils.getUserId(mContext, null);
 
-        ApiService addressListService = RetrofitUtil.getApiservice2();
+        ApiService addressListService = RetrofitUtil.getApiService();
 
         addressListService.getAddressList(userId).enqueue(new Callback<AddressBean>() {
             @Override
@@ -187,6 +189,7 @@ public class UserFragment extends Fragment {
                     }else {*/
                     //请求数据成功  跳转页面
                     Intent intent = new Intent(mContext, AddressListActivity.class);
+                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
 
 

@@ -23,21 +23,4 @@ public class RetrofitUtil {
         return getRetrofit().create(ApiService.class);
     }
 
-
-    /*
-    "我的" 请求框架
-     */
-    public static ApiService getApiservice2() {
-
-        ApiService apkservice = new Retrofit
-                .Builder()
-                //.client(client)
-                .baseUrl(Constant.URL_HOST)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiService.class);
-
-        return apkservice;
-    }
-
 }

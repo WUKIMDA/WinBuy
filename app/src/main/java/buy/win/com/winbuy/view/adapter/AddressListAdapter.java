@@ -118,7 +118,7 @@ public class AddressListAdapter extends BaseAdapter {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                     //删除条目  请求网络
-                                    ApiService deleteService = RetrofitUtil.getApiservice2();
+                                    ApiService deleteService = RetrofitUtil.getApiService();
 
                                     deleteService.deleteAddress(mId).enqueue(new Callback<DelectBean>() {
                                         @Override

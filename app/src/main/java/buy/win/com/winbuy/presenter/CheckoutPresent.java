@@ -47,12 +47,6 @@ private CheckoutActivity mCheckoutActivity;
         Log.e("CheckoutPresent", "onSuccess: "+bean.getResponse() );
         if ("checkOut".equals(bean.getResponse())){
             //提交成功
-            UiUtils.postTask(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(UiUtils.getContext(), "提交成功", Toast.LENGTH_SHORT).show();
-                }
-            });
             mCheckoutActivity.checkOutSuccess(bean);
         }else if ( "1533".equals(bean.getError_code())){
             //提交失败

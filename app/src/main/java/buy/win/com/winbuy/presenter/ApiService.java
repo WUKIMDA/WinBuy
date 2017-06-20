@@ -267,7 +267,7 @@ public interface ApiService {
 
     //商品收藏
     @GET("product/favorites")
-    Call<ErrorBean> upPidFavorites(String userid, String pId);
+    Call<ErrorBean> upPidFavorites(@Query("userid") String userid, @Query("pId") String pId);
 
 
     @FormUrlEncoded

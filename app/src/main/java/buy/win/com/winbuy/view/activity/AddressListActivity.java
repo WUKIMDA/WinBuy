@@ -91,7 +91,7 @@ public class AddressListActivity extends Activity {
 
         //Log.d(TAG, "precessIntent 意图为null");
         //首先请求网络获取数据 然后打开
-        ApiService apkservice = RetrofitUtil.getApiservice2();
+        ApiService apkservice = RetrofitUtil.getApiService();
 
         String userId = ShareUtils.getUserId(this, null);
         //TODO
@@ -160,7 +160,6 @@ public class AddressListActivity extends Activity {
                 finish();
                 break;
             case R.id.add_address:
-                Toast.makeText(this, "点击了新增地址", Toast.LENGTH_SHORT).show();
                 clickAddress();
                 break;
         }
