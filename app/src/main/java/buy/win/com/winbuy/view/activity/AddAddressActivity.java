@@ -61,8 +61,6 @@ public class AddAddressActivity extends Activity {
         setContentView(R.layout.address_add_activity);
         ButterKnife.bind(this);
 
-
-
     }
 
 
