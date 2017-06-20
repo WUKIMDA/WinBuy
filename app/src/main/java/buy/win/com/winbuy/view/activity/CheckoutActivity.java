@@ -65,9 +65,14 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     }
 
     private void loadView() {
+        String sku = "";
+        Intent intent = getIntent();
+        if (intent!=null) {
+            sku = intent.getStringExtra("sku");
+        }
         mUserId = ShareUtils.getUserId(this, "20428");
 //        mUserId = "20428";// TODO: 2017/6/20 到时候删除这行
-        mCheckoutPresenter.upCheckout(mUserId, "1:3:1,2,3,4|2:2:2,3");
+        mCheckoutPresenter.upCheckout(mUserId, sku);
         mCheckoutProductListAdapter = new CheckoutProductListAdapter(this);
         mRvCheckout.setAdapter(mCheckoutProductListAdapter);
     }
