@@ -77,6 +77,7 @@ public interface ApiService {
             @Query("pageNum") String pageNum,
             @Query("orderby") String orderby
     );
+
     /**
      * 热门搜索字段
      *
@@ -140,11 +141,12 @@ public interface ApiService {
     Call<String> descriptionData(@Query("pId") String pId);
 
     @GET("product/comment")
-    Call<CommentDataBean> commentLoad(@Query("pId")String pId, @Query("page")String page, @Query("pageNum")String pageNum);
+    Call<CommentDataBean> commentLoad(@Query("pId") String pId, @Query("page") String page, @Query("pageNum") String pageNum);
 
 
     /**
      * 发票
+     *
      * @return
      */
     @GET("invoice")
@@ -187,6 +189,11 @@ public interface ApiService {
     @GET("orderdetail")
     Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
                                                 @Query("orderId") String orderId);
+
+
+    //http://localhost:8080/market/orderlist?type=1&page=0&pageNum=10
+    @GET("orderlist")
+    Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
 
 
     /**
@@ -248,8 +255,6 @@ public interface ApiService {
 //    @FormUrlEncoded //POST请求中
 //    @POST("login")//定义
 //    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
-
-
     @FormUrlEncoded //POST请求中
     @POST("register")//定义
     Call<RegisterBean> register(@Field("username") String username, @Field("password") String password);
@@ -290,16 +295,16 @@ public interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("userid")
+    @POST("checkout")
     Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
 
     //新品上架
     @GET("newproduct")
-    Call<TopicPlistBean> getNewProduct(@Query("page") String page, @Query("pageNum") String pageNum,@Query("orderby") String orderby);
+    Call<TopicPlistBean> getNewProduct(@Query("page") String page, @Query("pageNum") String pageNum, @Query("orderby") String orderby);
 
     //热门单品
     @GET("hotproduct")
-    Call<TopicPlistBean> getHotProduct(@Query("page") String page, @Query("pageNum") String pageNum,@Query("orderby") String orderby);
+    Call<TopicPlistBean> getHotProduct(@Query("page") String page, @Query("pageNum") String pageNum, @Query("orderby") String orderby);
 
     //新品上架
     @GET("brand")
