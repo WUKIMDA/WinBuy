@@ -65,6 +65,8 @@ public class SearchResultActivity extends Activity {
     LinearLayout mSearchEmpty;
     @Bind(R.id.search_orderby)
     LinearLayout mSearchOrderby;
+    @Bind(R.id.search_error)
+    ImageView mSearchError;
     //    @Bind(R.id.loadmore_list)
 //    SwipeRefreshLayout mLoadmoreList;
     private SearchRvListAdapter mRvListAdapter;
@@ -189,7 +191,7 @@ public class SearchResultActivity extends Activity {
     }
 
     public void onSearchSuccess(SearchBean bean) {
-//        mSearchBean.addAll(bean.getProductList());
+        mSearchOrderby.setVisibility(View.VISIBLE);
         UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean.getProductList() + "size: " + bean.getProductList().size());
         if (bean.getProductList().size() <= 0) {
             mSearchOrderby.setVisibility(View.GONE);
@@ -286,7 +288,8 @@ public class SearchResultActivity extends Activity {
     }
 
     public void onSearchError(String message) {
-
+        mSearchError.setImageResource(R.mipmap.ic_error_page);
+        mSearchEmpty.setVisibility(View.VISIBLE);
     }
 
 }
