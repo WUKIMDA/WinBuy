@@ -1,7 +1,13 @@
 package buy.win.com.winbuy.presenter;
 
+import android.app.Activity;
+import android.content.Intent;
+
+import java.util.List;
+
 import buy.win.com.winbuy.model.net.SelectCartBean;
 import buy.win.com.winbuy.utils.RetrofitUtil;
+import buy.win.com.winbuy.view.activity.CheckoutActivity;
 import buy.win.com.winbuy.view.fragment.ShoppingCartFragment;
 
 /**
@@ -11,6 +17,7 @@ import buy.win.com.winbuy.view.fragment.ShoppingCartFragment;
 public class ShopCartPresenter extends BaseNetPresenter<SelectCartBean> {
 
     private ShoppingCartFragment mShoppingCartFragment;
+    private Activity mActivity;
 
     public ShopCartPresenter(ShoppingCartFragment shoppingCartFragment) {
         super();
@@ -18,6 +25,10 @@ public class ShopCartPresenter extends BaseNetPresenter<SelectCartBean> {
     }
 
     public ShopCartPresenter() {
+    }
+
+    public ShopCartPresenter(Activity activity) {
+        mActivity = activity;
     }
 
     public void loadShopCartFragment(String userId) {
@@ -51,10 +62,19 @@ public class ShopCartPresenter extends BaseNetPresenter<SelectCartBean> {
 
     @Override
     public void onSuccess(SelectCartBean bean) {
-
-        //删除item
         if (mShoppingCartFragment != null) {
             mShoppingCartFragment.onSuccess(bean);
-        }
+        }else if (mActivity != null){
+            List<SelectCartBean.CartBean> cart = bean.getCart();
+                StringBuffer buff = new StringBuffer("");
+                for (int i = 0; i < cart.size(); i++) {
+                    StringBuffer goods = new StringBuffer(cart.get(i).getProductId() + ":" + cart.get(i).getProductCount() + ":" + cart.get(i).getPropertyId() + "|");
+                    buff.append(goods);
+                }
+                String sku = buff.deleteCharAt(buff.length()-1).toString();
+            Intent intent = new Intent(mActivity, CheckoutActivity.class);
+            intent.putExtra("sku",sku);
+            mActivity.startActivity(intent);
     }
+}
 }

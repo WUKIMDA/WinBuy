@@ -38,14 +38,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="100"
             android:gravity="right"
-            android:text="共2件商品"/>
+            tools:text="共2件商品"/>
 
         <TextView
             android:id="@+id/checkoutAddup_totalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="小计:¥1234.43"/>
+            tools:text="小计:¥1234.43"/>
 
         <Button
             android:id="@+id/checkout_submit"
