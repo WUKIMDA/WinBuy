@@ -574,6 +574,9 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
                     public void onClick(DialogInterface dialog, int which) {
 
                         //// TODO: 2017/6/19 0019  支付中心
+
+
+                        new ShopCartPresenter(getActivity()).loadShopCartFragment(mUserId);
                         //   initSettlementCenter();
                         return;
 

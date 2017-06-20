@@ -14,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -47,7 +49,7 @@ import buy.win.com.winbuy.view.adapter.HomeFrgmRecyViewAdapter;
  * Created by Ziwen on 2017/6/15.
  */
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "HomeFragment";
     private static final int REQUEST_CODE = 111;
 
@@ -61,6 +63,8 @@ public class HomeFragment extends Fragment {
     private HomeFrgmRecyViewAdapter mHomeFrgmRecyViewAdapter;
     private Gson mGson = new Gson();
     private EditText mEditText;
+    private Button mBtnHomeConnectDefeate;
+    private LinearLayout mBtnHomeConnectSuccess;
 
     @Nullable
     @Override
@@ -68,12 +72,14 @@ public class HomeFragment extends Fragment {
         SpeechUtility.createUtility(getActivity(), SpeechConstant.APPID + "=56f22e12");
 
         mRootView = View.inflate(getActivity(), R.layout.fragment_home, null);
+
         mHomePresenter = new HomePresenter(HomeFragment.this);
         mHomePresenterLimit = new HomePresenterLimit(HomeFragment.this);
 
         tempBtn(mRootView);
         initRecyclerView(mRootView);
         ButterKnife.bind(this, mRootView);
+        initView(mRootView);
         return mRootView;
     }
 
@@ -97,9 +103,9 @@ public class HomeFragment extends Fragment {
     }
 
     int sumY = 0;
-    float distance = 150;  //最远滚动距离，超过这个距离还是最蓝色
+    float distance = 350;  //最远滚动距离，超过这个距离还是最蓝色
     int startColor = 0x00FFFFFF;
-    int endColor = 0xffDF7D6A;
+    int endColor = 0xffFF4081;
     ArgbEvaluator mEvaluator = new ArgbEvaluator();
 
     @Override
@@ -258,6 +264,7 @@ public class HomeFragment extends Fragment {
 
 
     public void onHomeSuccess(HomeAllBean bean) {
+        setVisibiliti(true);
         List<HomeAllBean.HomeTopicBean> mHomeTopicLists = bean.getHomeTopic();
         mHomeTopicLists.remove(mHomeTopicLists.size() - 1);
         mHomeFrgmRecyViewAdapter.setHomeAllBeenList(mHomeTopicLists);
@@ -271,10 +278,12 @@ public class HomeFragment extends Fragment {
     }
 
     public void onHomeConnectError(String message) {
+        setVisibiliti(true);
         Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
     }
 
     public void onHomeServerBug(int code) {
+        setVisibiliti(true);
         Log.d(TAG, "onHomeServerBug " + code);
         Toast.makeText(getActivity(), "服务器正在修复中", Toast.LENGTH_SHORT).show();
     }
@@ -306,6 +315,34 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+    }
+
+    private void initView(View mRootView) {
+        mBtnHomeConnectDefeate = (Button) mRootView.findViewById(R.id.btn_home_connect_defeate);
+        mBtnHomeConnectSuccess = (LinearLayout) mRootView.findViewById(R.id.btn_home_connect_success);
+
+        mBtnHomeConnectDefeate.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_home_connect_defeate:
+                Toast.makeText(getActivity() , "正在重试...", Toast.LENGTH_SHORT).show();
+                mHomePresenter.loadHomeData();
+                mHomePresenterLimit.loadHomeBottomData();
+                break;
+        }
+    }
+
+    private void setVisibiliti(boolean b) {
+        if (b) {
+            mBtnHomeConnectSuccess.setVisibility(View.VISIBLE);
+            mBtnHomeConnectDefeate.setVisibility(View.GONE);
+        } else {
+            mBtnHomeConnectSuccess.setVisibility(View.GONE);
+            mBtnHomeConnectDefeate.setVisibility(View.VISIBLE);
+        }
     }
 }
