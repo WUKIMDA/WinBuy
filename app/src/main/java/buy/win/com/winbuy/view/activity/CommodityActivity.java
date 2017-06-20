@@ -276,7 +276,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     private void orderDetail() {
         //TODO:用户ID
         if (TextUtils.isEmpty(userId)) {
-            DialogUtils.showLoginDialog();
+            Toast.makeText(getApplicationContext(), "请登录在试", Toast.LENGTH_SHORT).show();
             return;
         }
         //如果用户没有选择过属性,默认
