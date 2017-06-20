@@ -204,7 +204,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     protected void onStart() {
         super.onStart();
         //如果收藏,回显
-
     }
 
 

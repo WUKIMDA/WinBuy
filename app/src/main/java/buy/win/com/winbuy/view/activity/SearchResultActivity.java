@@ -63,6 +63,8 @@ public class SearchResultActivity extends Activity {
     RecyclerView mRvGrid;
     @Bind(R.id.search_empty)
     LinearLayout mSearchEmpty;
+    @Bind(R.id.search_orderby)
+    LinearLayout mSearchOrderby;
     //    @Bind(R.id.loadmore_list)
 //    SwipeRefreshLayout mLoadmoreList;
     private SearchRvListAdapter mRvListAdapter;
@@ -78,6 +80,7 @@ public class SearchResultActivity extends Activity {
     private int previousTotal = 0;
     private boolean loading = true;
     private int firstVisibleItem, visibleItemCount, totalItemCount;
+    private int lastVisibleItem;
 
 
     @Override
@@ -88,30 +91,19 @@ public class SearchResultActivity extends Activity {
         mContext = this;
         mSearchPresenter = new SearchPresenter(this);
         initData();
-        initEvent();
         init();
+        initEvent();
     }
 
     private void initData() {
         if (getIntent() != null) {
             mKeyword = getIntent().getStringExtra("keyword");
-           // UiUtils.logD(SearchResultActivity.class, "getExtra: " + mKeyword);
+            // UiUtils.logD(SearchResultActivity.class, "getExtra: " + mKeyword);
         }
         mOrderby = Constant.SHELVESDOWN;
         loadSearchResult(String.valueOf(mPage), mOrderby);
     }
 
-    public void onSearchSuccess(SearchBean bean) {
-//        mSearchBean.addAll(bean.getProductList());
-        UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean.getProductList() + "size: " + bean.getProductList().size());
-        if (bean.getProductList().size() <= 0) {
-            Toast.makeText(mContext, "没有该商品", Toast.LENGTH_SHORT).show();
-            mSearchEmpty.setVisibility(View.VISIBLE);
-        } else {
-            mRvListAdapter.setBean(bean.getProductList());
-            mRvGridAdapter.setSearchBean(bean.getProductList());
-        }
-    }
 
     private void init() {
 //        mRvList.setVisibility(View.VISIBLE);
@@ -133,7 +125,6 @@ public class SearchResultActivity extends Activity {
 
     }
 
-
     private void initEvent() {
 
 //        mLoadmoreList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -145,6 +136,21 @@ public class SearchResultActivity extends Activity {
 //        });
 
         mRvList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mRvListAdapter.getItemCount()) {
+//                    mPage++;
+//                    UiUtils.logD(SearchResultActivity.class, mPage + "");
+//                }
+//            }
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                lastVisibleItem = mLinearLayoutManager.findLastVisibleItemPosition();
+//            }
+
 //            @Override
 //            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
 //                super.onScrollStateChanged(recyclerView, newState);
@@ -155,6 +161,7 @@ public class SearchResultActivity extends Activity {
 //                    loadSearchResult(String.valueOf(mPage + 1), mOrderby);
 //                }
 //            }
+
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -173,23 +180,28 @@ public class SearchResultActivity extends Activity {
                 if (!loading
                         && (totalItemCount - visibleItemCount) <= firstVisibleItem) {
                     mPage++;
-                    UiUtils.logD(SearchResultActivity.class, mPage + "");
-                    onLoadMore(mPage);
+                    UiUtils.logD(SearchResultActivity.class, "page = " + mPage + "");
+                    loadSearchResult(String.valueOf(mPage), mOrderby);
                     loading = true;
                 }
             }
         });
     }
 
-    private void onLoadMore(int page) {
-        loadSearchResult(String.valueOf(page), mOrderby);
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//        mRvListAdapter.notifyDataSetChanged();
-//            }
-//        });
+    public void onSearchSuccess(SearchBean bean) {
+//        mSearchBean.addAll(bean.getProductList());
+        UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean.getProductList() + "size: " + bean.getProductList().size());
+        if (bean.getProductList().size() <= 0) {
+            mSearchOrderby.setVisibility(View.GONE);
+            Toast.makeText(mContext, "没有该商品", Toast.LENGTH_SHORT).show();
+            mSearchEmpty.setVisibility(View.VISIBLE);
+        } else {
+            mRvListAdapter.setBean(bean.getProductList());
+            mRvGridAdapter.setSearchBean(bean.getProductList());
+            if (!loading) {
+                mRvListAdapter.setMore(bean.getProductList());
+            }
+        }
     }
 
     private boolean isPriceUp = true;
@@ -269,8 +281,8 @@ public class SearchResultActivity extends Activity {
     }
 
     private void loadSearchResult(String page, String orderby) {
-        mSearchPresenter.loadSearchData(mKeyword, page, Constant.PAGE_NUM, orderby);
-        UiUtils.logD(SearchResultActivity.class, mKeyword + page + Constant.PAGE_NUM + orderby);
+        mSearchPresenter.loadSearchData(page, Constant.PAGE_NUM, orderby, mKeyword);
+//        UiUtils.logD(SearchResultActivity.class, mKeyword + page + Constant.PAGE_NUM + orderby);
     }
 
     public void onSearchError(String message) {
