@@ -1,8 +1,8 @@
 package buy.win.com.winbuy.view.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +22,7 @@ import buy.win.com.winbuy.view.adapter.FavoriteAdapter;
  * Created by demo on 2017/6/20.
  */
 
-public class FavoriteActivity extends AppCompatActivity {
+public class FavoriteActivity extends Activity {
 
     @Bind(R.id.iv_back)
     ImageView mIvBack;
@@ -55,26 +55,18 @@ public class FavoriteActivity extends AppCompatActivity {
 
     private void precessIntent() {
         if (getIntent() != null) {
-
             boolean booleanExtra = getIntent().getBooleanExtra("null.class", false);
-
             if (booleanExtra == false) {
-                //TODO:返回空图片
                 mFull.setVisibility(View.GONE);
                 mEmpty.setVisibility(View.VISIBLE);
-
             }
-
-        }else if(getIntent() != null){
+        } else if (getIntent() != null) {
             mFull.setVisibility(View.VISIBLE);
             mEmpty.setVisibility(View.GONE);
             mFavoriteBean = (FavoriteBean) getIntent().getSerializableExtra("FavoriteBean.class");
             //list.add(mFavoriteBean);
             mProductList = mFavoriteBean.getProductList();
-
         }
-
-
     }
 
     @OnClick({R.id.iv_back, R.id.delete})

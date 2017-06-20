@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +15,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.OrderListAllBean;
+import buy.win.com.winbuy.presenter.OrderCanclePresenter;
+import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.activity.OrderDetailActivity;
 
@@ -67,8 +68,8 @@ public class OrderListAdapter extends BaseAdapter {
     }
 
     public class OrderListViewHolder {
-        @Bind(R.id.iv_order_item_seller_logo)
-        ImageView mIvOrderItemSellerLogo;
+//        @Bind(R.id.iv_order_item_seller_logo)
+//        ImageView mIvOrderItemSellerLogo;
         @Bind(R.id.tv_order_name)
         TextView mTvOrderName;
         @Bind(R.id.tv_order_type)
@@ -85,6 +86,15 @@ public class OrderListAdapter extends BaseAdapter {
 
         OrderListViewHolder(View view) {
             ButterKnife.bind(this, view);
+
+            mTvOrderItemFlag.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new OrderCanclePresenter().orderCancle(ShareUtils.getUserId(UiUtils.getContext(),""), mOrderId);
+                    mTvOrderItemFlag.setVisibility(View.GONE);
+                }
+            });
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
