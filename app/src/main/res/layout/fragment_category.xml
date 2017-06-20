@@ -5,16 +5,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_searchtext_search"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/search_baground_shap"
-        android:drawableLeft="@mipmap/search_2"
-        android:hint="@string/search_hint"
-        android:textSize="14sp"
-        />
+        android:layout_height="36dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:src="@mipmap/scanning_black"/>
+
+        <EditText
+            android:id="@+id/et_searchtext_search"
+            android:hint="@string/search_hint"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="8"
+            android:background="@drawable/search_baground_shap"
+            android:drawableLeft="@mipmap/search_2"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#9f9f9f"/>
 
     <LinearLayout
         android:layout_width="match_parent"
