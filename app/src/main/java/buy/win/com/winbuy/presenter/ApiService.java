@@ -11,6 +11,7 @@ import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.DelectBean;
 import buy.win.com.winbuy.model.net.ErrorBean;
+import buy.win.com.winbuy.model.net.FavoriteBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.GoodsBean;
 import buy.win.com.winbuy.model.net.HelpBean;
@@ -127,10 +128,10 @@ public interface ApiService {
     Call<CommodityProductBean> getCommodityProdectData(@Query("pId") String pId);
 
 
-    @FormUrlEncoded //POST请求中
+   /* @FormUrlEncoded //POST请求中
     @POST("login")
     Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
-
+*/
 
     @FormUrlEncoded //POST请求中
     @POST("register")
@@ -238,12 +239,13 @@ public interface ApiService {
     /**
      * 底部导航我的部分(包括 用户登录 地址管理 )  eason
      */
-//    @FormUrlEncoded //POST请求中
-//    @POST("login")//定义
-//    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
+    @FormUrlEncoded //POST请求中
+    @POST("login")//定义
+    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
+
+
     @FormUrlEncoded //POST请求中
     @POST("register")
-//定义
     Call<RegisterBean> register(@Field("username") String username, @Field("password") String password);
 
 
@@ -258,7 +260,6 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("addresssave")
-//定义
     Call<SaveAddressBean> saveAddress(
             @Header("userid") String userid,
             @Field("name") String name,
@@ -328,6 +329,13 @@ public interface ApiService {
                                              @Field("invoiceTitle") String invoiceTitle,
                                              @Field("invoiceContent") String invoiceContent
     );
+
+
+    //新品上架
+    @GET("favorites")
+    Call<FavoriteBean> getFavorite(@Header("userid") String userid,
+                                   @Query("page") String page,
+                                   @Query("pageNum") String pageNum);
 
 
 }

@@ -92,6 +92,8 @@
 
         <activity android:name=".view.activity.OrderDetailActivity"/>
 
+        <activity android:name=".view.activity.FavoriteActivity"/>
+
     </application>
 
 </manifest>

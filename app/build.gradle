@@ -53,4 +53,5 @@ dependencies {
     compile 'com.android.support:support-v4:26.0.0-alpha1'
     compile 'cn.yipianfengye.android:zxing-library:1.5'
     compile files('libs/Msc.jar')
+    compile 'com.github.open-android:PullToRefresh:v1.0'
 }
