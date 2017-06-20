@@ -2,6 +2,10 @@ package buy.win.com.winbuy.presenter;
 
 import buy.win.com.winbuy.utils.RetrofitUtil;
 
+/**
+ * Created by Administrator on 2017/6/20 0020.
+ */
+
 public class FavoritePresenter extends BaseNetPresenter {
 
 

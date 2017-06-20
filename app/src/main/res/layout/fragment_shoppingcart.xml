@@ -61,6 +61,7 @@
 
                     <LinearLayout
                         android:gravity="center"
+                        android:layout_marginTop="2dp"
                         android:orientation="horizontal"
                         android:id="@+id/order_info"
                         android:layout_weight="0.7"
@@ -73,13 +74,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:gravity="end"
+                                android:gravity="start"
                                 android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="20dp">
                                 <TextView
                                     android:textColor="@android:color/black"
-                                    android:textSize="18sp"
+                                    android:textSize="16sp"
                                     android:text="@string/order_total"
                                     android:layout_marginLeft="5dp"
                                     android:layout_width="wrap_content"
@@ -87,14 +88,15 @@
                                 <TextView
                                     android:id="@+id/total_price"
                                     android:text="￥0.00"
-                                    android:textSize="18sp"
+                                    android:textSize="16sp"
                                     android:textColor="@color/ic_taobao"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content" />
                             </LinearLayout>
 
                             <TextView
-                                android:gravity="right"
+                                android:gravity="start"
+                                android:layout_marginLeft="6dp"
                                 android:text="不含运费"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
@@ -121,36 +123,37 @@
                         android:layout_height="match_parent">
                         <TextView
                             android:id="@+id/share_goods"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/white"
-                            android:background="@color/ic_yellow"
+                            android:textSize="14sp"
+                            android:textColor="@color/comm_text_black"
+                            android:background="@drawable/buttom_share_collect"
                             android:gravity="center"
-                            android:text="分享宝贝"
+                            android:text="分享"
                             android:layout_weight="0.3"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="36dp" />
                         <TextView
-                            android:layout_marginLeft="1dp"
+                            android:layout_marginLeft="5dp"
                             android:id="@+id/collect_goods"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/white"
-                            android:background="@color/ic_taobao"
+                            android:textSize="14sp"
+                            android:textColor="@color/comm_text_black"
+                            android:background="@drawable/buttom_share_collect"
                             android:gravity="center"
-                            android:text="移到收藏夹"
+                            android:text="收藏"
                             android:layout_weight="0.3"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="36dp" />
                         <TextView
-                            android:layout_marginLeft="1dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
                             android:id="@+id/del_goods"
-                            android:textSize="16sp"
-                            android:textColor="@android:color/white"
-                            android:background="@color/ic_red"
+                            android:textSize="14sp"
+                            android:textColor="@color/comm_text_red"
+                            android:background="@drawable/buttom_delete"
                             android:gravity="center"
                             android:text="删除"
                             android:layout_weight="0.3"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="36dp" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
