@@ -12,31 +12,136 @@
         android:orientation="horizontal"
         android:padding="8dp">
 
-        <TextView
+        <android.support.v7.widget.CardView
             android:id="@+id/toppic"
-            style="@style/HomeFrgmTV"
-            android:text="促销快报"/>
+            android:layout_margin="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/homefrgm_topic"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+
+                    style="@style/HomeFrgmTV"
+                    android:text="促销快报"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:id="@+id/tjpp"
-            style="@style/HomeFrgmTV"
-            android:text="推荐品牌"/>
+            android:layout_margin="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/homefrgm_topic"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+
+                    style="@style/HomeFrgmTV"
+                    android:text="促销快报"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_margin="2dp"
             android:id="@+id/xpsj"
-            style="@style/HomeFrgmTV"
-            android:text="新品上架"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/homefrgm_topic"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+
+                    style="@style/HomeFrgmTV"
+                    android:text="促销快报"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_margin="2dp"
             android:id="@+id/rmdp"
-            style="@style/HomeFrgmTV"
-            android:text="热门单品"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/homefrgm_topic"
+                    android:scaleType="fitCenter"/>
+
+                <TextView
+
+                    style="@style/HomeFrgmTV"
+                    android:text="促销快报"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_margin="2dp"
             android:id="@+id/cnxh"
-            style="@style/HomeFrgmTV"
-            android:text="结算中心"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/homefrgm_topic"
+                    android:scaleType="center"/>
+
+                <TextView
+
+                    style="@style/HomeFrgmTV"
+                    android:text="促销快报"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
 
     </LinearLayout>
 

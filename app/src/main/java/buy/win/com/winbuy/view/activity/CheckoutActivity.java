@@ -3,12 +3,15 @@ package buy.win.com.winbuy.view.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.List;
@@ -63,6 +66,7 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
 
     private void loadView() {
         mUserId = ShareUtils.getUserId(this, "20428");
+//        mUserId = "20428";// TODO: 2017/6/20 到时候删除这行
         mCheckoutPresenter.upCheckout(mUserId, "1:3:1,2,3,4|2:2:2,3");
         mCheckoutProductListAdapter = new CheckoutProductListAdapter(this);
         mRvCheckout.setAdapter(mCheckoutProductListAdapter);
@@ -101,6 +105,19 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         CheckoutAllBean.CheckoutAddupBean checkoutAddup = bean.getCheckoutAddup();
         mCheckoutAddupFreight.setText("共" + checkoutAddup.getFreight() + "件商品");
         mCheckoutAddupTotalPrice.setText("小计: ¥" + checkoutAddup.getTotalPrice());
+
+        mCheckoutProductListAdapter.mMPaymentList.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                Log.e(TAG, "mMPaymentList: checkedId" + checkedId);
+            }
+        });
+        mCheckoutProductListAdapter.mMDeliveryList.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                Log.e(TAG, "mMDeliveryList: checkedId" + checkedId);
+            }
+        });
     }
 
     private static final String TAG = "CheckoutActivity";
@@ -111,15 +128,11 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.checkout_submit:
                 String addressId = String.valueOf(mCheckoutAllBean.getAddressInfo().getId());
-                String paymentType = String.valueOf(mCheckoutProductListAdapter.mMPaymentList.getCheckedRadioButtonId());
+                int i = mCheckoutProductListAdapter.mMPaymentList.getCheckedRadioButtonId() % 3;
+                i = i == 0 ? 3 : i;
+                String paymentType = String.valueOf(i);
                 String deliveryType = String.valueOf(mCheckoutProductListAdapter.mMDeliveryList.getCheckedRadioButtonId());
-                int invoiceTypetemp = mCheckoutAllBean.getAddressInfo().getIsDefault();
-                String invoiceType;
-                if (invoiceTypetemp == 2) {
-                    invoiceType = "单位";
-                } else {
-                    invoiceType = "个人";
-                }
+                String invoiceType = String.valueOf(mCheckoutAllBean.getAddressInfo().getIsDefault());
                 String invoiceTitle = "传智慧播客教育科技有限公司";
                 String invoiceContent = "1";
 

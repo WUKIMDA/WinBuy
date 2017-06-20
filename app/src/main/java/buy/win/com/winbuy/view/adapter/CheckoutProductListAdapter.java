@@ -207,7 +207,6 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
 
         public void setData() {
             for (int i = 0; i < mDeliveryBeanList.size(); i++) {
-
                 RadioButton radioButton = new RadioButton(mCheckoutActivity);
                 radioButton.setText(mDeliveryBeanList.get(i).getDes());
                 mDeliveryList.addView(radioButton);
