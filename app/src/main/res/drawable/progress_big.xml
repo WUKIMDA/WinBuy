@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--多图层图片-->
-<layer-productListBeanList xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 正向旋转的圆,速度快 -->
     <item>
@@ -21,4 +21,4 @@
             android:pivotY="50%"
             android:toDegrees="0"/>
     </item>
-</layer-productListBeanList>
+</layer-list>

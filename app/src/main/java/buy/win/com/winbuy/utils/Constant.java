@@ -5,7 +5,7 @@ package buy.win.com.winbuy.utils;
  */
 public class Constant {
 
-    //    public static final String URL_HOST = "http://192.168.21.100:8080/market/";
+//        public static final String URL_HOST = "http://192.168.21.100:8080/market/";
     //    public static final String URL_HOST = "http://www.wukimda.win:8080/market/";
 
     /************************搜索排序常量**************************/
