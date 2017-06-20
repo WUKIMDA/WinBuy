@@ -269,4 +269,5 @@ public class GoodsShowActivity extends Activity {
         UiUtils.logD(GoodsShowActivity.class, sId + page + Constant.PAGE_NUM + orderby);
     }
 
+
 }

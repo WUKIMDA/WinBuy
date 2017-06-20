@@ -32,4 +32,9 @@
         android:layout_height="wrap_content"
         android:maxLines="2"
         tools:text="收货地址:经拉瑟扥喊啦赛风好戳;asdfioheqwfip[jqwer偶还差塞防戳啊塞防戳青蛙俄方看啦赛风放弃而糖茶奈法奈森遛弯儿破案疯掉哦豁陈亲爱额"/>
+    <View
+        android:layout_width="match_parent"
+        android:background="@drawable/home_line"
+        android:layerType="software"
+        android:layout_height="2dp"/>
 </LinearLayout>

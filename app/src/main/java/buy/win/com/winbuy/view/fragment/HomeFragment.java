@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +17,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -147,7 +147,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        TextView speakView = (TextView) rootView.findViewById(R.id.tv_message_topbar);
+        ImageView speakView = (ImageView) rootView.findViewById(R.id.tv_message_topbar);
         speakView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,5 +301,11 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
     }
 }

@@ -43,7 +43,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.MainActivity">
+        <activity android:name=".view.activity.MainActivity"
+            android:theme="@style/MainActiviyTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -91,8 +93,9 @@
         <activity android:name=".view.activity.OrderListActiivty"/>
 
         <activity android:name=".view.activity.OrderDetailActivity"/>
-
+        <activity android:name=".view.activity.OrdersumbitActivity"/>
         <activity android:name=".view.activity.FavoriteActivity"/>
+
 
     </application>
 

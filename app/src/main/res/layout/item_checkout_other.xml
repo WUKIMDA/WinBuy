@@ -7,18 +7,29 @@
 
     <RadioGroup
         android:id="@+id/deliveryList"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="送货方式"/>
+        android:orientation="vertical"
+        tools:text="送货方式">
 
+    </RadioGroup>
+    <View
+        android:layout_width="match_parent"
+        android:background="@drawable/home_line"
+        android:layerType="software"
+        android:layout_height="1dp"/>
     <RadioGroup
         android:id="@+id/paymentList"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="付款方式"/>
-
+        android:orientation="vertical"
+        tools:text="付款方式">
+    </RadioGroup>
+    <View
+        android:layout_width="match_parent"
+        android:background="@drawable/home_line"
+        android:layerType="software"
+        android:layout_height="1dp"/>
     <TextView
         android:id="@+id/checkoutProm"
         android:layout_width="match_parent"

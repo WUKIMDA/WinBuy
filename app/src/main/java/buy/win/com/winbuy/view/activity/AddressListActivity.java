@@ -1,9 +1,9 @@
 package buy.win.com.winbuy.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +33,7 @@ import retrofit2.Response;
  * Created eason
  */
 
-public class AddressListActivity extends AppCompatActivity {
+public class AddressListActivity extends Activity {
     @Bind(R.id.btn_back)
     ImageView mBtnBack;
     @Bind(R.id.add_address)

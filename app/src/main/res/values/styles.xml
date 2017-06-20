@@ -1,10 +1,10 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MainActiviyTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/snow</item>
+        <item name="colorPrimaryDark">@color/result_view</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -27,7 +27,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:drawableTop">@mipmap/ic_launcher</item>
     </style>
 
     <style name="colorPrimaryTextStyle">
@@ -69,7 +68,6 @@
         <item name="android:textSize">@dimen/font_small</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
-
 
     <style name="my_dialog">
         <item name="android:windowNoTitle">true</item>

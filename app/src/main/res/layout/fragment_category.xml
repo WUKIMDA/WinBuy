@@ -3,17 +3,60 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/category_list"
-        android:layout_width="70dp"
-        android:layout_height="match_parent">
-    </ListView>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/category_rcv"
-        android:layout_marginLeft="15dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="36dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:src="@mipmap/scanning_black"/>
+
+        <TextView
+            android:id="@+id/et_searchtext_search"
+            android:hint="@string/search_hint"
+            android:layout_width="0dp"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="8"
+            android:background="@drawable/search_baground_shap"
+            android:drawableLeft="@mipmap/search_2"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#9f9f9f"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/category_list"
+            android:layout_width="70dp"
+            android:layout_height="match_parent">
+        </ListView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/category_rcv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"/>
+
+    </LinearLayout>
 </LinearLayout>

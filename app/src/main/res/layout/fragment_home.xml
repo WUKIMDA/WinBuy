@@ -2,34 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@mipmap/bc_homefrgm"
               android:orientation="vertical">
-
-    <!--  <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal">
-
-          <Button
-              android:id="@+id/temp_ewm"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="二维码"/>
-
-          <Button
-              android:id="@+id/temp_yy"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="语音"/>
-
-          <Button
-              android:id="@+id/btn_search"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="搜索"/>
-
-
-      </LinearLayout>-->
 
     <RelativeLayout
         android:id="@+id/rl_title"
@@ -42,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_qrcode_topbar"/>
+            android:src="@mipmap/scanning_black"/>
 
         <FrameLayout
             android:id="@+id/fl_news_topbar"
@@ -51,26 +24,16 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true">
 
-            <TextView
+            <ImageView
                 android:id="@+id/tv_message_topbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:drawableTop="@drawable/ic_message_topbar"
-                android:text="消息"
-                android:visibility="visible"/>
-
-            <TextView
-                android:id="@+id/tv_right_topbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="取消"
-                android:visibility="gone"/>
+                android:src="@mipmap/msg"/>
 
         </FrameLayout>
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -78,16 +41,7 @@
             android:layout_marginRight="8dp"
             android:layout_toLeftOf="@id/fl_news_topbar"
             android:layout_toRightOf="@id/iv_qrcode_topbar"
-            android:background="@drawable/shape_editbg_search">
-
-            <ImageView
-                android:id="@+id/iv_speak_topbar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ic_speak_search"/>
+            android:background="@drawable/search_baground_shap">
 
             <EditText
                 android:id="@+id/btn_search"
@@ -97,12 +51,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:background="@null"
-                android:drawableLeft="@drawable/ic_search_search"
-                android:drawablePadding="8dp"
+                android:drawableLeft="@mipmap/search_2"
                 android:focusableInTouchMode="false"
-                android:hint="搜索条件"
-                android:maxLines="1"
-                android:padding="8dp"/>
+                android:hint="@string/search_hint"
+                android:maxLines="1"/>
 
         </RelativeLayout>
 

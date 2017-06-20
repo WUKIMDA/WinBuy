@@ -1,8 +1,8 @@
 package buy.win.com.winbuy.view.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +22,7 @@ import buy.win.com.winbuy.view.adapter.FavoriteAdapter;
  * Created by demo on 2017/6/20.
  */
 
-public class FavoriteActivity extends AppCompatActivity {
+public class FavoriteActivity extends Activity {
 
     @Bind(R.id.iv_back)
     ImageView mIvBack;

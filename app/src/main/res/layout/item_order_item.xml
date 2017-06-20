@@ -6,19 +6,19 @@
               android:background="#fff"
               android:orientation="horizontal">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <!--<FrameLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content">-->
 
-        <ImageView
-            android:id="@+id/iv_order_item_seller_logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            android:src="@drawable/item_kfc"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_order_item_seller_logo"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_margin="8dp"-->
+            <!--android:src="@drawable/item_kfc"/>-->
 
 
-    </FrameLayout>
+    <!--</FrameLayout>-->
 
 
     <LinearLayout
