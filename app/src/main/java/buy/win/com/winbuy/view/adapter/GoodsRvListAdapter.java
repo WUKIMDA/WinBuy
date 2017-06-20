@@ -18,26 +18,24 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
-import buy.win.com.winbuy.model.net.SearchBean;
+import buy.win.com.winbuy.model.net.GoodsBean;
 import buy.win.com.winbuy.utils.Constant;
-import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.activity.CommodityActivity;
-import buy.win.com.winbuy.view.activity.SearchResultActivity;
 
 /**
  * Created by lenovo on 2017/6/17.
  */
 
-public class SearchRvListAdapter extends RecyclerView.Adapter {
+public class GoodsRvListAdapter extends RecyclerView.Adapter {
     private Context mContext;
-    private List<SearchBean.ProductListBean> mSearchBean = new ArrayList<>();
+    private List<GoodsBean.ProductListBean> mSearchBean = new ArrayList<>();
 
-    public SearchRvListAdapter(Context context) {
+    public GoodsRvListAdapter(Context context) {
         mContext = context;
     }
 
 
-    public void setBean(List<SearchBean.ProductListBean> bean) {
+    public void setBean(List<GoodsBean.ProductListBean> bean) {
         mSearchBean = bean;
         notifyDataSetChanged();
     }
@@ -45,7 +43,7 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View listView = LayoutInflater.from(mContext).inflate(R.layout.item_search_vertical, parent, false);
+        View listView = LayoutInflater.from(mContext).inflate(R.layout.item_goods_list, parent, false);
         ListViewHolder lvHolder = new ListViewHolder(listView);
         return lvHolder;
     }
@@ -68,16 +66,17 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
     }
 
 
-
-    class ListViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.iv_icon)
-        ImageView mIvIcon;
-        @Bind(R.id.tv_name_v)
-        TextView mTvNameV;
-        @Bind(R.id.tv_newprice_v)
-        TextView mTvNewpriceV;
-        @Bind(R.id.tv_oldprice_v)
-        TextView mTvOldpriceV;
+    class ListViewHolder extends RecyclerView.ViewHolder{
+        @Bind(R.id.goos_icon_list)
+        ImageView mGoosIconList;
+        @Bind(R.id.goods_name_list)
+        TextView mGoodsNameList;
+        @Bind(R.id.goods_newprice_list)
+        TextView mGoodsNewpriceList;
+        @Bind(R.id.goods_oldprice_list)
+        TextView mGoodsOldpriceList;
+        @Bind(R.id.goods_comment_list)
+        TextView mGoodsCommentList;
 
         ListViewHolder(View view) {
             super(view);
@@ -85,9 +84,8 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SearchBean.ProductListBean bean = mSearchBean.get(getPosition());
+                    GoodsBean.ProductListBean bean = mSearchBean.get(getPosition());
                     int id = bean.getId();
-                    UiUtils.logD(SearchResultActivity.class,id + "");
                     Intent intent = new Intent(mContext,CommodityActivity.class);
                     intent.putExtra("pId", String.valueOf(id));
                     mContext.startActivity(intent);
@@ -95,18 +93,20 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
             });
         }
 
-        public void setData(SearchBean.ProductListBean bean) {
-          //  UiUtils.logD(SearchRvListAdapter.class, bean.toString());
+        public void setData(GoodsBean.ProductListBean bean) {
             String pic = bean.getPic();
             String name = bean.getName();
             int price = bean.getPrice();
             int marketPrice = bean.getMarketPrice();
 
-            Picasso.with(mContext).load(Constant.URL_HOST + pic).into(mIvIcon);
-            mTvNameV.setText(name);
-            mTvNewpriceV.setText("￥" + String.valueOf(price));
-            mTvOldpriceV.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            mTvOldpriceV.setText("￥" + String.valueOf(marketPrice));
+            Picasso.with(mContext).load(Constant.URL_HOST + pic).into(mGoosIconList);
+            mGoodsNameList.setText(name);
+            mGoodsNewpriceList.setText("￥" + String.valueOf(price));
+            mGoodsOldpriceList.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            mGoodsOldpriceList.setText("￥" + String.valueOf(marketPrice));
+            mGoodsCommentList.setText(String.valueOf(bean.getCommentCount())+ "条评价");
         }
+
+
     }
 }

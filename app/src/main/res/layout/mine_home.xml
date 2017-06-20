@@ -18,7 +18,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="15dp"
-            android:text="欧阳锋"
+            android:text="请登录"
             android:textSize="20sp"/>
 
 
@@ -124,6 +124,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -133,7 +134,7 @@
                 android:id="@+id/like_baby"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                app:mivText="喜欢宝贝"
+                app:mivText="收藏夹"
                 >
             </buy.win.com.winbuy.view.customview.MineHomeRelativeLayout>
 
@@ -143,33 +144,31 @@
                 />
 
             <buy.win.com.winbuy.view.customview.MineHomeRelativeLayout
-                android:id="@+id/seller"
+                android:id="@+id/order"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                app:mivText="关注商家"
+                app:mivText="我的订单"
                 >
             </buy.win.com.winbuy.view.customview.MineHomeRelativeLayout>
 
             <View
                 style="@style/mine_line"/>
 
-            <buy.win.com.winbuy.view.customview.MineHomeRelativeLayout
-                android:id="@+id/service"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:mivText="浏览记录"
-                >
-            </buy.win.com.winbuy.view.customview.MineHomeRelativeLayout>
+            <!--<buy.win.com.winbuy.view.customview.MineHomeRelativeLayout-->
+            <!--android:id="@+id/service"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="60dp"-->
+            <!--app:mivText="浏览记录" />-->
 
             <View
                 style="@style/mine_line"/>
 
-            <buy.win.com.winbuy.view.customview.MineHomeRelativeLayout
-                android:id="@+id/guess_like"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:mivText="猜你喜欢"
-                />
+            <!--<buy.win.com.winbuy.view.customview.MineHomeRelativeLayout-->
+            <!--android:id="@+id/guess_like"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="60dp"-->
+            <!--app:mivText="猜你喜欢"-->
+            <!--/>-->
 
             <View
                 style="@style/mine_line"/>
@@ -182,11 +181,9 @@
                 />
 
 
-
         </LinearLayout>
 
     </ScrollView>
-
 
 
 </LinearLayout>

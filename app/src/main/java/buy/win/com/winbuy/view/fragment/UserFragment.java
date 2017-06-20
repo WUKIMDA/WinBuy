@@ -19,8 +19,10 @@ import buy.win.com.winbuy.model.net.AddressBean;
 import buy.win.com.winbuy.presenter.ApiService;
 import buy.win.com.winbuy.utils.RetrofitUtil;
 import buy.win.com.winbuy.utils.ShareUtils;
+import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.activity.AddressListActivity;
 import buy.win.com.winbuy.view.activity.LonginAndRegisterActivity;
+import buy.win.com.winbuy.view.activity.OrderListActiivty;
 import buy.win.com.winbuy.view.customview.MineHomeRelativeLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,12 +40,12 @@ public class UserFragment extends Fragment {
     TextView mNameUser;
     @Bind(R.id.like_baby)
     MineHomeRelativeLayout mLikeBaby;
-    @Bind(R.id.seller)
-    MineHomeRelativeLayout mSeller;
-    @Bind(R.id.service)
-    MineHomeRelativeLayout mService;
-    @Bind(R.id.guess_like)
-    MineHomeRelativeLayout mGuessLike;
+    @Bind(R.id.order)
+    MineHomeRelativeLayout mOrder;
+//    @Bind(R.id.service)
+//    MineHomeRelativeLayout mService;
+//    @Bind(R.id.guess_like)
+//    MineHomeRelativeLayout mGuessLike;
     @Bind(R.id.address_manager)
     MineHomeRelativeLayout mAddressManager;
     private String mUserName;
@@ -84,25 +86,27 @@ public class UserFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
-    @OnClick({R.id.name_user, R.id.like_baby, R.id.seller, R.id.service, R.id.guess_like, R.id.address_manager})
+//, R.id.guess_like, R.id.service
+    @OnClick({R.id.name_user, R.id.like_baby, R.id.order, R.id.address_manager})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.name_user:
-
                 //跳转登录或者注册界面
                 Intent intent = new Intent(mContext, LonginAndRegisterActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.like_baby:
                 break;
-            case R.id.seller:
+            case R.id.order:
+                //跳转订单列表
+                Intent orderIntent = new Intent(UiUtils.getContext(), OrderListActiivty.class);
+                orderIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                UiUtils.getContext().startActivity(orderIntent);
                 break;
-            case R.id.service:
-                break;
-            case R.id.guess_like:
-                break;
+//            case R.id.service:
+//                break;
+//            case R.id.guess_like:
+//                break;
             case R.id.address_manager:
                 //点击跳转地址管理activity
                 clickAddressManager();

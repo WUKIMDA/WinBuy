@@ -78,14 +78,7 @@
 
         <activity android:name=".view.activity.AddressListActivity"/>
 
-        <activity android:name=".view.activity.AddAddressActivity">
-            <!-- <intent-filter>
-                 <action android:name="android.intent.action.MAIN"/>
-
-                 <category android:name="android.intent.category.LAUNCHER"/>
-             </intent-filter>-->
-
-        </activity>
+        <activity android:name=".view.activity.AddAddressActivity"/>
 
         <activity android:name=".view.activity.LonginAndRegisterActivity"/>
         <activity android:name=".view.activity.CheckoutActivity"/>
@@ -97,12 +90,7 @@
 
         <activity android:name=".view.activity.OrderListActiivty"/>
 
-
-        <activity android:name=".view.activity.OrderDetailActivity">
-
-        </activity>
-
-
+        <activity android:name=".view.activity.OrderDetailActivity"/>
 
     </application>
 
