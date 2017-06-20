@@ -56,6 +56,22 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case TYPE_TITLE:
+                View view = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_header, parent, false);
+                TitleHolder titleHolder = new TitleHolder(view);
+                return titleHolder;
+            case TYPE_SELLER:
+                View rootView = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_normal, parent, false);
+                ViewHolder viewHolder = new ViewHolder(rootView);
+                return viewHolder;
+            default:
+                return null;
+        }
+    }
+
     /**
      * 6.item的局部赋值
      * notifyItemChanged(int position, Object payload)
@@ -76,22 +92,6 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
              *  当你看到此处说明我已全部讲解完成.
              */
             ((ViewHolder) holder).mLeftTimeTextView.setText(NumToTime.secToTime(timeArr[position - 1]));
-        }
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_TITLE:
-                View view = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_header, parent, false);
-                TitleHolder titleHolder = new TitleHolder(view);
-                return titleHolder;
-            case TYPE_SELLER:
-                View rootView = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_normal, parent, false);
-                ViewHolder viewHolder = new ViewHolder(rootView);
-                return viewHolder;
-            default:
-                return null;
         }
     }
 

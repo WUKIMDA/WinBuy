@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -14,42 +16,37 @@
             android:text="←结算中心"/>
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/addressInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="显示收货地址,联系电话"/>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/productList"
+        android:id="@+id/rv_checkout"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/toolbar_checkout"
+        android:layout_weight="100"/>
 
-    </android.support.v7.widget.RecyclerView>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="这里以后会是一个recyclerView,item是每个商品的信息"/>
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1">
 
-    <RadioGroup
-        android:id="@+id/deliveryList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </RadioGroup>
+        <TextView
+            android:id="@+id/checkoutAddup_freight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="100"
+            android:gravity="right"
+            android:text="共2件商品"/>
 
-    <RadioGroup
-        android:id="@+id/paymentList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/productList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/checkoutAddup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="共2件,总金额¥ 11976.00"/>
+        <TextView
+            android:id="@+id/checkoutAddup_totalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="小计:¥1234.43"/>
+        <Button
+            android:id="@+id/checkout_submit"
+            android:layout_width="wrap_content"
+            android:text="结算"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>
