@@ -51,13 +51,6 @@
             android:drawableTop="@mipmap/gift_64"
             android:text="热门单品"/>
 
-        <TextView
-            android:id="@+id/cnxh"
-            style="@style/HomeFrgmTV"
-            android:drawablePadding="6dp"
-            android:drawableTop="@mipmap/gift_64"
-            android:text="结算中心"/>
-
     </LinearLayout>
 
 
