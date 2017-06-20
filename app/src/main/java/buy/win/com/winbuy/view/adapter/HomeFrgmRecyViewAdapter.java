@@ -30,6 +30,7 @@ import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.NumToTime;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.view.activity.CheckoutActivity;
+import buy.win.com.winbuy.view.activity.CommodityActivity;
 import buy.win.com.winbuy.view.activity.TopPicActivity;
 import buy.win.com.winbuy.view.activity.TopicPlistActivity;
 
@@ -210,6 +211,17 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
             mLimitPriceTextView = (TextView) rootView.findViewById(R.id.tv_home_limitPrice);
             mPriceTextView = (TextView) rootView.findViewById(R.id.tv_home_price);
             mLeftTimeTextView = (TextView) rootView.findViewById(R.id.tv_home_leftTime);
+            rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getPosition();
+                    LimitbuyBean.ProductListBean bean = mHomeBottomBeenList.get(position - 1);
+                    String s = String.valueOf(bean.id);
+                    Intent intent = new Intent(mContext, CommodityActivity.class);
+                    intent.putExtra("pId", s);
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
         public void setData(int position) {
@@ -280,8 +292,8 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
             // 返回页面布局文件
             View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
             mImageView = (ImageView) view.findViewById(R.id.banner_image);
-            Log.e("HomeFrgmRecyViewAdapter", "createView: "+mImageView.getWidth() );
-            Log.e("HomeFrgmRecyViewAdapter", "createView: "+mImageView.getHeight() );
+            Log.e("HomeFrgmRecyViewAdapter", "createView: " + mImageView.getWidth());
+            Log.e("HomeFrgmRecyViewAdapter", "createView: " + mImageView.getHeight());
             return view;
         }
 

@@ -96,7 +96,6 @@
         <activity android:name=".view.activity.OrdersumbitActivity"/>
         <activity android:name=".view.activity.FavoriteActivity"/>
 
-        <activity android:name=".view.activity.FavoriteActivity"/>
 
     </application>
 

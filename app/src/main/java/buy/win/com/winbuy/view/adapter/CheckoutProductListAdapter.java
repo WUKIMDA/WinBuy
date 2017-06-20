@@ -18,6 +18,8 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.utils.Constant;
+import buy.win.com.winbuy.utils.UiUtils;
+import buy.win.com.winbuy.view.activity.AddressListActivity;
 import buy.win.com.winbuy.view.activity.CheckoutActivity;
 
 import static buy.win.com.winbuy.R.id.addressInfoname;
@@ -104,7 +106,7 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
         mAddressInfoBean = addressInfo;
     }
 
-    public static class AddressViewHolder extends RecyclerView.ViewHolder {
+    public class AddressViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
         public TextView mAddressInfoname;
         public TextView mAddressInfophoneNumber;
@@ -116,9 +118,19 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
             this.mAddressInfoname = (TextView) rootView.findViewById(addressInfoname);
             this.mAddressInfophoneNumber = (TextView) rootView.findViewById(R.id.addressInfophoneNumber);
             this.mAddressInfoMerge = (TextView) rootView.findViewById(R.id.addressInfoMerge);
+
+            rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UiUtils.startActivity(mCheckoutActivity, AddressListActivity.class);
+                }
+            });
         }
 
         public void setData() {
+            if (mAddressInfoBean==null) {
+                return;
+            }
             mAddressInfoname.setText("收货人:" + mAddressInfoBean.getName());
             mAddressInfophoneNumber.setText(mAddressInfoBean.getPhoneNumber());
             mAddressInfoMerge.setText("收货地址:" + mAddressInfoBean.getProvince() + mAddressInfoBean.getCity() + mAddressInfoBean.getAddressArea()+mAddressInfoBean.getAddressDetail());
