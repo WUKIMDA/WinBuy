@@ -28,6 +28,7 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechUtility;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
+import com.ljs.lovelytoast.LovelyToast;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.zhouwei.mzbanner.MZBannerView;
@@ -278,14 +279,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onHomeConnectError(String message) {
-        setVisibiliti(true);
+        setVisibiliti(false);
         Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
+        reConnecting = false;
     }
 
     public void onHomeServerBug(int code) {
-        setVisibiliti(true);
+        setVisibiliti(false);
         Log.d(TAG, "onHomeServerBug " + code);
         Toast.makeText(getActivity(), "服务器正在修复中", Toast.LENGTH_SHORT).show();
+        reConnecting = false;
     }
 
     @Override
@@ -325,13 +328,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mBtnHomeConnectDefeate.setOnClickListener(this);
     }
 
+    private boolean reConnecting = false;
+    private int reCount = 0;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_home_connect_defeate:
-                Toast.makeText(getActivity() , "正在重试...", Toast.LENGTH_SHORT).show();
+                if (reConnecting) {
+                    if (reCount > 150) {
+                        LovelyToast.makeText(getActivity(), "臭傻逼!我是比亚迪,你来咬我啊.", LovelyToast.LENGTH_SHORT, LovelyToast.SUCCESS, LovelyToast.LEFT_RIGHT);
+                    } else if (reCount > 100) {
+                        LovelyToast.makeText(getActivity(), "加油,已经第" + (reCount++) + "次了", LovelyToast.LENGTH_SHORT, LovelyToast.SUCCESS, LovelyToast.LEFT_RIGHT);
+                    } else {
+                        LovelyToast.makeText(getActivity(), "第" + (reCount++) + "次点击,达到一定次数可激活加速", LovelyToast.LENGTH_SHORT, LovelyToast.SUCCESS, LovelyToast.LEFT_RIGHT);
+                    }
+                    return;
+                }
+                Toast.makeText(getActivity(), "重试中...", Toast.LENGTH_SHORT).show();
                 mHomePresenter.loadHomeData();
                 mHomePresenterLimit.loadHomeBottomData();
+                reConnecting = true;
                 break;
         }
     }
