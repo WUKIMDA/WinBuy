@@ -12,7 +12,6 @@ import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.DelectBean;
 import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.FavoriteBean;
-import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.GoodsBean;
 import buy.win.com.winbuy.model.net.HelpBean;
 import buy.win.com.winbuy.model.net.HelpDetailBean;
@@ -171,25 +170,6 @@ public interface ApiService {
     @GET("version")
     Call<VersionAllBean> getVersionProduct();
 
-
-    /**
-     * 收藏夹
-     *
-     * @param userid
-     * @param page
-     * @param pageNum
-     * @return
-     */
-    @GET("favorites")
-    Call<FavoritesBean> getFavoriteProduct(
-            @Header("userid") String userid,
-            @Query("page") String page,
-            @Query("pageNum") String pageNum
-
-    );
-
-
-
     /**
      * 地址列表
      *
@@ -334,11 +314,10 @@ public interface ApiService {
                                              @Field("deliveryType") String deliveryType,
                                              @Field("invoiceType") String invoiceType,
                                              @Field("invoiceTitle") String invoiceTitle,
-                                             @Field("invoiceContent") String invoiceContent
-    );
+                                             @Field("invoiceContent") String invoiceContent);
 
 
-    //新品上架
+    //收藏夹
     @GET("favorites")
     Call<FavoriteBean> getFavorite(@Header("userid") String userid,
                                    @Query("page") String page,

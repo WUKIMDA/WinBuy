@@ -1,11 +1,11 @@
 package buy.win.com.winbuy.view.activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +48,7 @@ import buy.win.com.winbuy.utils.UiUtils;
  * Created by BUTTON on 2017-06-18.
  */
 
-public class OrderDetailActivity extends AppCompatActivity {
+public class OrderDetailActivity extends Activity {
 
     @Bind(R.id.ib_back)
     ImageButton mIbBack;
@@ -247,7 +247,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         new OrderCanclePresenter().orderCancle(mUserId, mOrderId);
-
+                        finish();
                     }
                 })
                 .setNegativeButton("我不取消", new DialogInterface.OnClickListener() {
@@ -420,4 +420,5 @@ public class OrderDetailActivity extends AppCompatActivity {
                 return "订单异常";
         }
     }
+
 }

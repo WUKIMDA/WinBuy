@@ -13,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     @Bind(R.id.category_rcv)
     RecyclerView mCategoryRcv;
     @Bind(R.id.et_searchtext_search)
-    EditText mEtSearchtextSearch;
+    TextView mEtSearchtextSearch;
     private List<CategoryAllBean.CategoryBean> mDatas = new ArrayList<>();
     private CategoryListAdapter mListAdapter;
     private List<CategoryAllBean.CategoryBean> mLvDatas = new ArrayList<>();

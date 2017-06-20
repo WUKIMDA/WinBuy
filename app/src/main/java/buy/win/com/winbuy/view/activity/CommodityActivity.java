@@ -156,6 +156,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 
     private Map<String, String> skuMap = new HashMap<>();
     private String userId;
+    private String mReplaceUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,12 +200,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         initListeners();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //如果收藏,回显
-    }
-
 
     private void loadService(String pId) {
         if (TextUtils.isEmpty(pId)) {
@@ -227,18 +222,16 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         }
         List<CommentDataBean.CommentBean> comment = commentDataLists.getComment();
 
-        if (comment.size()<=0){//没有评论
+        if (comment.size() <= 0) {//没有评论
             look_all_comment.setVisibility(View.GONE);
             return;
-        }else{
+        } else {
             look_all_comment.setVisibility(View.VISIBLE);
         }
         int size = commentDataLists.getComment().size();
 //        mTvCommdotyCommentCount.setText("商品评论(" + size + ")");
         mTvCommdotyCommentCount.setText("商品评论(" + 1 + ")");
         mCommentAdapter.setData(commentDataLists);
-
-
     }
 
 
@@ -249,13 +242,11 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             case R.id.iv_good_detai_back:
                 finish();
                 break;
-
             case R.id.iv_good_detai_share:
                 //第三方分享
                 break;
             case R.id.ll_good_detail_collect:
                 //收藏:取反,GONE
-                //favorites?userid=85915&pId=1  //TODO:用户ID
                 pidFavorites();
                 break;
             case R.id.tv_good_detail_shop_cart:
@@ -272,7 +263,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             case R.id.tv_good_detail_buy:
                 //立即购买
                 //checkCommit
-                checkCommit();
+                orderDetail();
                 break;
             case R.id.tv_good_detail_cate:
                 //产品分类选择,popw
@@ -282,8 +273,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         }
     }
 
-    private void checkCommit() {
-//        CheckoutPresent checkoutPresent = new CheckoutPresent();
+    private void orderDetail() {
         //TODO:用户ID
         if (TextUtils.isEmpty(userId)) {
             return;
@@ -294,11 +284,12 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             sku = pId + ":" + "1" + ":" + "1" + "," + "3";
         }
         //单个商品立即购买Intent传输
-//        Intent intent = new Intent(this,CheckoutActivity.class);
+        Intent intent = new Intent(this, CheckoutActivity.class);
 //        intent.putExtra("userId",userId);
-//        intent.putExtra("sku",sku);
-//        startActivity(intent);
+        intent.putExtra("sku", sku);
+        startActivity(intent);
         Log.d("立即购买", sku + "跳转结算中心");
+
     }
 
     /**
@@ -322,6 +313,12 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                     if (("当前商品已经添加过收藏".equals(error)) || ("addfavorites".equals(bodyResponse))) {
                         ivCollectSelect.setVisibility(View.VISIBLE);
                         ivCollectUnSelect.setVisibility(View.GONE);
+                        UiUtils.postTask(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(CommodityActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                     if ("还未登陆".equals(error)) {
                         UiUtils.postTask(new Runnable() {
@@ -331,16 +328,15 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                             }
                         });
                     }
-
                 }
             }
+
             @Override
             public void onFailure(Call<ErrorBean> call, Throwable t) {
 
             }
         });
     }
-    //KIMDA:详细描述：product/description?pId=2
 
 
     private void dialogShow() {
@@ -425,7 +421,9 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
      * 对话框操作事件
      */
     private void initDialogEvent() {
-        Glide.with(this).load(Constant.URL_HOST + imageIndex0).into(mIvCommodity);
+
+        Glide.with(this).load(imageIndex0).into(mIvCommodity);
+
         mPropertySize.addItemViews(mSizeLists, PropertyViewGroup.BTN_MODE);
         mPropertyColor.addItemViews(mColorLists, PropertyViewGroup.TEV_MODE);
 
@@ -472,12 +470,12 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         mBtnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(mSelectColor)||TextUtils.isEmpty(mSelectSize)){
+                if (TextUtils.isEmpty(mSelectColor) || TextUtils.isEmpty(mSelectSize)) {
                     return;
                 }
                 mCommodityDialog.dismiss();
                 sku = pId + ":" + mCommodityCount + ":" + mSelectColor + "," + mSelectSize;
-                Log.d("SKU===", sku);
+                Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -573,6 +571,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         for (int i = 0; i < bigPicsLists.size(); i++) {
             imgsUrl.add(Constant.URL_HOST + bigPicsLists.get(i));
         }
+        mReplaceUrl = imgsUrl.get(0);
         imgAdapter.addAll(imgsUrl);
         nlvImgs.setAdapter(imgAdapter);
         imgAdapter.notifyDataSetChanged();
@@ -581,16 +580,15 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         //top的详情图
         List<String> picsLists = product.getPics();
         //对商品top图判空
-        if (picsLists.size()<=0){//没有商品头图片
+        if (picsLists.size() <= 0) {//没有商品头图片
 //            url_maps.put("" + 0, Constant.URL_HOST +"images/product/detail/bigcar1.jpg");
-            url_maps.put("" + 0, imgsUrl.get(0));
-
-        }else{
-            imageIndex0 = picsLists.get(0);
+            url_maps.put("" + 0, mReplaceUrl);
+            imageIndex0 = mReplaceUrl;
+        } else {
             for (int i = 0; i < picsLists.size(); i++) {
                 url_maps.put("" + i, Constant.URL_HOST + picsLists.get(i));
             }
-
+            imageIndex0 = url_maps.get("0");
         }
         for (String desc : url_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
@@ -633,11 +631,11 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     }
 
     private void bigPicsSizeCheck(List<String> bigPicsLists) {
-        if (bigPicsLists.size()<=0){
-            imgsUrl.add(Constant.URL_HOST+"/images/product/detail/bigcar1.jpg");
-            imgsUrl.add(Constant.URL_HOST+"/images/product/detail/bigcar2.jpg");
-            imgsUrl.add(Constant.URL_HOST+"/images/product/detail/bigcar3.jpg");
-            imgsUrl.add(Constant.URL_HOST+"/images/product/detail/bigcar4.jpg");
+        if (bigPicsLists.size() <= 0) {
+            imgsUrl.add(Constant.URL_HOST + "/images/product/detail/bigcar1.jpg");
+            imgsUrl.add(Constant.URL_HOST + "/images/product/detail/bigcar2.jpg");
+            imgsUrl.add(Constant.URL_HOST + "/images/product/detail/bigcar3.jpg");
+            imgsUrl.add(Constant.URL_HOST + "/images/product/detail/bigcar4.jpg");
         }
     }
 
@@ -646,5 +644,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
 
 }
