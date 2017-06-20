@@ -22,7 +22,11 @@
         android:layout_height="match_parent"
         android:layout_alignBottom="@id/toolbar_checkout"
         android:layout_weight="100"/>
-
+    <View
+        android:layout_width="match_parent"
+        android:background="@drawable/home_line"
+        android:layerType="software"
+        android:layout_height="2dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="64dp"
