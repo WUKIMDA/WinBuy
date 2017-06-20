@@ -26,12 +26,14 @@
             android:id="@+id/rb_home"
             style="@style/RadioGroupMainActivity"
             android:drawableTop="@drawable/selector_tab_home"
+            android:text="主页"
             />
 
         <RadioButton
             android:id="@+id/rb_category"
             style="@style/RadioGroupMainActivity"
             android:drawableTop="@drawable/selector_tab_category"
+
             />
 
         <RadioButton

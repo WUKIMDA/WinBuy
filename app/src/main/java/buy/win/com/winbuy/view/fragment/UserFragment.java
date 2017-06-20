@@ -126,7 +126,7 @@ public class UserFragment extends Fragment {
     private void clickLikeBady() {
         //请求网络数据
         String userId = ShareUtils.getUserId(mContext, null);
-        ApiService addressListService = RetrofitUtil.getApiservice2();
+        ApiService addressListService = RetrofitUtil.getApiService();
 
 
         addressListService.getFavorite(userId, "1", "10").enqueue(new Callback<FavoriteBean>() {
@@ -175,7 +175,7 @@ public class UserFragment extends Fragment {
         //请求网络数据
         String userId = ShareUtils.getUserId(mContext, null);
 
-        ApiService addressListService = RetrofitUtil.getApiservice2();
+        ApiService addressListService = RetrofitUtil.getApiService();
 
         addressListService.getAddressList(userId).enqueue(new Callback<AddressBean>() {
             @Override
