@@ -294,11 +294,12 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             sku = pId + ":" + "1" + ":" + "1" + "," + "3";
         }
         //单个商品立即购买Intent传输
-//        Intent intent = new Intent(this,CheckoutActivity.class);
+        Intent intent = new Intent(this,CheckoutActivity.class);
 //        intent.putExtra("userId",userId);
-//        intent.putExtra("sku",sku);
-//        startActivity(intent);
+        intent.putExtra("sku",sku);
+        startActivity(intent);
         Log.d("立即购买", sku + "跳转结算中心");
+
     }
 
     /**
