@@ -2,6 +2,7 @@ package buy.win.com.winbuy.view.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -19,9 +21,11 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CategoryAllBean;
 import buy.win.com.winbuy.presenter.CategoryPresenter;
+import buy.win.com.winbuy.view.activity.SearchActivity;
 import buy.win.com.winbuy.view.adapter.CategoryListAdapter;
 import buy.win.com.winbuy.view.adapter.CategoryRcvAdapter;
 
@@ -35,6 +39,8 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     ListView mCategoryList;
     @Bind(R.id.category_rcv)
     RecyclerView mCategoryRcv;
+    @Bind(R.id.et_searchtext_search)
+    EditText mEtSearchtextSearch;
     private List<CategoryAllBean.CategoryBean> mDatas = new ArrayList<>();
     private CategoryListAdapter mListAdapter;
     private List<CategoryAllBean.CategoryBean> mLvDatas = new ArrayList<>();
@@ -128,5 +134,12 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
 
     public void onSuccess(CategoryAllBean bean) {
         setDatas(bean.getCategory());
+    }
+
+    @OnClick(R.id.et_searchtext_search)
+    public void onViewClicked() {
+        Intent intent = new Intent(mContext, SearchActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 }

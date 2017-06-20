@@ -93,6 +93,8 @@
         <activity android:name=".view.activity.OrderListActiivty"/>
 
         <activity android:name=".view.activity.OrderDetailActivity"/>
+        <activity android:name=".view.activity.OrdersumbitActivity"/>
+        <activity android:name=".view.activity.FavoriteActivity"/>
 
         <activity android:name=".view.activity.FavoriteActivity"/>
 
