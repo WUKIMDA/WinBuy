@@ -23,6 +23,7 @@ public class OrdersumbitActivity extends Activity implements View.OnClickListene
     private TextView mOrderInfo;
     private Button mFukuan;
     private Context mContext;
+    private OrdersumbitBean.OrderInfoBean mInfoBean;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,14 +43,14 @@ public class OrdersumbitActivity extends Activity implements View.OnClickListene
 
     private void initData() {
         Intent intent = getIntent();
-        OrdersumbitBean.OrderInfoBean infoBean = (OrdersumbitBean.OrderInfoBean) intent.getSerializableExtra("orderInfo");
-        if (infoBean==null) {
+        mInfoBean = (OrdersumbitBean.OrderInfoBean) intent.getSerializableExtra("orderInfo");
+        if (mInfoBean == null) {
             return;
         }
         String text = "";
 //        mOrderInfo.setText("订单编号:" + infoBean.orderId);
 //        mOrderInfo.setText("订单金额:" + infoBean.price);
-        int paymentType = infoBean.paymentType;
+        int paymentType = mInfoBean.paymentType;
         String payType = "";
         switch (paymentType) {
             case 1:
@@ -63,8 +64,8 @@ public class OrdersumbitActivity extends Activity implements View.OnClickListene
                 break;
         }
 //        mOrderInfo.setText("支付方式:" + payType);
-        text += "订单编号:" + infoBean.orderId;
-        text += "订单金额:" + infoBean.price;
+        text += "订单编号:" + mInfoBean.orderId;
+        text += "订单金额:" + mInfoBean.price;
         text += "支付方式:" + payType;
         mOrderInfo.setText(text);
     }
@@ -80,11 +81,12 @@ public class OrdersumbitActivity extends Activity implements View.OnClickListene
 
     private void showPayDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("付款xxx元");
+        builder.setTitle("付款" + mInfoBean.price + "元");
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(mContext,"付款成功XXX元",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "成功付款" + mInfoBean.price + "元", Toast.LENGTH_SHORT).show();
+                setResult(3838438);
                 finish();
             }
         });
