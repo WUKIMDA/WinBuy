@@ -11,11 +11,7 @@ import buy.win.com.winbuy.model.net.CheckoutAllBean;
 public class BeanToString {
     public static String addressInfoBean2String(CheckoutAllBean.AddressInfoBean bean) {
         StringBuilder sb = new StringBuilder();
-        sb.append("收货人:" + bean.getName())
-                .append("/r" + "联系电话:" + bean.getPhoneNumber())
-                .append("/n" + "联系邮箱:" + bean.getAddressDetail())
-                .append("/r/n" + "邮编地址:" + bean.getZipCode())
-                .append("/r/n" + "收货地址:" + bean.getProvince() + bean.getCity() + bean.getAddressArea());
+        sb.append("收货地址:" + bean.getProvince() + bean.getCity() + bean.getAddressArea());
         return sb.toString();
     }
 

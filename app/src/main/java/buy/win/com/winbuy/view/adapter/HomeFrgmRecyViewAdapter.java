@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.SystemClock;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -128,21 +129,21 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
     private class TitleHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final LinearLayout mLlHomeTop;
         private final MZBannerView mBannerHomeTop;
-        private final TextView mCxkk;
-        private final TextView mTjpp;
-        private final TextView mXpsj;
-        private final TextView mRmdp;
-        private final TextView mCnxh;
+        private final CardView mCxkk;
+        private final CardView mTjpp;
+        private final CardView mXpsj;
+        private final CardView mRmdp;
+        private final CardView mCnxh;
 
 
         public TitleHolder(View view) {
             super(view);
             mLlHomeTop = (LinearLayout) view.findViewById(R.id.ll_home_top);
-            (mCxkk = (TextView) view.findViewById(R.id.toppic)).setOnClickListener(this);
-            (mTjpp = (TextView) view.findViewById(R.id.tjpp)).setOnClickListener(this);
-            (mXpsj = (TextView) view.findViewById(R.id.xpsj)).setOnClickListener(this);
-            (mRmdp = (TextView) view.findViewById(R.id.rmdp)).setOnClickListener(this);
-            (mCnxh = (TextView) view.findViewById(R.id.cnxh)).setOnClickListener(this);
+            (mCxkk = (CardView) view.findViewById(R.id.toppic)).setOnClickListener(this);
+            (mTjpp = (CardView) view.findViewById(R.id.tjpp)).setOnClickListener(this);
+            (mXpsj = (CardView) view.findViewById(R.id.xpsj)).setOnClickListener(this);
+            (mRmdp = (CardView) view.findViewById(R.id.rmdp)).setOnClickListener(this);
+            (mCnxh = (CardView) view.findViewById(R.id.cnxh)).setOnClickListener(this);
             mBannerHomeTop = (MZBannerView) view.findViewById(R.id.banner_home_top);
         }
 
