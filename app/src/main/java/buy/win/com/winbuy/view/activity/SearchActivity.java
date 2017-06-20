@@ -45,7 +45,7 @@ public class SearchActivity extends Activity {
     protected void initData() {
         // 获取热门搜索字段
         mHotSearchPresenter.loadHotSearch();
-        String shareData = "奶粉,奇妮孕妇装,莫施,Bio-oil,快乐宝贝,爱家,Nutrilon";
+        String shareData = "奶粉,韩,奇妮孕妇装,莫施,Bio-oil,快乐宝贝,爱家,Nutrilon";
         List<String> record = Arrays.asList(shareData.split(","));
         //UiUtils.logD(SearchActivity.class,record.toString());
 

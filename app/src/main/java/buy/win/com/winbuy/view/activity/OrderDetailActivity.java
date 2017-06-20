@@ -233,8 +233,6 @@ public class OrderDetailActivity extends AppCompatActivity {
         mTvGoodsTotalCount.setText(totalCount + "件商品");
         mTvCountPrice.setText("总金额:￥" + totalPrice);
 
-        Toast.makeText(getApplicationContext(), "执行完毕", Toast.LENGTH_SHORT).show();
-
 
     }
 

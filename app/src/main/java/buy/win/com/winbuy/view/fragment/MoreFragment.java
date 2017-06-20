@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,5 +65,10 @@ public class MoreFragment extends Fragment {
     @OnClick(R.id.ib_setting)
     public void onViewClicked() {
         mFragmentManager.beginTransaction().replace(R.id.main_fragment_container, new SettingFragment()).commit();
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
     }
 }

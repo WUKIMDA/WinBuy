@@ -1,10 +1,10 @@
 package buy.win.com.winbuy.view.activity;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
@@ -18,11 +18,11 @@ import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.view.fragment.CategoryFragment;
 import buy.win.com.winbuy.view.fragment.HomeFragment;
-import buy.win.com.winbuy.view.fragment.UserFragment;
-import buy.win.com.winbuy.view.fragment.ShopCartFragment;
 import buy.win.com.winbuy.view.fragment.MoreFragment;
+import buy.win.com.winbuy.view.fragment.ShoppingCartFragment;
+import buy.win.com.winbuy.view.fragment.UserFragment;
 
-public class MainActivity extends Activity implements RadioGroup.OnCheckedChangeListener{
+public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener{
 
     @Bind(R.id.main_fragment_container)
     FrameLayout mFrameLayoutContainer;
@@ -94,7 +94,7 @@ public class MainActivity extends Activity implements RadioGroup.OnCheckedChange
     private void initFragment() {
         mFragmentList.add(new HomeFragment());
         mFragmentList.add(new CategoryFragment());
-        mFragmentList.add(new ShopCartFragment());
+        mFragmentList.add(new ShoppingCartFragment());
         mFragmentList.add(new UserFragment(this));
         mFragmentList.add(MoreFragment.getInstance());
 

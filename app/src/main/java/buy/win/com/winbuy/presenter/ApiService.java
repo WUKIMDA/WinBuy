@@ -11,6 +11,7 @@ import buy.win.com.winbuy.model.net.CommentDataBean;
 import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.DelectBean;
 import buy.win.com.winbuy.model.net.ErrorBean;
+import buy.win.com.winbuy.model.net.FavoriteBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.GoodsBean;
 import buy.win.com.winbuy.model.net.HelpBean;
@@ -62,23 +63,30 @@ public interface ApiService {
     Call<SelectCartBean> getSelectCartProduct(@Query("userId") String userId);
 
 
+    @GET("deleteCart")
+    Call<SelectCartBean> deleteSelectCartProduct(@Query("userId") String userId,@Query("productId") String productId);
+
+    @GET("updateCart")
+    Call<SelectCartBean> updataSelectCartProduct(@Query("userId") String userId, @Query("productId") String productId,
+                                                 @Query("productCount") String productCount,
+                                                 @Query("propertyId") String propertyId
+                                                 );
     /**
      * 搜索
      *
-     * @param keyword
      * @param page
      * @param pageNum
      * @param orderby
+     * @param keyword
      * @return
      */
     @GET("search")
     Call<SearchBean> getSearchProduct(
-            @Query("keyword") String keyword,
             @Query("page") String page,
             @Query("pageNum") String pageNum,
-            @Query("orderby") String orderby
-    );
-
+            @Query("orderby") String orderby,
+            @Query("keyword") String keyword
+            );
     /**
      * 热门搜索字段
      *
@@ -127,10 +135,10 @@ public interface ApiService {
     Call<CommodityProductBean> getCommodityProdectData(@Query("pId") String pId);
 
 
-    @FormUrlEncoded //POST请求中
+   /* @FormUrlEncoded //POST请求中
     @POST("login")
     Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
-
+*/
 
     @FormUrlEncoded //POST请求中
     @POST("register")
@@ -149,7 +157,6 @@ public interface ApiService {
 
     /**
      * 发票
-     *
      * @return
      */
     @GET("invoice")
@@ -239,12 +246,13 @@ public interface ApiService {
     /**
      * 底部导航我的部分(包括 用户登录 地址管理 )  eason
      */
-//    @FormUrlEncoded //POST请求中
-//    @POST("login")//定义
-//    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
+    @FormUrlEncoded //POST请求中
+    @POST("login")//定义
+    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
+
+
     @FormUrlEncoded //POST请求中
     @POST("register")
-//定义
     Call<RegisterBean> register(@Field("username") String username, @Field("password") String password);
 
 
@@ -259,7 +267,6 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("addresssave")
-//定义
     Call<SaveAddressBean> saveAddress(
             @Header("userid") String userid,
             @Field("name") String name,
@@ -329,6 +336,13 @@ public interface ApiService {
                                              @Field("invoiceTitle") String invoiceTitle,
                                              @Field("invoiceContent") String invoiceContent
     );
+
+
+    //新品上架
+    @GET("favorites")
+    Call<FavoriteBean> getFavorite(@Header("userid") String userid,
+                                   @Query("page") String page,
+                                   @Query("pageNum") String pageNum);
 
 
 }

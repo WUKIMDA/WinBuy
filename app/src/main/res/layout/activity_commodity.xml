@@ -22,8 +22,6 @@
     </buy.win.com.winbuy.presenter.ScrollViewContainer>
 
 
-
-
     <!--头-->
     <RelativeLayout
         android:id="@+id/ll_good_detail"

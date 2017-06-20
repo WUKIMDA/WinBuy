@@ -73,7 +73,8 @@ public class AboutFragment extends Fragment {
 
     public void onSuccess(VersionAllBean bean) {
         float mVersion = bean.getVersion().getVersion();
-        mTextView.setText("版本号: v" + mVersion);
+        mTextView.setText("版本号: v"
+                + mVersion);
         SPUtils.saveVersion(getActivity(),mVersion);
     }
 }

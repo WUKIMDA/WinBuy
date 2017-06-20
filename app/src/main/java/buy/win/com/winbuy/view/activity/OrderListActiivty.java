@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.List;
@@ -28,15 +31,17 @@ public class OrderListActiivty extends AppCompatActivity {
     ListView mListviewOrder;
     private String userId;
     private OrderListAdapter mOrderListAdapter;
+    private RelativeLayout mPagerEmpty;
+    private RelativeLayout mPagerLoading;
+    private LinearLayout mMLlOrderlist;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_orderlist);
         ButterKnife.bind(this);
+        initView();
         OrderListsPresenter orderListsPresenter = new OrderListsPresenter(this);
-
 //        userId = "20428";
         userId = ShareUtils.getUserId(this, "");
         if (TextUtils.isEmpty(userId)) {
@@ -50,9 +55,26 @@ public class OrderListActiivty extends AppCompatActivity {
 
     }
 
+    private void initView() {
+        mMLlOrderlist = (LinearLayout) findViewById(R.id.ll_orderlist);
+        mPagerEmpty = (RelativeLayout) findViewById(R.id.pager_empty);
+        mPagerEmpty.setVisibility(View.GONE);
+        mPagerLoading = (RelativeLayout) findViewById(R.id.pager_loading);
+        mPagerLoading.setVisibility(View.VISIBLE);
+    }
+
     public void onSuccess(OrderListAllBean bean) {
+        mPagerLoading.setVisibility(View.GONE);
         List<OrderListAllBean.OrderListBean> orderList = bean.getOrderList();
+        if (orderList.size() <= 0) {//没有数据
+            mPagerEmpty.setVisibility(View.VISIBLE);
+            mMLlOrderlist.setVisibility(View.GONE);
+        } else {
+            mPagerEmpty.setVisibility(View.GONE);
+            mMLlOrderlist.setVisibility(View.VISIBLE);
+        }
         refreshUI(orderList);
+
     }
 
     private void refreshUI(List<OrderListAllBean.OrderListBean> orderList) {

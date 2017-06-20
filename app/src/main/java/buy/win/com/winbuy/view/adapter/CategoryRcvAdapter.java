@@ -3,6 +3,7 @@ package buy.win.com.winbuy.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,7 +129,7 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         public void setData(List<CategoryAllBean.CategoryBean> datas, CategoryAllBean.CategoryBean categoryBean) {
             mCategoryRcvItemTv.setText(categoryBean.getName());
 
-            List<CategoryAllBean.CategoryBean> mGridDatas = new ArrayList<>();
+            final List<CategoryAllBean.CategoryBean> mGridDatas = new ArrayList<>();
             for (int i = 0; i < datas.size(); i++) {
                 if (datas.get(i).getParentId() == categoryBean.getId()) {
                     mGridDatas.add(datas.get(i));
@@ -140,10 +141,9 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
             mCategoryRcvItemGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                     //// TODO: 2017/6/15 0015
                     Intent intent = new Intent(mContext, GoodsShowActivity.class);
-                    intent.putExtra("sId", "125");
+                    intent.putExtra("sId", mGridDatas.get(position).getId() + "");
                     mContext.startActivity(intent);
                 }
             });
