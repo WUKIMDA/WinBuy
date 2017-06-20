@@ -96,7 +96,7 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
         if (mProductListBeanList == null || mProductListBeanList.size() == 0) {
             return 2;
         }
-        Log.e(TAG, "mProductListBeanList.size(): "+mProductListBeanList.size() );
+        Log.e(TAG, "mProductListBeanList.size(): " + mProductListBeanList.size());
         return mProductListBeanList.size() + 2;
     }
 
@@ -128,12 +128,12 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
         }
 
         public void setData() {
-            if (mAddressInfoBean==null) {
+            if (mAddressInfoBean == null) {
                 return;
             }
             mAddressInfoname.setText("收货人:" + mAddressInfoBean.getName());
             mAddressInfophoneNumber.setText(mAddressInfoBean.getPhoneNumber());
-            mAddressInfoMerge.setText("收货地址:" + mAddressInfoBean.getProvince() + mAddressInfoBean.getCity() + mAddressInfoBean.getAddressArea()+mAddressInfoBean.getAddressDetail());
+            mAddressInfoMerge.setText("收货地址:" + mAddressInfoBean.getProvince() + mAddressInfoBean.getAddressDetail());
         }
     }
 
@@ -173,7 +173,7 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
             int price = beanProduct.getPrice();
             int prodNum = bean.getProdNum();
             mProductListProductPrice.setText("¥ " + String.valueOf(price / prodNum));
-            mProductListProdNum.setText("× "+String.valueOf(prodNum));
+            mProductListProdNum.setText("× " + String.valueOf(prodNum));
             List<CheckoutAllBean.ProductListBean.ProductBean.ProductPropertyBean> beanProductProperty = beanProduct.getProductProperty();
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < beanProductProperty.size(); i++) {
@@ -186,27 +186,32 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
     }
 
     private List<CheckoutAllBean.DeliveryListBean> mDeliveryBeanList = new ArrayList<>();
+
     public void setOtherDeliveryListInfo(List<CheckoutAllBean.DeliveryListBean> deliveryList) {
         mDeliveryBeanList = deliveryList;
     }
 
     private List<CheckoutAllBean.PaymentListBean> mPaymentBeanList = new ArrayList<>();
+
     public void setOtherPaymentListInfo(List<CheckoutAllBean.PaymentListBean> paymentList) {
         mPaymentBeanList = paymentList;
     }
 
     private List<String> mCheckoutPromListInfo = new ArrayList<>();
+
     public void setCheckoutPromListInfo(List<String> checkoutProm) {
         mCheckoutPromListInfo = checkoutProm;
     }
 
     public RadioGroup mMDeliveryList;
     public RadioGroup mMPaymentList;
+
     public class OtherViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
         public RadioGroup mDeliveryList;
         public RadioGroup mPaymentList;
         public TextView mCheckoutProm;
+
         public OtherViewHolder(View rootView) {
             super(rootView);
             this.rootView = rootView;
@@ -222,7 +227,7 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
                 RadioButton radioButton = new RadioButton(mCheckoutActivity);
                 radioButton.setText(mDeliveryBeanList.get(i).getDes());
                 mDeliveryList.addView(radioButton);
-                if (i==0) {
+                if (i == 0) {
                     radioButton.setChecked(true);
                 }
             }
@@ -230,7 +235,7 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
                 RadioButton radioButton = new RadioButton(mCheckoutActivity);
                 radioButton.setText(mPaymentBeanList.get(i).getDes());
                 mPaymentList.addView(radioButton);
-                if (i==0) {
+                if (i == 0) {
                     radioButton.setChecked(true);
                 }
             }
@@ -243,5 +248,6 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
         }
 
     }
+
     private static final String TAG = "CheckoutProductListAdap";
 }

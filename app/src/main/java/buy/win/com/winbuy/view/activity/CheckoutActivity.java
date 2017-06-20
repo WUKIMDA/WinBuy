@@ -64,7 +64,6 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     private void selectSku() {
         Intent intent = getIntent();
         if (intent != null) {
-            mSku = intent.getStringExtra("sku");
             if (mSku==null||mSku.equals("")) {
                 mSkuPresenter = new SkuPresenter(this);
                 mSkuPresenter.loadShopCartFragment(mUserId);
@@ -103,7 +102,6 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         // 收货地址
         CheckoutAllBean.AddressInfoBean addressInfo = bean.getAddressInfo();
         mCheckoutProductListAdapter.setAddressInfo(addressInfo);
-
         // 商品详情
         List<CheckoutAllBean.ProductListBean> productList = bean.getProductList();
         mCheckoutProductListAdapter.setProductListBeanList(productList);
