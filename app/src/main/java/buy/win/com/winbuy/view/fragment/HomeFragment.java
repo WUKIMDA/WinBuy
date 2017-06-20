@@ -340,6 +340,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                         LovelyToast.makeText(getActivity(), "臭傻逼!我是比亚迪,你来咬我啊.", LovelyToast.LENGTH_SHORT, LovelyToast.SUCCESS, LovelyToast.LEFT_RIGHT);
                     } else if (reCount > 100) {
                         LovelyToast.makeText(getActivity(), "加油,已经第" + (reCount++) + "次了", LovelyToast.LENGTH_SHORT, LovelyToast.SUCCESS, LovelyToast.LEFT_RIGHT);
+                    } else if (reCount > 50) {
+                        LovelyToast.makeText(getActivity(), "离目标不远啦,第" + (reCount++) + "次了", LovelyToast.LENGTH_SHORT, LovelyToast.SUCCESS, LovelyToast.LEFT_RIGHT);
                     } else {
                         LovelyToast.makeText(getActivity(), "第" + (reCount++) + "次点击,达到一定次数可激活加速", LovelyToast.LENGTH_SHORT, LovelyToast.SUCCESS, LovelyToast.LEFT_RIGHT);
                     }
@@ -354,6 +356,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setVisibiliti(boolean b) {
+        reCount = 0;
         if (b) {
             mBtnHomeConnectSuccess.setVisibility(View.VISIBLE);
             mBtnHomeConnectDefeate.setVisibility(View.GONE);
