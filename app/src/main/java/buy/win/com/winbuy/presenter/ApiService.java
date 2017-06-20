@@ -12,7 +12,6 @@ import buy.win.com.winbuy.model.net.CommodityProductBean;
 import buy.win.com.winbuy.model.net.DelectBean;
 import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.FavoriteBean;
-import buy.win.com.winbuy.model.net.ErrorBean;
 import buy.win.com.winbuy.model.net.FavoritesBean;
 import buy.win.com.winbuy.model.net.GoodsBean;
 import buy.win.com.winbuy.model.net.HelpBean;
@@ -188,18 +187,6 @@ public interface ApiService {
             @Query("pageNum") String pageNum
 
     );
-
-
-    /**
-     * 订单详情
-     *
-     * @param userid
-     * @param orderId
-     * @return
-     */
-    @GET("orderdetail")
-    Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
-                                                @Query("orderId") String orderId);
 
 
     /**
