@@ -84,14 +84,14 @@ public class OrderListAdapter extends BaseAdapter {
         TextView mTvOrderItemFlag;
         private String mOrderId;
 
-        OrderListViewHolder(View view) {
+        OrderListViewHolder(final View view) {
             ButterKnife.bind(this, view);
-
+            mTvOrderOrderid.setVisibility(View.GONE);
             mTvOrderItemFlag.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     new OrderCanclePresenter().orderCancle(ShareUtils.getUserId(UiUtils.getContext(),""), mOrderId);
-                    mTvOrderItemFlag.setVisibility(View.GONE);
+                    view.setVisibility(View.GONE);
                 }
             });
 
@@ -120,7 +120,8 @@ public class OrderListAdapter extends BaseAdapter {
 
             mTvOrderType.setText(status);
             mTvOrderMoney.setText("￥："+price);
-            mTvOrderOrderid.setText("订单号"+ mOrderId);
+            mTvOrderName.setText("订单号"+ mOrderId);
+
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/ MM/ dd HH:mm:ss");
             Date date= new Date(Long.parseLong(time));

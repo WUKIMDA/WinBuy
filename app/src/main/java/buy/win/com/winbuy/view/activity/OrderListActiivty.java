@@ -74,6 +74,7 @@ public class OrderListActiivty extends Activity {
         refreshUI(orderList);
     }
 
+
     private void refreshUI(List<OrderListAllBean.OrderListBean> orderList) {
         mOrderListAdapter.setData(orderList);
     }
@@ -90,4 +91,7 @@ public class OrderListActiivty extends Activity {
         //访问网络
         orderListsPresenter.loadOrderLists(userId, "1", "0", "10");
     }
+
+
+
 }
