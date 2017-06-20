@@ -55,16 +55,15 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         mUserId = ShareUtils.getUserId(this, "20428");
-        selectSku();
+        initView();
         mCheckoutPresenter = new CheckoutPresent(this);
         mCheckoutOrdersumbitPresenter = new CheckoutOrdersumbitPresenter(this);
-        initView();
+        selectSku();
     }
 
     private void selectSku() {
         Intent intent = getIntent();
         if (intent != null) {
-            mSku = intent.getStringExtra("sku");
             if (mSku==null||mSku.equals("")) {
                 mSkuPresenter = new SkuPresenter(this);
                 mSkuPresenter.loadShopCartFragment(mUserId);
@@ -103,7 +102,6 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         // 收货地址
         CheckoutAllBean.AddressInfoBean addressInfo = bean.getAddressInfo();
         mCheckoutProductListAdapter.setAddressInfo(addressInfo);
-
         // 商品详情
         List<CheckoutAllBean.ProductListBean> productList = bean.getProductList();
         mCheckoutProductListAdapter.setProductListBeanList(productList);

@@ -27,7 +27,7 @@
             style="@style/HomeFrgmTV"
             android:drawablePadding="6dp"
             android:drawableTop="@mipmap/gift_64"
-            android:text="促销快报"/>
+            android:text="天天优惠"/>
 
 
         <TextView
@@ -42,21 +42,21 @@
             style="@style/HomeFrgmTV"
             android:drawablePadding="6dp"
             android:drawableTop="@mipmap/gift_64"
-            android:text="促销快报"/>
+            android:text="新品上架"/>
 
         <TextView
             android:id="@+id/rmdp"
             style="@style/HomeFrgmTV"
             android:drawablePadding="6dp"
             android:drawableTop="@mipmap/gift_64"
-            android:text="促销快报"/>
+            android:text="热门单品"/>
 
         <TextView
             android:id="@+id/cnxh"
             style="@style/HomeFrgmTV"
             android:drawablePadding="6dp"
             android:drawableTop="@mipmap/gift_64"
-            android:text="促销快报"/>
+            android:text="结算中心"/>
 
     </LinearLayout>
 
