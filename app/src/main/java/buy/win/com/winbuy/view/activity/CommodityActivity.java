@@ -213,25 +213,27 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             Toast.makeText(getApplicationContext(), "请求商品id失败,请传商品id", Toast.LENGTH_SHORT).show();
             return;
         }
-//    public void loadService() {
         CommodityProductPresenter commodityProductPresenter = new CommodityProductPresenter(this);
 
         commodityProductPresenter.loadCommdityProductData(pId);
-//        commodityProductPresenter.loadCommdityProductData("1");
 
         CommentPresenter commentPresenter = new CommentPresenter();
-//        commentPresenter.loadCommentData(pId,page,pageNum);
         commentPresenter.loadCommentData(pId, "1", "10");
         //后续EventBus自动获取数据后onEventMainThread()
-
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(CommentDataBean commentDataLists) {
-//        List<CommentDataBean.CommentBean> comment = commentDataLists.getComment();
-//        System.out.println("测试" + comment.toString());
         if (commentDataLists == null) {
             return;
+        }
+        List<CommentDataBean.CommentBean> comment = commentDataLists.getComment();
+
+        if (comment.size()<=0){//没有评论
+            look_all_comment.setVisibility(View.GONE);
+            return;
+        }else{
+            look_all_comment.setVisibility(View.VISIBLE);
         }
         int size = commentDataLists.getComment().size();
 //        mTvCommdotyCommentCount.setText("商品评论(" + size + ")");
@@ -571,6 +573,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         //大图bigPics
         List<String> bigPicsLists = product.getBigPic();
         imgsUrl = new ArrayList<>();
+        //判空
+        bigPicsSizeCheck(bigPicsLists);
         for (int i = 0; i < bigPicsLists.size(); i++) {
             imgsUrl.add(Constant.URL_HOST + bigPicsLists.get(i));
         }
@@ -623,6 +627,15 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             skuMap.put(productPropertyBean.getV(), "" + productPropertyBean.getId());
         }
         Log.d("商品属性", "=====" + mColorLists.toString() + mSizeLists.toString());
+    }
+
+    private void bigPicsSizeCheck(List<String> bigPicsLists) {
+        if (bigPicsLists.size()<=0){
+            imgsUrl.add(Constant.URL_HOST+"/images/product/detail/bigcar1.jpg");
+            imgsUrl.add(Constant.URL_HOST+"/images/product/detail/bigcar2.jpg");
+            imgsUrl.add(Constant.URL_HOST+"/images/product/detail/bigcar3.jpg");
+            imgsUrl.add(Constant.URL_HOST+"/images/product/detail/bigcar4.jpg");
+        }
     }
 
     @Override
