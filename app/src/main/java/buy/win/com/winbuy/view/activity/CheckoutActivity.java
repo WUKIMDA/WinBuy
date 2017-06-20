@@ -1,10 +1,10 @@
 package buy.win.com.winbuy.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,7 +20,6 @@ import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.model.net.OrdersumbitBean;
 import buy.win.com.winbuy.presenter.CheckoutOrdersumbitPresenter;
 import buy.win.com.winbuy.presenter.CheckoutPresent;
-import buy.win.com.winbuy.presenter.SkuPresenter;
 import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.view.adapter.CheckoutProductListAdapter;
 
@@ -28,10 +27,9 @@ import buy.win.com.winbuy.view.adapter.CheckoutProductListAdapter;
  * Created by Ziwen on 2017/6/18.
  */
 
-public class CheckoutActivity extends AppCompatActivity implements View.OnClickListener {
+public class CheckoutActivity extends Activity implements View.OnClickListener {
 
     private CheckoutPresent mCheckoutPresenter;
-    private SkuPresenter mSkuPresenter;
     private RecyclerView mRvCheckout;
     private TextView mCheckoutAddupFreight;
     private TextView mCheckoutAddupTotalPrice;
@@ -54,23 +52,23 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+        initView();
         mUserId = ShareUtils.getUserId(this, "20428");
-        selectSku();
         mCheckoutPresenter = new CheckoutPresent(this);
         mCheckoutOrdersumbitPresenter = new CheckoutOrdersumbitPresenter(this);
-        initView();
+        selectSku();
     }
 
     private void selectSku() {
         Intent intent = getIntent();
         if (intent != null) {
             mSku = intent.getStringExtra("sku");
-            if (mSku==null||mSku.equals("")) {
-                mSkuPresenter = new SkuPresenter(this);
-                mSkuPresenter.loadShopCartFragment(mUserId);
-            }else {
+            //if (mSku==null||mSku.equals("")) {
+                //mSkuPresenter = new SkuPresenter(this);
+                //mSkuPresenter.loadShopCartFragment(mUserId);
+            //}else {
                 loadView(mSku);
-            }
+            //}
         }
     }
 
@@ -156,7 +154,7 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
                 String invoiceTitle = "传智慧播客教育科技有限公司";
                 String invoiceContent = "1";
 
-                mCheckoutOrdersumbitPresenter.checkoutOrdersumbit(mUserId, "1:3:1,2,3,4|2:2:2,3", addressId, paymentType, deliveryType, invoiceType, invoiceTitle, invoiceContent);
+                mCheckoutOrdersumbitPresenter.checkoutOrdersumbit(mUserId, mSku, addressId, paymentType, deliveryType, invoiceType, invoiceTitle, invoiceContent);
                 break;
         }
     }

@@ -16,7 +16,6 @@
             android:layout_height="64dp"
             android:layout_alignParentLeft="true"
             android:layout_margin="8dp"
-            android:background="@drawable/ic_launcher"
             android:scaleType="fitCenter"/>
 
         <LinearLayout
