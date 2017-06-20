@@ -37,7 +37,7 @@ import buy.win.com.winbuy.utils.UtilsLogForSC;
  * 购物车适配器
  */
 
-public class ShopcatAdapter extends BaseExpandableListAdapter {
+public class ShoppingCatAdapter extends BaseExpandableListAdapter {
     private List<SC_StoreInfoBean> groups;
     //这个String对应着StoreInfo的Id，也就是店铺的Id
     private Map<String, List<SC_GoodsInfoBean>> childrens;
@@ -49,7 +49,7 @@ public class ShopcatAdapter extends BaseExpandableListAdapter {
     private boolean flag=true; //组的编辑按钮是否可见，true可见，false不可见
 
 
-    public ShopcatAdapter(List<SC_StoreInfoBean> groups, Map<String, List<SC_GoodsInfoBean>> childrens, Context mcontext) {
+    public ShoppingCatAdapter(List<SC_StoreInfoBean> groups, Map<String, List<SC_GoodsInfoBean>> childrens, Context mcontext) {
         this.groups = groups;
         this.childrens = childrens;
         this.mcontext = mcontext;

@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -36,19 +37,20 @@ import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.SC_GoodsInfoBean;
 import buy.win.com.winbuy.model.net.SC_StoreInfoBean;
 import buy.win.com.winbuy.model.net.SelectCartBean;
+import buy.win.com.winbuy.presenter.FavoritePresenter;
 import buy.win.com.winbuy.presenter.ShopCartPresenter;
 import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.utils.UiUtils;
 import buy.win.com.winbuy.utils.UtilToolForSC;
 import buy.win.com.winbuy.utils.UtilsLogForSC;
-import buy.win.com.winbuy.view.adapter.ShopcatAdapter;
+import buy.win.com.winbuy.view.adapter.ShoppingCatAdapter;
 import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 import static in.srain.cube.views.ptr.util.PtrLocalDisplay.dp2px;
 
-public class ShoppingCartFragment extends Fragment implements View.OnClickListener, ShopcatAdapter.CheckInterface, ShopcatAdapter.ModifyCountInterface, ShopcatAdapter.GroupEditorListener {
+public class ShoppingCartFragment extends Fragment implements View.OnClickListener, ShoppingCatAdapter.CheckInterface, ShoppingCatAdapter.ModifyCountInterface, ShoppingCatAdapter.GroupEditorListener {
     @Bind(R.id.listView)
     ExpandableListView listView;
     @Bind(R.id.all_checkBox)
@@ -81,10 +83,11 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
     private int mtotalCount = 0;
     //false就是编辑，ture就是完成
     private boolean flag = false;
-    private ShopcatAdapter adapter;
+    private ShoppingCatAdapter adapter;
     private List<SC_StoreInfoBean> groups = new ArrayList<>(); //组元素的列表
     private Map<String, List<SC_GoodsInfoBean>> childs = new HashMap<>(); //子元素的列表
     private String mUserId;
+    private FavoritePresenter mFavoritePresenter;
 
 
     @Nullable
@@ -201,7 +204,7 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
 
     private void initEvents() {
         actionBarEdit.setOnClickListener(this);
-        adapter = new ShopcatAdapter(groups, childs, mContext);
+        adapter = new ShoppingCatAdapter(groups, childs, mContext);
         adapter.setCheckInterface(this);//关键步骤1：设置复选框的接口
         adapter.setModifyCountInterface(this); //关键步骤2:设置增删减的接口
         adapter.setGroupEditorListener(this);//关键步骤3:监听组列表的编辑状态
@@ -602,6 +605,22 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
                     UtilToolForSC.toast(mContext, "请选择要收藏的商品");
                     return;
                 }
+
+
+                // // TODO: 2017/6/20 0020    商品收藏!
+                mFavoritePresenter = new FavoritePresenter();
+                Iterator<Map.Entry<String, List<SC_GoodsInfoBean>>> iterator = childs.entrySet().iterator();
+                if (iterator.hasNext()) {
+                    Map.Entry<String, List<SC_GoodsInfoBean>> entry = iterator.next();
+                    List<SC_GoodsInfoBean> list = entry.getValue();
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).isChoosed()) {
+                            mFavoritePresenter.collect(mUserId,list.get(i).getId());
+                        }
+                    }
+                }
+
+
                 UtilToolForSC.toast(mContext, "收藏成功");
                 break;
             case R.id.del_goods:
@@ -632,6 +651,7 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
                 break;
         }
     }
+
 
     /**
      * ActionBar标题上点编辑的时候，只显示每一个店铺的商品修改界面
@@ -715,6 +735,7 @@ public class ShoppingCartFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onDestroy() {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
         super.onDestroy();
         adapter = null;
         childs.clear();
