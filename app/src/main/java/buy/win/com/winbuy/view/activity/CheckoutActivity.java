@@ -55,10 +55,10 @@ public class CheckoutActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         mUserId = ShareUtils.getUserId(this, "20428");
-        selectSku();
+        initView();
         mCheckoutPresenter = new CheckoutPresent(this);
         mCheckoutOrdersumbitPresenter = new CheckoutOrdersumbitPresenter(this);
-        initView();
+        selectSku();
     }
 
     private void selectSku() {
