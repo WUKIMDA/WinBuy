@@ -67,6 +67,8 @@ public class GoodsShowActivity extends Activity {
     LinearLayout mSearchEmpty;
     @Bind(R.id.search_orderby)
     LinearLayout mSearchOrderby;
+    @Bind(R.id.search_error)
+    ImageView mSearchError;
     //    @Bind(R.id.loadmore_list)
 //    SwipeRefreshLayout mLoadmoreList;
     private GoodsRvListAdapter mRvListAdapter;
@@ -100,14 +102,13 @@ public class GoodsShowActivity extends Activity {
         if (getIntent() != null) {
             sId = getIntent().getStringExtra("sId");
             Log.e("onItemClick: ", sId);
-            // UiUtils.logD(SearchResultActivity.class, "getExtra: " + mKeyword);
         }
         mOrderby = Constant.SHELVESDOWN;
         loadSearchResult(String.valueOf(mPage), mOrderby);
     }
 
     public void onGoodsShowSuccess(GoodsBean bean) {
-//        mSearchBean.addAll(bean.getProductList());
+        mSearchOrderby.setVisibility(View.VISIBLE);
         UiUtils.logD(GoodsShowActivity.class, "onSearchSuccessResult: " + bean.getProductList() + "size: " + bean.getProductList().size());
         if (bean.getProductList().size() <= 0) {
             mSearchOrderby.setVisibility(View.GONE);
@@ -120,10 +121,6 @@ public class GoodsShowActivity extends Activity {
     }
 
     private void init() {
-//        mRvList.setVisibility(View.VISIBLE);
-//        mRvGrid.setVisibility(View.GONE);
-//        mEtSearch.setText(mKeyword);
-//        mEtSearch.setCursorVisible(false);
         mComplex.setSelected(true);
 
         mLinearLayoutManager = new LinearLayoutManager(mContext);
@@ -270,4 +267,8 @@ public class GoodsShowActivity extends Activity {
     }
 
 
+    public void onGoodsShowError(String message) {
+        mSearchError.setImageResource(R.mipmap.ic_error_page);
+        mSearchEmpty.setVisibility(View.VISIBLE);
+    }
 }

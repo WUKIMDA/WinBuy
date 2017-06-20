@@ -24,13 +24,13 @@
 
         <EditText
             android:id="@+id/et_searchtext_search"
-            android:hint="@string/search_hint"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="8"
             android:background="@drawable/search_baground_shap"
             android:drawableLeft="@mipmap/search_2"
+            android:hint="@string/search_hint"
             android:textSize="14sp"
             />
 
@@ -53,6 +53,7 @@
 
     <LinearLayout
         android:id="@+id/search_orderby"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
@@ -150,33 +151,36 @@
         android:background="#9f9f9f"/>
 
     <LinearLayout
-        android:gravity="center"
         android:id="@+id/search_empty"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center">
 
         <ImageView
+            android:id="@+id/search_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_empty_page"/>
     </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/search_recycler_listview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:visibility="visible">
-        </android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recycler_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:visibility="visible">
+    </android.support.v7.widget.RecyclerView>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/search_recycler_gridview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:visibility="gone">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recycler_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:visibility="gone">
 
-        </android.support.v7.widget.RecyclerView>
+    </android.support.v7.widget.RecyclerView>
+
+
 </LinearLayout>
 

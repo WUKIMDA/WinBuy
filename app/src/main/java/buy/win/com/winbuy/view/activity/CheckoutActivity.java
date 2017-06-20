@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     private String mUserId;
     private TextView mTvCheckout;
     private String mSku = "";
+    private CheckoutAllBean.AddressInfoBean mAddressInfo;
 
     @Override
     protected void onResume() {
@@ -99,8 +101,8 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     private void parseBean(CheckoutAllBean bean) {
         mCheckoutAllBean = bean;
         // 收货地址
-        CheckoutAllBean.AddressInfoBean addressInfo = bean.getAddressInfo();
-        mCheckoutProductListAdapter.setAddressInfo(addressInfo);
+        mAddressInfo = bean.getAddressInfo();
+        mCheckoutProductListAdapter.setAddressInfo(mAddressInfo);
 
         // 商品详情
         List<CheckoutAllBean.ProductListBean> productList = bean.getProductList();
@@ -145,6 +147,10 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.checkout_submit:
+                if (mAddressInfo==null) {
+                    Toast.makeText(this, "请填写收货地址再提交", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String addressId = String.valueOf(mCheckoutAllBean.getAddressInfo().getId());
                 int i = mCheckoutProductListAdapter.mMPaymentList.getCheckedRadioButtonId() % 3;
                 i = i == 0 ? 3 : i;

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.SystemClock;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,7 +28,6 @@ import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.NumToTime;
 import buy.win.com.winbuy.utils.UiUtils;
-import buy.win.com.winbuy.view.activity.CheckoutActivity;
 import buy.win.com.winbuy.view.activity.CommodityActivity;
 import buy.win.com.winbuy.view.activity.TopPicActivity;
 import buy.win.com.winbuy.view.activity.TopicPlistActivity;
@@ -134,7 +132,7 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         private final TextView mTjpp;
         private final TextView mXpsj;
         private final TextView mRmdp;
-        private final TextView mCnxh;
+//        private final TextView mCnxh;
 
 
         public TitleHolder(View view) {
@@ -144,7 +142,7 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
             (mTjpp = (TextView) view.findViewById(R.id.tjpp)).setOnClickListener(this);
             (mXpsj = (TextView) view.findViewById(R.id.xpsj)).setOnClickListener(this);
             (mRmdp = (TextView) view.findViewById(R.id.rmdp)).setOnClickListener(this);
-            (mCnxh = (TextView) view.findViewById(R.id.cnxh)).setOnClickListener(this);
+//            (mCnxh = (TextView) view.findViewById(R.id.cnxh)).setOnClickListener(this);
             mBannerHomeTop = (MZBannerView) view.findViewById(R.id.banner_home_top);
         }
 
@@ -179,10 +177,10 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
                     intent2.putExtra("intentKey", "hotproductValue");
                     mContext.startActivity(intent2);
                     break;
-                case R.id.cnxh:
-                    UiUtils.startActivity(mContext, CheckoutActivity.class);
-//                    UiUtils.startActivity(mContext, OrdersumbitActivity.class);
-                    break;
+//                case R.id.cnxh:
+//                    UiUtils.startActivity(mContext, CheckoutActivity.class);
+////                    UiUtils.startActivity(mContext, OrdersumbitActivity.class);
+//                    break;
             }
         }
     }
