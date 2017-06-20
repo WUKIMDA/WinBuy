@@ -23,6 +23,7 @@ import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderCancleBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.OrderListAllBean;
+import buy.win.com.winbuy.model.net.OrdersumbitBean;
 import buy.win.com.winbuy.model.net.RegisterBean;
 import buy.win.com.winbuy.model.net.SaveAddressBean;
 import buy.win.com.winbuy.model.net.SearchBean;
@@ -181,7 +182,6 @@ public interface ApiService {
     );
 
 
-
     /**
      * 地址列表
      *
@@ -317,18 +317,17 @@ public interface ApiService {
     Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
                                                 @Query("orderId") String orderId);
 
-    // userid  //
-//    @FormUrlEncoded
-//    @POST("ordersumbit")
-//    Call<> ordersumbitService(@Header("userid")String userid,
-//                              @Field("sku") String sku,
-//                              @Field("addressId")String addressId,
-//                              @Field("paymentType")String paymentType,
-//                              @Field("deliveryType")String deliveryType,
-//                              @Field("invoiceType")String invoiceType,
-//                              @Field("invoiceTitle")String invoiceTitle,
-//                              @Field("invoiceContent")String invoiceContent
-//                              );
+    @FormUrlEncoded
+    @POST("ordersumbit")
+    Call<OrdersumbitBean> ordersumbitService(@Header("userid") String userid,
+                                             @Field("sku") String sku,
+                                             @Field("addressId") String addressId,
+                                             @Field("paymentType") String paymentType,
+                                             @Field("deliveryType") String deliveryType,
+                                             @Field("invoiceType") String invoiceType,
+                                             @Field("invoiceTitle") String invoiceTitle,
+                                             @Field("invoiceContent") String invoiceContent
+    );
 
 
 }
