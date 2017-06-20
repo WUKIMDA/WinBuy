@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +24,7 @@ import buy.win.com.winbuy.view.fragment.MoreFragment;
 import buy.win.com.winbuy.view.fragment.ShoppingCartFragment;
 import buy.win.com.winbuy.view.fragment.UserFragment;
 
-public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener{
+public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
     @Bind(R.id.main_fragment_container)
     FrameLayout mFrameLayoutContainer;
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     RadioButton mRbMore;
     @Bind(R.id.rg_navigation_bar)
     RadioGroup mRgNavigationBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 index = 4;
                 break;
         }
-
         selectPageIndex(index);
     }
 
@@ -97,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         mFragmentList.add(new ShoppingCartFragment());
         mFragmentList.add(new UserFragment(this));
         mFragmentList.add(MoreFragment.getInstance());
-
     }
 
 
@@ -128,4 +129,5 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             //View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY 触摸就显示
         }
     }
+
 }

@@ -53,14 +53,14 @@
             android:text="商品详情"
             android:textColor="@color/transparent"/>
 
-        <ImageView
-            android:id="@+id/iv_good_detai_shop"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@+id/iv_good_detai_share"
-            android:paddingLeft="@dimen/spacing_smaller"
-            android:paddingTop="@dimen/spacing_smallest"
-            android:src="@drawable/da_ren_all_shopping_cart"/>
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_good_detai_shop"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_toLeftOf="@+id/iv_good_detai_share"-->
+            <!--android:paddingLeft="@dimen/spacing_smaller"-->
+            <!--android:paddingTop="@dimen/spacing_smallest"-->
+            <!--android:src="@drawable/da_ren_all_shopping_cart"/>-->
 
         <ImageView
             android:id="@+id/iv_good_detai_share"

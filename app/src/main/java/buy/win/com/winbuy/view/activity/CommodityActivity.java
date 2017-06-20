@@ -120,8 +120,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     TextView mTvGoodDetailDaodi;
     @Bind(R.id.iv_good_detai_back)
     ImageView mIvGoodDetaiBack;
-    @Bind(R.id.iv_good_detai_shop)
-    ImageView mIvGoodDetaiShop;
+
     @Bind(R.id.iv_good_detai_share)
     ImageView mIvGoodDetaiShare;
     @Bind(R.id.tv_good_detail_shop)
@@ -243,16 +242,14 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     }
 
 
-    @OnClick({R.id.iv_good_detai_back, R.id.iv_good_detai_shop, R.id.iv_good_detai_share, R.id.tv_good_detail_shop_cart,
+    @OnClick({R.id.iv_good_detai_back, R.id.iv_good_detai_share, R.id.tv_good_detail_shop_cart,
             R.id.tv_good_detail_buy, R.id.tv_good_detail_cate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_good_detai_back:
                 finish();
                 break;
-            case R.id.iv_good_detai_shop:
-                //进入购物车
-                break;
+
             case R.id.iv_good_detai_share:
                 //第三方分享
                 break;
@@ -409,7 +406,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                     mPropertyColor.viewSelect(i);
                 }
             }
-
         }
         if (!TextUtils.isEmpty(mSelectSize) && mSizeLists != null) {
             for (int i = 0; i < mSizeLists.size(); i++) {
@@ -581,14 +577,21 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         nlvImgs.setAdapter(imgAdapter);
         imgAdapter.notifyDataSetChanged();
 
+        HashMap<String, String> url_maps = new HashMap<String, String>();
         //top的详情图
         List<String> picsLists = product.getPics();
-        imageIndex0 = picsLists.get(0);
-        HashMap<String, String> url_maps = new HashMap<String, String>();
-        for (int i = 0; i < picsLists.size(); i++) {
-            url_maps.put("" + i, Constant.URL_HOST + picsLists.get(i));
-        }
+        //对商品top图判空
+        if (picsLists.size()<=0){//没有商品头图片
+//            url_maps.put("" + 0, Constant.URL_HOST +"images/product/detail/bigcar1.jpg");
+            url_maps.put("" + 0, imgsUrl.get(0));
 
+        }else{
+            imageIndex0 = picsLists.get(0);
+            for (int i = 0; i < picsLists.size(); i++) {
+                url_maps.put("" + i, Constant.URL_HOST + picsLists.get(i));
+            }
+
+        }
         for (String desc : url_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
             textSliderView
@@ -596,6 +599,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
             mSlider.addSlider(textSliderView);
             mSlider.stopAutoCycle();
         }
+
 
         //基本数据填充
         mName = product.getName();
