@@ -62,19 +62,19 @@ public interface ApiService {
     /**
      * 搜索
      *
-     * @param keyword
      * @param page
      * @param pageNum
      * @param orderby
+     * @param keyword
      * @return
      */
     @GET("search")
     Call<SearchBean> getSearchProduct(
-            @Query("keyword") String keyword,
             @Query("page") String page,
             @Query("pageNum") String pageNum,
-            @Query("orderby") String orderby
-    );
+            @Query("orderby") String orderby,
+            @Query("keyword") String keyword
+            );
     /**
      * 热门搜索字段
      *

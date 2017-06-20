@@ -9,14 +9,14 @@ public class Constant {
     //    public static final String URL_HOST = "http://www.wukimda.win:8080/market/";
 
     /************************搜索排序常量**************************/
-    public static final String URL_HOST = "http://192.168.21.27:8080/market/";
+    public static final String URL_HOST = "http://192.168.21.25:8080/market/";
 //    public static final String URL_HOST = "http://192.168.191.1:8080/market/";
 
     public static final String SALEDOWN = "saleDown";   // 销量降序
     public static final String PRICEUP = "priceUp";     // 价格升序
     public static final String PRICEDOWN = "priceDown"; // 价格降序
     public static final String SHELVESDOWN = "shelvesDown"; // 上架降序
-    public static final String PAGE_NUM = "5"; // 上架降序
+    public static final String PAGE_NUM = "10";
 
     public static final int ERROR01 = 1530;// 用户名不存在或密码错误
     public static final int ERROR02 = 1531;//  userid请求头为空

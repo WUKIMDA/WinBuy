@@ -42,6 +42,11 @@ public class SearchRvListAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+    public void setMore(List<SearchBean.ProductListBean> bean) {
+        mSearchBean.addAll(bean);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
