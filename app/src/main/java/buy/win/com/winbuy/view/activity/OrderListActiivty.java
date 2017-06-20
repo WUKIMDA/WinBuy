@@ -64,7 +64,7 @@ public class OrderListActiivty extends Activity {
     public void onSuccess(OrderListAllBean bean) {
         mPagerLoading.setVisibility(View.GONE);
         List<OrderListAllBean.OrderListBean> orderList = bean.getOrderList();
-        if (orderList.size() <= 0) {//没有数据
+        if (orderList == null||orderList.size() <= 0){//没有数据
             mPagerEmpty.setVisibility(View.VISIBLE);
             mMLlOrderlist.setVisibility(View.GONE);
         } else {
