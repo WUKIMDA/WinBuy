@@ -9,16 +9,14 @@ import java.io.Serializable;
 public class OrdersumbitBean extends BaseBean{
 
     /**
-     * orderInfo : {"orderId":"296372","paymentType":1,"price":450}
-     * response : orderSubmit
+     * orderInfo : {"orderId":"149739","paymentType":1,"price":450}
      */
 
     public OrderInfoBean orderInfo;
-    public String response;
 
     public static class OrderInfoBean implements Serializable{
         /**
-         * orderId : 296372
+         * orderId : 149739
          * paymentType : 1
          * price : 450
          */

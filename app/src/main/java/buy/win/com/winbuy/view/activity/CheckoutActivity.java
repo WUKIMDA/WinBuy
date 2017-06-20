@@ -16,7 +16,9 @@ import java.util.List;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CheckoutAllBean;
 import buy.win.com.winbuy.model.net.OrdersumbitBean;
+import buy.win.com.winbuy.presenter.CheckoutOrdersumbitPresenter;
 import buy.win.com.winbuy.presenter.CheckoutPresent;
+import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.view.adapter.CheckoutProductListAdapter;
 
 /**
@@ -32,6 +34,8 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     private TextView mCheckoutAddupTotalPrice;
     private Button mCheckoutSubmit;
     private CheckoutProductListAdapter mCheckoutProductListAdapter;
+    private CheckoutOrdersumbitPresenter mCheckoutOrdersumbitPresenter;
+    private String mUserId;
 
 
     @Override
@@ -39,6 +43,7 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         mCheckoutPresenter = new CheckoutPresent(this);
+        mCheckoutOrdersumbitPresenter = new CheckoutOrdersumbitPresenter(this);
 
         initView();
         loadView();
@@ -57,7 +62,8 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     }
 
     private void loadView() {
-        mCheckoutPresenter.upCheckout("20428", "1:3:1,2,3,4|2:2:2,3");
+        mUserId = ShareUtils.getUserId(this, "20428");
+        mCheckoutPresenter.upCheckout(mUserId, "1:3:1,2,3,4|2:2:2,3");
         mCheckoutProductListAdapter = new CheckoutProductListAdapter(this);
         mRvCheckout.setAdapter(mCheckoutProductListAdapter);
     }
@@ -65,7 +71,9 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     public void checkOutSuccess(CheckoutAllBean bean) {
         parseBean(bean);
     }
+
     private CheckoutAllBean mCheckoutAllBean;
+
     private void parseBean(CheckoutAllBean bean) {
         mCheckoutAllBean = bean;
         // 收货地址
@@ -91,8 +99,8 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         mCheckoutProductListAdapter.notifyDataSetChanged();
 
         CheckoutAllBean.CheckoutAddupBean checkoutAddup = bean.getCheckoutAddup();
-        mCheckoutAddupFreight.setText("共"+checkoutAddup.getFreight()+"件商品");
-        mCheckoutAddupTotalPrice.setText("小计: ¥"+checkoutAddup.getTotalPrice());
+        mCheckoutAddupFreight.setText("共" + checkoutAddup.getFreight() + "件商品");
+        mCheckoutAddupTotalPrice.setText("小计: ¥" + checkoutAddup.getTotalPrice());
     }
 
     private static final String TAG = "CheckoutActivity";
@@ -102,27 +110,27 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.checkout_submit:
-                int addressId = mCheckoutAllBean.getAddressInfo().getId();
-                int deliveryType = mCheckoutProductListAdapter.mMDeliveryList.getCheckedRadioButtonId();
-                int paymentType = mCheckoutProductListAdapter.mMPaymentList.getCheckedRadioButtonId();
+                String addressId = String.valueOf(mCheckoutAllBean.getAddressInfo().getId());
+                String paymentType = String.valueOf(mCheckoutProductListAdapter.mMPaymentList.getCheckedRadioButtonId());
+                String deliveryType = String.valueOf(mCheckoutProductListAdapter.mMDeliveryList.getCheckedRadioButtonId());
                 int invoiceTypetemp = mCheckoutAllBean.getAddressInfo().getIsDefault();
                 String invoiceType;
                 if (invoiceTypetemp == 2) {
                     invoiceType = "单位";
-                }else  {
+                } else {
                     invoiceType = "个人";
                 }
                 String invoiceTitle = "传智慧播客教育科技有限公司";
-                int invoiceContent = 1;
+                String invoiceContent = "1";
 
-               // mCheckoutPresenter.checkoutOrdersumbit();
+                mCheckoutOrdersumbitPresenter.checkoutOrdersumbit(mUserId, "1:3:1,2,3,4|2:2:2,3", addressId, paymentType, deliveryType, invoiceType, invoiceTitle, invoiceContent);
                 break;
         }
     }
 
     public void ordersumbitSuccess(OrdersumbitBean bean) {
         Intent intent = new Intent(this, OrdersumbitActivity.class);
-        intent.putExtra("orderInfo",bean.orderInfo);
+        intent.putExtra("orderInfo", bean.orderInfo);
         startActivity(intent);
     }
 }
