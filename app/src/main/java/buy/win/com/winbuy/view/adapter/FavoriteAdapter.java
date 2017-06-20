@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.FavoriteBean;
+import buy.win.com.winbuy.utils.Constant;
 
 /**
  * Created by demo on 2017/6/20.
@@ -73,15 +76,10 @@ public class FavoriteAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        /*if(mProductList.size() == 0) {
-            //返回一张空图片
-            View emptyView = LayoutInflater.from(mContext).inflate(R.layout.favorite_empty, null);
-            return emptyView;
 
-        }else {*/
             holder.setData(mList.get(position));
 
-        //}
+
 
         return convertView;
     }
@@ -106,6 +104,12 @@ public class FavoriteAdapter extends BaseAdapter {
              //TODO:设置数据
 
              mTvName.setText(productListBean.getName());
+             String pic = productListBean.getPic();
+             String url = Constant.URL_HOST + pic;
+             Glide.with(mContext).load(url).into(mIv);
+             mPrice.setText(productListBean.getPrice());
+             mMarketprice.setText(productListBean.getMarketPrice());
+
 
          }
      }

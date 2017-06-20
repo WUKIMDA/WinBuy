@@ -85,6 +85,7 @@ public class OrdersumbitActivity extends Activity implements View.OnClickListene
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(mContext,"付款成功XXX元",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
         builder.setNegativeButton("取消", null);

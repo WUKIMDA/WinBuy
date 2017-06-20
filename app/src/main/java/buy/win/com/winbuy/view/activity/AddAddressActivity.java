@@ -161,7 +161,7 @@ public class AddAddressActivity extends Activity {
 
 
             //RetrofitUtils.getApiservice2()
-            ApiService apkservice = RetrofitUtil.getApiservice2();
+            ApiService apkservice = RetrofitUtil.getApiService();
 
             Log.e("body", "clickSave "+ShareUtils.getUserId(this,null));
 
