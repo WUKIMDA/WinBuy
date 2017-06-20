@@ -91,6 +91,7 @@
         <activity android:name=".view.activity.OrderListActiivty"/>
 
         <activity android:name=".view.activity.OrderDetailActivity"/>
+        <activity android:name=".view.activity.FavoriteActivity"/>
 
     </application>
 

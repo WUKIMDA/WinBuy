@@ -3,7 +3,6 @@ package buy.win.com.winbuy.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,8 +142,7 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //// TODO: 2017/6/15 0015
                     Intent intent = new Intent(mContext, GoodsShowActivity.class);
-                    intent.putExtra("sId", mGridDatas.get(position).getId());
-                    Log.e("onItemClick: ", mGridDatas.get(position).getId()+"");
+                    intent.putExtra("sId", mGridDatas.get(position).getId() + "");
                     mContext.startActivity(intent);
                 }
             });
