@@ -156,7 +156,7 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
                 String invoiceTitle = "传智慧播客教育科技有限公司";
                 String invoiceContent = "1";
 
-                mCheckoutOrdersumbitPresenter.checkoutOrdersumbit(mUserId, "1:3:1,2,3,4|2:2:2,3", addressId, paymentType, deliveryType, invoiceType, invoiceTitle, invoiceContent);
+                mCheckoutOrdersumbitPresenter.checkoutOrdersumbit(mUserId, mSku, addressId, paymentType, deliveryType, invoiceType, invoiceTitle, invoiceContent);
                 break;
         }
     }

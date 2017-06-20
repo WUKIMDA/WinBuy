@@ -170,20 +170,18 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
                     Toast.makeText(mContext, "tjpp", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.xpsj:
-//                    Toast.makeText(mContext, "xpsj", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(mContext, TopicPlistActivity.class);
                     intent.putExtra("intentKey", "newproductValue");
                     mContext.startActivity(intent);
                     break;
                 case R.id.rmdp:
-//                    Toast.makeText(mContext, "rmdp", Toast.LENGTH_SHORT).show();
                     Intent intent2 = new Intent(mContext, TopicPlistActivity.class);
                     intent2.putExtra("intentKey", "hotproductValue");
                     mContext.startActivity(intent2);
                     break;
                 case R.id.cnxh:
-//                    Toast.makeText(mContext, "猜你喜欢", Toast.LENGTH_SHORT).show();
                     UiUtils.startActivity(mContext, CheckoutActivity.class);
+//                    UiUtils.startActivity(mContext, OrdersumbitActivity.class);
                     break;
             }
         }
