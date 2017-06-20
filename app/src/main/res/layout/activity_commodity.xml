@@ -8,13 +8,6 @@
     >
 
 
-    <buy.win.com.winbuy.view.loadingview.LoadingView
-        android:id="@+id/lv_circularJump"
-        android:layout_width="50dp"
-        android:layout_gravity="center"
-        android:visibility="visible"
-        android:layout_height="50dp"
-        />
 
     <buy.win.com.winbuy.presenter.ScrollViewContainer
         android:id="@+id/sv_container"
