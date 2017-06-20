@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:orientation="vertical"
-              android:layout_height="match_parent">
-    <TextView
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_checkout"
         android:layout_width="match_parent"
-        android:text="结算中心"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="←结算中心"/>
+    </android.support.v7.widget.Toolbar>
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc_checkout"
+        android:id="@+id/rv_checkout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/toolbar_checkout"
+        android:layout_weight="100"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/checkoutAddup_freight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="100"
+            android:gravity="right"
+            android:text="共2件商品"/>
+
+        <TextView
+            android:id="@+id/checkoutAddup_totalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="小计:¥1234.43"/>
+        <Button
+            android:id="@+id/checkout_submit"
+            android:layout_width="wrap_content"
+            android:text="结算"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

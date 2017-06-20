@@ -49,7 +49,6 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
     }
 
 
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewholder = null;
@@ -91,11 +90,10 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
         mDatas = datas;
         mSelectedId = selectedId;
         mRcvDatas.clear();
-        rcvDatas.add(0,null);
+        rcvDatas.add(0, null);
         mRcvDatas.addAll(rcvDatas);
         notifyDataSetChanged();
     }
-
 
     class HeadViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.headview)
@@ -144,8 +142,8 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     //// TODO: 2017/6/15 0015
-                    Intent intent = new Intent(mContext,GoodsShowActivity.class);
-                    intent.putExtra("sId","125");
+                    Intent intent = new Intent(mContext, GoodsShowActivity.class);
+                    intent.putExtra("sId", "125");
                     mContext.startActivity(intent);
                 }
             });

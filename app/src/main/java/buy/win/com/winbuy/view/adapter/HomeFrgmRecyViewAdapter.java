@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.SystemClock;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.utils.Constant;
 import buy.win.com.winbuy.utils.NumToTime;
 import buy.win.com.winbuy.utils.UiUtils;
+import buy.win.com.winbuy.view.activity.CheckoutActivity;
 import buy.win.com.winbuy.view.activity.TopPicActivity;
 import buy.win.com.winbuy.view.activity.TopicPlistActivity;
 
@@ -54,6 +56,22 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
         }
     }
 
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case TYPE_TITLE:
+                View view = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_header, parent, false);
+                TitleHolder titleHolder = new TitleHolder(view);
+                return titleHolder;
+            case TYPE_SELLER:
+                View rootView = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_normal, parent, false);
+                ViewHolder viewHolder = new ViewHolder(rootView);
+                return viewHolder;
+            default:
+                return null;
+        }
+    }
+
     /**
      * 6.item的局部赋值
      * notifyItemChanged(int position, Object payload)
@@ -74,22 +92,6 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
              *  当你看到此处说明我已全部讲解完成.
              */
             ((ViewHolder) holder).mLeftTimeTextView.setText(NumToTime.secToTime(timeArr[position - 1]));
-        }
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_TITLE:
-                View view = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_header, parent, false);
-                TitleHolder titleHolder = new TitleHolder(view);
-                return titleHolder;
-            case TYPE_SELLER:
-                View rootView = LayoutInflater.from(mContext).inflate(R.layout.item_home_recycler_normal, parent, false);
-                ViewHolder viewHolder = new ViewHolder(rootView);
-                return viewHolder;
-            default:
-                return null;
         }
     }
 
@@ -178,7 +180,8 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
                     mContext.startActivity(intent2);
                     break;
                 case R.id.cnxh:
-                    Toast.makeText(mContext, "你猜我猜不猜", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "猜你喜欢", Toast.LENGTH_SHORT).show();
+                    UiUtils.startActivity(mContext, CheckoutActivity.class);
                     break;
             }
         }
@@ -276,6 +279,8 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
             // 返回页面布局文件
             View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
             mImageView = (ImageView) view.findViewById(R.id.banner_image);
+            Log.e("HomeFrgmRecyViewAdapter", "createView: "+mImageView.getWidth() );
+            Log.e("HomeFrgmRecyViewAdapter", "createView: "+mImageView.getHeight() );
             return view;
         }
 

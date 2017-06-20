@@ -63,7 +63,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d(TAG, "onActivityCreated: " + mDatas.toString());
-
     }
 
     private void recDataSet() {
@@ -80,7 +79,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         mLvDatas = new ArrayList<>();
         for (int i = 0; i < mDatas.size(); i++) {
             if (mDatas.get(i).getParentId() == 0) {
-
                 mLvDatas.add(mDatas.get(i));
             }
         }

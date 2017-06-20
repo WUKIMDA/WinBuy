@@ -20,7 +20,9 @@ import buy.win.com.winbuy.model.net.HotSearchBean;
 import buy.win.com.winbuy.model.net.InvoiceAllBean;
 import buy.win.com.winbuy.model.net.LimitbuyBean;
 import buy.win.com.winbuy.model.net.LoginBean;
+import buy.win.com.winbuy.model.net.OrderCancleBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
+import buy.win.com.winbuy.model.net.OrderListAllBean;
 import buy.win.com.winbuy.model.net.RegisterBean;
 import buy.win.com.winbuy.model.net.SaveAddressBean;
 import buy.win.com.winbuy.model.net.SearchBean;
@@ -62,19 +64,20 @@ public interface ApiService {
     /**
      * 搜索
      *
+     * @param keyword
      * @param page
      * @param pageNum
      * @param orderby
-     * @param keyword
      * @return
      */
     @GET("search")
     Call<SearchBean> getSearchProduct(
+            @Query("keyword") String keyword,
             @Query("page") String page,
             @Query("pageNum") String pageNum,
-            @Query("orderby") String orderby,
-            @Query("keyword") String keyword
-            );
+            @Query("orderby") String orderby
+    );
+
     /**
      * 热门搜索字段
      *

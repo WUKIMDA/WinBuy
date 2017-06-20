@@ -168,7 +168,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
 
         EventBus.getDefault().register(this);
 
-        //KIMDA KIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDA
         //加载用户id
         userId = ShareUtils.getUserId(this, "20428");
 
@@ -177,10 +176,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         if (intent != null) {
             pId = intent.getStringExtra("pId");
         }
-        //KIMDA KIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDAKIMDA
         loadService(pId);
 //        loadService();
-
 
         //透明状态栏
         StatusBarUtil.setTranslucentForImageView(this, llOffset);
@@ -218,13 +215,11 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         }
 //    public void loadService() {
         CommodityProductPresenter commodityProductPresenter = new CommodityProductPresenter(this);
-        //TODO:模拟加载第pId是"1"的商品
 
         commodityProductPresenter.loadCommdityProductData(pId);
 //        commodityProductPresenter.loadCommdityProductData("1");
 
         CommentPresenter commentPresenter = new CommentPresenter();
-        //TODO：模拟   评论
 //        commentPresenter.loadCommentData(pId,page,pageNum);
         commentPresenter.loadCommentData(pId, "1", "10");
         //后续EventBus自动获取数据后onEventMainThread()
