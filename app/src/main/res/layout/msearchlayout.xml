@@ -33,9 +33,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:drawablePadding="6dp"
                 android:drawableLeft="@mipmap/hot_red"
                 android:text="@string/search_all"
-                android:textColor="@color/huise"
+                android:textStyle="bold"
+                android:textColor="#000"
                 android:textSize="16sp"
                 />
 
@@ -57,9 +59,11 @@
                 android:layout_marginLeft="10dp"
                 android:paddingBottom="2dp"
                 android:paddingTop="2dp"
+                android:drawablePadding="6dp"
                 android:drawableLeft="@mipmap/history"
                 android:text="@string/search_lately"
-                android:textColor="@color/huise"
+                android:textStyle="bold"
+                android:textColor="#000"
                 android:textSize="16sp"
                 />
 
