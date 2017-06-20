@@ -172,7 +172,6 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         //加载用户id
         userId = ShareUtils.getUserId(this, "20428");
 
-
         Intent intent = getIntent();
         if (intent != null) {
             pId = intent.getStringExtra("pId");
@@ -277,6 +276,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     private void orderDetail() {
         //TODO:用户ID
         if (TextUtils.isEmpty(userId)) {
+            DialogUtils.showLoginDialog();
             return;
         }
         //如果用户没有选择过属性,默认
@@ -313,6 +313,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                             @Override
                             public void run() {
                                 Toast.makeText(CommodityActivity.this, "请登陆", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                         });
                     }

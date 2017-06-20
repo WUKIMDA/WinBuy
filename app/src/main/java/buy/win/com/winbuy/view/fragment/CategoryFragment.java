@@ -93,6 +93,9 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         }
         mListAdapter.setDatas(mLvDatas);
         mSelectedId = mLvDatas.get(0).getId();
+        if (mCategoryList == null){
+            return;
+        }
         mCategoryList.setOnItemClickListener(this);
     }
 
