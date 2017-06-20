@@ -51,6 +51,6 @@
             android:id="@+id/checkout_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="结算"/>
+            android:text="结算"/>
     </LinearLayout>
 </LinearLayout>
