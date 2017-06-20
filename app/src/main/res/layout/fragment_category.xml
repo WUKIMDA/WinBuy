@@ -21,10 +21,11 @@
             android:layout_weight="1"
             android:src="@mipmap/scanning_black"/>
 
-        <EditText
+        <TextView
             android:id="@+id/et_searchtext_search"
             android:hint="@string/search_hint"
             android:layout_width="0dp"
+            android:gravity="center_vertical"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="8"
