@@ -1,8 +1,8 @@
 package buy.win.com.winbuy.view.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +29,7 @@ import retrofit2.Response;
  * Created by demo on 2017/6/17.
  */
 
-public class LonginAndRegisterActivity extends AppCompatActivity {
+public class LonginAndRegisterActivity extends Activity {
 
     @Bind(R.id.btn_back)
     ImageView mBtnBack;

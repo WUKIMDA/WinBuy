@@ -1,8 +1,8 @@
 package buy.win.com.winbuy.view.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
@@ -23,7 +23,7 @@ import buy.win.com.winbuy.utils.ShareUtils;
 import buy.win.com.winbuy.view.adapter.OrderListAdapter;
 
 //type	1/2/3	1=>近一个月订单(改为10分钟)  2=>一个月前订单(改为10分钟)  0=>已取消订单
-public class OrderListActiivty extends AppCompatActivity {
+public class OrderListActiivty extends Activity {
 
     @Bind(R.id.ib_back)
     ImageButton mIbBack;
@@ -41,14 +41,12 @@ public class OrderListActiivty extends AppCompatActivity {
         setContentView(R.layout.activity_orderlist);
         ButterKnife.bind(this);
         initView();
-        OrderListsPresenter orderListsPresenter = new OrderListsPresenter(this);
+
 //        userId = "20428";
         userId = ShareUtils.getUserId(this, "");
         if (TextUtils.isEmpty(userId)) {
             Toast.makeText(this, "请重新登录", Toast.LENGTH_SHORT).show();
         }
-        //访问网络
-        orderListsPresenter.loadOrderLists(userId, "1", "0", "10");
 
         mOrderListAdapter = new OrderListAdapter();
         mListviewOrder.setAdapter(mOrderListAdapter);
@@ -74,16 +72,22 @@ public class OrderListActiivty extends AppCompatActivity {
             mMLlOrderlist.setVisibility(View.VISIBLE);
         }
         refreshUI(orderList);
-
     }
 
     private void refreshUI(List<OrderListAllBean.OrderListBean> orderList) {
         mOrderListAdapter.setData(orderList);
     }
 
-
     @OnClick(R.id.ib_back)
     public void onViewClicked() {
         finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        OrderListsPresenter orderListsPresenter = new OrderListsPresenter(this);
+        //访问网络
+        orderListsPresenter.loadOrderLists(userId, "1", "0", "10");
     }
 }

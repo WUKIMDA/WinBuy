@@ -69,7 +69,6 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-
     <style name="my_dialog">
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">true</item>
