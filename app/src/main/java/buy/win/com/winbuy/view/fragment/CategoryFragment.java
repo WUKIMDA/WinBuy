@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -51,7 +52,9 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
         mContext = getActivity();
+
         View root = inflater.inflate(R.layout.fragment_category, null);
         ButterKnife.bind(this, root);
         new CategoryPresenter(this).loadCategoryData();
@@ -102,7 +105,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
 
     public void setDatas(List<CategoryAllBean.CategoryBean> datas) {
         mDatas = datas;
-        Log.d(TAG, "setDatas: " + mDatas.toString());
+   //     Log.d(TAG, "setDatas: " + mDatas.toString());
         listDataSet();
         recDataSet();
     }
@@ -113,6 +116,13 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         mSelectedId = mLvDatas.get(position).getId();
         mListAdapter.notifyDataSetChanged();
         recDataSet();
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ((AppCompatActivity)mContext).getSupportActionBar().hide();
     }
 
     public void onConnectError(String message) {
