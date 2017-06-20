@@ -193,7 +193,8 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
         mCheckoutPromListInfo = checkoutProm;
         //notifyDataSetChanged();
     }
-
+    public RadioGroup mMDeliveryList;
+    public RadioGroup mMPaymentList;
     public class OtherViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
         public RadioGroup mDeliveryList;
@@ -204,20 +205,29 @@ public class CheckoutProductListAdapter extends RecyclerView.Adapter {
             super(rootView);
             this.rootView = rootView;
             this.mDeliveryList = (RadioGroup) rootView.findViewById(R.id.deliveryList);
+            mMDeliveryList = this.mDeliveryList;
             this.mPaymentList = (RadioGroup) rootView.findViewById(paymentList);
+            mMPaymentList = this.mPaymentList;
             this.mCheckoutProm = (TextView) rootView.findViewById(R.id.checkoutProm);
         }
 
         public void setData() {
             for (int i = 0; i < mDeliveryBeanList.size(); i++) {
+
                 RadioButton radioButton = new RadioButton(mCheckoutActivity);
                 radioButton.setText(mDeliveryBeanList.get(i).getDes());
                 mDeliveryList.addView(radioButton);
+                if (i==0) {
+                    radioButton.setChecked(true);
+                }
             }
             for (int i = 0; i < mPaymentBeanList.size(); i++) {
                 RadioButton radioButton = new RadioButton(mCheckoutActivity);
                 radioButton.setText(mPaymentBeanList.get(i).getDes());
                 mPaymentList.addView(radioButton);
+                if (i==0) {
+                    radioButton.setChecked(true);
+                }
             }
             StringBuilder sb = new StringBuilder();
             sb.append("享受以下促销:");

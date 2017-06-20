@@ -6,14 +6,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
 import buy.win.com.winbuy.R;
 import buy.win.com.winbuy.model.net.CheckoutAllBean;
+import buy.win.com.winbuy.model.net.OrdersumbitBean;
 import buy.win.com.winbuy.presenter.CheckoutPresent;
 import buy.win.com.winbuy.view.adapter.CheckoutProductListAdapter;
 
@@ -28,6 +29,7 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     private RecyclerView mRvCheckout;
     private TextView mCheckoutAddupFreight;
     private TextView mCheckoutAddupTotalPrice;
+    private Button mCheckoutSubmit;
     private CheckoutProductListAdapter mCheckoutProductListAdapter;
 
 
@@ -46,9 +48,9 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         mRvCheckout.setLayoutManager(new LinearLayoutManager(this));
         mRvCheckout.setOnClickListener(this);
         mCheckoutAddupFreight = (TextView) findViewById(R.id.checkoutAddup_freight);
-        mCheckoutAddupFreight.setOnClickListener(this);
         mCheckoutAddupTotalPrice = (TextView) findViewById(R.id.checkoutAddup_totalPrice);
-        mCheckoutAddupTotalPrice.setOnClickListener(this);
+        mCheckoutSubmit = (Button) findViewById(R.id.checkout_submit);
+        mCheckoutSubmit.setOnClickListener(this);
 
 
     }
@@ -62,9 +64,9 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     public void checkOutSuccess(CheckoutAllBean bean) {
         parseBean(bean);
     }
-
+    private CheckoutAllBean mCheckoutAllBean;
     private void parseBean(CheckoutAllBean bean) {
-
+        mCheckoutAllBean = bean;
         // 收货地址
         CheckoutAllBean.AddressInfoBean addressInfo = bean.getAddressInfo();
         mCheckoutProductListAdapter.setAddressInfo(addressInfo);
@@ -86,7 +88,10 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         mCheckoutProductListAdapter.setCheckoutPromListInfo(checkoutPromListInfo);
 
         mCheckoutProductListAdapter.notifyDataSetChanged();
-        Log.e(TAG, "parseBean: parseBeanparseBeanparseBeanparseBean" );
+
+        CheckoutAllBean.CheckoutAddupBean checkoutAddup = bean.getCheckoutAddup();
+        mCheckoutAddupFreight.setText("共"+checkoutAddup.getFreight()+"件商品");
+        mCheckoutAddupTotalPrice.setText("小计: ¥"+checkoutAddup.getTotalPrice());
     }
 
     private static final String TAG = "CheckoutActivity";
@@ -94,6 +99,27 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.checkout_submit:
+                int addressId = mCheckoutAllBean.getAddressInfo().getId();
+                int deliveryType = mCheckoutProductListAdapter.mMDeliveryList.getCheckedRadioButtonId();
+                int paymentType = mCheckoutProductListAdapter.mMPaymentList.getCheckedRadioButtonId();
+                int invoiceTypetemp = mCheckoutAllBean.getAddressInfo().getIsDefault();
+                String invoiceType;
+                if (invoiceTypetemp == 2) {
+                    invoiceType = "单位";
+                }else  {
+                    invoiceType = "个人";
+                }
+                String invoiceTitle = "传智慧播客教育科技有限公司";
+                int invoiceContent = 1;
 
+               // mCheckoutPresenter.checkoutOrdersumbit();
+                break;
+        }
+    }
+
+    public void ordersumbitSuccess(OrdersumbitBean bean) {
+        
     }
 }
