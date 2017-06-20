@@ -143,7 +143,7 @@ public class CategoryRcvAdapter extends RecyclerView.Adapter {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //// TODO: 2017/6/15 0015
                     Intent intent = new Intent(mContext, GoodsShowActivity.class);
-                    intent.putExtra("sId", mGridDatas.get(position).getId());
+                    intent.putExtra("sId", String.valueOf(mGridDatas.get(position).getId()));
                     Log.e("onItemClick: ", mGridDatas.get(position).getId()+"");
                     mContext.startActivity(intent);
                 }
