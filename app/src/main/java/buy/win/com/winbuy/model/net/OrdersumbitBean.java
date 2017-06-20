@@ -1,5 +1,7 @@
 package buy.win.com.winbuy.model.net;
 
+import java.io.Serializable;
+
 /**
  * Created by Ziwen on 2017/6/20.
  */
@@ -14,7 +16,7 @@ public class OrdersumbitBean extends BaseBean{
     public OrderInfoBean orderInfo;
     public String response;
 
-    public static class OrderInfoBean {
+    public static class OrderInfoBean implements Serializable{
         /**
          * orderId : 296372
          * paymentType : 1

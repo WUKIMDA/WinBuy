@@ -1,6 +1,7 @@
 package buy.win.com.winbuy.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -120,6 +121,8 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     }
 
     public void ordersumbitSuccess(OrdersumbitBean bean) {
-        
+        Intent intent = new Intent(this, OrdersumbitActivity.class);
+        intent.putExtra("orderInfo",bean.orderInfo);
+        startActivity(intent);
     }
 }
