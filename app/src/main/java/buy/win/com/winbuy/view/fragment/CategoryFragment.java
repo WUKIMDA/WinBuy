@@ -106,8 +106,8 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     public void setDatas(List<CategoryAllBean.CategoryBean> datas) {
         mDatas = datas;
    //     Log.d(TAG, "setDatas: " + mDatas.toString());
-        listDataSet();
-        recDataSet();
+            listDataSet();
+            recDataSet();
     }
 
     @Override
@@ -117,7 +117,6 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         mListAdapter.notifyDataSetChanged();
         recDataSet();
     }
-
 
     @Override
     public void onStart() {

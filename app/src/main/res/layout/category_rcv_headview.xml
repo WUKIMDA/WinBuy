@@ -4,5 +4,6 @@ android:id="@+id/headview"
 xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:scaleType="centerCrop"
+android:src="@drawable/ic_empty_page"
 android:layout_height="160dp">
 </ImageView>

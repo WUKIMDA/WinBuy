@@ -10,6 +10,7 @@
         android:id="@+id/category_rcv_item_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="测试文字"
         android:textColor="@color/text_color">
 
     </TextView>
