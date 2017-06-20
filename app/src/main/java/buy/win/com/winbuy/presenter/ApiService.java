@@ -23,6 +23,7 @@ import buy.win.com.winbuy.model.net.LoginBean;
 import buy.win.com.winbuy.model.net.OrderCancleBean;
 import buy.win.com.winbuy.model.net.OrderDetailBean;
 import buy.win.com.winbuy.model.net.OrderListAllBean;
+import buy.win.com.winbuy.model.net.OrdersumbitBean;
 import buy.win.com.winbuy.model.net.RegisterBean;
 import buy.win.com.winbuy.model.net.SaveAddressBean;
 import buy.win.com.winbuy.model.net.SearchBean;
@@ -87,6 +88,7 @@ public interface ApiService {
 
     /**
      * 商品列表
+     *
      * @param page
      * @param pageNum
      * @param cId
@@ -99,7 +101,7 @@ public interface ApiService {
             @Query("pageNum") String pageNum,
             @Query("cId") String cId,
             @Query("orderby") String orderby
-            );
+    );
 
     /**
      * 促销
@@ -133,18 +135,20 @@ public interface ApiService {
     @POST("register")
     Call<LoginBean> regist(@Field("username") String username, @Field("password") String password);
 
-    @GET("addCart")//http://localhost:8080/market/addCart?userId=20428&productId=2&productCount=2&propertyId=1
+    @GET("addCart")
+//http://localhost:8080/market/addCart?userId=20428&productId=2&productCount=2&propertyId=1
     Call<CartAllBean> addCart(@Query("userId") String userId, @Query("productId") String productId, @Query("productCount") String productCount, @Query("propertyId") String propertyId);
 
     @GET("description")
     Call<String> descriptionData(@Query("pId") String pId);
 
     @GET("product/comment")
-    Call<CommentDataBean> commentLoad(@Query("pId")String pId, @Query("page")String page, @Query("pageNum")String pageNum);
+    Call<CommentDataBean> commentLoad(@Query("pId") String pId, @Query("page") String page, @Query("pageNum") String pageNum);
 
 
     /**
      * 发票
+     *
      * @return
      */
     @GET("invoice")
@@ -175,18 +179,6 @@ public interface ApiService {
             @Query("pageNum") String pageNum
 
     );
-
-
-    /**
-     * 订单详情
-     *
-     * @param userid
-     * @param orderId
-     * @return
-     */
-    @GET("orderdetail")
-    Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
-                                                @Query("orderId") String orderId);
 
 
     /**
@@ -248,10 +240,9 @@ public interface ApiService {
 //    @FormUrlEncoded //POST请求中
 //    @POST("login")//定义
 //    Call<LoginBean> login(@Field("username") String username, @Field("password") String password);
-
-
     @FormUrlEncoded //POST请求中
-    @POST("register")//定义
+    @POST("register")
+//定义
     Call<RegisterBean> register(@Field("username") String username, @Field("password") String password);
 
 
@@ -265,7 +256,8 @@ public interface ApiService {
     Call<DelectBean> deleteAddress(@Query("id") int id);
 
     @FormUrlEncoded
-    @POST("addresssave")//定义
+    @POST("addresssave")
+//定义
     Call<SaveAddressBean> saveAddress(
             @Header("userid") String userid,
             @Field("name") String name,
@@ -290,27 +282,51 @@ public interface ApiService {
 
 
     @FormUrlEncoded
-    @POST("userid")
-    Call<CheckoutAllBean> checkout(@Header("userid")String userid,@Field("sku")String sku);
+    @POST("checkout")
+    Call<CheckoutAllBean> checkout(@Header("userid") String userid, @Field("sku") String sku);
 
     //新品上架
     @GET("newproduct")
-    Call<TopicPlistBean> getNewProduct(@Query("page") String page, @Query("pageNum") String pageNum,@Query("orderby") String orderby);
+    Call<TopicPlistBean> getNewProduct(@Query("page") String page, @Query("pageNum") String pageNum, @Query("orderby") String orderby);
 
     //热门单品
     @GET("hotproduct")
-    Call<TopicPlistBean> getHotProduct(@Query("page") String page, @Query("pageNum") String pageNum,@Query("orderby") String orderby);
+    Call<TopicPlistBean> getHotProduct(@Query("page") String page, @Query("pageNum") String pageNum, @Query("orderby") String orderby);
 
     //新品上架
     @GET("brand")
     Call<TopicPlistBean> getBrand();
 
+    //取消订单
+    @GET("ordercancel")
+    Call<OrderCancleBean> orderCancelService(@Header("userid") String userid, @Query("orderId") String orderId);
+
     //订单列表
     @GET("orderlist")
     Call<OrderListAllBean> orderLists(@Header("userid") String userid, @Query("type") String type, @Query("page") String page, @Query("pageNum") String pageNum);
 
-    //取消订单
-    @GET("ordercancel")
-    Call<OrderCancleBean> orderCancelService(@Header("userid") String userid, @Query("orderId") String orderId);
+    /**
+     * 订单详情
+     *
+     * @param userid
+     * @param orderId
+     * @return
+     */
+    @GET("orderdetail")
+    Call<OrderDetailBean> getOrderDetailProduct(@Header("userid") String userid,
+                                                @Query("orderId") String orderId);
+
+    @FormUrlEncoded
+    @POST("ordersumbit")
+    Call<OrdersumbitBean> ordersumbitService(@Header("userid") String userid,
+                                             @Field("sku") String sku,
+                                             @Field("addressId") String addressId,
+                                             @Field("paymentType") String paymentType,
+                                             @Field("deliveryType") String deliveryType,
+                                             @Field("invoiceType") String invoiceType,
+                                             @Field("invoiceTitle") String invoiceTitle,
+                                             @Field("invoiceContent") String invoiceContent
+    );
+
 
 }

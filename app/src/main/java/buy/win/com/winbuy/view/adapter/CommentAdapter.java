@@ -52,7 +52,6 @@ public class CommentAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.setItemUI(mCommentLists.get(position));
-        //System.out.println("我要测试Adapter" + mCommentLists.get(position));
         return convertView;
     }
 
