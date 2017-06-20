@@ -63,6 +63,8 @@ public class SearchResultActivity extends Activity {
     RecyclerView mRvGrid;
     @Bind(R.id.search_empty)
     LinearLayout mSearchEmpty;
+    @Bind(R.id.search_orderby)
+    LinearLayout mSearchOrderby;
     //    @Bind(R.id.loadmore_list)
 //    SwipeRefreshLayout mLoadmoreList;
     private SearchRvListAdapter mRvListAdapter;
@@ -90,7 +92,7 @@ public class SearchResultActivity extends Activity {
         mSearchPresenter = new SearchPresenter(this);
         initData();
         init();
-        //initEvent();
+        initEvent();
     }
 
     private void initData() {
@@ -161,7 +163,6 @@ public class SearchResultActivity extends Activity {
 //            }
 
 
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -176,18 +177,10 @@ public class SearchResultActivity extends Activity {
                         previousTotal = totalItemCount;
                     }
                 }
-//                else {
-//                    if ((totalItemCount - visibleItemCount) <= firstVisibleItem) {
-//                        mPage++;
-//                        UiUtils.logD(SearchResultActivity.class, mPage + "");
-//                        loadSearchResult(String.valueOf(mPage), mOrderby);
-//                        loading = true;
-//                    }
-//                }
                 if (!loading
                         && (totalItemCount - visibleItemCount) <= firstVisibleItem) {
                     mPage++;
-                    UiUtils.logD(SearchResultActivity.class, mPage + "");
+                    UiUtils.logD(SearchResultActivity.class, "page = " + mPage + "");
                     loadSearchResult(String.valueOf(mPage), mOrderby);
                     loading = true;
                 }
@@ -199,14 +192,15 @@ public class SearchResultActivity extends Activity {
 //        mSearchBean.addAll(bean.getProductList());
         UiUtils.logD(SearchResultActivity.class, "onSearchSuccessResult: " + bean.getProductList() + "size: " + bean.getProductList().size());
         if (bean.getProductList().size() <= 0) {
+            mSearchOrderby.setVisibility(View.GONE);
             Toast.makeText(mContext, "没有该商品", Toast.LENGTH_SHORT).show();
             mSearchEmpty.setVisibility(View.VISIBLE);
         } else {
             mRvListAdapter.setBean(bean.getProductList());
             mRvGridAdapter.setSearchBean(bean.getProductList());
-//            if(loading == false) {
-//                mRvListAdapter.setMore(bean.getProductList());
-//            }
+            if (!loading) {
+                mRvListAdapter.setMore(bean.getProductList());
+            }
         }
     }
 
@@ -287,7 +281,7 @@ public class SearchResultActivity extends Activity {
     }
 
     private void loadSearchResult(String page, String orderby) {
-        mSearchPresenter.loadSearchData(page, Constant.PAGE_NUM, orderby,mKeyword);
+        mSearchPresenter.loadSearchData(page, Constant.PAGE_NUM, orderby, mKeyword);
 //        UiUtils.logD(SearchResultActivity.class, mKeyword + page + Constant.PAGE_NUM + orderby);
     }
 

@@ -2,6 +2,7 @@ package buy.win.com.winbuy.view.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -200,7 +201,9 @@ public class GoodsShowActivity extends Activity {
                 finish();
                 break;
             case R.id.et_searchtext_search:
-                finish();
+                Intent intent = new Intent(mContext,SearchActivity.class);
+                startActivity(intent);
+//                finish();
                 break;
             case R.id.iv_pic_type:
                 // 搜索结果显示切换
