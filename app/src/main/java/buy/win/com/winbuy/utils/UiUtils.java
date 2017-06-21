@@ -3,10 +3,15 @@ package buy.win.com.winbuy.utils;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+
+import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by BUTTON on 2017-05-25.
@@ -144,13 +149,41 @@ public class UiUtils {
         Log.d(clazz.getSimpleName(), clazz.getClass().getSimpleName() + " : " + printStr);
     }
 
-    /**移除Runnable任务*/
+    /**
+     * 移除Runnable任务
+     */
     public static void removeTask(Runnable task) {
         sHandler.removeCallbacks(task);
     }
 
-    public static void startActivity(Context c,Class<?> cls) {
+    public static void startActivity(Context c, Class<?> cls) {
         Intent intent = new Intent(c, cls);
         c.startActivity(intent);
+    }
+
+    public static void setOldData(Context context, ArrayList<String> list) {
+        SharedPreferences.Editor editor = context.getSharedPreferences("oldData", MODE_PRIVATE).edit();
+        editor.putInt("oldIndex", list.size());
+        for (int i = 0; i < list.size(); i++) {
+            editor.putString("oldData_" + i, list.get(i));
+        }
+        editor.commit();
+    }
+
+    public static ArrayList<String> getOldData(Context context, ArrayList<String> list) {
+        SharedPreferences sp = context.getSharedPreferences("oldData", MODE_PRIVATE);
+        int oldIndex = sp.getInt("oldIndex", 0);
+        for (int i = 0; i < oldIndex; i++) {
+            String str = sp.getString("oldData_" + i, null);
+            list.add(str);
+        }
+        return list;
+    }
+
+    public static void deleteOldData(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("oldData", MODE_PRIVATE);
+        if(sp != null) {
+            sp.edit().clear().commit();
+        }
     }
 }

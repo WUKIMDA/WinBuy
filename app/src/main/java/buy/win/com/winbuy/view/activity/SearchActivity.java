@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -45,11 +44,13 @@ public class SearchActivity extends Activity {
     protected void initData() {
         // 获取热门搜索字段
         mHotSearchPresenter.loadHotSearch();
-        String shareData = "奶粉,韩,奇妮孕妇装,莫施,Bio-oil,快乐宝贝,爱家,Nutrilon";
-        List<String> record = Arrays.asList(shareData.split(","));
+//        String shareData = "奶粉,韩,奇妮孕妇装,莫施,Bio-oil,快乐宝贝,爱家,Nutrilon";
+//        List<String> record = Arrays.asList(shareData.split(","));
         //UiUtils.logD(SearchActivity.class,record.toString());
-
-        mSearch.initOldRecord(record);
+        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> oldData = UiUtils.getOldData(mContext, list);
+        UiUtils.logD(SearchActivity.class, "历史搜索获取: " + oldData);
+        mSearch.initOldRecord(oldData);
 
         mSearch.SetCallBackListener(new mSearchLayout.setSearchCallBackListener() {
             @Override
@@ -71,11 +72,13 @@ public class SearchActivity extends Activity {
             @Override
             public void ClearOldData() {
 
+                UiUtils.deleteOldData(mContext);
             }
 
             @Override
             public void SaveOldData(ArrayList<String> AlloldDataList) {
-
+                UiUtils.setOldData(mContext,AlloldDataList);
+                UiUtils.logD(SearchActivity.class, "历史搜索: " + AlloldDataList);
             }
         });
     }
