@@ -13,8 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,8 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     RecyclerView mCategoryRcv;
     @Bind(R.id.et_searchtext_search)
     TextView mEtSearchtextSearch;
+    @Bind(R.id.linearLayout)
+    LinearLayout mLinearLayout;
     private List<CategoryAllBean.CategoryBean> mDatas = new ArrayList<>();
     private CategoryListAdapter mListAdapter;
     private List<CategoryAllBean.CategoryBean> mLvDatas = new ArrayList<>();
@@ -93,7 +97,7 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
         }
         mListAdapter.setDatas(mLvDatas);
         mSelectedId = mLvDatas.get(0).getId();
-        if (mCategoryList == null){
+        if (mCategoryList == null) {
             return;
         }
         mCategoryList.setOnItemClickListener(this);
@@ -108,9 +112,9 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
 
     public void setDatas(List<CategoryAllBean.CategoryBean> datas) {
         mDatas = datas;
-   //     Log.d(TAG, "setDatas: " + mDatas.toString());
-            listDataSet();
-            recDataSet();
+        //     Log.d(TAG, "setDatas: " + mDatas.toString());
+        listDataSet();
+        recDataSet();
     }
 
     @Override
@@ -124,14 +128,17 @@ public class CategoryFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onStart() {
         super.onStart();
-        ((AppCompatActivity)mContext).getSupportActionBar().hide();
+        ((AppCompatActivity) mContext).getSupportActionBar().hide();
     }
 
     public void onConnectError(String message) {
+        getFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new ConnectionErrorFragment()).commit();
+        Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
     }
 
     public void onServerBug(int code) {
-
+        getFragmentManager().beginTransaction().replace(R.id.main_fragment_container, new ConnectionErrorFragment()).commit();
+        Toast.makeText(getActivity(), "服务器正在修复中", Toast.LENGTH_SHORT).show();
     }
 
     public void onSuccess(CategoryAllBean bean) {
