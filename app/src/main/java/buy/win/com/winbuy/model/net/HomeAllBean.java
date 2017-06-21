@@ -1,5 +1,6 @@
 package buy.win.com.winbuy.model.net;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class HomeAllBean extends BaseBean{
         return homeTopic;
     }
 
-    public static class HomeTopicBean {
+    public static class HomeTopicBean implements Serializable{
         /**
          * id : 123
          * pic : /images/home/image1.jpg

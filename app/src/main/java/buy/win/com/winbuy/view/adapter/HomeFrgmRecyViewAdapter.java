@@ -156,6 +156,17 @@ public class HomeFrgmRecyViewAdapter extends RecyclerView.Adapter {
                     return new BannerViewHolder();
                 }
             });
+//            mBannerHomeTop.setBannerPageClickListener(new MZBannerView.BannerPageClickListener() {
+//                @Override
+//                public void onPageClick(View view, int position) {
+//                    //Toast.makeText(mContext,"click page:"+position,Toast.LENGTH_LONG).show();
+//
+//                    Intent intent = new Intent(mContext, TopicPlistActivity.class);
+//                    intent.putExtra("bean", mHomeAllBeenList.get(position));
+//                    mContext.startActivity(intent);
+//
+//                }
+//            });
         }
 
         @Override

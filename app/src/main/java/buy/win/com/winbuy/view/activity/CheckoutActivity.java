@@ -47,7 +47,7 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         initView();
-        mUserId = ShareUtils.getUserId(this, "20428");
+        mUserId = ShareUtils.getUserId(this, "");
         mCheckoutPresenter = new CheckoutPresent(this);
         mCheckoutOrdersumbitPresenter = new CheckoutOrdersumbitPresenter(this);
         selectSku();
@@ -78,6 +78,10 @@ public class CheckoutActivity extends Activity implements View.OnClickListener {
     }
 
     public void loadView(String sku) {
+        if ("".equals(mUserId)) {
+            Toast.makeText(this,"请登录",Toast.LENGTH_SHORT).show();
+        }
+        finish();
         mSku = sku;
         mCheckoutPresenter.upCheckout(mUserId, sku);
         mCheckoutProductListAdapter = new CheckoutProductListAdapter(this);
