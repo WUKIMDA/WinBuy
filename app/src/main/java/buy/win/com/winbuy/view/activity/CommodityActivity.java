@@ -3,9 +3,11 @@ package buy.win.com.winbuy.view.activity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -170,7 +172,7 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         EventBus.getDefault().register(this);
 
         //加载用户id
-        userId = ShareUtils.getUserId(this, "20428");
+        userId = ShareUtils.getUserId(this, "");
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -246,6 +248,10 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                 //第三方分享
                 break;
             case R.id.ll_good_detail_collect:
+                if (TextUtils.isEmpty(userId)){
+                    dialogLogin();
+                    break;
+                }
                 //收藏:取反,GONE
                 pidFavorites();
                 break;
@@ -255,7 +261,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
                 AddCartPresenter addCartPresenter = new AddCartPresenter();
                 //用户id,商品id,商品数量,商品属性默认颜色1 TODO
                 if (TextUtils.isEmpty(userId) && TextUtils.isEmpty(pId)) {
-                    return;
+                    dialogLogin();
+                    break;
                 }
                 addCartPresenter.addCard(userId, pId, "1", "1");
 
@@ -276,7 +283,8 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
     private void orderDetail() {
         //TODO:用户ID
         if (TextUtils.isEmpty(userId)) {
-            Toast.makeText(getApplicationContext(), "请登录在试", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(), "请登录在试", Toast.LENGTH_SHORT).show();
+            dialogLogin();
             return;
         }
         //如果用户没有选择过属性,默认
@@ -673,5 +681,21 @@ public class CommodityActivity extends Activity implements GradationScrollView.S
         EventBus.getDefault().unregister(this);
     }
 
+    public void dialogLogin(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+       builder.setMessage("亲,要先登录哦030 ").setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).setPositiveButton("去登录", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent intent = new Intent(CommodityActivity.this, LonginAndRegisterActivity.class);
+                startActivity(intent);
+            }
+        }).create().show();
+    }
 
 }
